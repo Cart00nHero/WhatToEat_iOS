@@ -27,7 +27,7 @@
 		AF67A9A924666421008ABBCF /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67A9A824666421008ABBCF /* FindMyFood.storyboard */; };
 		AF67A9AE2466663B008ABBCF /* UIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */; };
 		AF67A9C024669AF1008ABBCF /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9BF24669AF1008ABBCF /* CommonActions.swift */; };
-		AF67A9C42466BACA008ABBCF /* DefaultTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9C32466BACA008ABBCF /* DefaultTemplate.swift */; };
+		AF67A9C42466BACA008ABBCF /* DefaultVCTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9C32466BACA008ABBCF /* DefaultVCTemplate.swift */; };
 		AF67A9C62466C22B008ABBCF /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9C52466C22B008ABBCF /* SignActions.swift */; };
 		AF67A9D62466D156008ABBCF /* OptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9D42466D156008ABBCF /* OptionalViewController.swift */; };
 		AF67A9D72466D156008ABBCF /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9D52466D156008ABBCF /* SignViewController.swift */; };
@@ -87,7 +87,7 @@
 		AF67A9A824666421008ABBCF /* FindMyFood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
 		AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseViewController.swift; sourceTree = "<group>"; };
 		AF67A9BF24669AF1008ABBCF /* CommonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
-		AF67A9C32466BACA008ABBCF /* DefaultTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTemplate.swift; sourceTree = "<group>"; };
+		AF67A9C32466BACA008ABBCF /* DefaultVCTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultVCTemplate.swift; sourceTree = "<group>"; };
 		AF67A9C52466C22B008ABBCF /* SignActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF67A9D42466D156008ABBCF /* OptionalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalViewController.swift; sourceTree = "<group>"; };
 		AF67A9D52466D156008ABBCF /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
@@ -298,7 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */,
-				AF67A9C32466BACA008ABBCF /* DefaultTemplate.swift */,
+				AF67A9C32466BACA008ABBCF /* DefaultVCTemplate.swift */,
 				AFB80EC22467DB41003AEB25 /* TableViewCellTemplate.swift */,
 			);
 			path = Templates;
@@ -661,7 +661,7 @@
 			files = (
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AF67A9AE2466663B008ABBCF /* UIBaseViewController.swift in Sources */,
-				AF67A9C42466BACA008ABBCF /* DefaultTemplate.swift in Sources */,
+				AF67A9C42466BACA008ABBCF /* DefaultVCTemplate.swift in Sources */,
 				AF67A9D72466D156008ABBCF /* SignViewController.swift in Sources */,
 				AF67A9C62466C22B008ABBCF /* SignActions.swift in Sources */,
 				AF13AF8B245E946A0026A5C8 /* AppState.swift in Sources */,

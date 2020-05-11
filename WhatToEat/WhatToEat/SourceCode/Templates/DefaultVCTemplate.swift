@@ -12,7 +12,7 @@ import ReSwift
 protocol DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState)
 }
-class DefaultTemplate: UIBaseViewController {
+class DefaultVCTemplate: UIBaseViewController {
 
     var stateDelegate: DefaultTemplateDelegate?
     
@@ -45,7 +45,7 @@ class DefaultTemplate: UIBaseViewController {
 
 }
 
-extension DefaultTemplate: StoreSubscriber{
+extension DefaultVCTemplate: StoreSubscriber{
     func newState(state: DefaultTemplateState) {
         self.stateDelegate?.receiveNewState(state: state)
     }

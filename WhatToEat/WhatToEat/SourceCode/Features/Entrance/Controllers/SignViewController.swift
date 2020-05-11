@@ -11,7 +11,7 @@ import ReSwift
 
 class SignViewController: UIViewController {
 
-    private var defaultTemplate: DefaultTemplate? = nil
+    private var defaultTemplate: DefaultVCTemplate? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class SignViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? DefaultTemplate
+        self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
     }
     override func viewWillDisappear(_ animated: Bool) {
