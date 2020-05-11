@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		022C2AD170D4A201DD3AD384 /* Pods_WhatToEatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15835AB0FE8DE234E433E485 /* Pods_WhatToEatTests.framework */; };
 		026DED75408948FF4B42558B /* Pods_WhatToEat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A5D83778100C1A601322 /* Pods_WhatToEat.framework */; };
+		20539DD324692D8300E70699 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 20539DD224692D8300E70699 /* schema.json */; };
+		20539DD524692DA200E70699 /* ListShops.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 20539DD424692DA200E70699 /* ListShops.graphql */; };
+		20A5F1F02469445900DD3AFD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A5F1EF2469445900DD3AFD /* API.swift */; };
+		20A5F1F2246944E200DD3AFD /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A5F1F1246944E200DD3AFD /* NetworkServices.swift */; };
 		6D809A68EB2CEE85CC3363AD /* Pods_WhatToEat_WhatToEatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */; };
 		AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */; };
 		AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF55245E90DB0026A5C8 /* SceneDelegate.swift */; };
@@ -54,6 +58,10 @@
 
 /* Begin PBXFileReference section */
 		15835AB0FE8DE234E433E485 /* Pods_WhatToEatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatToEatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		20539DD224692D8300E70699 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		20539DD424692DA200E70699 /* ListShops.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ListShops.graphql; sourceTree = "<group>"; };
+		20A5F1EF2469445900DD3AFD /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		20A5F1F1246944E200DD3AFD /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatToEat_WhatToEatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69187A829B5A4751557C0E55 /* Pods-WhatToEat-WhatToEatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat-WhatToEatUITests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		74106968E1D93E003AA9EE97 /* Pods-WhatToEat-WhatToEatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -121,6 +129,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		20539DD624692DA900E70699 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				20539DD424692DA200E70699 /* ListShops.graphql */,
+			);
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
+		20A5F1F3246944E800DD3AFD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				20539DD624692DA900E70699 /* GraphQL */,
+				20A5F1F1246944E200DD3AFD /* NetworkServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		AF13AF47245E90DB0026A5C8 = {
 			isa = PBXGroup;
 			children = (
@@ -147,9 +172,12 @@
 			isa = PBXGroup;
 			children = (
 				AF13AF83245E93F00026A5C8 /* SourceCode */,
+				20A5F1F3246944E800DD3AFD /* Services */,
+				20A5F1EF2469445900DD3AFD /* API.swift */,
 				AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */,
 				AF13AF55245E90DB0026A5C8 /* SceneDelegate.swift */,
 				AF13AF57245E90DB0026A5C8 /* ViewController.swift */,
+				20539DD224692D8300E70699 /* schema.json */,
 				AF13AF59245E90DB0026A5C8 /* Main.storyboard */,
 				AF13AF5C245E90DC0026A5C8 /* Assets.xcassets */,
 				AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */,
@@ -373,6 +401,7 @@
 			buildConfigurationList = AF13AF7A245E90DC0026A5C8 /* Build configuration list for PBXNativeTarget "WhatToEat" */;
 			buildPhases = (
 				00BF1C43977E7903D61097EF /* [CP] Check Pods Manifest.lock */,
+				20A5F1EE246942E700DD3AFD /* Generate Apollo GraphQL API */,
 				AF13AF4C245E90DB0026A5C8 /* Sources */,
 				AF13AF4D245E90DB0026A5C8 /* Frameworks */,
 				AF13AF4E245E90DB0026A5C8 /* Resources */,
@@ -474,12 +503,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20539DD324692D8300E70699 /* schema.json in Resources */,
 				AF67A9E32466E12E008ABBCF /* AddGourmets.storyboard in Resources */,
 				AF67A9D92466D175008ABBCF /* Entrance.storyboard in Resources */,
 				AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */,
 				AF13AF5D245E90DC0026A5C8 /* Assets.xcassets in Resources */,
 				AF13AF5B245E90DB0026A5C8 /* Main.storyboard in Resources */,
 				AF67A9A924666421008ABBCF /* FindMyFood.storyboard in Resources */,
+				20539DD524692DA200E70699 /* ListShops.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +569,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		20A5F1EE246942E700DD3AFD /* Generate Apollo GraphQL API */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Apollo GraphQL API";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
 		};
 		775A3DD4426F9EA75A6A6049 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -618,9 +667,11 @@
 				AFB80EC72468677C003AEB25 /* LRTableData.swift in Sources */,
 				AF67A9E52466E29A008ABBCF /* AddGourmetViewController.swift in Sources */,
 				AFB80EC32467DB41003AEB25 /* TableViewCellTemplate.swift in Sources */,
+				20A5F1F2246944E200DD3AFD /* NetworkServices.swift in Sources */,
 				AFB80EC524682190003AEB25 /* AddGourmetsTableData.swift in Sources */,
 				AF13AF89245E94300026A5C8 /* AppReducer.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
+				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF67A9C024669AF1008ABBCF /* CommonActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

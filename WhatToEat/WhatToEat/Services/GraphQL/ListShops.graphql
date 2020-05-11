@@ -1,0 +1,9 @@
+query ListShop {
+    listShops {
+      averagePrice
+      status
+      title
+      type
+      uniqueId
+    }
+}
