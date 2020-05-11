@@ -13,7 +13,7 @@ struct RegisterStateAction: Action {
     let subscriber: String
 }
 struct SendParcelAction: Action {
-    var senderId = ""
-    var recipientId = ""
+    var sender = ""
+    var recipient = ""
     let parcel: Action
 }
