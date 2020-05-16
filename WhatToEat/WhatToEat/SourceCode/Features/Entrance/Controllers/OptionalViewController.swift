@@ -23,15 +23,13 @@ class OptionalViewController: UIViewController {
         self.defaultTemplate?.stateDelegate = self
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - actions
+    @IBAction func toAddGourmetsButtonClickAction(sender: UIButton) {
+        // AddGourmets
+        let addGourmetsSB = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+        let toVC = addGourmetsSB.instantiateViewController(withIdentifier: "AddGourmetViewController")
+        defaultTemplate?.basePushToViewController(toVC, Animated: true)
     }
-    */
 
 }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="973-yh-Mes">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,11 +12,11 @@
             <objects>
                 <viewController storyboardIdentifier="DefaultTemplate" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RDl-9R-6hD" customClass="DefaultVCTemplate" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kBX-0Q-zwy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEg-rU-vr5">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="CJ6-fV-xMv" kind="embed" id="XlQ-ut-3LU"/>
                                 </connections>
@@ -45,7 +46,6 @@
                 <navigationController storyboardIdentifier="EnteranceNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="973-yh-Mes" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LBB-t6-Vhf">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -62,11 +62,11 @@
             <objects>
                 <viewController storyboardIdentifier="SignViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CJ6-fV-xMv" customClass="SignViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QCr-9N-KOu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-6h-yEn">
-                                <rect key="frame" x="15" y="316.5" width="345" height="34"/>
+                                <rect key="frame" x="15" y="267" width="290" height="34"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Facebook Login"/>
                                 <connections>
@@ -85,18 +85,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIO-WV-D3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="577" y="81"/>
+            <point key="canvasLocation" x="532" y="54"/>
         </scene>
         <!--Optional View Controller-->
         <scene sceneID="iTB-Rb-N5G">
             <objects>
                 <viewController storyboardIdentifier="OptionalViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qel-oS-6gd" customClass="OptionalViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g1g-59-mZd">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2m-IC-U1J">
-                                <rect key="frame" x="15" y="223" width="570" height="34"/>
+                                <rect key="frame" x="15" y="256.5" width="345" height="34"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Find Food"/>
                                 <connections>
@@ -104,11 +104,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oh9-A0-j7T">
-                                <rect key="frame" x="15" y="343" width="570" height="34"/>
+                                <rect key="frame" x="15" y="376.5" width="345" height="34"/>
                                 <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Add Gourmet"/>
                                 <connections>
                                     <action selector="loginButtonClickAction:" destination="CJ6-fV-xMv" eventType="touchUpInside" id="daf-6a-uUt"/>
+                                    <action selector="toAddGourmetsButtonClickActionWithSender:" destination="Qel-oS-6gd" eventType="touchUpInside" id="79s-nT-iHD"/>
                                 </connections>
                             </button>
                         </subviews>

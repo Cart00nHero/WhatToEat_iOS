@@ -68,7 +68,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="LRTableViewCell" rowHeight="83" id="2u9-PD-Vqw" customClass="LRTableViewCell" customModule="WhatToEat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddGLRTableViewCell" rowHeight="83" id="2u9-PD-Vqw" customClass="AddGLRTableViewCell" customModule="WhatToEat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="83"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2u9-PD-Vqw" id="QTV-pO-hEj">
@@ -76,10 +76,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mh2-j1-2id" userLabel="Left View">
-                                                    <rect key="frame" x="0.0" y="0.0" width="103.5" height="83"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="83"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-7Y-w6J">
-                                                            <rect key="frame" x="34" y="33" width="35.5" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-7Y-w6J">
+                                                            <rect key="frame" x="10" y="33" width="80" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -87,19 +87,20 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="gEE-7Y-w6J" firstAttribute="centerY" secondItem="Mh2-j1-2id" secondAttribute="centerY" id="7rH-0s-aGx"/>
-                                                        <constraint firstItem="gEE-7Y-w6J" firstAttribute="centerX" secondItem="Mh2-j1-2id" secondAttribute="centerX" id="Iyv-VF-kte"/>
+                                                        <constraint firstItem="gEE-7Y-w6J" firstAttribute="centerY" secondItem="Mh2-j1-2id" secondAttribute="centerY" id="SK9-k1-W15"/>
+                                                        <constraint firstAttribute="width" constant="100" id="aXY-pP-HHm"/>
+                                                        <constraint firstItem="gEE-7Y-w6J" firstAttribute="leading" secondItem="Mh2-j1-2id" secondAttribute="leading" constant="10" id="p2m-sq-83v"/>
+                                                        <constraint firstAttribute="trailing" secondItem="gEE-7Y-w6J" secondAttribute="trailing" constant="10" id="tTw-VE-d8Q"/>
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GhN-jf-bKg" userLabel="Right View">
-                                                    <rect key="frame" x="103.5" y="0.0" width="310.5" height="83"/>
+                                                    <rect key="frame" x="100" y="0.0" width="314" height="83"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="GhN-jf-bKg" secondAttribute="trailing" id="DAu-3X-Gdw"/>
                                                 <constraint firstItem="GhN-jf-bKg" firstAttribute="top" secondItem="QTV-pO-hEj" secondAttribute="top" id="KDD-Hw-hF2"/>
-                                                <constraint firstItem="Mh2-j1-2id" firstAttribute="width" secondItem="QTV-pO-hEj" secondAttribute="width" multiplier="1:4" id="SOF-4p-abz"/>
                                                 <constraint firstAttribute="bottom" secondItem="GhN-jf-bKg" secondAttribute="bottom" id="U1g-JU-kzE"/>
                                                 <constraint firstItem="GhN-jf-bKg" firstAttribute="leading" secondItem="Mh2-j1-2id" secondAttribute="trailing" id="U3R-ML-EWC"/>
                                                 <constraint firstItem="Mh2-j1-2id" firstAttribute="leading" secondItem="QTV-pO-hEj" secondAttribute="leading" id="cnT-Bz-aZL"/>
@@ -111,6 +112,7 @@
                                             <outlet property="cellLeftLabel" destination="gEE-7Y-w6J" id="e32-lY-auU"/>
                                             <outlet property="cellLeftView" destination="Mh2-j1-2id" id="ggB-OJ-F6u"/>
                                             <outlet property="cellRightView" destination="GhN-jf-bKg" id="n36-od-6JE"/>
+                                            <outlet property="leftWidthConstraint" destination="aXY-pP-HHm" id="Gkm-JD-Gzo"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonTableViewCell" rowHeight="109" id="pP4-7g-wow" customClass="ButtonTableViewCell" customModule="WhatToEat" customModuleProvider="target">

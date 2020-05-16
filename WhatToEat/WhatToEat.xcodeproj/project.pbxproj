@@ -24,6 +24,9 @@
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
 		AF13AF89245E94300026A5C8 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF88245E94300026A5C8 /* AppReducer.swift */; };
 		AF13AF8B245E946A0026A5C8 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF8A245E946A0026A5C8 /* AppState.swift */; };
+		AF1B66F6246FEA6B00F7B8FA /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66F5246FEA6B00F7B8FA /* AddGourmetPresenter.swift */; };
+		AF1B66F9246FEB1500F7B8FA /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66F8246FEB1500F7B8FA /* LRTableData.swift */; };
+		AF1B66FD24706D7400F7B8FA /* AddGLRTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66FC24706D7400F7B8FA /* AddGLRTableViewCell.swift */; };
 		AF67A9A924666421008ABBCF /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67A9A824666421008ABBCF /* FindMyFood.storyboard */; };
 		AF67A9AE2466663B008ABBCF /* UIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */; };
 		AF67A9C024669AF1008ABBCF /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9BF24669AF1008ABBCF /* CommonActions.swift */; };
@@ -36,8 +39,6 @@
 		AF67A9E52466E29A008ABBCF /* AddGourmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9E42466E29A008ABBCF /* AddGourmetViewController.swift */; };
 		AFB773D32468FAB600628C54 /* FindFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB773D22468FAB600628C54 /* FindFoodViewController.swift */; };
 		AFB80EC32467DB41003AEB25 /* TableViewCellTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB80EC22467DB41003AEB25 /* TableViewCellTemplate.swift */; };
-		AFB80EC524682190003AEB25 /* AddGourmetsTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB80EC424682190003AEB25 /* AddGourmetsTableData.swift */; };
-		AFB80EC72468677C003AEB25 /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB80EC62468677C003AEB25 /* LRTableData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,9 @@
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF13AF88245E94300026A5C8 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		AF13AF8A245E946A0026A5C8 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AF1B66F5246FEA6B00F7B8FA /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
+		AF1B66F8246FEB1500F7B8FA /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
+		AF1B66FC24706D7400F7B8FA /* AddGLRTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGLRTableViewCell.swift; sourceTree = "<group>"; };
 		AF67A9A824666421008ABBCF /* FindMyFood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
 		AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseViewController.swift; sourceTree = "<group>"; };
 		AF67A9BF24669AF1008ABBCF /* CommonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
@@ -96,8 +100,6 @@
 		AF67A9E42466E29A008ABBCF /* AddGourmetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGourmetViewController.swift; sourceTree = "<group>"; };
 		AFB773D22468FAB600628C54 /* FindFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFoodViewController.swift; sourceTree = "<group>"; };
 		AFB80EC22467DB41003AEB25 /* TableViewCellTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTemplate.swift; sourceTree = "<group>"; };
-		AFB80EC424682190003AEB25 /* AddGourmetsTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGourmetsTableData.swift; sourceTree = "<group>"; };
-		AFB80EC62468677C003AEB25 /* LRTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		B094A1456F89E4C27A08F93E /* Pods-WhatToEat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.release.xcconfig"; sourceTree = "<group>"; };
 		CDA9A5D83778100C1A601322 /* Pods_WhatToEat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatToEat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3DB8013881FE2C8E0935125 /* Pods-WhatToEat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 		AF13AF83245E93F00026A5C8 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				AF1B66F7246FEAEF00F7B8FA /* Data */,
 				AF67A9AC2466662D008ABBCF /* Templates */,
 				AF67A99F246663FC008ABBCF /* Features */,
 				AF13AF84245E93F00026A5C8 /* Redux */,
@@ -249,6 +252,14 @@
 				AF13AF88245E94300026A5C8 /* AppReducer.swift */,
 			);
 			path = Reducers;
+			sourceTree = "<group>";
+		};
+		AF1B66F7246FEAEF00F7B8FA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF1B66F8246FEB1500F7B8FA /* LRTableData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		AF67A99F246663FC008ABBCF /* Features */ = {
@@ -333,7 +344,6 @@
 		AF67A9DE2466E111008ABBCF /* AddGourmets */ = {
 			isa = PBXGroup;
 			children = (
-				AFB80EBF2467D365003AEB25 /* Data */,
 				AF67A9DF2466E111008ABBCF /* Presenters */,
 				AF67A9E02466E111008ABBCF /* Controllers */,
 				AF67A9E12466E111008ABBCF /* Views */,
@@ -344,6 +354,7 @@
 		AF67A9DF2466E111008ABBCF /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				AF1B66F5246FEA6B00F7B8FA /* AddGourmetPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -360,17 +371,9 @@
 			isa = PBXGroup;
 			children = (
 				AF67A9E22466E12E008ABBCF /* AddGourmets.storyboard */,
+				AF1B66FC24706D7400F7B8FA /* AddGLRTableViewCell.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		AFB80EBF2467D365003AEB25 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				AFB80EC424682190003AEB25 /* AddGourmetsTableData.swift */,
-				AFB80EC62468677C003AEB25 /* LRTableData.swift */,
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		B80175B4875867781181DCF6 /* Pods */ = {
@@ -667,13 +670,14 @@
 				AF13AF8B245E946A0026A5C8 /* AppState.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,
 				AF67A9D62466D156008ABBCF /* OptionalViewController.swift in Sources */,
-				AFB80EC72468677C003AEB25 /* LRTableData.swift in Sources */,
 				AF67A9E52466E29A008ABBCF /* AddGourmetViewController.swift in Sources */,
+				AF1B66FD24706D7400F7B8FA /* AddGLRTableViewCell.swift in Sources */,
+				AF1B66F6246FEA6B00F7B8FA /* AddGourmetPresenter.swift in Sources */,
 				AFB80EC32467DB41003AEB25 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F2246944E200DD3AFD /* NetworkServices.swift in Sources */,
-				AFB80EC524682190003AEB25 /* AddGourmetsTableData.swift in Sources */,
 				AF13AF89245E94300026A5C8 /* AppReducer.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
+				AF1B66F9246FEB1500F7B8FA /* LRTableData.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF67A9C024669AF1008ABBCF /* CommonActions.swift in Sources */,
 				AFB773D32468FAB600628C54 /* FindFoodViewController.swift in Sources */,
