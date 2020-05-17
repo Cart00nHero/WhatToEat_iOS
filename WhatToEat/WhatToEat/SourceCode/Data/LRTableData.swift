@@ -21,6 +21,7 @@ struct LRTextLabelCell: LRTableCellProtocol {
 struct LRTextFieldCell: LRTableCellProtocol {
     var cellStyle: LRCellStyle
     var cellHeight: CGFloat = 48.0
+    var keyboardType: UIKeyboardType = .default
     var placeHolder = ""
     var inputText = ""
 }

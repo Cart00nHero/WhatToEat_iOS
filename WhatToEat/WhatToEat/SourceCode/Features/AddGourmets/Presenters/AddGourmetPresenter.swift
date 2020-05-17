@@ -15,12 +15,12 @@ struct GourmetsTableData {
             LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Title"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField)),
             LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Type"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField)),
             LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Style"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField)),
-            LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Under Price"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField))
+            LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Under Price"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField,keyboardType: .numberPad))
         ],
         [
             LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Name"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField)),
             LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Business Hours"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField)),
-            LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Tel"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField))
+            LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Tel"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField,keyboardType: .phonePad))
         ],
         [
             LRCellData(templateStyle: .LeftRight, leftCellProtocol: LRTextLabelCell(cellStyle: .TextLabel, labelText: "Nation"), rightCellProtocol: LRTextFieldCell(cellStyle: .TextField)),

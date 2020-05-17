@@ -20,28 +20,42 @@ class AddGLRTableViewCell: LRTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         createLeftView()
+        createRightView()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for subView in cellRightView.subviews {
+            subView.removeFromSuperview()
+        }
+    }
     
     // MARK: - create view
     private func createLeftView() {
         switch cellData?.leftCellProtocol.cellStyle {
         case .TextLabel:
-            putLeftTitleTextOnLabel(cellProtocol: cellData?.leftCellProtocol)
+            putLeftTitleTextOnLabel(cellProtocol: cellData!.leftCellProtocol)
+        default: break
+        }
+    }
+    private func createRightView() {
+        switch cellData?.rightCellProtocol.cellStyle {
+        case .TextField:
+            createRTextFieldOnCell(cellProtocol: cellData!.rightCellProtocol)
         default: break
         }
     }
     // MARK: - left style
-    private func putLeftTitleTextOnLabel(cellProtocol: LRTableCellProtocol?) {
+    private func putLeftTitleTextOnLabel(cellProtocol: LRTableCellProtocol) {
         let data = cellProtocol as? LRTextLabelCell
         cellLeftLabel.text = data?.labelText
     }
     // MARK: - right style
-    private func createRTextLabelOnCell(cellProtocol: LRTableCellProtocol) -> UIView? {
+    private func createRTextLabelOnCell(cellProtocol: LRTableCellProtocol) {
         if cellRightView.subviews.count == 0 {
             let data = cellProtocol as? LRTextLabelCell
             let textLabel = UILabel()
@@ -53,16 +67,16 @@ class AddGLRTableViewCell: LRTableViewCell {
             cellRightView.addSubview(textLabel)
             cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
             cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
-            return textLabel
         }
-        return nil
     }
     
-    private func createRTextFieldOnCell(cellProtocol: LRTableCellProtocol) -> UIView? {
+    private func createRTextFieldOnCell(cellProtocol: LRTableCellProtocol) {
         if cellRightView.subviews.count == 0 {
             let data = cellProtocol as? LRTextFieldCell
             let textField = UITextField()
             textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.borderStyle = .roundedRect
+            textField.keyboardType = data?.keyboardType ?? UIKeyboardType.default
             if data?.inputText.isEmpty == false {
                 textField.text = data?.inputText
             } else {
@@ -71,9 +85,7 @@ class AddGLRTableViewCell: LRTableViewCell {
             cellRightView.addSubview(textField)
             cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
             cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
-            return textField
         }
-        return nil
     }
 
 

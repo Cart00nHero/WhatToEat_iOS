@@ -13,9 +13,12 @@ class AddGourmetViewController: UIViewController {
     private var defaultTemplate: DefaultVCTemplate? = nil
     private let tableData = GourmetsTableData()
     
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         appStore.dispatch(RegisterStateAction(subscriber: String(describing: type(of: self))))
+        registerKeyBoardNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,9 +27,41 @@ class AddGourmetViewController: UIViewController {
         self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.defaultTemplate?.stateDelegate = nil
+    }
+    private func registerKeyBoardNotification() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    @objc func adjustForKeyboard(notification: Notification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+        if notification.name == UIResponder.keyboardWillHideNotification {
+        } else {
+            var contentInsets:UIEdgeInsets
+
+            if UIDevice.current.orientation == .portrait {
+
+                contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardScreenEndFrame.height, right: 0.0);
+            }
+            else {
+                contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardScreenEndFrame.width, right: 0.0)
+            }
+
+            tableView.contentInset = contentInsets
+
+//            tableView.scrollToRowAtIndexPath(editingIndexPath, atScrollPosition: .Top, animated: true)
+            tableView.scrollIndicatorInsets = tableView.contentInset
+        }
     }
     // MARK: - Actions
 
@@ -67,7 +102,17 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         return cell
     }
     
-    
+}
+extension AddGourmetViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // let header scroll with table
+        let sectionHeaderHeight: CGFloat = 36
+        if scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0 {
+            scrollView.contentInset = UIEdgeInsets(top: CGFloat(-scrollView.contentOffset.y), left: 0, bottom: 0, right: 0)
+        } else if scrollView.contentOffset.y >= sectionHeaderHeight {
+            scrollView.contentInset = UIEdgeInsets(top: CGFloat(-sectionHeaderHeight), left: 0, bottom: 0, right: 0)
+        }
+    }
 }
 extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {

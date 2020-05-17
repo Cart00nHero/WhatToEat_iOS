@@ -27,6 +27,7 @@
 		AF1B66F6246FEA6B00F7B8FA /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66F5246FEA6B00F7B8FA /* AddGourmetPresenter.swift */; };
 		AF1B66F9246FEB1500F7B8FA /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66F8246FEB1500F7B8FA /* LRTableData.swift */; };
 		AF1B66FD24706D7400F7B8FA /* AddGLRTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66FC24706D7400F7B8FA /* AddGLRTableViewCell.swift */; };
+		AF1B66FF2471890600F7B8FA /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF1B66FE2471890600F7B8FA /* IBView.swift */; };
 		AF67A9A924666421008ABBCF /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF67A9A824666421008ABBCF /* FindMyFood.storyboard */; };
 		AF67A9AE2466663B008ABBCF /* UIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */; };
 		AF67A9C024669AF1008ABBCF /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF67A9BF24669AF1008ABBCF /* CommonActions.swift */; };
@@ -88,6 +89,7 @@
 		AF1B66F5246FEA6B00F7B8FA /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AF1B66F8246FEB1500F7B8FA /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF1B66FC24706D7400F7B8FA /* AddGLRTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGLRTableViewCell.swift; sourceTree = "<group>"; };
+		AF1B66FE2471890600F7B8FA /* IBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
 		AF67A9A824666421008ABBCF /* FindMyFood.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
 		AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseViewController.swift; sourceTree = "<group>"; };
 		AF67A9BF24669AF1008ABBCF /* CommonActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 		AF67A9AC2466662D008ABBCF /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				AF1B66FE2471890600F7B8FA /* IBView.swift */,
 				AF67A9AD2466663B008ABBCF /* UIBaseViewController.swift */,
 				AF67A9C32466BACA008ABBCF /* DefaultVCTemplate.swift */,
 				AFB80EC22467DB41003AEB25 /* TableViewCellTemplate.swift */,
@@ -679,6 +682,7 @@
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
 				AF1B66F9246FEB1500F7B8FA /* LRTableData.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
+				AF1B66FF2471890600F7B8FA /* IBView.swift in Sources */,
 				AF67A9C024669AF1008ABBCF /* CommonActions.swift in Sources */,
 				AFB773D32468FAB600628C54 /* FindFoodViewController.swift in Sources */,
 			);
