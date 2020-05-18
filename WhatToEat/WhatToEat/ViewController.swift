@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     }
     
     private func startApollo() {
-        let apollo = NetworkServices.shared.apollo
+        let apollo = ApolloService.shared.apollo
         apollo.fetch(query: ListShopQuery()) { result in
             print(result)
             switch result {

@@ -43,24 +43,11 @@ class AddGourmetViewController: UIViewController {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+//        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
         if notification.name == UIResponder.keyboardWillHideNotification {
         } else {
-            var contentInsets:UIEdgeInsets
-
-            if UIDevice.current.orientation == .portrait {
-
-                contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardScreenEndFrame.height, right: 0.0);
-            }
-            else {
-                contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardScreenEndFrame.width, right: 0.0)
-            }
-
-            tableView.contentInset = contentInsets
-
-//            tableView.scrollToRowAtIndexPath(editingIndexPath, atScrollPosition: .Top, animated: true)
-            tableView.scrollIndicatorInsets = tableView.contentInset
+            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
         }
     }
     // MARK: - Actions
