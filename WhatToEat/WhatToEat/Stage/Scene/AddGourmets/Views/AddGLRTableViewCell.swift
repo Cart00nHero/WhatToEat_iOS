@@ -10,6 +10,9 @@ import UIKit
 
 class AddGLRTableViewCell: LRTableViewCell {
 
+    private enum ContentSide : Int {
+        case Left,Right
+    }
     @IBOutlet weak var cellLeftLabel: UILabel!
     
     override func awakeFromNib() {
@@ -29,6 +32,9 @@ class AddGLRTableViewCell: LRTableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
+        for subView in cellLeftView.subviews {
+            subView.removeFromSuperview()
+        }
         for subView in cellRightView.subviews {
             subView.removeFromSuperview()
         }
@@ -38,6 +44,7 @@ class AddGLRTableViewCell: LRTableViewCell {
     private func createLeftView() {
         switch cellData?.leftCellProtocol.cellStyle {
         case .TextLabel:
+//            createTextLabelOnCell(cellProtocol: cellData!.leftCellProtocol, contentSide: .Left)
             putLeftTitleTextOnLabel(cellProtocol: cellData!.leftCellProtocol)
         default: break
         }
@@ -49,24 +56,54 @@ class AddGLRTableViewCell: LRTableViewCell {
         default: break
         }
     }
+    
+    private func createDropDownCellView(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+        
+        let dropDownView = DropDownCellView()
+        dropDownView.translatesAutoresizingMaskIntoConstraints = false
+        var contentView = UIView()
+        switch contentSide {
+            
+        case .Left:
+            for subView in cellLeftView.subviews {
+                subView.removeFromSuperview()
+            }
+            contentView = cellLeftView
+        case .Right:
+            contentView = cellRightView
+        }
+        contentView.addSubview(dropDownView)
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
+        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
+    }
     // MARK: - left style
     private func putLeftTitleTextOnLabel(cellProtocol: LRTableCellProtocol) {
         let data = cellProtocol as? LRTextLabelCell
         cellLeftLabel.text = data?.labelText
     }
     // MARK: - right style
-    private func createRTextLabelOnCell(cellProtocol: LRTableCellProtocol) {
+    private func createTextLabelOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
         if cellRightView.subviews.count == 0 {
             let data = cellProtocol as? LRTextLabelCell
             let textLabel = UILabel()
             textLabel.translatesAutoresizingMaskIntoConstraints = false
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-            textLabel.font = UIFont.systemFont(ofSize: 15.0)
+            textLabel.font = UIFont.systemFont(ofSize: 14.0)
             textLabel.text = data?.labelText
-            //textLabel.textAlignment = .left
-            cellRightView.addSubview(textLabel)
-            cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
-            cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+            textLabel.numberOfLines = 0
+            textLabel.lineBreakMode = .byWordWrapping
+            textLabel.backgroundColor = UIColor.red
+            var contentView = UIView()
+            switch contentSide {
+                
+            case .Left:
+                contentView = cellLeftView
+            case .Right:
+                contentView = cellRightView
+            }
+            contentView.addSubview(textLabel)
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[textLabel]-10-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
         }
     }
     

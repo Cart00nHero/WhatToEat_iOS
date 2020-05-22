@@ -2,6 +2,7 @@ PODS:
   - Apollo (0.27.0):
     - Apollo/Core (= 0.27.0)
   - Apollo/Core (0.27.0)
+  - iOSDropDown (0.3.4)
   - Realm (4.4.1):
     - Realm/Headers (= 4.4.1)
   - Realm/Headers (4.4.1)
@@ -11,22 +12,25 @@ PODS:
 
 DEPENDENCIES:
   - Apollo
+  - iOSDropDown
   - RealmSwift
   - ReSwift
 
 SPEC REPOS:
   trunk:
     - Apollo
+    - iOSDropDown
     - Realm
     - RealmSwift
     - ReSwift
 
 SPEC CHECKSUMS:
   Apollo: 5926be3853a34c10ef9fb7447435f0e083070b41
+  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
   Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
   RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
   ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
 
-PODFILE CHECKSUM: 7159947d10257b49ffed0293ee0c9638f9fb671c
+PODFILE CHECKSUM: 612e613ef0e7a08f7ab0eb0a08190f6895640821
 
 COCOAPODS: 1.8.4

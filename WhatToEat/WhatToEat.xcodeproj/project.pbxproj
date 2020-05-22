@@ -20,6 +20,9 @@
 		AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */; };
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
+		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
+		AF719D862474DF6C003A7285 /* DropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF719D852474DF6C003A7285 /* DropDownCellView.xib */; };
+		AF719D882474DFAA003A7285 /* DropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D872474DFAA003A7285 /* DropDownCellView.swift */; };
 		AF8224632472F21D0034C928 /* TableViewCellTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224412472F21D0034C928 /* TableViewCellTemplate.swift */; };
 		AF8224642472F21D0034C928 /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224422472F21D0034C928 /* IBView.swift */; };
 		AF8224652472F21D0034C928 /* UIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224432472F21D0034C928 /* UIBaseViewController.swift */; };
@@ -82,6 +85,9 @@
 		AF13AF71245E90DC0026A5C8 /* WhatToEatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatToEatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
+		AF719D852474DF6C003A7285 /* DropDownCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownCellView.xib; sourceTree = "<group>"; };
+		AF719D872474DFAA003A7285 /* DropDownCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCellView.swift; sourceTree = "<group>"; };
 		AF8224412472F21D0034C928 /* TableViewCellTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellTemplate.swift; sourceTree = "<group>"; };
 		AF8224422472F21D0034C928 /* IBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
 		AF8224432472F21D0034C928 /* UIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseViewController.swift; sourceTree = "<group>"; };
@@ -194,9 +200,35 @@
 			path = WhatToEatUITests;
 			sourceTree = "<group>";
 		};
+		AF719D732474D225003A7285 /* BackStage */ = {
+			isa = PBXGroup;
+			children = (
+				AF719D742474D225003A7285 /* Utils */,
+			);
+			path = BackStage;
+			sourceTree = "<group>";
+		};
+		AF719D742474D225003A7285 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AF719D7D2474D569003A7285 /* XibSetupView.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AF719D842474DF29003A7285 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				AF719D852474DF6C003A7285 /* DropDownCellView.xib */,
+				AF719D872474DFAA003A7285 /* DropDownCellView.swift */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				AF719D732474D225003A7285 /* BackStage */,
 				AF8224752472F27D0034C928 /* Network */,
 			);
 			path = Actors;
@@ -215,6 +247,7 @@
 		AF8224402472F21D0034C928 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				AF719D842474DF29003A7285 /* Xibs */,
 				AF8224412472F21D0034C928 /* TableViewCellTemplate.swift */,
 				AF8224422472F21D0034C928 /* IBView.swift */,
 				AF8224432472F21D0034C928 /* UIBaseViewController.swift */,
@@ -517,6 +550,7 @@
 				AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */,
 				20539DD324692D8300E70699 /* schema.json in Resources */,
 				AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */,
+				AF719D862474DF6C003A7285 /* DropDownCellView.xib in Resources */,
 				AF13AF5D245E90DC0026A5C8 /* Assets.xcassets in Resources */,
 				AF13AF5B245E90DB0026A5C8 /* Main.storyboard in Resources */,
 				AF8224782472F27D0034C928 /* ListShops.graphql in Resources */,
@@ -666,6 +700,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF8224662472F21D0034C928 /* DefaultVCTemplate.swift in Sources */,
+				AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */,
 				AF82246D2472F21D0034C928 /* OptionalViewController.swift in Sources */,
 				AF8224632472F21D0034C928 /* TableViewCellTemplate.swift in Sources */,
 				AF8224642472F21D0034C928 /* IBView.swift in Sources */,
@@ -685,6 +720,7 @@
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF82246B2472F21D0034C928 /* FindFoodViewController.swift in Sources */,
+				AF719D882474DFAA003A7285 /* DropDownCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

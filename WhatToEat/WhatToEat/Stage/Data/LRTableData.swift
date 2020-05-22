@@ -12,9 +12,15 @@ enum LRCellStyle : Int {
     case TextLabel,TextField
 }
 
+struct LRDropDownCell: LRTableCellProtocol {
+    var cellStyle: LRCellStyle
+    var cellHeight: CGFloat
+    var labelText = ""
+}
 struct LRTextLabelCell: LRTableCellProtocol {
     var cellStyle: LRCellStyle
     var cellHeight: CGFloat = 48.0
+    var numberOfLines = 1
     var labelText = ""
 }
 

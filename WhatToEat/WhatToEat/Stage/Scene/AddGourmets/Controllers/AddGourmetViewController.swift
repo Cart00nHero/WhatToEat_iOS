@@ -12,6 +12,7 @@ class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
     private let tableData = GourmetsTableData()
+    private var originTableFooter = UIView()
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -29,6 +30,7 @@ class AddGourmetViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        originTableFooter = tableView.tableFooterView ?? UIView()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -46,8 +48,12 @@ class AddGourmetViewController: UIViewController {
 //        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
         if notification.name == UIResponder.keyboardWillHideNotification {
+            tableView.tableFooterView = originTableFooter
         } else {
-            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+//            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+            let keyboardFooterView = UIView()
+            keyboardFooterView.frame = CGRect(x: 0,y: 0,width: tableView.bounds.width,height: keyboardScreenEndFrame.height)
+            tableView.tableFooterView = keyboardFooterView
         }
     }
     // MARK: - Actions
