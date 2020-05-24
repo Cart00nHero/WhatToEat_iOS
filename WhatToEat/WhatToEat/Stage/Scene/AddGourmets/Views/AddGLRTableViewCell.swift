@@ -38,7 +38,20 @@ class AddGLRTableViewCell: LRTableViewCell {
             subView.removeFromSuperview()
         }
     }
-    
+    // MARK: - UI Actions
+    @objc private func textFieldDidChanged(sender: UITextField) {
+        let superViewTag = ContentSide(rawValue: sender.superview?.tag ?? 0)
+        if superViewTag == ContentSide.Right {
+            var data = cellData?.rightCellProtocol as? LRTextFieldCellData
+            data?.inputText = sender.text ?? ""
+            cellData?.rightCellProtocol = data ?? LRTextFieldCellData()
+        } else {
+            var data = cellData?.leftCellProtocol as? LRTextFieldCellData
+            data?.inputText = sender.text ?? ""
+            cellData?.leftCellProtocol = data ?? LRTextFieldCellData()
+        }
+        appStore.dispatch(CellTextFieldDidChangedAction(cell: self, textField: sender))
+    }
     // MARK: - create view
     private func createLeftView() {
         let style = cellData?.leftCellProtocol.cellStyle
@@ -49,7 +62,6 @@ class AddGLRTableViewCell: LRTableViewCell {
         }
         switch style {
         case .TextLabel:
-//            createTextLabelOnCell(cellProtocol: cellData!.leftCellProtocol, contentSide: .Left)
             putLeftTitleTextOnLabel(cellProtocol: cellData!.leftCellProtocol)
         case .DropDown:
             leftWidthConstraint.constant = self.contentView.frame.width/2.0
@@ -106,7 +118,6 @@ class AddGLRTableViewCell: LRTableViewCell {
         contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
     }
     
-    // MARK: - cell style
     private func putLeftTitleTextOnLabel(cellProtocol: LRTableCellProtocol) {
         let data = cellProtocol as? LRLabelCellData
         cellLeftLabel.text = data?.labelText
@@ -157,6 +168,7 @@ class AddGLRTableViewCell: LRTableViewCell {
             contentView?.addSubview(textField)
             contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
             contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
+            textField.addTarget(self, action: #selector(textFieldDidChanged(sender:)), for: .editingChanged)
         }
     }
 

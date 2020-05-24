@@ -18,7 +18,7 @@ class DropDownCellView: XibSetupView {
         dropDownField.delegate = self
         dropDownField.didSelect{(selectedText , index ,id) in
             appStore.dispatch(
-                DropDownMenuSelectedAction(dropdownView: self, selectedIndex: index, selectedText: selectedText)
+                CellDropDownMenuSelectedAction(dropdownView: self, selectedIndex: index, selectedText: selectedText)
             )
         }
     }

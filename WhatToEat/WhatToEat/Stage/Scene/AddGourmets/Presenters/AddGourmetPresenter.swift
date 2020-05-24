@@ -11,7 +11,7 @@ import UIKit
 struct GourmetsTableData {
     
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
-    let dataSource: Array<Array<CellDataProtocol>> = [
+    var dataSource: Array<Array<CellDataProtocol>> = [
         [
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"), rightCellProtocol: LRTextFieldCellData()),
             LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource), rightCellProtocol: LRDropDownCellData(placeHolder:"Type",optionArray: DropDownMenuData().typeSource)),

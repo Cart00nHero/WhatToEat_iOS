@@ -37,7 +37,6 @@ class LRTableViewCell: UITableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.accessoryType = .none
     }
 }
 

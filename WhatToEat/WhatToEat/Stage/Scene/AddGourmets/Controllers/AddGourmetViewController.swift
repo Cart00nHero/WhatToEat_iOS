@@ -11,15 +11,15 @@ import UIKit
 class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private let tableData = GourmetsTableData()
+    private var tableData = GourmetsTableData()
     private var originTableFooter = UIView()
+    private lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         appStore.dispatch(RegisterStateAction(subscriber: String(describing: type(of: self))))
-        registerKeyBoardNotification()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,33 +30,12 @@ class AddGourmetViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        defaultTemplate?.registerKeyBoardNotification()
         originTableFooter = tableView.tableFooterView ?? UIView()
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.defaultTemplate?.stateDelegate = nil
-    }
-    private func registerKeyBoardNotification() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
-    }
-    // MARK: - UI Actions
-    @objc func adjustForKeyboard(notification: Notification) {
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-
-        let keyboardScreenEndFrame = keyboardValue.cgRectValue
-//        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-
-        if notification.name == UIResponder.keyboardWillHideNotification {
-            tableView.tableFooterView = nil
-            tableView.setContentOffset(.zero, animated: true)
-        } else {
-//            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
-            let keyboardFooterView = UIView()
-            keyboardFooterView.frame = CGRect(x: 0,y: 0,width: tableView.bounds.width,height: keyboardScreenEndFrame.height)
-            tableView.tableFooterView = keyboardFooterView
-        }
     }
 
 }
@@ -116,17 +95,32 @@ extension AddGourmetViewController: UIScrollViewDelegate {
 extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
-        case is DropDownMenuSelectedAction:
-            let action = state.currentAction as? DropDownMenuSelectedAction
-            let cell = action?.dropdownView.superTableViewCell
+        case is AdjustForKeyboardAction:
+            let action = state.currentAction as? AdjustForKeyboardAction
+            let notification = action?.notification
+            guard let keyboardValue = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+            let keyboardScreenEndFrame = keyboardValue.cgRectValue
+            //        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+            if notification?.name == UIResponder.keyboardWillHideNotification {
+                tableView.tableFooterView = nil
+                tableView.setContentOffset(.zero, animated: true)
+            } else {
+                let keyboardFooterView = UIView()
+                keyboardFooterView.frame = CGRect(x: 0,y: 0,width: tableView.bounds.width,height: keyboardScreenEndFrame.height)
+                tableView.tableFooterView = keyboardFooterView
+            }
+        case is CellDropDownMenuSelectedAction:
+            let action = state.currentAction as? CellDropDownMenuSelectedAction
+            let cell = action?.dropdownView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
-            let contentSide =
-                LRTableViewCell.ContentSide(rawValue: action?.dropdownView.tag ?? 0)
-            print(indexPath?.row ?? 0)
-            
-            
-        case is TableCellButtonClickAction:
-            let action = state.currentAction as? TableCellButtonClickAction
+            tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = (cell?.cellData)!
+        case is CellTextFieldDidChangedAction:
+            let action = state.currentAction as? CellTextFieldDidChangedAction
+            let cell = action?.cell as? LRTableViewCell
+            let indexPath = tableView.indexPath(for: cell!)
+            tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
+                = (cell?.cellData)!
+        case is TableCellButtonClickAction: break
             
         default: break
         }

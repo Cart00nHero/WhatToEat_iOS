@@ -14,8 +14,20 @@ struct TableCellButtonClickAction: Action {
     let button: UIButton
 }
 
-struct DropDownMenuSelectedAction: Action {
+struct CellDropDownMenuSelectedAction: Action {
     let dropdownView: DropDownCellView
     let selectedIndex: Int
     let selectedText: String
+}
+
+struct AdjustForKeyboardAction: Action {
+    let notification: Notification
+    init(notification: Notification) {
+        self.notification = notification
+    }
+}
+
+struct CellTextFieldDidChangedAction: Action {
+    let cell: UITableViewCell
+    let textField: UITextField
 }

@@ -30,18 +30,20 @@ class DefaultVCTemplate: UIBaseViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
         appStore.unsubscribe(self)
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - Public Methods
+    func registerKeyBoardNotification() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
-    */
+    // MARK: - UI Actions
+    @objc private func adjustForKeyboard(notification: Notification) {
+        appStore.dispatch(AdjustForKeyboardAction(notification: notification))
+    }
 
 }
 

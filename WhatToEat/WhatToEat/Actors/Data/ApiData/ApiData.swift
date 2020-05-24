@@ -17,38 +17,44 @@ struct Foodie: Codable {
     let branches: [ShopBranch]?
 }
 struct Shop: Codable {
-    let uniqueId: String
-    let title: String
-    let style: String
-    let type: String
-    let status: Int
-    let underPrice: Float64
+    var uniqueId: String?
+    var title: String?
+    var style: String?
+    var type: String?
+    var status: Int = 0
+    var underPrice: Float64 = 0.0
     let branches: [ShopBranch]
+    init(branches: [ShopBranch]) {
+        self.branches = branches
+    }
 }
 
 struct ShopBranch: Codable {
-    let uniqueId: String
-    let orderId: Int
-    let name: String
-    let openTime: Date
-    let closeTime: Date
-    let tel: String
-    let shop: Shop
+    var uniqueId: String?
+    var orderId: Int = 0
+    var name: String?
+    var openTime: Date?
+    var closeTime: Date?
+    var tel: String?
+    var shop: Shop?
     let address: Address
+    init(address: Address) {
+        self.address = address
+    }
 }
 
 struct Address: Codable {
-    let ownerType: String
-    let completeInfo: String
-    let nation: String
-    let nationCode: String
-    let state: String
-    let cityCounty: String
-    let district: String
-    let town: String
-    let roadStreet: String
-    let remainInfo: String
-    let latitude: Double
-    let longitude: Double
-    let annotation: String
+    var ownerType: String?
+    var completeInfo: String?
+    var nation: String?
+    var nationCode: String?
+    var state: String?
+    var cityCounty: String?
+    var district: String?
+    var town: String?
+    var roadStreet: String?
+    var remainInfo: String?
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
+    var annotation: String?
 }
