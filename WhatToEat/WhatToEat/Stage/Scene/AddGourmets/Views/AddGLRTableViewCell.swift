@@ -10,10 +10,9 @@ import UIKit
 
 class AddGLRTableViewCell: LRTableViewCell {
 
-    private enum ContentSide : Int {
-        case Left,Right
-    }
     @IBOutlet weak var cellLeftLabel: UILabel!
+    private var leftContentView: UIView? = nil
+    private var rightContentView: UIView? = nil
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +31,8 @@ class AddGLRTableViewCell: LRTableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
-        for subView in cellLeftView.subviews {
-            subView.removeFromSuperview()
+        if leftContentView != nil {
+            leftContentView?.removeFromSuperview()
         }
         for subView in cellRightView.subviews {
             subView.removeFromSuperview()
@@ -42,49 +41,79 @@ class AddGLRTableViewCell: LRTableViewCell {
     
     // MARK: - create view
     private func createLeftView() {
-        switch cellData?.leftCellProtocol.cellStyle {
+        let style = cellData?.leftCellProtocol.cellStyle
+        if style != .TextLabel {
+            for subView in cellLeftView.subviews {
+                subView.removeFromSuperview()
+            }
+        }
+        switch style {
         case .TextLabel:
 //            createTextLabelOnCell(cellProtocol: cellData!.leftCellProtocol, contentSide: .Left)
             putLeftTitleTextOnLabel(cellProtocol: cellData!.leftCellProtocol)
+        case .DropDown:
+            leftWidthConstraint.constant = self.contentView.frame.width/2.0
+            createDropDownMenuOnCell(cellProtocol: cellData!.leftCellProtocol, contentSide: .Left)
         default: break
         }
     }
     private func createRightView() {
         switch cellData?.rightCellProtocol.cellStyle {
         case .TextField:
-            createRTextFieldOnCell(cellProtocol: cellData!.rightCellProtocol)
+            createRTextFieldOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+        case .DropDown:
+            createDropDownMenuOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+        case .Range:
+            createRangeViewOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
         default: break
         }
     }
     
-    private func createDropDownCellView(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
-        
-        let dropDownView = DropDownCellView()
-        dropDownView.translatesAutoresizingMaskIntoConstraints = false
-        var contentView = UIView()
+    private func createRangeViewOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide){
+        let rangeView = SetRangeCellView()
+//        let data = cellProtocol as? LRRangeCellData
+        rangeView.translatesAutoresizingMaskIntoConstraints = false
+        var contentView : UIView? = nil
         switch contentSide {
-            
         case .Left:
-            for subView in cellLeftView.subviews {
-                subView.removeFromSuperview()
-            }
+            leftContentView = rangeView
             contentView = cellLeftView
         case .Right:
             contentView = cellRightView
         }
-        contentView.addSubview(dropDownView)
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
-        contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
+        contentView?.addSubview(rangeView)
+        contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[rangeView]-|", options: [], metrics: nil, views: ["rangeView": rangeView]))
+        contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[rangeView]-|", options: [], metrics: nil, views: ["rangeView": rangeView]))
+        
     }
-    // MARK: - left style
+    private func createDropDownMenuOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+        let dropDownView = DropDownCellView()
+        dropDownView.superTableViewCell = self
+        let data = cellProtocol as? LRDropDownCellData
+        dropDownView.translatesAutoresizingMaskIntoConstraints = false
+        dropDownView.dropDownField.placeholder = data?.placeHolder
+        dropDownView.dropDownField.optionArray = data?.optionArray ?? []
+        var contentView : UIView? = nil
+        switch contentSide {
+        case .Left:
+            leftContentView = dropDownView
+            contentView = cellLeftView
+        case .Right:
+            contentView = cellRightView
+        }
+        contentView?.addSubview(dropDownView)
+        contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
+        contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
+    }
+    
+    // MARK: - cell style
     private func putLeftTitleTextOnLabel(cellProtocol: LRTableCellProtocol) {
-        let data = cellProtocol as? LRTextLabelCell
+        let data = cellProtocol as? LRLabelCellData
         cellLeftLabel.text = data?.labelText
     }
-    // MARK: - right style
     private func createTextLabelOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
         if cellRightView.subviews.count == 0 {
-            let data = cellProtocol as? LRTextLabelCell
+            let data = cellProtocol as? LRLabelCellData
             let textLabel = UILabel()
             textLabel.translatesAutoresizingMaskIntoConstraints = false
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
@@ -93,23 +122,22 @@ class AddGLRTableViewCell: LRTableViewCell {
             textLabel.numberOfLines = 0
             textLabel.lineBreakMode = .byWordWrapping
             textLabel.backgroundColor = UIColor.red
-            var contentView = UIView()
+            var contentView : UIView? = nil
             switch contentSide {
-                
             case .Left:
                 contentView = cellLeftView
             case .Right:
                 contentView = cellRightView
             }
-            contentView.addSubview(textLabel)
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[textLabel]-10-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
-            contentView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+            contentView?.addSubview(textLabel)
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
         }
     }
     
-    private func createRTextFieldOnCell(cellProtocol: LRTableCellProtocol) {
+    private func createRTextFieldOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
         if cellRightView.subviews.count == 0 {
-            let data = cellProtocol as? LRTextFieldCell
+            let data = cellProtocol as? LRTextFieldCellData
             let textField = UITextField()
             textField.translatesAutoresizingMaskIntoConstraints = false
             textField.borderStyle = .roundedRect
@@ -119,9 +147,16 @@ class AddGLRTableViewCell: LRTableViewCell {
             } else {
                 textField.placeholder = data?.placeHolder
             }
-            cellRightView.addSubview(textField)
-            cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
-            cellRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
+            var contentView : UIView? = nil
+            switch contentSide {
+            case .Left:
+                contentView = cellLeftView
+            case .Right:
+                contentView = cellRightView
+            }
+            contentView?.addSubview(textField)
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textField]-|", options: [], metrics: nil, views: ["textField": textField]))
         }
     }
 

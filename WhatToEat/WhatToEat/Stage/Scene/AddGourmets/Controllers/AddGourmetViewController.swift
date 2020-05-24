@@ -41,6 +41,7 @@ class AddGourmetViewController: UIViewController {
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
+    // MARK: - UI Actions
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
@@ -48,7 +49,8 @@ class AddGourmetViewController: UIViewController {
 //        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
 
         if notification.name == UIResponder.keyboardWillHideNotification {
-            tableView.tableFooterView = originTableFooter
+            tableView.tableFooterView = nil
+            tableView.setContentOffset(.zero, animated: true)
         } else {
 //            tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
             let keyboardFooterView = UIView()
@@ -56,7 +58,6 @@ class AddGourmetViewController: UIViewController {
             tableView.tableFooterView = keyboardFooterView
         }
     }
-    // MARK: - Actions
 
 }
 
@@ -73,7 +74,8 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         let textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.textColor = UIColor(red: 255.0/255.0, green: 0.0, blue: 0.0, alpha: 1.0)
-        textLabel.font = UIFont.systemFont(ofSize: 13.0)
+        textLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
+//        textLabel.font = UIFont.systemFont(ofSize: 18.0)
         textLabel.text = tableData.sectionTitles[section]
         headerView.addSubview(textLabel)
         headerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
@@ -85,12 +87,16 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         let data = tableData.dataSource[indexPath.section][indexPath.row]
         var cellIdentifier = "AddGLRTableViewCell"
         if data.templateStyle == .Button {
-            cellIdentifier = "ButtonCell"
+            cellIdentifier = "AddBtnTableViewCell"
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "AddGLRTableViewCell" {
             let contentCell = cell as? AddGLRTableViewCell
             contentCell?.cellData = data as? LRCellData
+        }
+        if cellIdentifier == "AddBtnTableViewCell" {
+            let contentCell = cell as? AddBtnTableViewCell
+            contentCell?.cellData = data as? ButtonCellData
         }
         return cell
     }
@@ -109,5 +115,20 @@ extension AddGourmetViewController: UIScrollViewDelegate {
 }
 extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
+        switch state.currentAction {
+        case is DropDownMenuSelectedAction:
+            let action = state.currentAction as? DropDownMenuSelectedAction
+            let cell = action?.dropdownView.superTableViewCell
+            let indexPath = tableView.indexPath(for: cell!)
+            let contentSide =
+                LRTableViewCell.ContentSide(rawValue: action?.dropdownView.tag ?? 0)
+            print(indexPath?.row ?? 0)
+            
+            
+        case is TableCellButtonClickAction:
+            let action = state.currentAction as? TableCellButtonClickAction
+            
+        default: break
+        }
     }
 }

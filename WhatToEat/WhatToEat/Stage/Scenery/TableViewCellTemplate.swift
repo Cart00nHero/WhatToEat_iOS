@@ -12,11 +12,14 @@ enum CellTemplateStyle : Int {
     case LeftRight,Button
 }
 protocol CellDataProtocol {
-    var templateStyle: CellTemplateStyle { get set }
+    var templateStyle: CellTemplateStyle { get }
 }
 
 class LRTableViewCell: UITableViewCell {
 
+    enum ContentSide : Int {
+        case Left,Right
+    }
     @IBOutlet weak var cellLeftView: UIView!
     @IBOutlet weak var cellRightView: UIView!
     @IBOutlet weak var leftWidthConstraint: NSLayoutConstraint!
@@ -27,9 +30,6 @@ class LRTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-    override func layoutSubviews() {
-        super.layoutSubviews()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -44,13 +44,13 @@ class LRTableViewCell: UITableViewCell {
 class ButtonTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellButton: UIButton!
+    var cellData: ButtonCellData?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        cellButton.layer.cornerRadius = 4.0
     }
 
 }

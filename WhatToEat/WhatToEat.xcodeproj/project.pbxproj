@@ -12,6 +12,15 @@
 		20539DD324692D8300E70699 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 20539DD224692D8300E70699 /* schema.json */; };
 		20A5F1F02469445900DD3AFD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A5F1EF2469445900DD3AFD /* API.swift */; };
 		6D809A68EB2CEE85CC3363AD /* Pods_WhatToEat_WhatToEatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */; };
+		AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */; };
+		AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */; };
+		AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */; };
+		AF0EDF5E247A5012003D84C0 /* SetRangeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF57247A5012003D84C0 /* SetRangeCellView.swift */; };
+		AF0EDF5F247A5012003D84C0 /* SetRangeCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EDF58247A5012003D84C0 /* SetRangeCellView.xib */; };
+		AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF59247A5012003D84C0 /* TableViewCellTemplate.swift */; };
+		AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF5A247A5012003D84C0 /* UIBaseViewController.swift */; };
+		AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF5B247A5012003D84C0 /* DefaultVCTemplate.swift */; };
+		AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF63247A7E3B003D84C0 /* SceneryActions.swift */; };
 		AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */; };
 		AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF55245E90DB0026A5C8 /* SceneDelegate.swift */; };
 		AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF57245E90DB0026A5C8 /* ViewController.swift */; };
@@ -20,13 +29,10 @@
 		AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */; };
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
+		AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D55247AA79E00A8625D /* LRTableData.swift */; };
+		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
+		AF550D5B247AA7DE00A8625D /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D5A247AA7DE00A8625D /* ApiData.swift */; };
 		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
-		AF719D862474DF6C003A7285 /* DropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF719D852474DF6C003A7285 /* DropDownCellView.xib */; };
-		AF719D882474DFAA003A7285 /* DropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D872474DFAA003A7285 /* DropDownCellView.swift */; };
-		AF8224632472F21D0034C928 /* TableViewCellTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224412472F21D0034C928 /* TableViewCellTemplate.swift */; };
-		AF8224642472F21D0034C928 /* IBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224422472F21D0034C928 /* IBView.swift */; };
-		AF8224652472F21D0034C928 /* UIBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224432472F21D0034C928 /* UIBaseViewController.swift */; };
-		AF8224662472F21D0034C928 /* DefaultVCTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224442472F21D0034C928 /* DefaultVCTemplate.swift */; };
 		AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */; };
 		AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */; };
 		AF8224692472F21D0034C928 /* AddGLRTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82244C2472F21D0034C928 /* AddGLRTableViewCell.swift */; };
@@ -36,7 +42,6 @@
 		AF82246D2472F21D0034C928 /* OptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224552472F21D0034C928 /* OptionalViewController.swift */; };
 		AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224562472F21D0034C928 /* SignViewController.swift */; };
 		AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8224582472F21D0034C928 /* Entrance.storyboard */; };
-		AF8224702472F21D0034C928 /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82245A2472F21D0034C928 /* LRTableData.swift */; };
 		AF8224782472F27D0034C928 /* ListShops.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF8224772472F27D0034C928 /* ListShops.graphql */; };
 		AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224792472F2FE0034C928 /* ApolloService.swift */; };
 		AF8224832472F4160034C928 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247D2472F4160034C928 /* AppState.swift */; };
@@ -71,6 +76,15 @@
 		74106968E1D93E003AA9EE97 /* Pods-WhatToEat-WhatToEatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E921B269310A443990AD826 /* Pods-WhatToEatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F808F0CB39BE61F56DA0471 /* Pods-WhatToEatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.release.xcconfig"; sourceTree = "<group>"; };
+		AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
+		AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCellView.swift; sourceTree = "<group>"; };
+		AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCellView.xib; sourceTree = "<group>"; };
+		AF0EDF57247A5012003D84C0 /* SetRangeCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetRangeCellView.swift; sourceTree = "<group>"; };
+		AF0EDF58247A5012003D84C0 /* SetRangeCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetRangeCellView.xib; sourceTree = "<group>"; };
+		AF0EDF59247A5012003D84C0 /* TableViewCellTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellTemplate.swift; sourceTree = "<group>"; };
+		AF0EDF5A247A5012003D84C0 /* UIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseViewController.swift; sourceTree = "<group>"; };
+		AF0EDF5B247A5012003D84C0 /* DefaultVCTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVCTemplate.swift; sourceTree = "<group>"; };
+		AF0EDF63247A7E3B003D84C0 /* SceneryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneryActions.swift; sourceTree = "<group>"; };
 		AF13AF50245E90DB0026A5C8 /* WhatToEat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatToEat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF13AF55245E90DB0026A5C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,13 +99,10 @@
 		AF13AF71245E90DC0026A5C8 /* WhatToEatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatToEatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF550D55247AA79E00A8625D /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
+		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
+		AF550D5A247AA7DE00A8625D /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
 		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
-		AF719D852474DF6C003A7285 /* DropDownCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownCellView.xib; sourceTree = "<group>"; };
-		AF719D872474DFAA003A7285 /* DropDownCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCellView.swift; sourceTree = "<group>"; };
-		AF8224412472F21D0034C928 /* TableViewCellTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCellTemplate.swift; sourceTree = "<group>"; };
-		AF8224422472F21D0034C928 /* IBView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBView.swift; sourceTree = "<group>"; };
-		AF8224432472F21D0034C928 /* UIBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIBaseViewController.swift; sourceTree = "<group>"; };
-		AF8224442472F21D0034C928 /* DefaultVCTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultVCTemplate.swift; sourceTree = "<group>"; };
 		AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetViewController.swift; sourceTree = "<group>"; };
 		AF82244C2472F21D0034C928 /* AddGLRTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGLRTableViewCell.swift; sourceTree = "<group>"; };
@@ -101,7 +112,6 @@
 		AF8224552472F21D0034C928 /* OptionalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalViewController.swift; sourceTree = "<group>"; };
 		AF8224562472F21D0034C928 /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
 		AF8224582472F21D0034C928 /* Entrance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Entrance.storyboard; sourceTree = "<group>"; };
-		AF82245A2472F21D0034C928 /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF8224772472F27D0034C928 /* ListShops.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ListShops.graphql; sourceTree = "<group>"; };
 		AF8224792472F2FE0034C928 /* ApolloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloService.swift; sourceTree = "<group>"; };
 		AF82247D2472F4160034C928 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -141,6 +151,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF0EDF53247A5012003D84C0 /* Scenery */ = {
+			isa = PBXGroup;
+			children = (
+				AF0EDF54247A5012003D84C0 /* Xibs */,
+				AF0EDF59247A5012003D84C0 /* TableViewCellTemplate.swift */,
+				AF0EDF5A247A5012003D84C0 /* UIBaseViewController.swift */,
+				AF0EDF5B247A5012003D84C0 /* DefaultVCTemplate.swift */,
+			);
+			path = Scenery;
+			sourceTree = "<group>";
+		};
+		AF0EDF54247A5012003D84C0 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */,
+				AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */,
+				AF0EDF57247A5012003D84C0 /* SetRangeCellView.swift */,
+				AF0EDF58247A5012003D84C0 /* SetRangeCellView.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		AF0EDF65247A9C9C003D84C0 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF550D59247AA7BA00A8625D /* ApiData */,
+				AF550D54247AA78500A8625D /* TableData */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		AF13AF47245E90DB0026A5C8 = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +241,23 @@
 			path = WhatToEatUITests;
 			sourceTree = "<group>";
 		};
+		AF550D54247AA78500A8625D /* TableData */ = {
+			isa = PBXGroup;
+			children = (
+				AF550D56247AA79E00A8625D /* ButtonTableData.swift */,
+				AF550D55247AA79E00A8625D /* LRTableData.swift */,
+			);
+			path = TableData;
+			sourceTree = "<group>";
+		};
+		AF550D59247AA7BA00A8625D /* ApiData */ = {
+			isa = PBXGroup;
+			children = (
+				AF550D5A247AA7DE00A8625D /* ApiData.swift */,
+			);
+			path = ApiData;
+			sourceTree = "<group>";
+		};
 		AF719D732474D225003A7285 /* BackStage */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,18 +274,10 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		AF719D842474DF29003A7285 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				AF719D852474DF6C003A7285 /* DropDownCellView.xib */,
-				AF719D872474DFAA003A7285 /* DropDownCellView.swift */,
-			);
-			path = Xibs;
-			sourceTree = "<group>";
-		};
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				AF0EDF65247A9C9C003D84C0 /* Data */,
 				AF719D732474D225003A7285 /* BackStage */,
 				AF8224752472F27D0034C928 /* Network */,
 			);
@@ -237,23 +287,10 @@
 		AF82243F2472F21D0034C928 /* Stage */ = {
 			isa = PBXGroup;
 			children = (
-				AF8224402472F21D0034C928 /* Templates */,
+				AF0EDF53247A5012003D84C0 /* Scenery */,
 				AF8224452472F21D0034C928 /* Scene */,
-				AF8224592472F21D0034C928 /* Data */,
 			);
 			path = Stage;
-			sourceTree = "<group>";
-		};
-		AF8224402472F21D0034C928 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				AF719D842474DF29003A7285 /* Xibs */,
-				AF8224412472F21D0034C928 /* TableViewCellTemplate.swift */,
-				AF8224422472F21D0034C928 /* IBView.swift */,
-				AF8224432472F21D0034C928 /* UIBaseViewController.swift */,
-				AF8224442472F21D0034C928 /* DefaultVCTemplate.swift */,
-			);
-			path = Templates;
 			sourceTree = "<group>";
 		};
 		AF8224452472F21D0034C928 /* Scene */ = {
@@ -296,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				AF82244C2472F21D0034C928 /* AddGLRTableViewCell.swift */,
+				AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */,
 				AF82244D2472F21D0034C928 /* AddGourmets.storyboard */,
 			);
 			path = Views;
@@ -352,14 +390,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		AF8224592472F21D0034C928 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				AF82245A2472F21D0034C928 /* LRTableData.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		AF8224752472F27D0034C928 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,6 +430,7 @@
 			children = (
 				AF82247F2472F4160034C928 /* CommonActions.swift */,
 				AF8224802472F4160034C928 /* SignActions.swift */,
+				AF0EDF63247A7E3B003D84C0 /* SceneryActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -550,8 +581,9 @@
 				AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */,
 				20539DD324692D8300E70699 /* schema.json in Resources */,
 				AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */,
-				AF719D862474DF6C003A7285 /* DropDownCellView.xib in Resources */,
+				AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */,
 				AF13AF5D245E90DC0026A5C8 /* Assets.xcassets in Resources */,
+				AF0EDF5F247A5012003D84C0 /* SetRangeCellView.xib in Resources */,
 				AF13AF5B245E90DB0026A5C8 /* Main.storyboard in Resources */,
 				AF8224782472F27D0034C928 /* ListShops.graphql in Resources */,
 			);
@@ -699,28 +731,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF8224662472F21D0034C928 /* DefaultVCTemplate.swift in Sources */,
 				AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */,
 				AF82246D2472F21D0034C928 /* OptionalViewController.swift in Sources */,
-				AF8224632472F21D0034C928 /* TableViewCellTemplate.swift in Sources */,
-				AF8224642472F21D0034C928 /* IBView.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AF8224692472F21D0034C928 /* AddGLRTableViewCell.swift in Sources */,
+				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,
+				AF0EDF5E247A5012003D84C0 /* SetRangeCellView.swift in Sources */,
 				AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */,
+				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
-				AF8224652472F21D0034C928 /* UIBaseViewController.swift in Sources */,
+				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
+				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
+				AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */,
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,
 				AF8224852472F4160034C928 /* SignActions.swift in Sources */,
-				AF8224702472F21D0034C928 /* LRTableData.swift in Sources */,
+				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
+				AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */,
+				AF550D5B247AA7DE00A8625D /* ApiData.swift in Sources */,
+				AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF82246B2472F21D0034C928 /* FindFoodViewController.swift in Sources */,
-				AF719D882474DFAA003A7285 /* DropDownCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

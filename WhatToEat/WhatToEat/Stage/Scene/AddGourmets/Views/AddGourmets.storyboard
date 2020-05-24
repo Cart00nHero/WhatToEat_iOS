@@ -93,7 +93,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="gEE-7Y-w6J" secondAttribute="trailing" constant="10" id="tTw-VE-d8Q"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GhN-jf-bKg" userLabel="Right View">
+                                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GhN-jf-bKg" userLabel="Right View">
                                                     <rect key="frame" x="100" y="0.0" width="275" height="80"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
@@ -115,7 +115,7 @@
                                             <outlet property="leftWidthConstraint" destination="aXY-pP-HHm" id="Gkm-JD-Gzo"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ButtonTableViewCell" rowHeight="109" id="pP4-7g-wow" customClass="ButtonTableViewCell" customModule="WhatToEat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddBtnTableViewCell" rowHeight="109" id="pP4-7g-wow" customClass="AddBtnTableViewCell" customModule="WhatToEat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="108" width="375" height="109"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pP4-7g-wow" id="nFy-Yk-0di">
@@ -123,18 +123,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ybl-ko-IOb">
-                                                    <rect key="frame" x="13" y="56" width="350" height="40"/>
+                                                    <rect key="frame" x="10" y="34" width="355" height="41"/>
                                                     <color key="backgroundColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="ybl-ko-IOb" secondAttribute="height" multiplier="35:4" id="pt4-Qj-mh7"/>
+                                                        <constraint firstAttribute="width" secondItem="ybl-ko-IOb" secondAttribute="height" multiplier="35:4" id="45h-rC-vbj"/>
                                                     </constraints>
-                                                    <state key="normal" title="關閉"/>
+                                                    <state key="normal" title="上傳儲存"/>
+                                                    <connections>
+                                                        <action selector="cellButtonClickActionWithSender:" destination="pP4-7g-wow" eventType="touchUpInside" id="wbc-kr-fca"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="ybl-ko-IOb" secondAttribute="trailing" constant="12" id="UHr-DC-wKW"/>
-                                                <constraint firstAttribute="bottom" secondItem="ybl-ko-IOb" secondAttribute="bottom" constant="13" id="bXo-BC-FTO"/>
-                                                <constraint firstItem="ybl-ko-IOb" firstAttribute="leading" secondItem="nFy-Yk-0di" secondAttribute="leading" constant="13" id="toa-1g-SQz"/>
+                                                <constraint firstItem="ybl-ko-IOb" firstAttribute="leading" secondItem="nFy-Yk-0di" secondAttribute="leading" constant="10" id="BJA-Az-rxo"/>
+                                                <constraint firstItem="ybl-ko-IOb" firstAttribute="centerY" secondItem="nFy-Yk-0di" secondAttribute="centerY" id="Uwp-uN-Qxk"/>
+                                                <constraint firstItem="ybl-ko-IOb" firstAttribute="centerX" secondItem="nFy-Yk-0di" secondAttribute="centerX" id="XpE-9Q-uXZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
