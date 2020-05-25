@@ -113,7 +113,22 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let action = state.currentAction as? CellDropDownMenuSelectedAction
             let cell = action?.dropdownView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
-            tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = (cell?.cellData)!
+            var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
+            let superTag = action?.dropdownView.superview?.tag ?? 0
+            if LRTableViewCell.ContentSide(rawValue: superTag) ==
+                LRTableViewCell.ContentSide.Left {
+                var data = cellData?.leftCellProtocol as? LRDropDownCellData
+                data?.selectedText = action?.selectedText ?? ""
+                cellData?.leftCellProtocol = data!
+                tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
+            } else {
+                var data = cellData?.rightCellProtocol as? LRDropDownCellData
+                data?.selectedText = action?.selectedText ?? ""
+                cellData?.leftCellProtocol = data!
+                tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
+            }
+            
+            
         case is CellTextFieldDidChangedAction:
             let action = state.currentAction as? CellTextFieldDidChangedAction
             let cell = action?.cell as? LRTableViewCell

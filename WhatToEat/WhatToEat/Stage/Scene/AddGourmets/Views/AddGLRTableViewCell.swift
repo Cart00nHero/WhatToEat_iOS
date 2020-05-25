@@ -105,6 +105,7 @@ class AddGLRTableViewCell: LRTableViewCell {
         dropDownView.translatesAutoresizingMaskIntoConstraints = false
         dropDownView.dropDownField.placeholder = data?.placeHolder
         dropDownView.dropDownField.optionArray = data?.optionArray ?? []
+        dropDownView.dropDownField.text = data?.selectedText
         var contentView : UIView? = nil
         switch contentSide {
         case .Left:
