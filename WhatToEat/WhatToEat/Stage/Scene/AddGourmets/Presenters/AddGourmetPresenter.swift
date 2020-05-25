@@ -30,7 +30,7 @@ struct GourmetsTableData {
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Town"), rightCellProtocol: LRTextFieldCellData()),
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Road/Street"), rightCellProtocol: LRTextFieldCellData()),
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Remain Info"), rightCellProtocol: LRTextFieldCellData()),
-            ButtonCellData(cornerRadius: 2.0, titleText: "儲存")
+            ButtonCellData(cornerRadius: 2.0, titleText: "Save")
         ]
     ]
 }
