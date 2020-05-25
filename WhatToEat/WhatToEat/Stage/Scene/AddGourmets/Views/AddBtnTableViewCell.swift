@@ -17,7 +17,7 @@ class AddBtnTableViewCell: ButtonTableViewCell {
     override func layoutSubviews() {
         superview?.layoutSubviews()
         cellButton.setTitle(cellData?.titleText, for: .normal)
-        cellButton.layer.cornerRadius = cellData?.cornerRadius ?? 2.0
+        cellButton.layer.cornerRadius = cellData?.cornerRadius ?? 5.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
