@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--DefaultVC Template-->
         <scene sceneID="dY9-Pp-j7o">
             <objects>
-                <viewController id="11R-HU-uXt" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultVCTemplate" useStoryboardIdentifierAsRestorationIdentifier="YES" id="11R-HU-uXt" customClass="DefaultVCTemplate" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="edX-oE-Q3Y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,10 +55,10 @@
             </objects>
             <point key="canvasLocation" x="88.799999999999997" y="-80.50974512743629"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Loc View Controller-->
         <scene sceneID="GRB-3M-zsJ">
             <objects>
-                <viewController id="Ojl-Ev-g81" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchLocViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ojl-Ev-g81" customClass="SearchLocViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EOS-Ov-jNF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
