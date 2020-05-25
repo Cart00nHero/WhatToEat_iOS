@@ -41,7 +41,7 @@
                     </userDefinedRuntimeAttributes>
                 </textField>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="kAe-Nu-ZpP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="74b-ae-PP7"/>
                 <constraint firstItem="kAe-Nu-ZpP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="EEA-Vh-kMR"/>
@@ -49,7 +49,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-238.40579710144928" y="114.50892857142857"/>
+            <point key="canvasLocation" x="-231" y="-9"/>
         </view>
     </objects>
 </document>

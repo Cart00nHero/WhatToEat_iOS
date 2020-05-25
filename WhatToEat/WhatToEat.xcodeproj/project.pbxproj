@@ -32,6 +32,8 @@
 		AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D55247AA79E00A8625D /* LRTableData.swift */; };
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
 		AF550D5B247AA7DE00A8625D /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D5A247AA7DE00A8625D /* ApiData.swift */; };
+		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
+		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
 		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
 		AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */; };
 		AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */; };
@@ -102,6 +104,8 @@
 		AF550D55247AA79E00A8625D /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
 		AF550D5A247AA7DE00A8625D /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
+		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
+		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
 		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
 		AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetViewController.swift; sourceTree = "<group>"; };
@@ -278,6 +282,7 @@
 		AF550D6A247BBB2800A8625D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AF550D6C247C399B00A8625D /* SearchLocViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -285,6 +290,7 @@
 		AF550D6B247BBB2800A8625D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -618,6 +624,7 @@
 				AF0EDF5F247A5012003D84C0 /* SetRangeCellView.xib in Resources */,
 				AF13AF5B245E90DB0026A5C8 /* Main.storyboard in Resources */,
 				AF8224782472F27D0034C928 /* ListShops.graphql in Resources */,
+				AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +783,7 @@
 				AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */,
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
+				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
