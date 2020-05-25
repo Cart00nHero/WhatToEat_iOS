@@ -124,7 +124,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             } else {
                 var data = cellData?.rightCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                cellData?.leftCellProtocol = data!
+                cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
             

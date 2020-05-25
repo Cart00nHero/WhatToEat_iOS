@@ -62,19 +62,20 @@
             <objects>
                 <viewController storyboardIdentifier="SignViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CJ6-fV-xMv" customClass="SignViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QCr-9N-KOu">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-6h-yEn">
-                                <rect key="frame" x="15" y="267" width="290" height="34"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="15" y="316.5" width="345" height="34"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.54509803921568623" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Facebook Login"/>
                                 <connections>
                                     <action selector="loginButtonClickAction:" destination="CJ6-fV-xMv" eventType="touchUpInside" id="9AE-Rx-glt"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="1" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="centerY" secondItem="QCr-9N-KOu" secondAttribute="centerY" id="09B-5a-roP"/>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="centerX" secondItem="QCr-9N-KOu" secondAttribute="centerX" id="71d-hb-l7T"/>
@@ -85,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIO-WV-D3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532" y="54"/>
+            <point key="canvasLocation" x="570" y="81"/>
         </scene>
         <!--Optional View Controller-->
         <scene sceneID="iTB-Rb-N5G">
@@ -97,7 +98,8 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2m-IC-U1J">
                                 <rect key="frame" x="15" y="256.5" width="345" height="34"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.54509803921568623" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Find Food"/>
                                 <connections>
                                     <action selector="loginButtonClickAction:" destination="CJ6-fV-xMv" eventType="touchUpInside" id="nX7-4d-qQg"/>
@@ -105,7 +107,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oh9-A0-j7T">
                                 <rect key="frame" x="15" y="376.5" width="345" height="34"/>
-                                <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.54509803921568623" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Add Gourmet"/>
                                 <connections>
                                     <action selector="loginButtonClickAction:" destination="CJ6-fV-xMv" eventType="touchUpInside" id="daf-6a-uUt"/>
@@ -113,7 +116,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="1" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="N2m-IC-U1J" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="1TB-6c-ih9"/>
                             <constraint firstItem="Oh9-A0-j7T" firstAttribute="centerY" secondItem="g1g-59-mZd" secondAttribute="centerY" constant="60" id="3Rz-1F-yfu"/>
@@ -128,7 +131,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXg-7B-qLj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1246" y="81"/>
+            <point key="canvasLocation" x="1271" y="81"/>
         </scene>
     </scenes>
 </document>

@@ -258,6 +258,37 @@
 			path = ApiData;
 			sourceTree = "<group>";
 		};
+		AF550D68247BBB2800A8625D /* SearchLocations */ = {
+			isa = PBXGroup;
+			children = (
+				AF550D69247BBB2800A8625D /* Presenters */,
+				AF550D6A247BBB2800A8625D /* Controllers */,
+				AF550D6B247BBB2800A8625D /* Views */,
+			);
+			path = SearchLocations;
+			sourceTree = "<group>";
+		};
+		AF550D69247BBB2800A8625D /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		AF550D6A247BBB2800A8625D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		AF550D6B247BBB2800A8625D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		AF719D732474D225003A7285 /* BackStage */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +327,7 @@
 		AF8224452472F21D0034C928 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				AF550D68247BBB2800A8625D /* SearchLocations */,
 				AF8224462472F21D0034C928 /* AddGourmets */,
 				AF82244E2472F21D0034C928 /* FindMyFood */,
 				AF8224532472F21D0034C928 /* Entrance */,

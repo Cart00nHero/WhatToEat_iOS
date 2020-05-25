@@ -47,9 +47,10 @@ class SetRangeCellView: XibSetupView {
         let screenWidth = UIScreen.main.bounds.width
         let toolBar = UIToolbar(frame: CGRect(x: 0.0, y: 0.0, width: screenWidth, height: 44.0))
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(barCancelButtonClickAction))
+//        let cancel = UIBarButtonItem(title: "Cancel", style: .plain, target: nil, action: #selector(barCancelButtonClickAction))
         let barButton = UIBarButtonItem(title: "Done", style: .plain, target: target, action: #selector(barDoneButtonClickAction))
-        toolBar.setItems([cancel, flexible, barButton], animated: false)
+//        toolBar.setItems([cancel, flexible, barButton], animated: false)
+        toolBar.setItems([flexible, barButton], animated: false)
         return toolBar
     }
     
