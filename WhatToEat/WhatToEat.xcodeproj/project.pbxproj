@@ -34,6 +34,7 @@
 		AF550D5B247AA7DE00A8625D /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D5A247AA7DE00A8625D /* ApiData.swift */; };
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
 		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
+		AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */; };
 		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
 		AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */; };
 		AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */; };
@@ -106,6 +107,7 @@
 		AF550D5A247AA7DE00A8625D /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
+		AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
 		AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetViewController.swift; sourceTree = "<group>"; };
@@ -265,8 +267,8 @@
 		AF550D68247BBB2800A8625D /* SearchLocations */ = {
 			isa = PBXGroup;
 			children = (
-				AF550D69247BBB2800A8625D /* Presenters */,
 				AF550D6A247BBB2800A8625D /* Controllers */,
+				AF550D69247BBB2800A8625D /* Presenters */,
 				AF550D6B247BBB2800A8625D /* Views */,
 			);
 			path = SearchLocations;
@@ -275,6 +277,7 @@
 		AF550D69247BBB2800A8625D /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
 				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
+				AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
 				AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */,

@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4vA-2d-VeA">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <segue destination="Ojl-Ev-g81" kind="embed" id="Mf2-g0-wFc"/>
                                 </connections>
@@ -40,10 +40,9 @@
         <!--Navigation Controller-->
         <scene sceneID="pZJ-f6-WUP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="giV-cl-kyN" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="giV-cl-kyN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TP8-jV-3uw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -60,21 +59,83 @@
             <objects>
                 <viewController storyboardIdentifier="SearchLocViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Ojl-Ev-g81" customClass="SearchLocViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EOS-Ov-jNF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GhF-32-JiP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
-                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2E-8Y-TLd" userLabel="Search Bar View">
+                                <rect key="frame" x="0.0" y="301.5" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5x-yY-4wO">
+                                        <rect key="frame" x="311" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="j5x-yY-4wO" secondAttribute="height" multiplier="1:1" id="tp5-Y7-PaH"/>
+                                            <constraint firstAttribute="height" constant="64" id="yEZ-h4-CQf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="Search"/>
+                                        <connections>
+                                            <action selector="searchButtonClickActionWithSender:" destination="Ojl-Ev-g81" eventType="touchUpInside" id="jcf-Ib-yOD"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ZeE-5U-HiY">
+                                        <rect key="frame" x="8" y="15" width="295" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.13333333333333333" green="0.54509803921568623" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="ZeE-5U-HiY" firstAttribute="leading" secondItem="G2E-8Y-TLd" secondAttribute="leading" constant="8" id="41r-K1-g6P"/>
+                                    <constraint firstItem="ZeE-5U-HiY" firstAttribute="centerY" secondItem="G2E-8Y-TLd" secondAttribute="centerY" id="7dT-aB-dm4"/>
+                                    <constraint firstItem="j5x-yY-4wO" firstAttribute="top" secondItem="G2E-8Y-TLd" secondAttribute="top" id="B8O-vC-zG6"/>
+                                    <constraint firstAttribute="trailing" secondItem="j5x-yY-4wO" secondAttribute="trailing" id="QL0-ui-JbL"/>
+                                    <constraint firstAttribute="bottom" secondItem="j5x-yY-4wO" secondAttribute="bottom" id="aKJ-AS-ib1"/>
+                                    <constraint firstItem="j5x-yY-4wO" firstAttribute="leading" secondItem="ZeE-5U-HiY" secondAttribute="trailing" constant="8" id="rSA-c1-0kh"/>
+                                    <constraint firstAttribute="width" secondItem="G2E-8Y-TLd" secondAttribute="height" multiplier="375:64" id="xQz-VE-b8k"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5z-VV-UsX" userLabel="Top Selected View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="301.5"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="YZ4-kc-eHK">
+                                        <rect key="frame" x="2" y="2" width="371" height="297.5"/>
+                                    </mapView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="YZ4-kc-eHK" firstAttribute="top" secondItem="g5z-VV-UsX" secondAttribute="top" constant="2" id="a9G-FS-rZ2"/>
+                                    <constraint firstAttribute="bottom" secondItem="YZ4-kc-eHK" secondAttribute="bottom" constant="2" id="cyO-n8-AUD"/>
+                                    <constraint firstItem="YZ4-kc-eHK" firstAttribute="leading" secondItem="g5z-VV-UsX" secondAttribute="leading" constant="2" id="fkD-cC-UNd"/>
+                                    <constraint firstAttribute="trailing" secondItem="YZ4-kc-eHK" secondAttribute="trailing" constant="2" id="ikF-U1-t8D"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcE-o9-rR0" userLabel="Bottom Selected View">
+                                <rect key="frame" x="0.0" y="365.5" width="375" height="301.5"/>
+                                <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="GhF-32-JiP" firstAttribute="height" secondItem="EOS-Ov-jNF" secondAttribute="height" multiplier="1:3" id="2R3-ma-yk0"/>
-                            <constraint firstItem="GhF-32-JiP" firstAttribute="top" secondItem="EOS-Ov-jNF" secondAttribute="top" id="Qnt-ER-XiF"/>
-                            <constraint firstAttribute="trailing" secondItem="GhF-32-JiP" secondAttribute="trailing" id="Shp-by-5Et"/>
-                            <constraint firstItem="GhF-32-JiP" firstAttribute="leading" secondItem="EOS-Ov-jNF" secondAttribute="leading" id="Wq1-pf-lSJ"/>
+                            <constraint firstItem="G2E-8Y-TLd" firstAttribute="centerY" secondItem="EOS-Ov-jNF" secondAttribute="centerY" id="2qo-Vt-Yj9"/>
+                            <constraint firstItem="G2E-8Y-TLd" firstAttribute="top" secondItem="g5z-VV-UsX" secondAttribute="bottom" id="8yW-of-vIh"/>
+                            <constraint firstItem="G2E-8Y-TLd" firstAttribute="trailing" secondItem="z5D-FV-6Bk" secondAttribute="trailing" id="At6-Ag-oYk"/>
+                            <constraint firstItem="g5z-VV-UsX" firstAttribute="top" secondItem="z5D-FV-6Bk" secondAttribute="top" id="Bpv-Oc-wpu"/>
+                            <constraint firstItem="g5z-VV-UsX" firstAttribute="trailing" secondItem="z5D-FV-6Bk" secondAttribute="trailing" id="Hng-ab-lKS"/>
+                            <constraint firstItem="dcE-o9-rR0" firstAttribute="bottom" secondItem="z5D-FV-6Bk" secondAttribute="bottom" id="Z6a-yI-1cJ"/>
+                            <constraint firstItem="G2E-8Y-TLd" firstAttribute="leading" secondItem="z5D-FV-6Bk" secondAttribute="leading" id="bAV-iR-NfL"/>
+                            <constraint firstItem="dcE-o9-rR0" firstAttribute="trailing" secondItem="z5D-FV-6Bk" secondAttribute="trailing" id="czx-RV-3or"/>
+                            <constraint firstItem="g5z-VV-UsX" firstAttribute="leading" secondItem="z5D-FV-6Bk" secondAttribute="leading" id="he0-TN-Xrx"/>
+                            <constraint firstItem="dcE-o9-rR0" firstAttribute="top" secondItem="G2E-8Y-TLd" secondAttribute="bottom" id="nhi-cN-btv"/>
+                            <constraint firstItem="dcE-o9-rR0" firstAttribute="leading" secondItem="z5D-FV-6Bk" secondAttribute="leading" id="s8O-eY-gaz"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="z5D-FV-6Bk"/>
                     </view>
+                    <connections>
+                        <outlet property="barCenterVConstraint" destination="2qo-Vt-Yj9" id="cFM-aC-DCe"/>
+                        <outlet property="bottomSelectedView" destination="dcE-o9-rR0" id="TDP-vn-VUE"/>
+                        <outlet property="searchTextField" destination="ZeE-5U-HiY" id="xyO-rO-DUa"/>
+                        <outlet property="topSelectedView" destination="g5z-VV-UsX" id="6ZF-Bz-lp8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="af1-kg-d9I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

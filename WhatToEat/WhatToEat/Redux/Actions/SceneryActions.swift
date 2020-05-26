@@ -31,3 +31,6 @@ struct CellTextFieldDidChangedAction: Action {
     let cell: UITableViewCell
     let textField: UITextField
 }
+struct ReceivedTapAction: Action {
+    let tapGesture: UITapGestureRecognizer
+}

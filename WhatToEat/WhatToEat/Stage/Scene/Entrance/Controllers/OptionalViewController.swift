@@ -27,8 +27,8 @@ class OptionalViewController: UIViewController {
     // MARK: - actions
     @IBAction func toAddGourmetsButtonClickAction(sender: UIButton) {
         // AddGourmets
-        let addGourmetsSB = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-        let toVC = addGourmetsSB.instantiateViewController(withIdentifier: "AddGourmetViewController")
+        let addGourmetsSB = UIStoryboard.init(name: "SearchLocations", bundle: nil)
+        let toVC = addGourmetsSB.instantiateViewController(withIdentifier: "SearchLocViewController")
         defaultTemplate?.basePushToViewController(toVC, Animated: true)
     }
 
