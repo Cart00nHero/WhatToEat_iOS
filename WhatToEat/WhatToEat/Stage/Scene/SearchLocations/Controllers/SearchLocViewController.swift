@@ -8,10 +8,12 @@
 
 import UIKit
 import WebKit
+import MapKit
 import SafariServices
 
 class SearchLocViewController: UIViewController {
     
+    @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var topSelectedView: UIView!
     @IBOutlet weak var bottomSelectedView: UIView!
     @IBOutlet weak var barCenterVConstraint: NSLayoutConstraint!
@@ -67,6 +69,7 @@ class SearchLocViewController: UIViewController {
         switch presenter.searchMode {
         case .MapLocation:
             print("Map")
+            appStore.dispatch(geoCodeAddressAction(address: searchTextField.text ?? ""))
         case .Google:
             print("Google")
             let urlString = presenter.googleSearchUrl(queryText: searchTextField.text ?? "")
@@ -101,6 +104,16 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 coverView.removeFromSuperview()
                 coverView = presenter.createCoverView(coverSuperView: topSelectedView)
                 presenter.searchMode = .Google
+            }
+        case is GeoCodeAddressAction:
+            let action = state.currentAction as? GeoCodeAddressAction
+            if action?.status == GeoCodeStatus.complete {
+                appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
+            }
+        case is CreateMapAnnotationsAction:
+            let action = state.currentAction as? CreateMapAnnotationsAction
+            if action?.status == GeoCodeStatus.complete {
+                mapView.showAnnotations(action?.annotations ?? [], animated: true)
             }
         default: break
         }

@@ -133,6 +133,7 @@
                     <connections>
                         <outlet property="barCenterVConstraint" destination="2qo-Vt-Yj9" id="cFM-aC-DCe"/>
                         <outlet property="bottomSelectedView" destination="dcE-o9-rR0" id="TDP-vn-VUE"/>
+                        <outlet property="mapView" destination="YZ4-kc-eHK" id="JcT-Qu-mVo"/>
                         <outlet property="searchTextField" destination="ZeE-5U-HiY" id="xyO-rO-DUa"/>
                         <outlet property="topSelectedView" destination="g5z-VV-UsX" id="6ZF-Bz-lp8"/>
                     </connections>

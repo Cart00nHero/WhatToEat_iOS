@@ -35,6 +35,8 @@
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
 		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
 		AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */; };
+		AF5F16FB247D73300023F3FC /* GPSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FA247D73300023F3FC /* GPSService.swift */; };
+		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
 		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
 		AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */; };
 		AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */; };
@@ -108,6 +110,8 @@
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
 		AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
+		AF5F16FA247D73300023F3FC /* GPSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSService.swift; sourceTree = "<group>"; };
+		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
 		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
 		AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AF82244A2472F21D0034C928 /* AddGourmetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetViewController.swift; sourceTree = "<group>"; };
@@ -298,6 +302,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		AF5F16F9247D73180023F3FC /* GPS */ = {
+			isa = PBXGroup;
+			children = (
+				AF5F16FA247D73300023F3FC /* GPSService.swift */,
+			);
+			path = GPS;
+			sourceTree = "<group>";
+		};
 		AF719D732474D225003A7285 /* BackStage */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +329,7 @@
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				AF5F16F9247D73180023F3FC /* GPS */,
 				AF0EDF65247A9C9C003D84C0 /* Data */,
 				AF719D732474D225003A7285 /* BackStage */,
 				AF8224752472F27D0034C928 /* Network */,
@@ -472,6 +485,7 @@
 				AF82247F2472F4160034C928 /* CommonActions.swift */,
 				AF8224802472F4160034C928 /* SignActions.swift */,
 				AF0EDF63247A7E3B003D84C0 /* SceneryActions.swift */,
+				AF5F16FE247D7CB60023F3FC /* GPSActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -775,9 +789,11 @@
 			files = (
 				AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */,
 				AF82246D2472F21D0034C928 /* OptionalViewController.swift in Sources */,
+				AF5F16FB247D73300023F3FC /* GPSService.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AF8224692472F21D0034C928 /* AddGLRTableViewCell.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
+				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
