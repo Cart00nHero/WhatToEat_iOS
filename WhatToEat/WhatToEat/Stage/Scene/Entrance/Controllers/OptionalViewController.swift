@@ -23,6 +23,10 @@ class OptionalViewController: UIViewController {
         self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
     }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 
     // MARK: - actions
     @IBAction func toAddGourmetsButtonClickAction(sender: UIButton) {

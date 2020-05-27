@@ -73,6 +73,8 @@ class AddGLRTableViewCell: LRTableViewCell {
         switch cellData?.rightCellProtocol.cellStyle {
         case .TextField:
             createRTextFieldOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+        case .TextLabel:
+            createTextLabelOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
         case .DropDown:
             createDropDownMenuOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
         case .Range:
@@ -133,7 +135,6 @@ class AddGLRTableViewCell: LRTableViewCell {
             textLabel.text = data?.labelText
             textLabel.numberOfLines = 0
             textLabel.lineBreakMode = .byWordWrapping
-            textLabel.backgroundColor = UIColor.red
             var contentView : UIView? = nil
             switch contentSide {
             case .Left:

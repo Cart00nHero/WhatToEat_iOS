@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import ReSwift
 
 class SearchLocPresenter: NSObject {
     enum SearchMode {
         case MapLocation, Google
     }
+    
     var searchMode: SearchMode = .MapLocation
+    var isWebViewCreated = false
+    
     func googleSearchUrl(queryText: String) -> String {
         let query = queryText.replacingOccurrences(of: " ", with: "+")
         let url = "https://www.google.co.in/search?q=" + query
@@ -33,10 +37,25 @@ class SearchLocPresenter: NSObject {
         appStore.dispatch(ReceivedTapAction(tapGesture: sender))
     }
     
+    func setViewDefaultStyle(selectView: UIView) {
+        selectView.layer.borderWidth = 0.0
+        selectView.layer.borderColor = normalBgColor().cgColor
+    }
+    func setViewSelectedStyle(selectView: UIView) {
+        selectView.layer.borderWidth = 2.0
+        selectView.layer.borderColor = selectedBgColor().cgColor
+    }
     func normalBgColor() -> UIColor {
         return UIColor(red: 245/255.0, green: 255/255.0, blue: 250/255.0, alpha: 1.0)
     }
     func selectedBgColor() -> UIColor {
         return UIColor.red
+    }
+    
+    struct SearchModeChangedAction: Action {
+        let searchMode: SearchMode
+        init(searchMode: SearchMode) {
+            self.searchMode = searchMode
+        }
     }
 }

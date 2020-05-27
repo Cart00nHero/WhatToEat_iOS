@@ -23,13 +23,7 @@ struct GourmetsTableData {
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"), rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad))
         ],
         [
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Nation"), rightCellProtocol: LRTextFieldCellData()),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "State"), rightCellProtocol: LRTextFieldCellData()),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "City/County"), rightCellProtocol: LRTextFieldCellData()),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "District"), rightCellProtocol: LRTextFieldCellData()),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Town"), rightCellProtocol: LRTextFieldCellData()),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Road/Street"), rightCellProtocol: LRTextFieldCellData()),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Remain Info"), rightCellProtocol: LRTextFieldCellData()),
+            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"), rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: "新北市永和區信義路20號")),
             ButtonCellData(cornerRadius: 2.0, titleText: "Save")
         ]
     ]

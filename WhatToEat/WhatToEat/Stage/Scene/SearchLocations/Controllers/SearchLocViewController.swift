@@ -37,17 +37,18 @@ class SearchLocViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let screenHeight = UIScreen.main.bounds.height
-        barCenterVConstraint.constant = screenHeight/3.0 - screenHeight/2.0
+        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchTextField.inputAccessoryView = createInputAccessoryView()
-        createWebViewOnBottom()
         coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
     }
 
     // MARK: - Private methods
     private func createWebViewOnBottom() {
+        presenter.isWebViewCreated = true
+        webView.backgroundColor = UIColor.clear
         webView.translatesAutoresizingMaskIntoConstraints = false
         bottomSelectedView.addSubview(webView)
         bottomSelectedView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-2-[webView]-2-|", options: [], metrics: nil, views: ["webView": webView]))
@@ -72,6 +73,9 @@ class SearchLocViewController: UIViewController {
             appStore.dispatch(geoCodeAddressAction(address: searchTextField.text ?? ""))
         case .Google:
             print("Google")
+            if presenter.isWebViewCreated == false {
+                createWebViewOnBottom()
+            }
             let urlString = presenter.googleSearchUrl(queryText: searchTextField.text ?? "")
             let ecodeUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             let request = NSURLRequest(url: URL(string: ecodeUrl)!)
@@ -83,6 +87,13 @@ class SearchLocViewController: UIViewController {
     }
 }
 
+extension SearchLocViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+        let toVC = storyboard.instantiateViewController(withIdentifier: "AddGourmetViewController")
+        defaultTemplate?.basePushToViewController(toVC, Animated: true)
+    }
+}
 extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
 }
 extension SearchLocViewController: DefaultTemplateDelegate {
@@ -92,14 +103,14 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             let action = state.currentAction as? ReceivedTapAction
             if coverView.superview == topSelectedView {
                 topSelectedView.backgroundColor = presenter.selectedBgColor()
-                bottomSelectedView.backgroundColor = presenter.normalBgColor()
+                presenter.setViewDefaultStyle(selectView: bottomSelectedView)
                 coverView.removeGestureRecognizer(action!.tapGesture)
                 coverView.removeFromSuperview()
                 coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
                 presenter.searchMode = .MapLocation
             } else {
                 topSelectedView.backgroundColor = presenter.normalBgColor()
-                bottomSelectedView.backgroundColor = presenter.selectedBgColor()
+                presenter.setViewSelectedStyle(selectView: bottomSelectedView)
                 coverView.removeGestureRecognizer(action!.tapGesture)
                 coverView.removeFromSuperview()
                 coverView = presenter.createCoverView(coverSuperView: topSelectedView)
@@ -107,12 +118,19 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             }
         case is GeoCodeAddressAction:
             let action = state.currentAction as? GeoCodeAddressAction
-            if action?.status == GeoCodeStatus.complete {
+            switch action?.status {
+            case .Started:
+                mapView.removeAnnotations(mapView.annotations)
+            case .Completed:
+                appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
+            default: break
+            }
+            if action?.status == GeoCodeStatus.Completed {
                 appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
             }
         case is CreateMapAnnotationsAction:
             let action = state.currentAction as? CreateMapAnnotationsAction
-            if action?.status == GeoCodeStatus.complete {
+            if action?.status == GeoCodeStatus.Completed {
                 mapView.showAnnotations(action?.annotations ?? [], animated: true)
             }
         default: break
