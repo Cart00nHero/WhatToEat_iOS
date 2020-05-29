@@ -9,11 +9,16 @@
 import ReSwift
 
 struct AppState : StateType {
+    let deliveryState: DeliveryState
     let defaultTemplateState: DefaultTemplateState
 }
 
 // MARK: - SubStates
 struct DefaultTemplateState : StateType {
-    var subscriber: String
+    let currentAction : Action?
+    var receivedParcel: ParcelObject?
+}
+
+struct DeliveryState {
     let currentAction : Action?
 }

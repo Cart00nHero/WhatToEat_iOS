@@ -63,14 +63,18 @@ func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
 }
 
 struct CreateMapAnnotationsAction: Action {
+    var actionType = ""
     var status: GeoCodeStatus = .Started
     var annotations: [MKPointAnnotation] = []
+    
+    init() {
+        actionType = String(describing: type(of: self))
+    }
 }
 
 func createMapAnnotationsAction(locations: [CLLocation]) -> CreateMapAnnotationsAction {
     var action = CreateMapAnnotationsAction()
     let resultArray = NSMutableArray()
-    
     DispatchQueue.global(qos: .background).async {
         for location in locations {
             let annotation = MKPointAnnotation()
@@ -87,3 +91,25 @@ func createMapAnnotationsAction(locations: [CLLocation]) -> CreateMapAnnotations
     }
     return action
 }
+struct ParePlaceMarktoAddressAction: Action {
+    let placeMark:CLPlacemark
+    var address: Address
+    init(placeMark:CLPlacemark, address:Address) {
+        self.placeMark = placeMark
+        self.address = address
+        parePlaceMarktoAddress()
+    }
+    private mutating func parePlaceMarktoAddress() {
+        address.nation = placeMark.country
+        address.isoNationCode = placeMark.isoCountryCode
+        address.locality = placeMark.locality
+        address.subLocality = placeMark.subLocality
+        address.administrativeArea = placeMark.administrativeArea
+        address.subAdministrativeArea = placeMark.subAdministrativeArea
+        address.postalCode = placeMark.postalCode
+        address.thoroughfare = placeMark.thoroughfare
+        address.subThoroughfare = placeMark.subThoroughfare
+        address.subThoroughfare = placeMark.subThoroughfare
+    }
+}
+

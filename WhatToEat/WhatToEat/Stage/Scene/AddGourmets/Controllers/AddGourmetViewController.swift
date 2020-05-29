@@ -11,15 +11,15 @@ import UIKit
 class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = GourmetsTableData()
+    private var tableData = GourmetsTableData(shopData: Shop(branches: [ShopBranch(address: Address())]))
     private var originTableFooter = UIView()
-    private lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
+    let presenter = AddGourmetPresenter()
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        appStore.dispatch(RegisterStateAction(subscriber: String(describing: type(of: self))))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +31,7 @@ class AddGourmetViewController: UIViewController {
         super.viewDidAppear(animated)
         defaultTemplate?.registerKeyBoardNotification()
         originTableFooter = tableView.tableFooterView ?? UIView()
+        appStore.dispatch(ReceivedParcelAction())
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -93,6 +94,14 @@ extension AddGourmetViewController: UIScrollViewDelegate {
 }
 extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
+        if state.receivedParcel?.recipient == String(describing: type(of: self)) {
+            let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarktoAddressAction
+            let newBranch = ShopBranch(address: parcelAction?.address ?? Address())
+            presenter.newShop.branches = [newBranch]
+            tableData.dataSource[2][0] = LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"), rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: presenter.combineAddressCompleteInfo(address: newBranch.address)))
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
+            appStore.dispatch(SignParcelReceiptAction())
+        }
         switch state.currentAction {
         case is AdjustForKeyboardAction:
             let action = state.currentAction as? AdjustForKeyboardAction
@@ -126,8 +135,6 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
-            
-            
         case is CellTextFieldDidChangedAction:
             let action = state.currentAction as? CellTextFieldDidChangedAction
             let cell = action?.cell as? LRTableViewCell

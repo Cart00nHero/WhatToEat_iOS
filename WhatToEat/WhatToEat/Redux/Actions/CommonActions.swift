@@ -12,8 +12,3 @@ import ReSwift
 struct RegisterStateAction: Action {
     let subscriber: String
 }
-struct SendParcelAction: Action {
-    var sender = ""
-    var recipient = ""
-    let parcel: Action
-}

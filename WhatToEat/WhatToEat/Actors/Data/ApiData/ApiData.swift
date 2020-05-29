@@ -16,6 +16,7 @@ struct Foodie: Codable {
     let token: Dictionary<String, String>
     let branches: [ShopBranch]?
 }
+
 struct Shop: Codable {
     var uniqueId: String?
     var title: String?
@@ -23,7 +24,7 @@ struct Shop: Codable {
     var type: String?
     var status: Int = 0
     var underPrice: Float64 = 0.0
-    let branches: [ShopBranch]
+    var branches: [ShopBranch]
     init(branches: [ShopBranch]) {
         self.branches = branches
     }
@@ -45,16 +46,27 @@ struct ShopBranch: Codable {
 
 struct Address: Codable {
     var ownerType: String?
-    var completeInfo: String?
-    var nation: String?
-    var nationCode: String?
-    var state: String?
-    var cityCounty: String?
-    var district: String?
-    var town: String?
-    var roadStreet: String?
-    var remainInfo: String?
     var latitude: Double = 0.0
     var longitude: Double = 0.0
+    var completeInfo: String?
+    var nation: String?
+    // ex: TW
+    var isoNationCode: String?
+    // City ex: Taipei
+    var locality: String?
+    // District
+    var subLocality: String?
+    // State
+    var administrativeArea: String?
+    // County
+    var subAdministrativeArea: String?
+    // Zip code
+    var postalCode: String?
+    // Street / Road
+    var thoroughfare: String?
+    // ？號
+    var subThoroughfare: String?
     var annotation: String?
+    init() {
+    }
 }

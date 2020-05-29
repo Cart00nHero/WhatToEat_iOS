@@ -21,6 +21,7 @@ class SearchLocViewController: UIViewController {
     private lazy var coverView: UIView = UIView()
     private lazy var presenter: SearchLocPresenter = SearchLocPresenter()
     
+    
     private var defaultTemplate: DefaultVCTemplate? = nil
     let webView = WKWebView()
     
@@ -92,6 +93,9 @@ extension SearchLocViewController: MKMapViewDelegate {
         let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
         let toVC = storyboard.instantiateViewController(withIdentifier: "AddGourmetViewController")
         defaultTemplate?.basePushToViewController(toVC, Animated: true)
+        presenter.addressParcel.sender = String(describing: type(of: self))
+        let deliveryMan = DeliveryMan()
+        deliveryMan.applyDeliverService(parcel: presenter.addressParcel)
     }
 }
 extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
@@ -122,12 +126,22 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             case .Started:
                 mapView.removeAnnotations(mapView.annotations)
             case .Completed:
+                appStore.dispatch(reverseLocationAction(location: (action?.location)!))
+                presenter.address.latitude = action?.location?.coordinate.latitude ?? 0.0
+                presenter.address.latitude = action?.location?.coordinate.longitude ?? 0.0
                 appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
             default: break
             }
-            if action?.status == GeoCodeStatus.Completed {
-                appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
+        case is ReverseLocationAction:
+            let action = state.currentAction as? ReverseLocationAction
+            if action?.place != nil {
+                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!, address: presenter.address))
             }
+        case is ParePlaceMarktoAddressAction:
+            let action = state.currentAction as? ParePlaceMarktoAddressAction
+            presenter.addressParcel.recipient = "AddGourmetViewController"
+            presenter.addressParcel.parcelType = String(describing: type(of: action))
+            presenter.addressParcel.parcel = action
         case is CreateMapAnnotationsAction:
             let action = state.currentAction as? CreateMapAnnotationsAction
             if action?.status == GeoCodeStatus.Completed {

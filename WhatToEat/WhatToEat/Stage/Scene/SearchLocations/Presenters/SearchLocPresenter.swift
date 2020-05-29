@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import MapKit
 
 class SearchLocPresenter: NSObject {
     enum SearchMode {
@@ -16,6 +17,8 @@ class SearchLocPresenter: NSObject {
     
     var searchMode: SearchMode = .MapLocation
     var isWebViewCreated = false
+    lazy var address = Address()
+    lazy var addressParcel = ParcelObject()
     
     func googleSearchUrl(queryText: String) -> String {
         let query = queryText.replacingOccurrences(of: " ", with: "+")
@@ -36,8 +39,7 @@ class SearchLocPresenter: NSObject {
     @objc private func coverViewTapGesture(sender: UITapGestureRecognizer) {
         appStore.dispatch(ReceivedTapAction(tapGesture: sender))
     }
-    
-    func setViewDefaultStyle(selectView: UIView) {
+    @objc func setViewDefaultStyle(selectView: UIView) {
         selectView.layer.borderWidth = 0.0
         selectView.layer.borderColor = normalBgColor().cgColor
     }
@@ -52,10 +54,4 @@ class SearchLocPresenter: NSObject {
         return UIColor.red
     }
     
-    struct SearchModeChangedAction: Action {
-        let searchMode: SearchMode
-        init(searchMode: SearchMode) {
-            self.searchMode = searchMode
-        }
-    }
 }

@@ -10,15 +10,25 @@ import ReSwift
 
 func appReducer(action: Action, state: AppState?) -> AppState {
     return AppState(
+        deliveryState: deliveryReducer(action: action, state: state?.deliveryState),
         defaultTemplateState: defaultTemplateReducer(action: action, state: state?.defaultTemplateState)
     )
 }
 
 // MARK: - SubReducers
 func defaultTemplateReducer(action: Action, state: DefaultTemplateState?) -> DefaultTemplateState {
-    var newState = DefaultTemplateState(subscriber: state?.subscriber ?? "", currentAction: action)
-    if let currentAction = action as? RegisterStateAction {
-        newState.subscriber = currentAction.subscriber
+    var newState = DefaultTemplateState(currentAction: action, receivedParcel: state?.receivedParcel)
+    switch newState.currentAction {
+    case is SendParcelAction:
+        let action = newState.currentAction as? SendParcelAction
+        newState.receivedParcel = action?.parcel
+    case is SignParcelReceiptAction:
+        newState.receivedParcel = nil
+    default:break;
     }
     return newState
+}
+
+func deliveryReducer(action: Action, state: DeliveryState?) -> DeliveryState {
+    return DeliveryState(currentAction: action)
 }

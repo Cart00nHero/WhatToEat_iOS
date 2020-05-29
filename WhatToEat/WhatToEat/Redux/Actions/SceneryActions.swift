@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import MapKit
 
 struct TableCellButtonClickAction: Action {
     let cell: UITableViewCell

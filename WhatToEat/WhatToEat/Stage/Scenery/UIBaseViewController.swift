@@ -97,7 +97,6 @@ class UIBaseViewController: UIViewController {
                 self.navigationController?.dismiss(animated: true, completion: nil)
             } else {
                 self.navigationController?.popViewController(animated: true)
-
             }
             
         }

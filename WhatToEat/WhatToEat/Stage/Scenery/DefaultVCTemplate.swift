@@ -15,6 +15,7 @@ protocol DefaultTemplateDelegate {
 class DefaultVCTemplate: UIBaseViewController {
 
     var stateDelegate: DefaultTemplateDelegate?
+    lazy var receivedParcel = ParcelObject()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +29,14 @@ class DefaultVCTemplate: UIBaseViewController {
             }
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self)
         appStore.unsubscribe(self)
+        stateDelegate = nil
     }
 
     // MARK: - Public Methods
@@ -49,6 +54,11 @@ class DefaultVCTemplate: UIBaseViewController {
 
 extension DefaultVCTemplate: StoreSubscriber{
     func newState(state: DefaultTemplateState) {
+        if state.currentAction is SendParcelAction {
+            let action = state.currentAction as? SendParcelAction
+            let parcel = action?.parcel
+            self.receivedParcel = parcel ?? ParcelObject()
+        }
         self.stateDelegate?.receiveNewState(state: state)
     }
 }
