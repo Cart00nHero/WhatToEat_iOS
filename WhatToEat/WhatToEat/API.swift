@@ -4,14 +4,14 @@
 import Apollo
 import Foundation
 
-public final class ListShopQuery: GraphQLQuery {
+public final class ListShopsQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query ListShop {
+    query listShops {
       listShops {
         __typename
-        averagePrice
+        underPrice
         status
         title
         type
@@ -20,7 +20,7 @@ public final class ListShopQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "ListShop"
+  public let operationName: String = "listShops"
 
   public init() {
   }
@@ -57,7 +57,7 @@ public final class ListShopQuery: GraphQLQuery {
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("averagePrice", type: .scalar(Double.self)),
+        GraphQLField("underPrice", type: .scalar(Double.self)),
         GraphQLField("status", type: .scalar(Int.self)),
         GraphQLField("title", type: .scalar(String.self)),
         GraphQLField("type", type: .scalar(String.self)),
@@ -70,8 +70,8 @@ public final class ListShopQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(averagePrice: Double? = nil, status: Int? = nil, title: String? = nil, type: String? = nil, uniqueId: String? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Shop", "averagePrice": averagePrice, "status": status, "title": title, "type": type, "uniqueId": uniqueId])
+      public init(underPrice: Double? = nil, status: Int? = nil, title: String? = nil, type: String? = nil, uniqueId: String? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Shop", "underPrice": underPrice, "status": status, "title": title, "type": type, "uniqueId": uniqueId])
       }
 
       public var __typename: String {
@@ -83,12 +83,12 @@ public final class ListShopQuery: GraphQLQuery {
         }
       }
 
-      public var averagePrice: Double? {
+      public var underPrice: Double? {
         get {
-          return resultMap["averagePrice"] as? Double
+          return resultMap["underPrice"] as? Double
         }
         set {
-          resultMap.updateValue(newValue, forKey: "averagePrice")
+          resultMap.updateValue(newValue, forKey: "underPrice")
         }
       }
 

@@ -394,7 +394,7 @@
         "description": null,
         "fields": [
           {
-            "name": "annotation",
+            "name": "administrativeArea",
             "description": null,
             "args": [],
             "type": {
@@ -406,7 +406,7 @@
             "deprecationReason": null
           },
           {
-            "name": "cityCounty",
+            "name": "annotation",
             "description": null,
             "args": [],
             "type": {
@@ -430,7 +430,7 @@
             "deprecationReason": null
           },
           {
-            "name": "district",
+            "name": "isoNationCode",
             "description": null,
             "args": [],
             "type": {
@@ -448,6 +448,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "Decimal",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "locality",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -478,18 +490,6 @@
             "deprecationReason": null
           },
           {
-            "name": "nationCode",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "ownerType",
             "description": null,
             "args": [],
@@ -502,19 +502,7 @@
             "deprecationReason": null
           },
           {
-            "name": "remainInfo",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "roadStreet",
+            "name": "postalCode",
             "description": null,
             "args": [],
             "type": {
@@ -538,7 +526,7 @@
             "deprecationReason": null
           },
           {
-            "name": "state",
+            "name": "subAdministrativeArea",
             "description": null,
             "args": [],
             "type": {
@@ -550,7 +538,31 @@
             "deprecationReason": null
           },
           {
-            "name": "town",
+            "name": "subLocality",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "subThoroughfare",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "thoroughfare",
             "description": null,
             "args": [],
             "type": {
@@ -617,18 +629,6 @@
             "deprecationReason": null
           },
           {
-            "name": "location",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Address",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "args": [],
@@ -652,6 +652,18 @@
                 "name": "ShopBranch",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "token",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Token",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -686,21 +698,44 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Shop",
-        "description": "shop type",
+        "name": "Token",
+        "description": null,
         "fields": [
           {
-            "name": "averagePrice",
+            "name": "token",
             "description": null,
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Float",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
+          {
+            "name": "tokenType",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "Shop",
+        "description": "shop type",
+        "fields": [
           {
             "name": "branches",
             "description": null,
@@ -730,6 +765,18 @@
             "deprecationReason": null
           },
           {
+            "name": "style",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "title",
             "description": null,
             "args": [],
@@ -748,6 +795,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "underPrice",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
               "ofType": null
             },
             "isDeprecated": false,
@@ -854,6 +913,20 @@
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "token",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "LoginToken",
                     "ofType": null
                   }
                 },
@@ -1106,6 +1179,20 @@
                 "defaultValue": null
               },
               {
+                "name": "token",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "LoginToken",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "uniqueId",
                 "description": null,
                 "type": {
@@ -1198,6 +1285,37 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "LoginToken",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "token",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tokenType",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },

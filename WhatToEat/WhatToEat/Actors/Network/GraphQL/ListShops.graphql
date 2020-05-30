@@ -1,6 +1,6 @@
-query ListShop {
+query listShops {
     listShops {
-      averagePrice
+      underPrice
       status
       title
       type
