@@ -9,7 +9,6 @@
 import UIKit
 import ReSwift
 
-
 class ParcelObject: NSObject {
     @objc dynamic var parcelType: String = ""
     @objc dynamic var sender = ""

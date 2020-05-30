@@ -39,7 +39,8 @@ struct GourmetsTableData {
     func createDataSource() -> Array<Array<CellDataProtocol>> {
         return [
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"), rightCellProtocol: LRTextFieldCellData(inputText: shopData.title ?? "")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
+                           rightCellProtocol: LRTextFieldCellData(inputText: shopData.title ?? "")),
                 LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource, selectedText: shopData.style ?? ""),
                            rightCellProtocol: LRDropDownCellData(placeHolder:"Type",optionArray: DropDownMenuData().typeSource,selectedText: shopData.type ?? "")),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"), rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,inputText: String(format: "%.2f", shopData.underPrice)))
@@ -50,7 +51,8 @@ struct GourmetsTableData {
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"), rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad))
             ],
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"), rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: "")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
+                           rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: "")),
                 ButtonCellData(cornerRadius: 2.0, titleText: "Save")
             ]
         ]

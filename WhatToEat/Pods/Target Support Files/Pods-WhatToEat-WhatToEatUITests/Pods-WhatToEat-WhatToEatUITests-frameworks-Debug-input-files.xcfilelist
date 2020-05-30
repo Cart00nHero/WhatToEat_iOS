@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Apollo/Apollo.framework
+${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework
 ${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework
 ${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
 ${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework

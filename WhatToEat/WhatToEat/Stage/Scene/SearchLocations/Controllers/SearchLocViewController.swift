@@ -21,7 +21,6 @@ class SearchLocViewController: UIViewController {
     private lazy var coverView: UIView = UIView()
     private lazy var presenter: SearchLocPresenter = SearchLocPresenter()
     
-    
     private var defaultTemplate: DefaultVCTemplate? = nil
     let webView = WKWebView()
     
@@ -52,8 +51,12 @@ class SearchLocViewController: UIViewController {
         webView.backgroundColor = UIColor.clear
         webView.translatesAutoresizingMaskIntoConstraints = false
         bottomSelectedView.addSubview(webView)
-        bottomSelectedView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-2-[webView]-2-|", options: [], metrics: nil, views: ["webView": webView]))
-        bottomSelectedView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-2-[webView]-2-|", options: [], metrics: nil, views: ["webView": webView]))
+        bottomSelectedView?.addConstraints(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "H:|-2-[webView]-2-|", options: [], metrics: nil, views: ["webView": webView]))
+        bottomSelectedView?.addConstraints(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-2-[webView]-2-|", options: [], metrics: nil, views: ["webView": webView]))
         webView.uiDelegate = self
         webView.navigationDelegate = self
     }
@@ -127,15 +130,18 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 mapView.removeAnnotations(mapView.annotations)
             case .Completed:
                 appStore.dispatch(reverseLocationAction(location: (action?.location)!))
-                presenter.address.latitude = action?.location?.coordinate.latitude ?? 0.0
-                presenter.address.latitude = action?.location?.coordinate.longitude ?? 0.0
+                let addressObj = AddressObj()
+                addressObj.latitude = action?.location?.coordinate.latitude ?? 0.0
+                var address = Address()
+                address.latitude = action?.location?.coordinate.latitude ?? 0.0
+                address.latitude = action?.location?.coordinate.longitude ?? 0.0
                 appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
             default: break
             }
         case is ReverseLocationAction:
             let action = state.currentAction as? ReverseLocationAction
             if action?.place != nil {
-                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!, address: presenter.address))
+//                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!, address: presenter.address))
             }
         case is ParePlaceMarktoAddressAction:
             let action = state.currentAction as? ParePlaceMarktoAddressAction

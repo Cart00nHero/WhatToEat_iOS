@@ -29,12 +29,13 @@
 		AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */; };
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
+		AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */; };
+		AF3C6E9F248117E50052719A /* ShopStructData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9E248117E50052719A /* ShopStructData.swift */; };
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
 		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
 		AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0E248055E700ED4BB1 /* StructObserver.swift */; };
 		AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D55247AA79E00A8625D /* LRTableData.swift */; };
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
-		AF550D5B247AA7DE00A8625D /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D5A247AA7DE00A8625D /* ApiData.swift */; };
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
 		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
 		AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */; };
@@ -107,12 +108,13 @@
 		AF13AF71245E90DC0026A5C8 /* WhatToEatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatToEatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopObjectMapper.swift; sourceTree = "<group>"; };
+		AF3C6E9E248117E50052719A /* ShopStructData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopStructData.swift; sourceTree = "<group>"; };
 		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
 		AF40DC0E248055E700ED4BB1 /* StructObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
 		AF550D55247AA79E00A8625D /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
-		AF550D5A247AA7DE00A8625D /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
 		AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
@@ -278,7 +280,8 @@
 		AF550D59247AA7BA00A8625D /* ApiData */ = {
 			isa = PBXGroup;
 			children = (
-				AF550D5A247AA7DE00A8625D /* ApiData.swift */,
+				AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */,
+				AF3C6E9E248117E50052719A /* ShopStructData.swift */,
 			);
 			path = ApiData;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				AF8224692472F21D0034C928 /* AddGLRTableViewCell.swift in Sources */,
 				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
+				AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
@@ -820,6 +824,7 @@
 				AF0EDF5E247A5012003D84C0 /* SetRangeCellView.swift in Sources */,
 				AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */,
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
+				AF3C6E9F248117E50052719A /* ShopStructData.swift in Sources */,
 				AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
 				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,
@@ -833,7 +838,6 @@
 				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
 				AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */,
-				AF550D5B247AA7DE00A8625D /* ApiData.swift in Sources */,
 				AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */,

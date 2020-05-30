@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ShopStruct.swift">
+   </FileRef>
+   <FileRef
       location = "group:WhatToEat.xcodeproj">
    </FileRef>
    <FileRef

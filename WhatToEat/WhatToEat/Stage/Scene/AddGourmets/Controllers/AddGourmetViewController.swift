@@ -98,7 +98,10 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarktoAddressAction
             let newBranch = ShopBranch(address: parcelAction?.address ?? Address())
             presenter.newShop.branches = [newBranch]
-            tableData.dataSource[2][0] = LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"), rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: presenter.combineAddressCompleteInfo(address: newBranch.address)))
+            tableData.dataSource[2][0] = LRCellData(
+                leftCellProtocol: LRLabelCellData(labelText: "Address"),
+                rightCellProtocol: LRLabelCellData(cellHeight: 64.0,
+                numberOfLines: 0, labelText: presenter.combineAddressCompleteInfo(address: newBranch.address)))
             tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
             appStore.dispatch(SignParcelReceiptAction())
         }
