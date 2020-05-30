@@ -62,7 +62,7 @@ class ShopBranchObj: Mappable {
     var openTime: Date?
     var closeTime: Date?
     var tel: String?
-    var address: AddressObj?
+    var address: AddressObj = AddressObj()
     var foodies: [FoodieObj]?
     
     convenience required init?(map: Map) {

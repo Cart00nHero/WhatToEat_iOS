@@ -17,7 +17,6 @@ class SearchLocPresenter: NSObject {
     
     var searchMode: SearchMode = .MapLocation
     var isWebViewCreated = false
-    let newShopObj = ShopObj()
     lazy var addressParcel = ParcelObject()
     
     func googleSearchUrl(queryText: String) -> String {

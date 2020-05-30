@@ -15,6 +15,7 @@ class SetRangeCellView: XibSetupView {
     }
     @IBOutlet var inputTextFields: [UITextField]!
     
+    lazy var superTableViewCell = UITableViewCell()
     private var editingtextField: UITextField?
     private var startDate: Date = Date()
     private var endDate: Date = Date()
@@ -72,20 +73,13 @@ class SetRangeCellView: XibSetupView {
         } else {
             endDate = sender.date
         }
+        appStore.dispatch(RangeDatePickerSelectedAction(rangeView: self, startDate: startDate, endDate: endDate))
     }
     
 }
 extension SetRangeCellView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         editingtextField = textField
-    }
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        let fieldTag = TextFieldTag(rawValue: textField.tag)
-        switch fieldTag {
-        case .StartField: break
-        case .EndField: break
-        case .none: break
-        }
     }
 }
 

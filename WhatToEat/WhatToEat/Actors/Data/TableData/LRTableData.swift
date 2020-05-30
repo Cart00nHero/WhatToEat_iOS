@@ -13,6 +13,8 @@ enum LRCellStyle : Int {
 }
 struct LRRangeCellData: LRTableCellProtocol {
     let cellStyle: LRCellStyle = .Range
+    var starDate: Date = Date()
+    var endDate: Date = Date()
     var cellHeight: CGFloat = 48.0
 }
 struct LRDropDownCellData: LRTableCellProtocol {

@@ -141,7 +141,7 @@ extension SearchLocViewController: DefaultTemplateDelegate {
         case is ReverseLocationAction:
             let action = state.currentAction as? ReverseLocationAction
             if action?.place != nil {
-//                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!, address: presenter.address))
+                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!, address: Address()))
             }
         case is ParePlaceMarktoAddressAction:
             let action = state.currentAction as? ParePlaceMarktoAddressAction

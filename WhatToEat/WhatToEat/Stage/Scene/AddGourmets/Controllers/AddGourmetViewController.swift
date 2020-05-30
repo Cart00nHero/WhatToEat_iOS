@@ -96,13 +96,20 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarktoAddressAction
-            let newBranch = ShopBranch(address: parcelAction?.address ?? Address())
+            var newBranch = presenter.newShop.branches[0]
+            newBranch.address = parcelAction?.address ?? Address()
+            newBranch.address.latitude = parcelAction?.placeMark.location?.coordinate.latitude ?? 0.0
+            newBranch.address.longitude = parcelAction?.placeMark.location?.coordinate.longitude ?? 0.0
+            newBranch.address.completeInfo =
+                presenter.combineAddressCompleteInfo(address: parcelAction?.address ?? Address())
             presenter.newShop.branches = [newBranch]
-            tableData.dataSource[2][0] = LRCellData(
-                leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                rightCellProtocol: LRLabelCellData(cellHeight: 64.0,
-                numberOfLines: 0, labelText: presenter.combineAddressCompleteInfo(address: newBranch.address)))
+            var cellData = tableData.dataSource[2][0] as? LRCellData
+            var addressInput = cellData?.rightCellProtocol as? LRLabelCellData
+            addressInput?.labelText = newBranch.address.completeInfo ?? ""
+            cellData?.rightCellProtocol = addressInput!
+            tableData.dataSource[2][0] = cellData!
             tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
+            presenter.newShop.branches = [newBranch]
             appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
         }
         switch state.currentAction {
@@ -130,21 +137,42 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
+                presenter.newShop.style = data?.selectedText
                 cellData?.leftCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
                 var data = cellData?.rightCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
+                presenter.newShop.type = data?.selectedText
                 cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
+        case is RangeDatePickerSelectedAction:
+            let action = state.currentAction as? RangeDatePickerSelectedAction
+            var branch = presenter.newShop.branches[0]
+            branch.openTime = action?.startDate
+            branch.closeTime = action?.endDate
+            presenter.newShop.branches = [branch]
+            
+            let cell = action?.rangeView.superTableViewCell as? LRTableViewCell
+            let indexPath = tableView.indexPath(for: cell!)
+            var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
+            var data = cellData?.rightCellProtocol as? LRRangeCellData
+            data?.starDate = branch.openTime ?? Date()
+            data?.endDate = branch.closeTime ?? Date()
+            cellData?.rightCellProtocol = data!
+            tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
+            
         case is CellTextFieldDidChangedAction:
             let action = state.currentAction as? CellTextFieldDidChangedAction
             let cell = action?.cell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
                 = (cell?.cellData)!
-        case is TableCellButtonClickAction: break
+            let data = cell?.cellData?.rightCellProtocol as? LRTextFieldCellData
+            presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
+        case is TableCellButtonClickAction:
+            print(presenter.newShop)
             
         default: break
         }

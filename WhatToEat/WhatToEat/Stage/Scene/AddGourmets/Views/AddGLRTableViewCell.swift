@@ -85,7 +85,7 @@ class AddGLRTableViewCell: LRTableViewCell {
     
     private func createRangeViewOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide){
         let rangeView = SetRangeCellView()
-//        let data = cellProtocol as? LRRangeCellData
+        rangeView.superTableViewCell = self
         rangeView.translatesAutoresizingMaskIntoConstraints = false
         var contentView : UIView? = nil
         switch contentSide {
@@ -157,6 +157,9 @@ class AddGLRTableViewCell: LRTableViewCell {
             textField.backgroundColor = UIColor(red: 240.0/255.0, green: 248.0/255.0, blue: 255.0/255.0, alpha: 1.0)
             textField.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
             textField.keyboardType = data?.keyboardType ?? UIKeyboardType.default
+            textField.returnKeyType = .done
+            textField.clearButtonMode = .whileEditing
+            textField.delegate = self
             if data?.inputText.isEmpty == false {
                 textField.text = data?.inputText
             } else {
@@ -176,5 +179,19 @@ class AddGLRTableViewCell: LRTableViewCell {
         }
     }
 
-
+}
+extension AddGLRTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let textFieldText = textField.text,
+            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+                return false
+        }
+        let substringToReplace = textFieldText[rangeOfTextToReplace]
+        let count = textFieldText.count - substringToReplace.count + string.count
+        return count <= 10
+    }
 }

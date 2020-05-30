@@ -35,3 +35,9 @@ struct CellTextFieldDidChangedAction: Action {
 struct ReceivedTapAction: Action {
     let tapGesture: UITapGestureRecognizer
 }
+
+struct RangeDatePickerSelectedAction: Action {
+    let rangeView: SetRangeCellView
+    let startDate: Date
+    let endDate: Date
+}
