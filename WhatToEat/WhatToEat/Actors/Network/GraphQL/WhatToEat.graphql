@@ -7,3 +7,14 @@ query listShops {
       uniqueId
     }
 }
+
+mutation createShop($title: String!,$style: String,$type: String,$underPrice: Float,$branches: [InputBranch]!) {
+    createShop(title: $title,style: $style,type: $type,underPrice: $underPrice,branches: $branches) {
+        uniqueId
+        title
+        style
+        type
+        status
+        underPrice
+    }
+}
