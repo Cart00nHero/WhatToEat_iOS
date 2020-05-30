@@ -103,7 +103,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 rightCellProtocol: LRLabelCellData(cellHeight: 64.0,
                 numberOfLines: 0, labelText: presenter.combineAddressCompleteInfo(address: newBranch.address)))
             tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
-            appStore.dispatch(SignParcelReceiptAction())
+            appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
         }
         switch state.currentAction {
         case is AdjustForKeyboardAction:

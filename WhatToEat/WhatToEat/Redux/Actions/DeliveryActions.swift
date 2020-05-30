@@ -15,4 +15,5 @@ struct SendParcelAction: Action {
 struct ReceivedParcelAction: Action {
 }
 struct SignParcelReceiptAction: Action {
+    let recipient: String
 }
