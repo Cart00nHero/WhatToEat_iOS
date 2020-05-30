@@ -946,16 +946,6 @@
             "description": null,
             "args": [
               {
-                "name": "averagePrice",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Float",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
                 "name": "branches",
                 "description": null,
                 "type": {
@@ -984,6 +974,16 @@
                 "defaultValue": null
               },
               {
+                "name": "style",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "title",
                 "description": null,
                 "type": {
@@ -1001,13 +1001,19 @@
                 "name": "type",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "underPrice",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Float",
+                  "ofType": null
                 },
                 "defaultValue": null
               }
@@ -1240,6 +1246,16 @@
                 "defaultValue": null
               },
               {
+                "name": "style",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "title",
                 "description": null,
                 "type": {
@@ -1255,6 +1271,16 @@
                 "type": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "underPrice",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Float",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -1397,17 +1423,7 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "annotation",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "cityCounty",
+            "name": "administrativeArea",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1427,7 +1443,7 @@
             "defaultValue": null
           },
           {
-            "name": "district",
+            "name": "isoNationCode",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1442,6 +1458,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "Decimal",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "locality",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null
@@ -1467,16 +1493,6 @@
             "defaultValue": null
           },
           {
-            "name": "nationCode",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
             "name": "ownerType",
             "description": null,
             "type": {
@@ -1487,7 +1503,7 @@
             "defaultValue": null
           },
           {
-            "name": "remainInfo",
+            "name": "postalCode",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1497,7 +1513,7 @@
             "defaultValue": null
           },
           {
-            "name": "roadStreet",
+            "name": "subAdministrativeArea",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1507,7 +1523,7 @@
             "defaultValue": null
           },
           {
-            "name": "state",
+            "name": "subLocality",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1517,7 +1533,17 @@
             "defaultValue": null
           },
           {
-            "name": "town",
+            "name": "subThoroughfare",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "thoroughfare",
             "description": null,
             "type": {
               "kind": "SCALAR",

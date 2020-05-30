@@ -26,19 +26,19 @@ class ViewController: UIViewController {
     
     private func startApollo() {
         let apollo = ApolloService.shared.apollo
-        apollo.fetch(query: ListShopQuery()) { result in
-            print(result)
-            switch result {
-            case let .success(res):
-                if let first = res.data?.listShops?.first {
-                    print(first?.title ?? "none")
-                } else {
-                    print(res)
-                }
-            case let .failure(err):
-                print(err)
-            }
-        }
+//        apollo.fetch(query: ListShopQuery()) { result in
+//            print(result)
+//            switch result {
+//            case let .success(res):
+//                if let first = res.data?.listShops?.first {
+//                    print(first?.title ?? "none")
+//                } else {
+//                    print(res)
+//                }
+//            case let .failure(err):
+//                print(err)
+//            }
+//        }
     }
 
 }
