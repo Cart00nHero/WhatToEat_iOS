@@ -74,3 +74,34 @@ struct Address: Codable {
     init() {
     }
 }
+
+func parseShopGraphQLData(branch: ShopBranch) -> InputBranch {
+    
+    var inputBranch = InputBranch()
+    inputBranch.uniqueId = branch.uniqueId
+    inputBranch.orderId = branch.orderId
+    inputBranch.name = branch.name
+    inputBranch.openTime = parseDateToString(branch.openTime ?? Date(), dateFormat: "HH:mm")
+    inputBranch.closedTime = parseDateToString(branch.closeTime ?? Date(), dateFormat: "HH:mm")
+    
+    let address = branch.address
+    var inputAddress = InputAddress()
+    inputAddress.ownerType = address.ownerType
+    inputAddress.latitude = String(format:"%f", address.latitude)
+    inputAddress.longitude = String(format:"%f", address.longitude)
+    inputAddress.completeInfo = address.completeInfo
+    inputAddress.nation = address.nation
+    inputAddress.isoNationCode = address.isoNationCode
+    inputAddress.locality = address.locality
+    inputAddress.subLocality = address.subLocality
+    inputAddress.administrativeArea = address.administrativeArea
+    inputAddress.subAdministrativeArea = address.subAdministrativeArea
+    inputAddress.thoroughfare = address.thoroughfare
+    inputAddress.subThoroughfare = address.subThoroughfare
+    inputAddress.postalCode = address.postalCode
+    inputAddress.annotation = address.annotation
+    
+    inputBranch.address = inputAddress
+    
+    return inputBranch
+}

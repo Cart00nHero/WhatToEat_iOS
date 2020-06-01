@@ -8,7 +8,7 @@ query listShops {
     }
 }
 
-mutation createShop($title: String!,$style: String,$type: String,$underPrice: Float,$branches: [InputBranch]!) {
+mutation CreateShop($title: String!,$style: String,$type: String,$underPrice: Float,$branches: [InputBranch]!) {
     createShop(title: $title,style: $style,type: $type,underPrice: $underPrice,branches: $branches) {
         uniqueId
         title
@@ -16,5 +16,29 @@ mutation createShop($title: String!,$style: String,$type: String,$underPrice: Fl
         type
         status
         underPrice
+        branches {
+            uniqueId
+            orderId
+            name
+            openTime
+            closedTime
+            tel
+            address {
+                ownerType
+                completeInfo
+                nation
+                isoNationCode
+                locality
+                subLocality
+                administrativeArea
+                subAdministrativeArea
+                postalCode
+                thoroughfare
+                subThoroughfare
+                latitude
+                longitude
+                annotation
+            }
+        }
     }
 }

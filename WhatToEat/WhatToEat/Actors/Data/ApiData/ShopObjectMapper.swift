@@ -14,7 +14,7 @@ class FoodieObj: Mappable {
     var name: String?
     var gender: Int = 0
     var token: [String : String] = [:]
-    var branches: [ShopBranchObj]?
+    var branches: [InputBranch]?
     
     convenience required init?(map: Map) {
         self.init()
@@ -27,18 +27,17 @@ class FoodieObj: Mappable {
         gender <- map["gender"]
         branches <- map["branches"]
     }
-    
 }
 
 class ShopObj: Mappable {
     
-    @objc dynamic var uniqueId: String?
-    @objc dynamic var title: String?
-    @objc dynamic var style: String?
-    @objc dynamic var type: String?
-    @objc dynamic var status: Int = 0
-    @objc dynamic var underPrice: Float64 = 0.0
-    var branches: [ShopBranchObj] = []
+    var uniqueId: String?
+    var title: String?
+    var style: String?
+    var type: String?
+    var status: Int = 0
+    var underPrice: Float64 = 0.0
+    var branches: [InputBranch] = []
     
     convenience required init?(map: Map) {
         self.init()

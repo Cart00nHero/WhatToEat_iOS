@@ -109,7 +109,6 @@ struct ParePlaceMarktoAddressAction: Action {
         address.postalCode = placeMark.postalCode
         address.thoroughfare = placeMark.thoroughfare
         address.subThoroughfare = placeMark.subThoroughfare
-        address.subThoroughfare = placeMark.subThoroughfare
     }
 }
 

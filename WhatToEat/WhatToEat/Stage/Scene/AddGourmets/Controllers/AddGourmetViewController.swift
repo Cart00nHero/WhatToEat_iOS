@@ -173,6 +173,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             print(presenter.newShop)
+            appStore.dispatch(createShopAction(newShop: presenter.newShop))
             
         default: break
         }
