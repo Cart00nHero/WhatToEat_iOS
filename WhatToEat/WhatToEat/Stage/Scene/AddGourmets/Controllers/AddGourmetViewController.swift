@@ -37,7 +37,6 @@ class AddGourmetViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.defaultTemplate?.stateDelegate = nil
     }
-
 }
 
 extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
@@ -173,8 +172,10 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             print(presenter.newShop)
+            var branch = presenter.newShop.branches[0]
+            branch.address.fullInfo = presenter.combineAddressFullInfo()
+            presenter.newShop.branches = [branch]
             appStore.dispatch(createShopAction(newShop: presenter.newShop))
-            
         default: break
         }
     }

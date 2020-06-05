@@ -44,6 +44,13 @@ class AddGourmetPresenter: NSObject {
             return
         }
     }
+    func combineAddressFullInfo() -> String {
+        let mutableText = NSMutableString(string: newShop.title ?? "")
+        let branch = newShop.branches[0]
+        mutableText.append(branch.name ?? "")
+        mutableText.append(branch.address.completeInfo ?? "")
+        return mutableText as String
+    }
 }
 struct GourmetsTableData {
     let shopData: Shop

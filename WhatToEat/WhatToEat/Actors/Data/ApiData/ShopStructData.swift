@@ -53,6 +53,7 @@ struct Address: Codable {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     var completeInfo: String?
+    var fullInfo: String?
     var nation: String?
     // ex: TW
     var isoNationCode: String?
@@ -77,18 +78,21 @@ struct Address: Codable {
 
 func parseShopGraphQLData(branch: ShopBranch) -> InputBranch {
     
-    var inputBranch = InputBranch()
+    var inputBranch = InputBranch(address: InputAddress())
     inputBranch.uniqueId = branch.uniqueId
     inputBranch.orderId = branch.orderId
     inputBranch.name = branch.name
-    inputBranch.openTime = parseDateToString(branch.openTime ?? Date(), dateFormat: "HH:mm")
-    inputBranch.closedTime = parseDateToString(branch.closeTime ?? Date(), dateFormat: "HH:mm")
+    inputBranch.openTime = convertDateToUTC_ISO8601DateString(date: branch.openTime ?? Date())
+    inputBranch.closedTime = convertDateToUTC_ISO8601DateString(date: branch.closeTime ?? Date())
+//    inputBranch.openTime = parseDateToString(branch.openTime ?? Date(), dateFormat: "HH:mm")
+//    inputBranch.closedTime = parseDateToString(branch.closeTime ?? Date(), dateFormat: "HH:mm")
     
     let address = branch.address
     var inputAddress = InputAddress()
     inputAddress.ownerType = address.ownerType
     inputAddress.latitude = String(format:"%f", address.latitude)
     inputAddress.longitude = String(format:"%f", address.longitude)
+    inputAddress.fullInfo = address.fullInfo
     inputAddress.completeInfo = address.completeInfo
     inputAddress.nation = address.nation
     inputAddress.isoNationCode = address.isoNationCode

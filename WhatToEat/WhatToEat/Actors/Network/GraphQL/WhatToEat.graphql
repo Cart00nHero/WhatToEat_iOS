@@ -1,10 +1,14 @@
-query listShops {
-    listShops {
-      underPrice
-      status
-      title
-      type
-      uniqueId
+
+
+mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: InputToken!) {
+    createFoodie(email: $email, gender: $gender,name: $name, token:$token) {
+        email
+        name
+        gender
+        token {
+          type
+          token
+        }
     }
 }
 
@@ -26,6 +30,7 @@ mutation CreateShop($title: String!,$style: String,$type: String,$underPrice: Fl
             address {
                 ownerType
                 completeInfo
+                fullInfo
                 nation
                 isoNationCode
                 locality

@@ -11,6 +11,7 @@
 		026DED75408948FF4B42558B /* Pods_WhatToEat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A5D83778100C1A601322 /* Pods_WhatToEat.framework */; };
 		20A5F1F02469445900DD3AFD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A5F1EF2469445900DD3AFD /* API.swift */; };
 		6D809A68EB2CEE85CC3363AD /* Pods_WhatToEat_WhatToEatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */; };
+		AF007A152489F12200DF61DB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AF007A142489F12200DF61DB /* schema.json */; };
 		AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */; };
 		AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */; };
 		AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */; };
@@ -60,7 +61,6 @@
 		AF8224842472F4160034C928 /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247F2472F4160034C928 /* CommonActions.swift */; };
 		AF8224852472F4160034C928 /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224802472F4160034C928 /* SignActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
-		AFEFFFB42484D876007DB698 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AFEFFFB32484D876007DB698 /* schema.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +88,7 @@
 		74106968E1D93E003AA9EE97 /* Pods-WhatToEat-WhatToEatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E921B269310A443990AD826 /* Pods-WhatToEatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F808F0CB39BE61F56DA0471 /* Pods-WhatToEatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.release.xcconfig"; sourceTree = "<group>"; };
+		AF007A142489F12200DF61DB /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
 		AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCellView.swift; sourceTree = "<group>"; };
 		AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCellView.xib; sourceTree = "<group>"; };
@@ -143,7 +144,6 @@
 		AF82247F2472F4160034C928 /* CommonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
 		AF8224802472F4160034C928 /* SignActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
-		AFEFFFB32484D876007DB698 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		B094A1456F89E4C27A08F93E /* Pods-WhatToEat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.release.xcconfig"; sourceTree = "<group>"; };
 		CDA9A5D83778100C1A601322 /* Pods_WhatToEat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatToEat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F3DB8013881FE2C8E0935125 /* Pods-WhatToEat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 				AF82247B2472F4160034C928 /* Redux */,
 				AF8224392472F2110034C928 /* Actors */,
 				20A5F1EF2469445900DD3AFD /* API.swift */,
-				AFEFFFB32484D876007DB698 /* schema.json */,
+				AF007A142489F12200DF61DB /* schema.json */,
 				AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */,
 				AF13AF55245E90DB0026A5C8 /* SceneDelegate.swift */,
 				AF13AF57245E90DB0026A5C8 /* ViewController.swift */,
@@ -668,7 +668,7 @@
 				AF3C6EAD248376F80052719A /* DoorNumberInputCell.xib in Resources */,
 				AF82246C2472F21D0034C928 /* FindMyFood.storyboard in Resources */,
 				AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */,
-				AFEFFFB42484D876007DB698 /* schema.json in Resources */,
+				AF007A152489F12200DF61DB /* schema.json in Resources */,
 				AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */,
 				AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */,
 				AF13AF5D245E90DC0026A5C8 /* Assets.xcassets in Resources */,
