@@ -21,7 +21,7 @@ class SetRangeCellView: XibSetupView {
     private var endDate: Date = Date()
     
     override func layoutSubviews() {
-        superview?.layoutSubviews()
+        super.layoutSubviews()
         initSetRangeCellView()
     }
     
