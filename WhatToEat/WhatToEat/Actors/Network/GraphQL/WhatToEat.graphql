@@ -12,6 +12,51 @@ mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: Inp
     }
 }
 
+mutation CreateLocation(
+  $ownerType: String,$completeInfo: String,$fullInfo: String,$postalCode: String,$nation: String,$isoNationCode: String,
+  $locality: String,$subLocality: String,$administrativeArea: String,$subAdministrativeArea: String,
+  $thoroughfare: String,$subThoroughfare: String,$floor: String,$latitude: Decimal,$longitude: Decimal,$annotation: String,
+  $shopBranch:InputBranch!
+) {
+  createLocation(ownerType: $ownerType,completeInfo: $completeInfo,fullInfo: $fullInfo,postalCode: $postalCode
+  nation: $nation,isoNationCode: $isoNationCode,locality: $locality,subLocality: $subLocality,
+  administrativeArea: $administrativeArea,subAdministrativeArea: $subAdministrativeArea,
+  thoroughfare: $thoroughfare,subThoroughfare: $subThoroughfare,floor: $floor,latitude: $latitude,longitude: $longitude
+  annotation: $annotation,shopBranch: $shopBranch) {
+    ownerType
+    completeInfo
+    fullInfo
+    postalCode
+    nation
+    isoNationCode
+    locality
+    subLocality
+    administrativeArea
+    subAdministrativeArea
+    thoroughfare
+    subThoroughfare
+    floor
+    latitude
+    longitude
+    annotation
+    shopBranch{
+      uniqueId
+      orderId
+      name
+      openTime
+      closedTime
+      tel
+      shop{
+        uniqueId
+        title
+        style
+        type
+        underPrice
+        status
+      }
+    }
+  }
+}
 mutation CreateShop($title: String!,$style: String,$type: String,$underPrice: Float,$branches: [InputBranch]!) {
     createShop(title: $title,style: $style,type: $type,underPrice: $underPrice,branches: $branches) {
         uniqueId

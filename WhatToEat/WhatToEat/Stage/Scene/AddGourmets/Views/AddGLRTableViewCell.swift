@@ -122,8 +122,8 @@ class AddGLRTableViewCell: LRTableViewCell {
     }
     
     func ceateAddressInputView(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
-        let addressView = AddressInputCellView()
-        addressView.superTableViewCell = self
+//        let addressView = AddressInputCellView()
+//        addressView.superTableViewCell = self
         
     }
     

@@ -132,7 +132,7 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 appStore.dispatch(reverseLocationAction(location: (action?.location)!))
                 let addressObj = AddressObj()
                 addressObj.latitude = action?.location?.coordinate.latitude ?? 0.0
-                var address = Address()
+                var address = GQAddress(shopBranch: InputBranch())
                 address.latitude = action?.location?.coordinate.latitude ?? 0.0
                 address.latitude = action?.location?.coordinate.longitude ?? 0.0
                 appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
@@ -141,7 +141,8 @@ extension SearchLocViewController: DefaultTemplateDelegate {
         case is ReverseLocationAction:
             let action = state.currentAction as? ReverseLocationAction
             if action?.place != nil {
-                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!, address: Address()))
+                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!,
+                                                               address: GQAddress(shopBranch: InputBranch())))
             }
         case is ParePlaceMarktoAddressAction:
             let action = state.currentAction as? ParePlaceMarktoAddressAction

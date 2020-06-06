@@ -8,6 +8,13 @@
 
 import UIKit
 
+func convertStringToUTC_ISO8601Date(dateString: String) -> Date {
+    // The default timeZone on ISO8601DateFormatter is UTC.
+    // Set timeZone to UTTimeZone.current to get local time.
+    let localISOFormatter = ISO8601DateFormatter()
+    localISOFormatter.timeZone = TimeZone.current
+    return localISOFormatter.date(from: dateString) ?? Date()
+}
 func convertDateToUTC_ISO8601DateString(date: Date) -> String {
     // The default timeZone for ISO8601DateFormatter is UTC
     let utcISODateFormatter = ISO8601DateFormatter()

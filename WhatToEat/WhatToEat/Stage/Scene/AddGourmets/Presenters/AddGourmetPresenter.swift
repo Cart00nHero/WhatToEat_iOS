@@ -9,8 +9,9 @@
 import UIKit
 
 class AddGourmetPresenter: NSObject {
-    lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
-    func combineAddressCompleteInfo(address: Address) -> String {
+//    lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
+    lazy var newAddress = GQAddress(shopBranch: InputBranch(shop:InputShop()))
+    func combineAddressCompleteInfo(address: GQAddress) -> String {
         let mutabletext = NSMutableString(string: address.administrativeArea ?? "")
         mutabletext.append(address.subAdministrativeArea ?? "")
         mutabletext.append(address.locality ?? "")
@@ -21,18 +22,20 @@ class AddGourmetPresenter: NSObject {
     }
     
     func updateTextFieldInputData(newText: String, indexPath: IndexPath) {
+        var newShop = newAddress.shopBranch.shop ?? InputShop()
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                newShop.title = newText
+                newShop?.title = newText
             case 2:
-                newShop.underPrice = Float64(newText) ?? 0.0
+                newShop?.underPrice! = Float64(newText) ?? 0.0
             default: break
             }
+            newAddress.shopBranch.shop = newShop
             return
         }
         if indexPath.section == 1 {
-            var branch = newShop.branches[0]
+            var branch = newAddress.shopBranch
             switch indexPath.row {
             case 0:
                 branch.name = newText
@@ -40,44 +43,45 @@ class AddGourmetPresenter: NSObject {
                 branch.tel = newText
             default: break
             }
-            newShop.branches = [branch]
+            newAddress.shopBranch = branch
             return
         }
     }
     func combineAddressFullInfo() -> String {
-        let mutableText = NSMutableString(string: newShop.title ?? "")
-        let branch = newShop.branches[0]
-        mutableText.append(branch.name ?? "")
-        mutableText.append(branch.address.completeInfo ?? "")
+        let newShop = newAddress.shopBranch.shop ?? InputShop()
+        let mutableText = NSMutableString(string: newShop?.title! ?? "")
+        let branch = newAddress.shopBranch
+        mutableText.append(branch.name! ?? "")
+        mutableText.append(newAddress.completeInfo ?? "")
         return mutableText as String
     }
 }
 struct GourmetsTableData {
-    let shopData: Shop
+    let address: GQAddress
+    private var shopData: InputShop
     var dataSource: Array<Array<CellDataProtocol>> = []
-    init(shopData: Shop) {
-        self.shopData = shopData
+    init(address: GQAddress) {
+        self.address = address
+        shopData = address.shopBranch.shop! ?? InputShop()
         dataSource = createDataSource()
     }
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
     func createDataSource() -> Array<Array<CellDataProtocol>> {
-        let branch = shopData.branches[0]
-        let address = branch.address
-        
+        let branch = address.shopBranch
         return [
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: shopData.title ?? "")),
-                LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource, selectedText: shopData.style ?? ""),
-                           rightCellProtocol: LRDropDownCellData(placeHolder:"Type",optionArray: DropDownMenuData().typeSource,selectedText: shopData.type ?? "")),
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"), rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,inputText: String(format: "%.2f", shopData.underPrice)))
+                           rightCellProtocol: LRTextFieldCellData(inputText: shopData.title! ?? "")),
+                LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource, selectedText: shopData.style! ?? ""),
+                           rightCellProtocol: LRDropDownCellData(placeHolder:"Type",optionArray: DropDownMenuData().typeSource,selectedText: shopData.type! ?? "")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"), rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,inputText: String(format: "%.2f", shopData.underPrice! ?? 0.0)))
             ],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData()),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Business\nHours"),
-                           rightCellProtocol: LRRangeCellData(starDate: branch.openTime ?? Date(), endDate: branch.closeTime ?? Date())),
+                           rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: branch.openTime! ?? ""), endDate: convertStringToUTC_ISO8601Date(dateString: branch.closedTime! ?? ""))),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
-                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: branch.tel ?? ""))
+                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: branch.tel! ?? ""))
             ],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),

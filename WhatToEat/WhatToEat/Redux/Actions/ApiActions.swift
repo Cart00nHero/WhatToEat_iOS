@@ -16,28 +16,24 @@ protocol ApiActionProtocol {
     var status: ApiActionStatus { get set }
 }
 
-struct CreateShopAction: Action, ApiActionProtocol {
+struct CreateLocationAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func createShopAction(newShop: Shop) -> CreateShopAction {
-    
-    var action = CreateShopAction()
+func createLocationAction(newLoc: GQAddress) -> CreateLocationAction {
+    var action = CreateLocationAction()
     let service = ApolloService.shared.apollo
-    let branch = parseShopGraphQLData(branch: newShop.branches[0])
-    let createShopMutation =  CreateShopMutation(title: newShop.title ?? "",
-                                                 style: newShop.style, type: newShop.type,
-                                                 underPrice: newShop.underPrice, branches: [branch])
-    service.perform(mutation: createShopMutation){result in
-        
+    let createLocationMutation = CreateLocationMutation(ownerType: newLoc.ownerType, completeInfo: newLoc.completeInfo, fullInfo: newLoc.fullInfo, postalCode: newLoc.postalCode, nation: newLoc.nation, isoNationCode: newLoc.isoNationCode, locality: newLoc.locality, subLocality: newLoc.subLocality, administrativeArea: newLoc.administrativeArea, subAdministrativeArea: newLoc.subAdministrativeArea, thoroughfare: newLoc.thoroughfare, subThoroughfare: newLoc.subThoroughfare, floor: newLoc.floor, latitude: String(format:"%f", newLoc.latitude), longitude: String(format:"%f", newLoc.longitude), annotation: newLoc.annotation, shopBranch: newLoc.shopBranch)
+    service.perform(mutation: createLocationMutation) { result in
         switch result {
+            
         case .success(let graphQLResult):
-            if (graphQLResult.data?.createShop) != nil {
-                action.status = .Success
-            }
             if graphQLResult.errors != nil {
                 print("幹咧！！")
                 print(graphQLResult.errors?.description ?? "")
                 action.status = .Failed
+            }
+            if (graphQLResult.data?.createLocation) != nil {
+                action.status = .Success
             }
         case .failure(let error):
             print(error.localizedDescription)
@@ -45,6 +41,5 @@ func createShopAction(newShop: Shop) -> CreateShopAction {
         }
         appStore.dispatch(action)
     }
-    
     return action
 }

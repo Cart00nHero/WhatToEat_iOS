@@ -430,6 +430,18 @@
             "deprecationReason": null
           },
           {
+            "name": "floor",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "fullInfo",
             "description": null,
             "args": [],
@@ -955,7 +967,7 @@
           },
           {
             "name": "createLocation",
-            "description": null,
+            "description": "create location",
             "args": [
               {
                 "name": "administrativeArea",
@@ -978,21 +990,17 @@
                 "defaultValue": null
               },
               {
-                "name": "branch",
+                "name": "completeInfo",
                 "description": null,
                 "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "InputBranch",
-                    "ofType": null
-                  }
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
                 },
                 "defaultValue": null
               },
               {
-                "name": "completeInfo",
+                "name": "floor",
                 "description": null,
                 "type": {
                   "kind": "SCALAR",
@@ -1078,6 +1086,20 @@
                   "kind": "SCALAR",
                   "name": "String",
                   "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "shopBranch",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputBranch",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               },
@@ -1544,13 +1566,9 @@
             "name": "address",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "InputAddress",
-                "ofType": null
-              }
+              "kind": "INPUT_OBJECT",
+              "name": "InputAddress",
+              "ofType": null
             },
             "defaultValue": null
           },
@@ -1656,17 +1674,17 @@
             "defaultValue": null
           },
           {
-            "name": "branch",
+            "name": "completeInfo",
             "description": null,
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "InputBranch",
+              "kind": "SCALAR",
+              "name": "String",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "completeInfo",
+            "name": "floor",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1806,24 +1824,6 @@
         "description": null,
         "fields": null,
         "inputFields": [
-          {
-            "name": "branches",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "InputBranch",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
           {
             "name": "status",
             "description": null,
