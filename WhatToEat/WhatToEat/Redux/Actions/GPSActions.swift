@@ -93,8 +93,8 @@ func createMapAnnotationsAction(locations: [CLLocation]) -> CreateMapAnnotations
 }
 struct ParePlaceMarktoAddressAction: Action {
     let placeMark:CLPlacemark
-    var address: Address
-    init(placeMark:CLPlacemark, address:Address) {
+    var address: GQAddress
+    init(placeMark:CLPlacemark, address:GQAddress) {
         self.placeMark = placeMark
         self.address = address
         parePlaceMarktoAddress()
@@ -108,7 +108,6 @@ struct ParePlaceMarktoAddressAction: Action {
         address.subAdministrativeArea = placeMark.subAdministrativeArea
         address.postalCode = placeMark.postalCode
         address.thoroughfare = placeMark.thoroughfare
-        address.subThoroughfare = placeMark.subThoroughfare
         address.subThoroughfare = placeMark.subThoroughfare
     }
 }

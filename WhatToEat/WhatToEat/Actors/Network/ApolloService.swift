@@ -11,5 +11,5 @@ import Apollo
 
 class ApolloService: NSObject {
     static let shared = ApolloService()
-    private(set) lazy var apollo = ApolloClient(url: URL(string: "http://18.181.145.108:8080/graphiql/api")!)
+    private(set) lazy var apollo = ApolloClient(url: URL(string: "http://54.238.192.3:8080/graphiql/api")!)
 }

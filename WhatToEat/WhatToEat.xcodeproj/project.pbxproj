@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		022C2AD170D4A201DD3AD384 /* Pods_WhatToEatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15835AB0FE8DE234E433E485 /* Pods_WhatToEatTests.framework */; };
 		026DED75408948FF4B42558B /* Pods_WhatToEat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA9A5D83778100C1A601322 /* Pods_WhatToEat.framework */; };
-		20539DD324692D8300E70699 /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = 20539DD224692D8300E70699 /* schema.json */; };
 		20A5F1F02469445900DD3AFD /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A5F1EF2469445900DD3AFD /* API.swift */; };
 		6D809A68EB2CEE85CC3363AD /* Pods_WhatToEat_WhatToEatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */; };
+		AF007A152489F12200DF61DB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AF007A142489F12200DF61DB /* schema.json */; };
+		AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF007A25248C12F700DF61DB /* GQInputData.swift */; };
 		AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */; };
 		AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */; };
 		AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */; };
@@ -30,9 +31,9 @@
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
 		AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */; };
-		AF3C6E9F248117E50052719A /* ShopStructData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9E248117E50052719A /* ShopStructData.swift */; };
 		AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6EA0248269F70052719A /* DateUtil.swift */; };
 		AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF3C6EA42482FDD40052719A /* WhatToEat.graphql */; };
+		AF3C6EAF24839B300052719A /* ApiActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6EAE24839B300052719A /* ApiActions.swift */; };
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
 		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
 		AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0E248055E700ED4BB1 /* StructObserver.swift */; };
@@ -79,13 +80,14 @@
 
 /* Begin PBXFileReference section */
 		15835AB0FE8DE234E433E485 /* Pods_WhatToEatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatToEatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		20539DD224692D8300E70699 /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		20A5F1EF2469445900DD3AFD /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhatToEat_WhatToEatUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69187A829B5A4751557C0E55 /* Pods-WhatToEat-WhatToEatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat-WhatToEatUITests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests.release.xcconfig"; sourceTree = "<group>"; };
 		74106968E1D93E003AA9EE97 /* Pods-WhatToEat-WhatToEatUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEat-WhatToEatUITests/Pods-WhatToEat-WhatToEatUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E921B269310A443990AD826 /* Pods-WhatToEatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.debug.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F808F0CB39BE61F56DA0471 /* Pods-WhatToEatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.release.xcconfig"; sourceTree = "<group>"; };
+		AF007A142489F12200DF61DB /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
+		AF007A25248C12F700DF61DB /* GQInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQInputData.swift; sourceTree = "<group>"; };
 		AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
 		AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCellView.swift; sourceTree = "<group>"; };
 		AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCellView.xib; sourceTree = "<group>"; };
@@ -110,9 +112,9 @@
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopObjectMapper.swift; sourceTree = "<group>"; };
-		AF3C6E9E248117E50052719A /* ShopStructData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopStructData.swift; sourceTree = "<group>"; };
 		AF3C6EA0248269F70052719A /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		AF3C6EA42482FDD40052719A /* WhatToEat.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatToEat.graphql; sourceTree = "<group>"; };
+		AF3C6EAE24839B300052719A /* ApiActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiActions.swift; sourceTree = "<group>"; };
 		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
 		AF40DC0E248055E700ED4BB1 /* StructObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF007A22248C0FE500DF61DB /* GQInputData */ = {
+			isa = PBXGroup;
+			children = (
+				AF007A25248C12F700DF61DB /* GQInputData.swift */,
+			);
+			path = GQInputData;
+			sourceTree = "<group>";
+		};
 		AF0EDF53247A5012003D84C0 /* Scenery */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,10 +241,10 @@
 				AF82247B2472F4160034C928 /* Redux */,
 				AF8224392472F2110034C928 /* Actors */,
 				20A5F1EF2469445900DD3AFD /* API.swift */,
+				AF007A142489F12200DF61DB /* schema.json */,
 				AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */,
 				AF13AF55245E90DB0026A5C8 /* SceneDelegate.swift */,
 				AF13AF57245E90DB0026A5C8 /* ViewController.swift */,
-				20539DD224692D8300E70699 /* schema.json */,
 				AF13AF59245E90DB0026A5C8 /* Main.storyboard */,
 				AF13AF5C245E90DC0026A5C8 /* Assets.xcassets */,
 				AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */,
@@ -282,8 +292,8 @@
 		AF550D59247AA7BA00A8625D /* ApiData */ = {
 			isa = PBXGroup;
 			children = (
+				AF007A22248C0FE500DF61DB /* GQInputData */,
 				AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */,
-				AF3C6E9E248117E50052719A /* ShopStructData.swift */,
 			);
 			path = ApiData;
 			sourceTree = "<group>";
@@ -510,6 +520,7 @@
 				AF0EDF63247A7E3B003D84C0 /* SceneryActions.swift */,
 				AF5F16FE247D7CB60023F3FC /* GPSActions.swift */,
 				AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */,
+				AF3C6EAE24839B300052719A /* ApiActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -658,7 +669,7 @@
 				AF82246A2472F21D0034C928 /* AddGourmets.storyboard in Resources */,
 				AF82246C2472F21D0034C928 /* FindMyFood.storyboard in Resources */,
 				AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */,
-				20539DD324692D8300E70699 /* schema.json in Resources */,
+				AF007A152489F12200DF61DB /* schema.json in Resources */,
 				AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */,
 				AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */,
 				AF13AF5D245E90DC0026A5C8 /* Assets.xcassets in Resources */,
@@ -742,6 +753,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "SCRIPT_PATH=\"${PODS_ROOT}/Apollo/scripts\"\ncd \"${SRCROOT}/${TARGET_NAME}\"\n\"${SCRIPT_PATH}\"/run-bundled-codegen.sh codegen:generate --target=swift --includes=./**/*.graphql --localSchemaFile=\"schema.json\" API.swift\n";
+			showEnvVarsInLog = 0;
 		};
 		775A3DD4426F9EA75A6A6049 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -821,14 +833,15 @@
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
 				AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
+				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
+				AF3C6EAF24839B300052719A /* ApiActions.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,
 				AF0EDF5E247A5012003D84C0 /* SetRangeCellView.swift in Sources */,
 				AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */,
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
-				AF3C6E9F248117E50052719A /* ShopStructData.swift in Sources */,
 				AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
 				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,

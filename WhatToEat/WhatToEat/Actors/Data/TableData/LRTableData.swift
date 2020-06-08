@@ -9,7 +9,7 @@
 import UIKit
 
 enum LRCellStyle : Int {
-    case TextLabel,TextField, DropDown, Range
+    case TextLabel,TextField, DropDown, Range, AddressInput
 }
 struct LRRangeCellData: LRTableCellProtocol {
     let cellStyle: LRCellStyle = .Range
@@ -24,6 +24,12 @@ struct LRDropDownCellData: LRTableCellProtocol {
     var optionArray: Array<String>?
     var optionImages: Array<UIImage>?
     var selectedText = ""
+}
+struct LRAddressInputCellView: LRTableCellProtocol {
+    var cellStyle: LRCellStyle = .AddressInput
+    var cellHeight: CGFloat = 100.0
+    var address: GQAddress
+    
 }
 struct LRLabelCellData: LRTableCellProtocol {
     let cellStyle: LRCellStyle = .TextLabel

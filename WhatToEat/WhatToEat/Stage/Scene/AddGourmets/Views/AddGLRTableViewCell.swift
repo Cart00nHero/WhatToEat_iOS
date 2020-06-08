@@ -72,7 +72,7 @@ class AddGLRTableViewCell: LRTableViewCell {
     private func createRightView() {
         switch cellData?.rightCellProtocol.cellStyle {
         case .TextField:
-            createRTextFieldOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+            createTextFieldOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
         case .TextLabel:
             createTextLabelOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
         case .DropDown:
@@ -121,6 +121,12 @@ class AddGLRTableViewCell: LRTableViewCell {
         contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[dropDownView]-|", options: [], metrics: nil, views: ["dropDownView": dropDownView]))
     }
     
+    func ceateAddressInputView(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+//        let addressView = AddressInputCellView()
+//        addressView.superTableViewCell = self
+        
+    }
+    
     private func putLeftTitleTextOnLabel(cellProtocol: LRTableCellProtocol) {
         let data = cellProtocol as? LRLabelCellData
         cellLeftLabel.text = data?.labelText
@@ -148,7 +154,7 @@ class AddGLRTableViewCell: LRTableViewCell {
         }
     }
     
-    private func createRTextFieldOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+    private func createTextFieldOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
         if cellRightView.subviews.count == 0 {
             let data = cellProtocol as? LRTextFieldCellData
             let textField = UITextField()

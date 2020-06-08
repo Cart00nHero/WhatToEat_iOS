@@ -11,7 +11,7 @@ import UIKit
 class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = GourmetsTableData(shopData: Shop(branches: [ShopBranch(address: Address())]))
+    private var tableData = GourmetsTableData(address: GQAddress(shopBranch: InputBranch(shop:InputShop())))
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
     
@@ -37,7 +37,6 @@ class AddGourmetViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.defaultTemplate?.stateDelegate = nil
     }
-
 }
 
 extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
@@ -96,20 +95,18 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarktoAddressAction
-            var newBranch = presenter.newShop.branches[0]
-            newBranch.address = parcelAction?.address ?? Address()
-            newBranch.address.latitude = parcelAction?.placeMark.location?.coordinate.latitude ?? 0.0
-            newBranch.address.longitude = parcelAction?.placeMark.location?.coordinate.longitude ?? 0.0
-            newBranch.address.completeInfo =
-                presenter.combineAddressCompleteInfo(address: parcelAction?.address ?? Address())
-            presenter.newShop.branches = [newBranch]
+            presenter.newAddress = parcelAction?.address ?? GQAddress(shopBranch: InputBranch())
+            presenter.newAddress.latitude = parcelAction?.placeMark.location?.coordinate.latitude ?? 0.0
+            presenter.newAddress.longitude = parcelAction?.placeMark.location?.coordinate.longitude ?? 0.0
+            presenter.newAddress.completeInfo =
+                presenter.combineAddressCompleteInfo(address: parcelAction?.address ??
+                    GQAddress(shopBranch: InputBranch()))
             var cellData = tableData.dataSource[2][0] as? LRCellData
             var addressInput = cellData?.rightCellProtocol as? LRLabelCellData
-            addressInput?.labelText = newBranch.address.completeInfo ?? ""
+            addressInput?.labelText = presenter.newAddress.completeInfo ?? ""
             cellData?.rightCellProtocol = addressInput!
             tableData.dataSource[2][0] = cellData!
             tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
-            presenter.newShop.branches = [newBranch]
             appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
         }
         switch state.currentAction {
@@ -133,33 +130,36 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             let superTag = action?.dropdownView.superview?.tag ?? 0
+            var newShop = presenter.newAddress.shopBranch.shop ?? InputShop()
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                presenter.newShop.style = data?.selectedText
+                newShop?.style = data?.selectedText
                 cellData?.leftCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
                 var data = cellData?.rightCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                presenter.newShop.type = data?.selectedText
+                newShop?.type = data?.selectedText
                 cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
         case is RangeDatePickerSelectedAction:
             let action = state.currentAction as? RangeDatePickerSelectedAction
-            var branch = presenter.newShop.branches[0]
-            branch.openTime = action?.startDate
-            branch.closeTime = action?.endDate
-            presenter.newShop.branches = [branch]
+            var branch = presenter.newAddress.shopBranch
+            branch.openTime = convertDateToUTC_ISO8601DateString(date: action?.startDate ?? Date())
+            branch.closedTime = convertDateToUTC_ISO8601DateString(date: action?.endDate ?? Date())
+            presenter.newAddress.shopBranch = branch
             
             let cell = action?.rangeView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             var data = cellData?.rightCellProtocol as? LRRangeCellData
-            data?.starDate = branch.openTime ?? Date()
-            data?.endDate = branch.closeTime ?? Date()
+            data?.starDate =
+                convertStringToUTC_ISO8601Date(dateString: branch.openTime! ?? "")
+            data?.endDate =
+                convertStringToUTC_ISO8601Date(dateString: branch.closedTime! ?? "")
             cellData?.rightCellProtocol = data!
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             
@@ -172,8 +172,16 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let data = cell?.cellData?.rightCellProtocol as? LRTextFieldCellData
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
-            print(presenter.newShop)
-            
+            presenter.newAddress.fullInfo = combineFullInfo(address: presenter.newAddress)
+            appStore.dispatch(createLocationAction(newLoc: presenter.newAddress))
+        case is CreateLocationAction:
+            let action = state.currentAction as? CreateLocationAction
+            switch action?.status {
+            case .Success:
+                let stackVCs = self.navigationController?.viewControllers
+                self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
+            default: break
+            }
         default: break
         }
     }

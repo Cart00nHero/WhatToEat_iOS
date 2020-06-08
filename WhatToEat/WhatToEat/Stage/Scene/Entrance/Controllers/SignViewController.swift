@@ -29,6 +29,23 @@ class SignViewController: UIViewController {
 
     // MARK: - actions
     @IBAction func loginButtonClickAction(_ sender: UIButton) {
+//        let service = ApolloService.shared.apollo
+//        let createFoodie = CreateFoodieMutation(email: "abc@gmail.com", name: "Morris", token: InputTo)
+//        service.perform(mutation: createFoodie) { result in
+//            switch result {
+//            case .success(let graphQLResult):
+//                if (graphQLResult.data?.createFoodie) != nil {
+//                    print("成功")
+//                }
+//                if graphQLResult.errors != nil {
+//                    print("幹咧")
+//                    print(graphQLResult.errors?.description ?? "")
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+        
         appStore.dispatch(SignAppAction())
     }
 }
