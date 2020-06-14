@@ -10,7 +10,8 @@ import UIKit
 
 class AddGourmetPresenter: NSObject {
 //    lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
-    lazy var newAddress = GQAddress(shopBranch: InputBranch(shop:InputShop()))
+    lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(style: "", title: "", type: "", underPrice: 0.0), tel: ""))
+//    lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(), tel: ""))
     func combineAddressCompleteInfo(address: GQAddress) -> String {
         let mutabletext = NSMutableString(string: address.administrativeArea ?? "")
         mutabletext.append(address.subAdministrativeArea ?? "")
@@ -57,31 +58,34 @@ class AddGourmetPresenter: NSObject {
     }
 }
 struct GourmetsTableData {
-    let address: GQAddress
-    private var shopData: InputShop
+    var address: GQAddress
     var dataSource: Array<Array<CellDataProtocol>> = []
     init(address: GQAddress) {
         self.address = address
-        shopData = address.shopBranch.shop! ?? InputShop()
         dataSource = createDataSource()
     }
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
     func createDataSource() -> Array<Array<CellDataProtocol>> {
-        let branch = address.shopBranch
         return [
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: shopData.title! ?? "")),
-                LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource, selectedText: shopData.style! ?? ""),
-                           rightCellProtocol: LRDropDownCellData(placeHolder:"Type",optionArray: DropDownMenuData().typeSource,selectedText: shopData.type! ?? "")),
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"), rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,inputText: String(format: "%.2f", shopData.underPrice! ?? 0.0)))
+                           rightCellProtocol: LRTextFieldCellData(inputText: self.address.shopBranch.shop!?.title! ?? "")),
+                LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
+                                                                selectedText: (self.address.shopBranch.shop!?.style ?? "") ?? ""),
+                           rightCellProtocol: LRDropDownCellData(placeHolder:"Type",
+                                                                 optionArray: DropDownMenuData().typeSource,
+                                                                 selectedText: (self.address.shopBranch.shop!?.type ?? "") ?? "")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"),
+                           rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,
+                                                                  inputText: String(format: "%.2f", (self.address.shopBranch.shop!?.underPrice ?? 0.0) ?? 0.0)))
             ],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData()),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Business\nHours"),
-                           rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: branch.openTime! ?? ""), endDate: convertStringToUTC_ISO8601Date(dateString: branch.closedTime! ?? ""))),
+                           rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: (address.shopBranch.openTime ?? "") ?? ""),
+                                                              endDate: convertStringToUTC_ISO8601Date(dateString: (address.shopBranch.closedTime ?? "") ?? ""))),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
-                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: branch.tel! ?? ""))
+                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: (address.shopBranch.tel ?? "") ?? ""))
             ],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),

@@ -10,6 +10,7 @@ import UIKit
 import ReSwift
 
 class ParcelObject: NSObject {
+    public typealias T = Action
     @objc dynamic var parcelType: String = ""
     @objc dynamic var sender = ""
     @objc dynamic var recipient = ""
@@ -65,7 +66,17 @@ class DeliveryMan: NSObject {
         isSubscribed = false
     }
 }
+func classFromString(_ className: String) -> AnyClass! {
 
+    /// get namespace
+    let namespace = Bundle.main.infoDictionary!["CFBundleExecutable"] as! String
+
+    /// get 'anyClass' with classname and namespace
+    let cls: AnyClass = NSClassFromString("\(namespace).\(className)")!
+
+    // return AnyClass!
+    return cls
+}
 extension DeliveryMan: StoreSubscriber {
     func newState(state: DeliveryState) {
         if state.currentAction is SignParcelReceiptAction {

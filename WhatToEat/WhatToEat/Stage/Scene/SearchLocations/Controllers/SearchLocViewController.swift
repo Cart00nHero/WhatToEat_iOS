@@ -97,19 +97,26 @@ class SearchLocViewController: UIViewController {
         LocationMaster.shared.requestCurrentLocation()
     }
 }
-
+    // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-        let toVC = storyboard.instantiateViewController(withIdentifier: "AddGourmetViewController")
-        defaultTemplate?.basePushToViewController(toVC, Animated: true)
-        presenter.addressParcel.sender = String(describing: type(of: self))
-        let deliveryMan = DeliveryMan()
-        deliveryMan.applyDeliverService(parcel: presenter.addressParcel)
+        if presenter.addressParcel.parcelType == "CreateMapAnnotationsAction" {
+            let parcelAction = presenter.addressParcel.parcel as! CreateMapAnnotationsAction
+            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedAddress: parcelAction.addresses[view.tag]))
+        }
+    }
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+        var viewTag = 0
+        for view in views {
+            view.tag = viewTag
+            viewTag += 1
+        }
     }
 }
+// MARK: - WKNavigationDelegate,WKUIDelegate
 extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
 }
+// MARK: - DefaultTemplateDelegate
 extension SearchLocViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
@@ -137,12 +144,6 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 mapView.removeAnnotations(mapView.annotations)
             case .Completed:
                 appStore.dispatch(reverseLocationAction(location: (action?.location)!))
-                let addressObj = AddressObj()
-                addressObj.latitude = action?.location?.coordinate.latitude ?? 0.0
-                var address = GQAddress(shopBranch: InputBranch())
-                address.latitude = action?.location?.coordinate.latitude ?? 0.0
-                address.latitude = action?.location?.coordinate.longitude ?? 0.0
-                appStore.dispatch(createMapAnnotationsAction(locations: [(action?.location)!]))
             default: break
             }
         case is ReverseLocationAction:
@@ -150,33 +151,62 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             if action?.place != nil {
                 appStore.dispatch(ParePlaceMarkToAddressAction(
                     queryLoc: true, placeMark: (action?.place)!,
-                    address: GQAddress(shopBranch: InputBranch()))
+                    address: getInitGQAddress())
                 )
             }
         case is LocationsDynamicQueryAction:
-            let action = state.currentAction as? LocationsDynamicQueryAction
+            let action = state.currentAction as! LocationsDynamicQueryAction
+            switch action.status {
+            case .Success:
+                var markAddress = [GQAddress]()
+                if action.responseData?.count ?? 0 > 0 {
+                    presenter.addressParcel.parcelType = String(describing: type(of: action))
+                    for queryData in action.responseData! {
+                        let address = locationsDynamicQueryToGQAddress(result: queryData)
+                        markAddress.append(address)
+                    }
+                    appStore.dispatch(createMapAnnotationsAction(addresses: markAddress))
+                } else {
+                    let parcelAction = presenter.addressParcel.parcel as? ParePlaceMarkToAddressAction
+                    guard let address = parcelAction?.address else { return }
+                    markAddress.append(address)
+                    appStore.dispatch(createMapAnnotationsAction(addresses: markAddress))
+                }
+            default: break
+            }
         case is ParePlaceMarkToAddressAction:
-            let action = state.currentAction as? ParePlaceMarkToAddressAction
-            presenter.addressParcel.recipient = "AddGourmetViewController"
+            let action = state.currentAction as! ParePlaceMarkToAddressAction
+            if presenter.addressParcel.parcelType != "LocationsDynamicQueryAction" {
+                presenter.addressParcel.parcelType = String(describing: type(of: action))
+                presenter.addressParcel.parcel = action
+            }
+        case is CreateMapAnnotationsAction:
+            let action = state.currentAction as! CreateMapAnnotationsAction
             presenter.addressParcel.parcelType = String(describing: type(of: action))
             presenter.addressParcel.parcel = action
-        case is CreateMapAnnotationsAction:
-            let action = state.currentAction as? CreateMapAnnotationsAction
-            if action?.status == GeoCodeStatus.Completed {
-                mapView.showAnnotations(action?.annotations ?? [], animated: true)
+            if action.status == GeoCodeStatus.Completed {
+                mapView.showAnnotations(action.annotations , animated: true)
             }
         case is LocatePositionAction:
             let action = state.currentAction as? LocatePositionAction
             switch action?.status {
             case .DidUpdateLocation:
-                print("***********")
-                print(action?.locations as Any)
-                print("===========")
                 if action?.locations?.count ?? 0 > 0 {
                     appStore.dispatch(reverseLocationAction(location: (action?.locations?[0])!))
                 }
             default: break
             }
+        case is MKAnnotationDidSelectAction:
+            let action = state.currentAction as! MKAnnotationDidSelectAction
+            presenter.addressParcel.recipient = "AddGourmetViewController"
+            presenter.addressParcel.parcelType = String(describing: type(of: action))
+            presenter.addressParcel.parcel = action
+            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+            let toVC = storyboard.instantiateViewController(withIdentifier: "AddGourmetViewController")
+            defaultTemplate?.basePushToViewController(toVC, Animated: true)
+            presenter.addressParcel.sender = String(describing: type(of: self))
+            let deliveryMan = DeliveryMan()
+            deliveryMan.applyDeliverService(parcel: presenter.addressParcel)
         default: break
         }
     }

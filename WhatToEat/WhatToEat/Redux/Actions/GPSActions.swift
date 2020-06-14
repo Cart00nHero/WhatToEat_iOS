@@ -65,23 +65,26 @@ func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
 }
 
 struct CreateMapAnnotationsAction: Action {
+    var addresses: [GQAddress]
     var actionType = ""
     var status: GeoCodeStatus = .Started
     var annotations: [MKPointAnnotation] = []
     
-    init() {
+    init(addresses: [GQAddress]) {
+        self.addresses = addresses
         actionType = String(describing: type(of: self))
     }
 }
 
-func createMapAnnotationsAction(locations: [CLLocation]) -> CreateMapAnnotationsAction {
-    var action = CreateMapAnnotationsAction()
+func createMapAnnotationsAction(addresses: [GQAddress]) -> CreateMapAnnotationsAction {
+    var action = CreateMapAnnotationsAction(addresses: addresses)
     let resultArray = NSMutableArray()
     DispatchQueue.global(qos: .background).async {
-        for location in locations {
+        for address in addresses {
+            let location = CLLocation(latitude: address.latitude, longitude: address.longitude)
             let annotation = MKPointAnnotation()
-            annotation.title = ""
-            annotation.subtitle = ""
+            annotation.title = address.shopBranch.shop!?.title ?? ""
+            annotation.subtitle = address.shopBranch.name ?? ""
             annotation.coordinate = location.coordinate
             resultArray.add(annotation)
         }
@@ -109,6 +112,8 @@ struct ParePlaceMarkToAddressAction: Action {
         parePlaceMarktoAddress()
     }
     private mutating func parePlaceMarktoAddress() {
+        address.latitude = placeMark.location?.coordinate.latitude ?? 0.0
+        address.longitude = placeMark.location?.coordinate.longitude ?? 0.0
         address.nation = placeMark.country
         address.isoNationCode = placeMark.isoCountryCode
         address.locality = placeMark.locality
@@ -150,7 +155,10 @@ struct ParePlaceMarkToAddressAction: Action {
         appStore.dispatch(locationsDynamicQueryAction(whereCMD: inputAddress))
     }
 }
-
+struct MKAnnotationDidSelectAction: Action {
+    let selectedIndex: Int
+    let selectedAddress: GQAddress
+}
 struct LocatePositionAction: Action {
     var status: LocatePositionStatus
     var locations: [CLLocation]?

@@ -49,6 +49,10 @@ struct GQShop {
     var branches: [InputBranch]
 }
 
+func getInitGQAddress() -> GQAddress {
+    return GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "",
+                                             shop: InputShop(style: "", title: "", type: "", underPrice: 0.0), tel: ""))
+}
 func combineFullInfo(address: GQAddress) -> String {
     let shop = address.shopBranch.shop ?? InputShop()
     let fullInfoText = NSMutableString(string: shop?.title! ?? "")
@@ -58,13 +62,22 @@ func combineFullInfo(address: GQAddress) -> String {
     fullInfoText.append(address.completeInfo ?? "")
     return fullInfoText as String
 }
-
-func pareAddressGraphQLResult(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?) -> GQAddress {
-    var address = GQAddress(shopBranch: InputBranch())
+func locationsDynamicQueryToGQAddress(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?) -> GQAddress {
+    var branch = InputBranch()
+    for key in result!.shopBranch!.resultMap.keys {
+        let value = result?.shopBranch?.resultMap[key]
+        branch.graphQLMap.updateValue(value, forKey: key)
+    }
+    var shop = InputShop()
+    for key in result!.shopBranch!.shop!.resultMap.keys {
+        let value = result?.shopBranch?.shop?.resultMap[key]
+        shop.graphQLMap.updateValue(value, forKey: key)
+    }
+    branch.shop = shop
+    var address = GQAddress(shopBranch: branch)
     address.ownerType = result?.ownerType
     address.latitude = Double(result?.latitude! ?? "0.0")!
     address.longitude = Double(result?.longitude! ?? "0.0")!
-    address.completeInfo = result?.completeInfo
     address.completeInfo = result?.completeInfo
     address.fullInfo = result?.fullInfo
     address.nation = result?.nation

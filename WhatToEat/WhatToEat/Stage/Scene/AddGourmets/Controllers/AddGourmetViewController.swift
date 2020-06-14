@@ -11,7 +11,7 @@ import UIKit
 class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = GourmetsTableData(address: GQAddress(shopBranch: InputBranch(shop:InputShop())))
+    private var tableData = GourmetsTableData(address: getInitGQAddress())
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
     
@@ -94,20 +94,18 @@ extension AddGourmetViewController: UIScrollViewDelegate {
 extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
-            let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarkToAddressAction
-            presenter.newAddress = parcelAction?.address ?? GQAddress(shopBranch: InputBranch())
-            presenter.newAddress.latitude = parcelAction?.placeMark.location?.coordinate.latitude ?? 0.0
-            presenter.newAddress.longitude = parcelAction?.placeMark.location?.coordinate.longitude ?? 0.0
-            presenter.newAddress.completeInfo =
-                presenter.combineAddressCompleteInfo(address: parcelAction?.address ??
-                    GQAddress(shopBranch: InputBranch()))
-            var cellData = tableData.dataSource[2][0] as? LRCellData
-            var addressInput = cellData?.rightCellProtocol as? LRLabelCellData
-            addressInput?.labelText = presenter.newAddress.completeInfo ?? ""
-            cellData?.rightCellProtocol = addressInput!
-            tableData.dataSource[2][0] = cellData!
-            tableView.reloadRows(at: [IndexPath(row: 0, section: 2)], with: .none)
-            appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
+            if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
+                let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
+                let gqAddress = parcelAction.selectedAddress
+                presenter.newAddress = gqAddress
+                if presenter.newAddress.completeInfo == nil {
+                    // To-Do: Here Upload to Insert
+                    presenter.newAddress.completeInfo = presenter.combineAddressCompleteInfo(address: gqAddress)
+                }
+                tableData = GourmetsTableData(address: presenter.newAddress)
+                tableView.reloadData()
+                appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
+            }
         }
         switch state.currentAction {
         case is AdjustForKeyboardAction:
