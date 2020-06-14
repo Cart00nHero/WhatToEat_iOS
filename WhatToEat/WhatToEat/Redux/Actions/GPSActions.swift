@@ -120,15 +120,33 @@ struct ParePlaceMarkToAddressAction: Action {
         address.subThoroughfare = placeMark.subThoroughfare
     }
     private mutating func queryLocation() {
-        inputAddress.nation = placeMark.country
-        inputAddress.isoNationCode = placeMark.isoCountryCode
-        inputAddress.locality = placeMark.locality
-        inputAddress.subLocality = placeMark.subLocality
-        inputAddress.administrativeArea = placeMark.administrativeArea
-        inputAddress.subAdministrativeArea = placeMark.subAdministrativeArea
-        inputAddress.postalCode = placeMark.postalCode
-        inputAddress.thoroughfare = placeMark.thoroughfare
-        inputAddress.subThoroughfare = placeMark.subThoroughfare
+        if placeMark.country != nil {
+            inputAddress.nation = placeMark.country
+        }
+        if placeMark.isoCountryCode != nil {
+            inputAddress.isoNationCode = placeMark.isoCountryCode
+        }
+        if placeMark.locality != nil {
+            inputAddress.locality = placeMark.locality
+        }
+        if placeMark.subLocality != nil {
+            inputAddress.subLocality = placeMark.subLocality
+        }
+        if placeMark.administrativeArea != nil {
+            inputAddress.administrativeArea = placeMark.administrativeArea
+        }
+        if placeMark.subAdministrativeArea != nil {
+            inputAddress.subAdministrativeArea = placeMark.subAdministrativeArea
+        }
+        if placeMark.postalCode != nil {
+            inputAddress.postalCode = placeMark.postalCode
+        }
+        if placeMark.thoroughfare != nil {
+            inputAddress.thoroughfare = placeMark.thoroughfare
+        }
+        if placeMark.subThoroughfare != nil {
+            inputAddress.subThoroughfare = placeMark.subThoroughfare
+        }
         appStore.dispatch(locationsDynamicQueryAction(whereCMD: inputAddress))
     }
 }

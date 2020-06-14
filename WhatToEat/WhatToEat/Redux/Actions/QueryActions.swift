@@ -26,10 +26,9 @@ func locationsDynamicQueryAction(whereCMD: InputAddress) -> LocationsDynamicQuer
                 action.status = .Failed
             }
             if (graphQLResult.data?.locationsDynamicQuery) != nil {
-                action.responseData = graphQLResult.data?.locationsDynamicQuery
-                graphQLResult.data?.jsonObject
-//                let data = try JSONSerialization.data(withJSONObject: graphQLResult.data.jsonObject, options: .allowFragments)
-//                let decode:LaunchesModal = try JSONDecoder().decode(LaunchesModal.self, from: data)
+//                let serialized = try! JSONSerialization.data(withJSONObject: graphQLResult.data?.jsonObject as Any, options: .fragmentsAllowed)
+//                let deserialized = try! JSONSerialization.jsonObject(with: serialized, options: []) as! [String: Any]
+//                print("幹\(deserialized)")
                 action.status = .Success
             }
         case .failure(let error):
