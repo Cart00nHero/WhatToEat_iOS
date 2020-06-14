@@ -18,6 +18,7 @@ class DefaultVCTemplate: UIBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +44,15 @@ class DefaultVCTemplate: UIBaseViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    }
+    // MARK: - Private Methods
+    private func initialNavigationBar() {
+        self.navigationController?.navigationBar.barTintColor =
+            UIColor(red: 34.0/255.0, green: 139.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     // MARK: - UI Actions
     @objc private func adjustForKeyboard(notification: Notification) {

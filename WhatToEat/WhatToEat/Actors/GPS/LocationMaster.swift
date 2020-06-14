@@ -18,6 +18,12 @@ enum RequestAuthorization : Int {
     case REQUEST_AUTHORIZATION_ALWAYS,
     REQUEST_AUTHORIZATION_WHENINUSE
 }
+enum LocatePositionStatus {
+    case DidStarted
+    case DidUpdateLocation
+    case DidFailWithError
+    case DidChangeAuthorization
+}
 
 protocol LocationServiceDelegate {
     func locationManager(didUpdateLocations locations: [CLLocation])
@@ -25,8 +31,9 @@ protocol LocationServiceDelegate {
     func locationManager(didChangeAuthorization status: CLAuthorizationStatus)
 }
 
-class GPSService: NSObject {
-    static let shareService = GPSService()
+class LocationMaster: NSObject {
+    
+    static let shared = LocationMaster()
     private var locationManager: CLLocationManager?
     var delegate: LocationServiceDelegate?
 
@@ -97,11 +104,14 @@ class GPSService: NSObject {
     }
 }
 
-extension GPSService : CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+extension LocationMaster : CLLocationManagerDelegate {
+    internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        appStore.dispatch(LocatePositionAction(status: .DidUpdateLocation,locations: locations))
     }
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+    internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        appStore.dispatch(LocatePositionAction(status: .DidFailWithError,error: error))
     }
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        appStore.dispatch(LocatePositionAction(status: .DidUpdateLocation))
     }
 }

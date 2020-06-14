@@ -58,3 +58,26 @@ func combineFullInfo(address: GQAddress) -> String {
     fullInfoText.append(address.completeInfo ?? "")
     return fullInfoText as String
 }
+
+func pareAddressGraphQLResult(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?) -> GQAddress {
+    var address = GQAddress(shopBranch: InputBranch())
+    address.ownerType = result?.ownerType
+    address.latitude = Double(result?.latitude! ?? "0.0")!
+    address.longitude = Double(result?.longitude! ?? "0.0")!
+    address.completeInfo = result?.completeInfo
+    address.completeInfo = result?.completeInfo
+    address.fullInfo = result?.fullInfo
+    address.nation = result?.nation
+    address.isoNationCode = result?.isoNationCode
+    address.locality = result?.locality
+    address.subLocality = result?.subLocality
+    address.administrativeArea = result?.administrativeArea
+    address.subAdministrativeArea = result?.subAdministrativeArea
+    address.postalCode = result?.postalCode
+    address.thoroughfare = result?.thoroughfare
+    address.subThoroughfare = result?.subThoroughfare
+    address.floor = result?.floor
+    address.annotation = result?.floor
+    
+    return address
+}

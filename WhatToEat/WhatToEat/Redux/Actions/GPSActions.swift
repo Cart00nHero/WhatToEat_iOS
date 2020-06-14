@@ -14,13 +14,14 @@ enum GeoCodeStatus: Int {
     case Started, Completed, NotFound, Failed
 }
 struct GeoCodeAddressAction: Action {
+    var codedAdress: String
     var status: GeoCodeStatus = .Started
     var location: CLLocation? = nil
     var error: Error? = nil
 }
 
 func geoCodeAddressAction(address: String) -> GeoCodeAddressAction {
-    var action = GeoCodeAddressAction()
+    var action = GeoCodeAddressAction(codedAdress: address)
     let geoCoder = CLGeocoder()
     geoCoder.geocodeAddressString(address) { (placemarks, error) in
         if error == nil {
@@ -42,12 +43,13 @@ func geoCodeAddressAction(address: String) -> GeoCodeAddressAction {
 }
 
 struct ReverseLocationAction: Action {
+    var reversedLocation: CLLocation
     var status: GeoCodeStatus = .Started
     var place: CLPlacemark? = nil
     var error: Error? = nil
 }
 func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
-    var action = ReverseLocationAction()
+    var action = ReverseLocationAction(reversedLocation: location)
     let geoCoder = CLGeocoder()
     geoCoder.reverseGeocodeLocation(location) { (placemarks, error) in
         if error == nil {
@@ -91,12 +93,19 @@ func createMapAnnotationsAction(locations: [CLLocation]) -> CreateMapAnnotations
     }
     return action
 }
-struct ParePlaceMarktoAddressAction: Action {
+struct ParePlaceMarkToAddressAction: Action {
+    let queryLoc: Bool
     let placeMark:CLPlacemark
     var address: GQAddress
-    init(placeMark:CLPlacemark, address:GQAddress) {
+    lazy var inputAddress = InputAddress()
+    
+    init(queryLoc: Bool,placeMark: CLPlacemark,address: GQAddress) {
+        self.queryLoc = queryLoc
         self.placeMark = placeMark
         self.address = address
+        if self.queryLoc {
+            queryLocation()
+        }
         parePlaceMarktoAddress()
     }
     private mutating func parePlaceMarktoAddress() {
@@ -110,5 +119,22 @@ struct ParePlaceMarktoAddressAction: Action {
         address.thoroughfare = placeMark.thoroughfare
         address.subThoroughfare = placeMark.subThoroughfare
     }
+    private mutating func queryLocation() {
+        inputAddress.nation = placeMark.country
+        inputAddress.isoNationCode = placeMark.isoCountryCode
+        inputAddress.locality = placeMark.locality
+        inputAddress.subLocality = placeMark.subLocality
+        inputAddress.administrativeArea = placeMark.administrativeArea
+        inputAddress.subAdministrativeArea = placeMark.subAdministrativeArea
+        inputAddress.postalCode = placeMark.postalCode
+        inputAddress.thoroughfare = placeMark.thoroughfare
+        inputAddress.subThoroughfare = placeMark.subThoroughfare
+        appStore.dispatch(locationsDynamicQueryAction(whereCMD: inputAddress))
+    }
 }
 
+struct LocatePositionAction: Action {
+    var status: LocatePositionStatus
+    var locations: [CLLocation]?
+    var error: Error?
+}

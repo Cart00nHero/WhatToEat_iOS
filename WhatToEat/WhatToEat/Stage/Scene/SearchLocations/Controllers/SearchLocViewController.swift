@@ -26,13 +26,12 @@ class SearchLocViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
+        defaultTemplate?.title = "Search"
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -41,6 +40,9 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        let rightBarButtonItem = UIBarButtonItem(title: "Locate", style: .plain, target: self,
+                                             action: #selector(rigtBarButtonClickAction(sender:)))
+        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
         searchTextField.inputAccessoryView = createInputAccessoryView()
         coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
     }
@@ -86,8 +88,13 @@ class SearchLocViewController: UIViewController {
             webView.load(request as URLRequest)
         }
     }
-    @objc func barDoneButtonClickAction(sender: UIBarButtonItem) {
+    @objc private func barDoneButtonClickAction(sender: UIBarButtonItem) {
         searchTextField.resignFirstResponder()
+    }
+    @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
+        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
+        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
+        LocationMaster.shared.requestCurrentLocation()
     }
 }
 
@@ -141,11 +148,15 @@ extension SearchLocViewController: DefaultTemplateDelegate {
         case is ReverseLocationAction:
             let action = state.currentAction as? ReverseLocationAction
             if action?.place != nil {
-                appStore.dispatch(ParePlaceMarktoAddressAction(placeMark: (action?.place)!,
-                                                               address: GQAddress(shopBranch: InputBranch())))
+                appStore.dispatch(ParePlaceMarkToAddressAction(
+                    queryLoc: true, placeMark: (action?.place)!,
+                    address: GQAddress(shopBranch: InputBranch()))
+                )
             }
-        case is ParePlaceMarktoAddressAction:
-            let action = state.currentAction as? ParePlaceMarktoAddressAction
+        case is LocationsDynamicQueryAction:
+            let action = state.currentAction as? LocationsDynamicQueryAction
+        case is ParePlaceMarkToAddressAction:
+            let action = state.currentAction as? ParePlaceMarkToAddressAction
             presenter.addressParcel.recipient = "AddGourmetViewController"
             presenter.addressParcel.parcelType = String(describing: type(of: action))
             presenter.addressParcel.parcel = action
@@ -153,6 +164,18 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             let action = state.currentAction as? CreateMapAnnotationsAction
             if action?.status == GeoCodeStatus.Completed {
                 mapView.showAnnotations(action?.annotations ?? [], animated: true)
+            }
+        case is LocatePositionAction:
+            let action = state.currentAction as? LocatePositionAction
+            switch action?.status {
+            case .DidUpdateLocation:
+                print("***********")
+                print(action?.locations as Any)
+                print("===========")
+                if action?.locations?.count ?? 0 > 0 {
+                    appStore.dispatch(reverseLocationAction(location: (action?.locations?[0])!))
+                }
+            default: break
             }
         default: break
         }

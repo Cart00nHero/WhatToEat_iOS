@@ -11,6 +11,7 @@ import ReSwift
 
 struct LocationsDynamicQueryAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
+    var responseData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]?
 }
 func locationsDynamicQueryAction(whereCMD: InputAddress) -> LocationsDynamicQueryAction {
     var action = LocationsDynamicQueryAction()
@@ -25,6 +26,10 @@ func locationsDynamicQueryAction(whereCMD: InputAddress) -> LocationsDynamicQuer
                 action.status = .Failed
             }
             if (graphQLResult.data?.locationsDynamicQuery) != nil {
+                action.responseData = graphQLResult.data?.locationsDynamicQuery
+                graphQLResult.data?.jsonObject
+//                let data = try JSONSerialization.data(withJSONObject: graphQLResult.data.jsonObject, options: .allowFragments)
+//                let decode:LaunchesModal = try JSONDecoder().decode(LaunchesModal.self, from: data)
                 action.status = .Success
             }
         case .failure(let error):
@@ -32,6 +37,5 @@ func locationsDynamicQueryAction(whereCMD: InputAddress) -> LocationsDynamicQuer
             action.status = .Failed
         }
     }
-    
     return action
 }

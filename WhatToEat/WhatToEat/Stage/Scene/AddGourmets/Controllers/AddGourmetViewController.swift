@@ -94,7 +94,7 @@ extension AddGourmetViewController: UIScrollViewDelegate {
 extension AddGourmetViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
-            let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarktoAddressAction
+            let parcelAction = state.receivedParcel?.parcel as? ParePlaceMarkToAddressAction
             presenter.newAddress = parcelAction?.address ?? GQAddress(shopBranch: InputBranch())
             presenter.newAddress.latitude = parcelAction?.placeMark.location?.coordinate.latitude ?? 0.0
             presenter.newAddress.longitude = parcelAction?.placeMark.location?.coordinate.longitude ?? 0.0
