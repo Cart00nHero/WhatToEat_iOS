@@ -100,7 +100,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 presenter.newAddress = gqAddress
                 if presenter.newAddress.completeInfo == nil {
                     // To-Do: Here Upload to Insert
-                    presenter.newAddress.completeInfo = presenter.combineAddressCompleteInfo(address: gqAddress)
+                    presenter.newAddress.completeInfo = combineAddressCompleteInfo(address: gqAddress)
                 }
                 tableData = GourmetsTableData(address: presenter.newAddress)
                 tableView.reloadData()

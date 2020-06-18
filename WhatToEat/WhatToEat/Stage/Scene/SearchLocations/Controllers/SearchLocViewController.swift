@@ -175,7 +175,11 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             default: break
             }
         case is ParePlaceMarkToAddressAction:
-            let action = state.currentAction as! ParePlaceMarkToAddressAction
+            var action = state.currentAction as! ParePlaceMarkToAddressAction
+            if presenter.addressParcel.parcelType == "LocatePositionAction" {
+                action.address.completeInfo = combineAddressCompleteInfo(address: action.address)
+                searchTextField.text = action.address.completeInfo
+            }
             if presenter.addressParcel.parcelType != "LocationsDynamicQueryAction" {
                 presenter.addressParcel.parcelType = String(describing: type(of: action))
                 presenter.addressParcel.parcel = action
@@ -188,11 +192,12 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 mapView.showAnnotations(action.annotations , animated: true)
             }
         case is LocatePositionAction:
-            let action = state.currentAction as? LocatePositionAction
-            switch action?.status {
+            let action = state.currentAction as! LocatePositionAction
+            switch action.status {
             case .DidUpdateLocation:
-                if action?.locations?.count ?? 0 > 0 {
-                    appStore.dispatch(reverseLocationAction(location: (action?.locations?[0])!))
+                if action.locations?.count ?? 0 > 0 {
+                    presenter.addressParcel.parcelType = String(describing: type(of: action))
+                    appStore.dispatch(reverseLocationAction(location: (action.locations?[0])!))
                 }
             default: break
             }

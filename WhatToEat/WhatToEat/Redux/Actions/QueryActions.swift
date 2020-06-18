@@ -28,7 +28,7 @@ func locationsDynamicQueryAction(whereCMD: InputAddress) -> LocationsDynamicQuer
             }
             if (graphQLResult.data?.locationsDynamicQuery) != nil {
                 action.responseData = graphQLResult.data?.locationsDynamicQuery
-                let serialized = try! JSONSerialization.data(withJSONObject: graphQLResult.data?.jsonObject as Any, options: .fragmentsAllowed)
+                let serialized = try! JSONSerialization.data(withJSONObject: graphQLResult.data?.jsonObject as Any, options: .prettyPrinted)
 //                let deserialized = try! JSONSerialization.jsonObject(with: serialized, options: []) as! [String: Any]
                 do {
                     action.dynamicQueryData =

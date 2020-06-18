@@ -12,15 +12,6 @@ class AddGourmetPresenter: NSObject {
 //    lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
     lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(style: "", title: "", type: "", underPrice: 0.0), tel: ""))
 //    lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(), tel: ""))
-    func combineAddressCompleteInfo(address: GQAddress) -> String {
-        let mutabletext = NSMutableString(string: address.administrativeArea ?? "")
-        mutabletext.append(address.subAdministrativeArea ?? "")
-        mutabletext.append(address.locality ?? "")
-        mutabletext.append(address.thoroughfare ?? "")
-        mutabletext.append(" ")
-        mutabletext.append(address.subThoroughfare ?? "")
-        return mutabletext as String
-    }
     
     func updateTextFieldInputData(newText: String, indexPath: IndexPath) {
         var newShop = newAddress.shopBranch.shop ?? InputShop()

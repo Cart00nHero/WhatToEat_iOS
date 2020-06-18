@@ -36,6 +36,7 @@
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
 		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
 		AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0E248055E700ED4BB1 /* StructObserver.swift */; };
+		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
 		AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D55247AA79E00A8625D /* LRTableData.swift */; };
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
@@ -120,6 +121,7 @@
 		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
 		AF40DC0E248055E700ED4BB1 /* StructObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
+		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
 		AF550D55247AA79E00A8625D /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				AF550D59247AA7BA00A8625D /* ApiData */,
 				AF550D54247AA78500A8625D /* TableData */,
 				AFF8843724965F4A00646088 /* CodableExtension.swift */,
+				AF501ECB249712B700628DB0 /* DataParser.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -866,6 +869,7 @@
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
 				AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
+				AF501ECC249712B700628DB0 /* DataParser.swift in Sources */,
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
 				AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */,
