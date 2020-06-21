@@ -98,9 +98,9 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
                 let gqAddress = parcelAction.selectedAddress
                 presenter.newAddress = gqAddress
-                if presenter.newAddress.completeInfo == nil {
+                if presenter.newAddress.address.completeInfo.isEmpty {
                     // To-Do: Here Upload to Insert
-                    presenter.newAddress.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                    presenter.newAddress.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
                 }
                 tableData = GourmetsTableData(address: presenter.newAddress)
                 tableView.reloadData()
@@ -128,18 +128,18 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             let superTag = action?.dropdownView.superview?.tag ?? 0
-            var newShop = presenter.newAddress.shopBranch.shop ?? InputShop()
+            var newShop = presenter.newAddress.shopBranch.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                newShop?.style = data?.selectedText
+                newShop.style = data?.selectedText
                 cellData?.leftCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
                 var data = cellData?.rightCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                newShop?.type = data?.selectedText
+                newShop.type = data?.selectedText
                 cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
@@ -170,7 +170,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let data = cell?.cellData?.rightCellProtocol as? LRTextFieldCellData
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
-            presenter.newAddress.fullInfo = combineFullInfo(address: presenter.newAddress)
+            presenter.newAddress.address.fullInfo = combineFullInfo(address: presenter.newAddress)
             appStore.dispatch(createLocationAction(newLoc: presenter.newAddress))
         case is CreateLocationAction:
             let action = state.currentAction as? CreateLocationAction

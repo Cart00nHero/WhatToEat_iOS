@@ -177,8 +177,8 @@ extension SearchLocViewController: DefaultTemplateDelegate {
         case is ParePlaceMarkToAddressAction:
             var action = state.currentAction as! ParePlaceMarkToAddressAction
             if presenter.addressParcel.parcelType == "LocatePositionAction" {
-                action.address.completeInfo = combineAddressCompleteInfo(address: action.address)
-                searchTextField.text = action.address.completeInfo
+                action.address.address.completeInfo = combineAddressCompleteInfo(address: action.address)
+                searchTextField.text = action.address.address.completeInfo
             }
             if presenter.addressParcel.parcelType != "LocationsDynamicQueryAction" {
                 presenter.addressParcel.parcelType = String(describing: type(of: action))

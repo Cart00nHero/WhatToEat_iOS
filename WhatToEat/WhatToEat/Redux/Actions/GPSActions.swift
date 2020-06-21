@@ -81,10 +81,12 @@ func createMapAnnotationsAction(addresses: [GQAddress]) -> CreateMapAnnotationsA
     let resultArray = NSMutableArray()
     DispatchQueue.global(qos: .background).async {
         for address in addresses {
-            let location = CLLocation(latitude: address.latitude, longitude: address.longitude)
+            let latitude = Double(address.address.latitude) ?? 0.0
+            let longitude = Double(address.address.longitude) ?? 0.0
+            let location = CLLocation(latitude: latitude, longitude: longitude)
             let annotation = MKPointAnnotation()
-            annotation.title = address.shopBranch.shop!?.title ?? ""
-            annotation.subtitle = address.shopBranch.name ?? ""
+            annotation.title = address.shopBranch.shop.title ?? ""
+            annotation.subtitle = address.shopBranch.name
             annotation.coordinate = location.coordinate
             resultArray.add(annotation)
         }
@@ -100,7 +102,7 @@ struct ParePlaceMarkToAddressAction: Action {
     let queryLoc: Bool
     let placeMark:CLPlacemark
     var address: GQAddress
-    lazy var inputAddress = InputAddress()
+    lazy var addressDqCmd = AddressDqCmd()
     
     init(queryLoc: Bool,placeMark: CLPlacemark,address: GQAddress) {
         self.queryLoc = queryLoc
@@ -112,47 +114,47 @@ struct ParePlaceMarkToAddressAction: Action {
         parePlaceMarktoAddress()
     }
     private mutating func parePlaceMarktoAddress() {
-        address.latitude = placeMark.location?.coordinate.latitude ?? 0.0
-        address.longitude = placeMark.location?.coordinate.longitude ?? 0.0
-        address.nation = placeMark.country
-        address.isoNationCode = placeMark.isoCountryCode
-        address.locality = placeMark.locality
-        address.subLocality = placeMark.subLocality
-        address.administrativeArea = placeMark.administrativeArea
-        address.subAdministrativeArea = placeMark.subAdministrativeArea
-        address.postalCode = placeMark.postalCode
-        address.thoroughfare = placeMark.thoroughfare
-        address.subThoroughfare = placeMark.subThoroughfare
+        address.address.latitude = String(format: "%.2f", placeMark.location?.coordinate.latitude ?? 0.0)
+        address.address.longitude = String(format: "%.2f", placeMark.location?.coordinate.longitude ?? 0.0)
+        address.address.nation = placeMark.country
+        address.address.isoNationCode = placeMark.isoCountryCode
+        address.address.locality = placeMark.locality
+        address.address.subLocality = placeMark.subLocality
+        address.address.administrativeArea = placeMark.administrativeArea
+        address.address.subAdministrativeArea = placeMark.subAdministrativeArea
+        address.address.postalCode = placeMark.postalCode
+        address.address.thoroughfare = placeMark.thoroughfare
+        address.address.subThoroughfare = placeMark.subThoroughfare
     }
     private mutating func queryLocation() {
         if placeMark.country != nil {
-            inputAddress.nation = placeMark.country
+            addressDqCmd.nation = placeMark.country
         }
         if placeMark.isoCountryCode != nil {
-            inputAddress.isoNationCode = placeMark.isoCountryCode
+            addressDqCmd.isoNationCode = placeMark.isoCountryCode
         }
         if placeMark.locality != nil {
-            inputAddress.locality = placeMark.locality
+            addressDqCmd.locality = placeMark.locality
         }
         if placeMark.subLocality != nil {
-            inputAddress.subLocality = placeMark.subLocality
+            addressDqCmd.subLocality = placeMark.subLocality
         }
         if placeMark.administrativeArea != nil {
-            inputAddress.administrativeArea = placeMark.administrativeArea
+            addressDqCmd.administrativeArea = placeMark.administrativeArea
         }
         if placeMark.subAdministrativeArea != nil {
-            inputAddress.subAdministrativeArea = placeMark.subAdministrativeArea
+            addressDqCmd.subAdministrativeArea = placeMark.subAdministrativeArea
         }
         if placeMark.postalCode != nil {
-            inputAddress.postalCode = placeMark.postalCode
+            addressDqCmd.postalCode = placeMark.postalCode
         }
         if placeMark.thoroughfare != nil {
-            inputAddress.thoroughfare = placeMark.thoroughfare
+            addressDqCmd.thoroughfare = placeMark.thoroughfare
         }
         if placeMark.subThoroughfare != nil {
-            inputAddress.subThoroughfare = placeMark.subThoroughfare
+            addressDqCmd.subThoroughfare = placeMark.subThoroughfare
         }
-        appStore.dispatch(locationsDynamicQueryAction(whereCMD: inputAddress))
+        appStore.dispatch(locationsDynamicQueryAction(whereCMD: addressDqCmd))
     }
 }
 struct MKAnnotationDidSelectAction: Action {

@@ -22,16 +22,14 @@ struct CreateLocationAction: Action, ApiActionProtocol {
 func createLocationAction(newLoc: GQAddress) -> CreateLocationAction {
     var action = CreateLocationAction()
     let service = ApolloService.shared.apollo
-    let mutation = CreateLocationMutation(ownerType: newLoc.ownerType, completeInfo: newLoc.completeInfo, fullInfo: newLoc.fullInfo, postalCode: newLoc.postalCode, nation: newLoc.nation, isoNationCode: newLoc.isoNationCode, locality: newLoc.locality, subLocality: newLoc.subLocality, administrativeArea: newLoc.administrativeArea, subAdministrativeArea: newLoc.subAdministrativeArea, thoroughfare: newLoc.thoroughfare, subThoroughfare: newLoc.subThoroughfare, floor: newLoc.floor, latitude: String(format:"%f", newLoc.latitude), longitude: String(format:"%f", newLoc.longitude), annotation: newLoc.annotation, shopBranch: newLoc.shopBranch)
+    let mutation = CreateLocationMutation(address: newLoc.address, shopBranch: newLoc.shopBranch)
     service.perform(mutation: mutation) { result in
         switch result {
             
         case .success(let graphQLResult):
             if graphQLResult.errors != nil {
-                print(graphQLResult.errors?.description ?? "")
                 action.status = .Failed
-            }
-            if (graphQLResult.data?.createLocation) != nil {
+            } else {
                 action.status = .Success
             }
         case .failure(let error):

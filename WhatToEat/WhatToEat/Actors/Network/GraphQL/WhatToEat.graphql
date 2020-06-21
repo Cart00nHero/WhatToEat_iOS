@@ -12,16 +12,10 @@ mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: Inp
 }
 
 mutation CreateLocation(
-  $ownerType: String,$completeInfo: String,$fullInfo: String,$postalCode: String,$nation: String,$isoNationCode: String,
-  $locality: String,$subLocality: String,$administrativeArea: String,$subAdministrativeArea: String,
-  $thoroughfare: String,$subThoroughfare: String,$floor: String,$latitude: Decimal,$longitude: Decimal,$annotation: String,
+  $address: InputAddress!,
   $shopBranch:InputBranch!
 ) {
-  createLocation(ownerType: $ownerType,completeInfo: $completeInfo,fullInfo: $fullInfo,postalCode: $postalCode
-  nation: $nation,isoNationCode: $isoNationCode,locality: $locality,subLocality: $subLocality,
-  administrativeArea: $administrativeArea,subAdministrativeArea: $subAdministrativeArea,
-  thoroughfare: $thoroughfare,subThoroughfare: $subThoroughfare,floor: $floor,latitude: $latitude,longitude: $longitude
-  annotation: $annotation,shopBranch: $shopBranch) {
+  createLocation(address:$address,shopBranch: $shopBranch) {
     ownerType
     completeInfo
     fullInfo
@@ -92,7 +86,7 @@ mutation CreateShop($title: String!,$style: String,$type: String,$underPrice: Fl
     }
 }
 
-query LocationsDynamicQuery($whereAnd: InputAddress!) {
+query LocationsDynamicQuery($whereAnd: AddressDqCmd!) {
   locationsDynamicQuery(whereAnd: $whereAnd) {
     ownerType
     completeInfo

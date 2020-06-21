@@ -10,25 +10,194 @@ public struct InputToken: GraphQLMapConvertible {
   /// - Parameters:
   ///   - token
   ///   - type
-  public init(token: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil) {
+  public init(token: String, type: String) {
     graphQLMap = ["token": token, "type": type]
   }
 
-  public var token: Swift.Optional<String?> {
+  public var token: String {
     get {
-      return graphQLMap["token"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+      return graphQLMap["token"] as! String
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "token")
     }
   }
 
-  public var type: Swift.Optional<String?> {
+  public var type: String {
     get {
-      return graphQLMap["type"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+      return graphQLMap["type"] as! String
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+}
+
+public struct InputAddress: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - administrativeArea
+  ///   - annotation
+  ///   - completeInfo
+  ///   - floor
+  ///   - fullInfo
+  ///   - isoNationCode
+  ///   - latitude
+  ///   - locality
+  ///   - longitude
+  ///   - nation
+  ///   - ownerType
+  ///   - postalCode
+  ///   - subAdministrativeArea
+  ///   - subLocality
+  ///   - subThoroughfare
+  ///   - thoroughfare
+  public init(administrativeArea: Swift.Optional<String?> = nil, annotation: Swift.Optional<String?> = nil, completeInfo: String, floor: Swift.Optional<String?> = nil, fullInfo: String, isoNationCode: Swift.Optional<String?> = nil, latitude: String, locality: Swift.Optional<String?> = nil, longitude: String, nation: Swift.Optional<String?> = nil, ownerType: Swift.Optional<String?> = nil, postalCode: Swift.Optional<String?> = nil, subAdministrativeArea: Swift.Optional<String?> = nil, subLocality: Swift.Optional<String?> = nil, subThoroughfare: Swift.Optional<String?> = nil, thoroughfare: Swift.Optional<String?> = nil) {
+    graphQLMap = ["administrativeArea": administrativeArea, "annotation": annotation, "completeInfo": completeInfo, "floor": floor, "fullInfo": fullInfo, "isoNationCode": isoNationCode, "latitude": latitude, "locality": locality, "longitude": longitude, "nation": nation, "ownerType": ownerType, "postalCode": postalCode, "subAdministrativeArea": subAdministrativeArea, "subLocality": subLocality, "subThoroughfare": subThoroughfare, "thoroughfare": thoroughfare]
+  }
+
+  public var administrativeArea: Swift.Optional<String?> {
+    get {
+      return graphQLMap["administrativeArea"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "administrativeArea")
+    }
+  }
+
+  public var annotation: Swift.Optional<String?> {
+    get {
+      return graphQLMap["annotation"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "annotation")
+    }
+  }
+
+  public var completeInfo: String {
+    get {
+      return graphQLMap["completeInfo"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "completeInfo")
+    }
+  }
+
+  public var floor: Swift.Optional<String?> {
+    get {
+      return graphQLMap["floor"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "floor")
+    }
+  }
+
+  public var fullInfo: String {
+    get {
+      return graphQLMap["fullInfo"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "fullInfo")
+    }
+  }
+
+  public var isoNationCode: Swift.Optional<String?> {
+    get {
+      return graphQLMap["isoNationCode"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "isoNationCode")
+    }
+  }
+
+  public var latitude: String {
+    get {
+      return graphQLMap["latitude"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "latitude")
+    }
+  }
+
+  public var locality: Swift.Optional<String?> {
+    get {
+      return graphQLMap["locality"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "locality")
+    }
+  }
+
+  public var longitude: String {
+    get {
+      return graphQLMap["longitude"] as! String
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "longitude")
+    }
+  }
+
+  public var nation: Swift.Optional<String?> {
+    get {
+      return graphQLMap["nation"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "nation")
+    }
+  }
+
+  public var ownerType: Swift.Optional<String?> {
+    get {
+      return graphQLMap["ownerType"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "ownerType")
+    }
+  }
+
+  public var postalCode: Swift.Optional<String?> {
+    get {
+      return graphQLMap["postalCode"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "postalCode")
+    }
+  }
+
+  public var subAdministrativeArea: Swift.Optional<String?> {
+    get {
+      return graphQLMap["subAdministrativeArea"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subAdministrativeArea")
+    }
+  }
+
+  public var subLocality: Swift.Optional<String?> {
+    get {
+      return graphQLMap["subLocality"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subLocality")
+    }
+  }
+
+  public var subThoroughfare: Swift.Optional<String?> {
+    get {
+      return graphQLMap["subThoroughfare"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "subThoroughfare")
+    }
+  }
+
+  public var thoroughfare: Swift.Optional<String?> {
+    get {
+      return graphQLMap["thoroughfare"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "thoroughfare")
     }
   }
 }
@@ -37,7 +206,6 @@ public struct InputBranch: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
-  ///   - address
   ///   - closedTime
   ///   - name
   ///   - openTime
@@ -45,17 +213,8 @@ public struct InputBranch: GraphQLMapConvertible {
   ///   - shop
   ///   - tel
   ///   - uniqueId
-  public init(address: Swift.Optional<InputAddress?> = nil, closedTime: Swift.Optional<String?> = nil, name: Swift.Optional<String?> = nil, openTime: Swift.Optional<String?> = nil, orderId: Swift.Optional<Int?> = nil, shop: Swift.Optional<InputShop?> = nil, tel: Swift.Optional<String?> = nil, uniqueId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["address": address, "closedTime": closedTime, "name": name, "openTime": openTime, "orderId": orderId, "shop": shop, "tel": tel, "uniqueId": uniqueId]
-  }
-
-  public var address: Swift.Optional<InputAddress?> {
-    get {
-      return graphQLMap["address"] as? Swift.Optional<InputAddress?> ?? Swift.Optional<InputAddress?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "address")
-    }
+  public init(closedTime: Swift.Optional<String?> = nil, name: String, openTime: Swift.Optional<String?> = nil, orderId: Swift.Optional<Int?> = nil, shop: InputShop, tel: Swift.Optional<String?> = nil, uniqueId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["closedTime": closedTime, "name": name, "openTime": openTime, "orderId": orderId, "shop": shop, "tel": tel, "uniqueId": uniqueId]
   }
 
   public var closedTime: Swift.Optional<String?> {
@@ -67,9 +226,9 @@ public struct InputBranch: GraphQLMapConvertible {
     }
   }
 
-  public var name: Swift.Optional<String?> {
+  public var name: String {
     get {
-      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+      return graphQLMap["name"] as! String
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "name")
@@ -94,9 +253,9 @@ public struct InputBranch: GraphQLMapConvertible {
     }
   }
 
-  public var shop: Swift.Optional<InputShop?> {
+  public var shop: InputShop {
     get {
-      return graphQLMap["shop"] as? Swift.Optional<InputShop?> ?? Swift.Optional<InputShop?>.none
+      return graphQLMap["shop"] as! InputShop
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "shop")
@@ -122,7 +281,77 @@ public struct InputBranch: GraphQLMapConvertible {
   }
 }
 
-public struct InputAddress: GraphQLMapConvertible {
+public struct InputShop: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - status
+  ///   - style
+  ///   - title
+  ///   - type
+  ///   - underPrice
+  ///   - uniqueId
+  public init(status: Swift.Optional<Int?> = nil, style: Swift.Optional<String?> = nil, title: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, underPrice: Double, uniqueId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["status": status, "style": style, "title": title, "type": type, "underPrice": underPrice, "uniqueId": uniqueId]
+  }
+
+  public var status: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["status"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "status")
+    }
+  }
+
+  public var style: Swift.Optional<String?> {
+    get {
+      return graphQLMap["style"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "style")
+    }
+  }
+
+  public var title: Swift.Optional<String?> {
+    get {
+      return graphQLMap["title"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "title")
+    }
+  }
+
+  public var type: Swift.Optional<String?> {
+    get {
+      return graphQLMap["type"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "type")
+    }
+  }
+
+  public var underPrice: Double {
+    get {
+      return graphQLMap["underPrice"] as! Double
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "underPrice")
+    }
+  }
+
+  public var uniqueId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["uniqueId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "uniqueId")
+    }
+  }
+}
+
+/// address dynamic query parameters
+public struct AddressDqCmd: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
@@ -287,75 +516,6 @@ public struct InputAddress: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "thoroughfare")
-    }
-  }
-}
-
-public struct InputShop: GraphQLMapConvertible {
-  public var graphQLMap: GraphQLMap
-
-  /// - Parameters:
-  ///   - status
-  ///   - style
-  ///   - title
-  ///   - type
-  ///   - underPrice
-  ///   - uniqueId
-  public init(status: Swift.Optional<Int?> = nil, style: Swift.Optional<String?> = nil, title: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, underPrice: Swift.Optional<Double?> = nil, uniqueId: Swift.Optional<String?> = nil) {
-    graphQLMap = ["status": status, "style": style, "title": title, "type": type, "underPrice": underPrice, "uniqueId": uniqueId]
-  }
-
-  public var status: Swift.Optional<Int?> {
-    get {
-      return graphQLMap["status"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "status")
-    }
-  }
-
-  public var style: Swift.Optional<String?> {
-    get {
-      return graphQLMap["style"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "style")
-    }
-  }
-
-  public var title: Swift.Optional<String?> {
-    get {
-      return graphQLMap["title"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "title")
-    }
-  }
-
-  public var type: Swift.Optional<String?> {
-    get {
-      return graphQLMap["type"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "type")
-    }
-  }
-
-  public var underPrice: Swift.Optional<Double?> {
-    get {
-      return graphQLMap["underPrice"] as? Swift.Optional<Double?> ?? Swift.Optional<Double?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "underPrice")
-    }
-  }
-
-  public var uniqueId: Swift.Optional<String?> {
-    get {
-      return graphQLMap["uniqueId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "uniqueId")
     }
   }
 }
@@ -544,8 +704,8 @@ public final class CreateLocationMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation CreateLocation($ownerType: String, $completeInfo: String, $fullInfo: String, $postalCode: String, $nation: String, $isoNationCode: String, $locality: String, $subLocality: String, $administrativeArea: String, $subAdministrativeArea: String, $thoroughfare: String, $subThoroughfare: String, $floor: String, $latitude: Decimal, $longitude: Decimal, $annotation: String, $shopBranch: InputBranch!) {
-      createLocation(ownerType: $ownerType, completeInfo: $completeInfo, fullInfo: $fullInfo, postalCode: $postalCode, nation: $nation, isoNationCode: $isoNationCode, locality: $locality, subLocality: $subLocality, administrativeArea: $administrativeArea, subAdministrativeArea: $subAdministrativeArea, thoroughfare: $thoroughfare, subThoroughfare: $subThoroughfare, floor: $floor, latitude: $latitude, longitude: $longitude, annotation: $annotation, shopBranch: $shopBranch) {
+    mutation CreateLocation($address: InputAddress!, $shopBranch: InputBranch!) {
+      createLocation(address: $address, shopBranch: $shopBranch) {
         __typename
         ownerType
         completeInfo
@@ -587,53 +747,23 @@ public final class CreateLocationMutation: GraphQLMutation {
 
   public let operationName: String = "CreateLocation"
 
-  public var ownerType: String?
-  public var completeInfo: String?
-  public var fullInfo: String?
-  public var postalCode: String?
-  public var nation: String?
-  public var isoNationCode: String?
-  public var locality: String?
-  public var subLocality: String?
-  public var administrativeArea: String?
-  public var subAdministrativeArea: String?
-  public var thoroughfare: String?
-  public var subThoroughfare: String?
-  public var floor: String?
-  public var latitude: String?
-  public var longitude: String?
-  public var annotation: String?
+  public var address: InputAddress
   public var shopBranch: InputBranch
 
-  public init(ownerType: String? = nil, completeInfo: String? = nil, fullInfo: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, floor: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil, shopBranch: InputBranch) {
-    self.ownerType = ownerType
-    self.completeInfo = completeInfo
-    self.fullInfo = fullInfo
-    self.postalCode = postalCode
-    self.nation = nation
-    self.isoNationCode = isoNationCode
-    self.locality = locality
-    self.subLocality = subLocality
-    self.administrativeArea = administrativeArea
-    self.subAdministrativeArea = subAdministrativeArea
-    self.thoroughfare = thoroughfare
-    self.subThoroughfare = subThoroughfare
-    self.floor = floor
-    self.latitude = latitude
-    self.longitude = longitude
-    self.annotation = annotation
+  public init(address: InputAddress, shopBranch: InputBranch) {
+    self.address = address
     self.shopBranch = shopBranch
   }
 
   public var variables: GraphQLMap? {
-    return ["ownerType": ownerType, "completeInfo": completeInfo, "fullInfo": fullInfo, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "floor": floor, "latitude": latitude, "longitude": longitude, "annotation": annotation, "shopBranch": shopBranch]
+    return ["address": address, "shopBranch": shopBranch]
   }
 
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["RootMutationType"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("createLocation", arguments: ["ownerType": GraphQLVariable("ownerType"), "completeInfo": GraphQLVariable("completeInfo"), "fullInfo": GraphQLVariable("fullInfo"), "postalCode": GraphQLVariable("postalCode"), "nation": GraphQLVariable("nation"), "isoNationCode": GraphQLVariable("isoNationCode"), "locality": GraphQLVariable("locality"), "subLocality": GraphQLVariable("subLocality"), "administrativeArea": GraphQLVariable("administrativeArea"), "subAdministrativeArea": GraphQLVariable("subAdministrativeArea"), "thoroughfare": GraphQLVariable("thoroughfare"), "subThoroughfare": GraphQLVariable("subThoroughfare"), "floor": GraphQLVariable("floor"), "latitude": GraphQLVariable("latitude"), "longitude": GraphQLVariable("longitude"), "annotation": GraphQLVariable("annotation"), "shopBranch": GraphQLVariable("shopBranch")], type: .object(CreateLocation.selections)),
+      GraphQLField("createLocation", arguments: ["address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch")], type: .object(CreateLocation.selections)),
     ]
 
     public private(set) var resultMap: ResultMap
@@ -1506,7 +1636,7 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query LocationsDynamicQuery($whereAnd: InputAddress!) {
+    query LocationsDynamicQuery($whereAnd: AddressDqCmd!) {
       locationsDynamicQuery(whereAnd: $whereAnd) {
         __typename
         ownerType
@@ -1549,9 +1679,9 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
 
   public let operationName: String = "LocationsDynamicQuery"
 
-  public var whereAnd: InputAddress
+  public var whereAnd: AddressDqCmd
 
-  public init(whereAnd: InputAddress) {
+  public init(whereAnd: AddressDqCmd) {
     self.whereAnd = whereAnd
   }
 

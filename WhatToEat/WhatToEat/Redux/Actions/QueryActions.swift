@@ -15,7 +15,7 @@ struct LocationsDynamicQueryAction: Action, ApiActionProtocol {
     var dynamicQueryData: DynamicQueryData<LocDynamicQueryData>?
     
 }
-func locationsDynamicQueryAction(whereCMD: InputAddress) -> LocationsDynamicQueryAction {
+func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQueryAction {
     var action = LocationsDynamicQueryAction()
     let service = ApolloService.shared.apollo
     let query = LocationsDynamicQueryQuery(whereAnd: whereCMD)

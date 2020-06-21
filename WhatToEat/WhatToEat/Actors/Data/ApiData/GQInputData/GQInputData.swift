@@ -9,32 +9,10 @@
 import UIKit
 
 struct GQAddress {
-    var ownerType: String?
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-    var completeInfo: String?
-    var fullInfo: String?
-    var nation: String?
-    // ex: TW
-    var isoNationCode: String?
-    // City ex: Taipei
-    var locality: String?
-    // District
-    var subLocality: String?
-    // State
-    var administrativeArea: String?
-    // County
-    var subAdministrativeArea: String?
-    // Zip code
-    var postalCode: String?
-    // Street / Road
-    var thoroughfare: String?
-    // ？號
-    var subThoroughfare: String?
-    var floor: String?
-    var annotation: String?
+    var address: InputAddress
     var shopBranch: InputBranch
-    init(shopBranch: InputBranch) {
+    init(address: InputAddress ,shopBranch: InputBranch) {
+        self.address = address
         self.shopBranch = shopBranch
     }
 }
@@ -50,6 +28,6 @@ struct GQShop {
 }
 
 func getInitGQAddress() -> GQAddress {
-    return GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "",
-                                             shop: InputShop(style: "", title: "", type: "", underPrice: 0.0), tel: ""))
+    return GQAddress(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
+                     shopBranch: InputBranch(name: "", shop: InputShop(underPrice: 0.00)))
 }
