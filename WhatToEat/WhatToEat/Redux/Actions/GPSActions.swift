@@ -85,7 +85,7 @@ func createMapAnnotationsAction(addresses: [GQAddress]) -> CreateMapAnnotationsA
             let longitude = Double(address.address.longitude) ?? 0.0
             let location = CLLocation(latitude: latitude, longitude: longitude)
             let annotation = MKPointAnnotation()
-            annotation.title = address.shopBranch.shop.title ?? ""
+            annotation.title = address.shopBranch.shop.title 
             annotation.subtitle = address.shopBranch.name
             annotation.coordinate = location.coordinate
             resultArray.add(annotation)

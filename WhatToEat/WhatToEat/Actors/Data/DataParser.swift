@@ -20,7 +20,7 @@ func combineAddressCompleteInfo(address: GQAddress) -> String {
 
 func combineFullInfo(address: GQAddress) -> String {
     let shop = address.shopBranch.shop
-    let fullInfoText = NSMutableString(string: (shop.title ?? "") ?? "")
+    let fullInfoText = NSMutableString(string: shop.title)
     fullInfoText.append("，")
     fullInfoText.append(address.shopBranch.name)
     fullInfoText.append("，")

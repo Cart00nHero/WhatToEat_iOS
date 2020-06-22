@@ -41,7 +41,7 @@ class AddGourmetPresenter: NSObject {
     }
     func combineAddressFullInfo() -> String {
         let newShop = newAddress.shopBranch.shop
-        let mutableText = NSMutableString(string: newShop.title! ?? "")
+        let mutableText = NSMutableString(string: newShop.title )
         let branch = newAddress.shopBranch
         mutableText.append(branch.name)
         mutableText.append(newAddress.address.completeInfo)
@@ -60,7 +60,7 @@ struct GourmetsTableData {
         return [
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: self.address.shopBranch.shop.title! ?? "")),
+                           rightCellProtocol: LRTextFieldCellData(inputText: self.address.shopBranch.shop.title)),
                 LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
                                                                 selectedText: (self.address.shopBranch.shop.style ?? "") ?? ""),
                            rightCellProtocol: LRDropDownCellData(placeHolder:"Type",

@@ -17,17 +17,7 @@ struct GQAddress {
     }
 }
 
-struct GQShop {
-    var uniqueId: String?
-    var title: String?
-    var style: String?
-    var type: String?
-    var status: Int = 0
-    var underPrice: Float64 = 0.0
-    var branches: [InputBranch]
-}
-
 func getInitGQAddress() -> GQAddress {
     return GQAddress(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
-                     shopBranch: InputBranch(name: "", shop: InputShop(underPrice: 0.00)))
+                     shopBranch: InputBranch(name: "", shop: InputShop(title: "", underPrice: 0.00)))
 }

@@ -291,7 +291,7 @@ public struct InputShop: GraphQLMapConvertible {
   ///   - type
   ///   - underPrice
   ///   - uniqueId
-  public init(status: Swift.Optional<Int?> = nil, style: Swift.Optional<String?> = nil, title: Swift.Optional<String?> = nil, type: Swift.Optional<String?> = nil, underPrice: Double, uniqueId: Swift.Optional<String?> = nil) {
+  public init(status: Swift.Optional<Int?> = nil, style: Swift.Optional<String?> = nil, title: String, type: Swift.Optional<String?> = nil, underPrice: Double, uniqueId: Swift.Optional<String?> = nil) {
     graphQLMap = ["status": status, "style": style, "title": title, "type": type, "underPrice": underPrice, "uniqueId": uniqueId]
   }
 
@@ -313,9 +313,9 @@ public struct InputShop: GraphQLMapConvertible {
     }
   }
 
-  public var title: Swift.Optional<String?> {
+  public var title: String {
     get {
-      return graphQLMap["title"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+      return graphQLMap["title"] as! String
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "title")
