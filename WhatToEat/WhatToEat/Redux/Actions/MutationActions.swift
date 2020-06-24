@@ -22,7 +22,7 @@ struct CreateLocationAction: Action, ApiActionProtocol {
 func createLocationAction(newLoc: GQAddress) -> CreateLocationAction {
     var action = CreateLocationAction()
     let service = ApolloService.shared.apollo
-    let mutation = CreateLocationMutation(address: newLoc.address, shopBranch: newLoc.shopBranch)
+    let mutation = CreateLocationMutation(address: newLoc.address, shopBranch: newLoc.shopBranch, shop: newLoc.shop)
     service.perform(mutation: mutation) { result in
         switch result {
             

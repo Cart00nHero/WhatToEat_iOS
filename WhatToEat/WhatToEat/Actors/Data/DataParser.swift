@@ -19,7 +19,7 @@ func combineAddressCompleteInfo(address: GQAddress) -> String {
 }
 
 func combineFullInfo(address: GQAddress) -> String {
-    let shop = address.shopBranch.shop
+    let shop = address.shop
     let fullInfoText = NSMutableString(string: shop.title)
     fullInfoText.append("，")
     fullInfoText.append(address.shopBranch.name)
@@ -39,13 +39,13 @@ func locationsDynamicQueryToGQAddress(result: LocationsDynamicQueryQuery.Data.Lo
         let value = result?.shopBranch?.resultMap[key]
         branch.graphQLMap.updateValue(value, forKey: key)
     }
-    var shop = address.shopBranch.shop
+    var shop = address.shop
     for key in result!.shopBranch!.shop!.resultMap.keys {
         let value = result?.shopBranch?.shop?.resultMap[key]
         shop.graphQLMap.updateValue(value, forKey: key)
     }
     
-    address.shopBranch.shop = shop
+    address.shop = shop
     
     return address
 }

@@ -128,7 +128,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             let superTag = action?.dropdownView.superview?.tag ?? 0
-            var newShop = presenter.newAddress.shopBranch.shop
+            var newShop = presenter.newAddress.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData

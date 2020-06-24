@@ -11,13 +11,18 @@ import UIKit
 struct GQAddress {
     var address: InputAddress
     var shopBranch: InputBranch
-    init(address: InputAddress ,shopBranch: InputBranch) {
+    var shop: InputShop
+    
+    
+    init(address: InputAddress ,shopBranch: InputBranch, shop: InputShop) {
         self.address = address
         self.shopBranch = shopBranch
+        self.shop = shop
     }
 }
 
 func getInitGQAddress() -> GQAddress {
+//    shop: InputShop(title: "", underPrice: 0.00)
     return GQAddress(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
-                     shopBranch: InputBranch(name: "", shop: InputShop(title: "", underPrice: 0.00)))
+                     shopBranch: InputBranch(name: ""), shop: InputShop(title: "", underPrice: 0.00))
 }

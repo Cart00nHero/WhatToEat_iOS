@@ -13,9 +13,10 @@ mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: Inp
 
 mutation CreateLocation(
   $address: InputAddress!,
-  $shopBranch:InputBranch!
+  $shopBranch:InputBranch!,
+  $shop:InputShop!
 ) {
-  createLocation(address:$address,shopBranch: $shopBranch) {
+  createLocation(address:$address,shopBranch: $shopBranch,shop:$shop) {
     ownerType
     completeInfo
     fullInfo
@@ -49,41 +50,6 @@ mutation CreateLocation(
       }
     }
   }
-}
-mutation CreateShop($title: String!,$style: String,$type: String,$underPrice: Float,$branches: [InputBranch]!) {
-    createShop(title: $title,style: $style,type: $type,underPrice: $underPrice,branches: $branches) {
-        uniqueId
-        title
-        style
-        type
-        status
-        underPrice
-        branches {
-            uniqueId
-            orderId
-            name
-            openTime
-            closedTime
-            tel
-            address {
-                ownerType
-                completeInfo
-                fullInfo
-                nation
-                isoNationCode
-                locality
-                subLocality
-                administrativeArea
-                subAdministrativeArea
-                postalCode
-                thoroughfare
-                subThoroughfare
-                latitude
-                longitude
-                annotation
-            }
-        }
-    }
 }
 
 query LocationsDynamicQuery($whereAnd: AddressDqCmd!) {
