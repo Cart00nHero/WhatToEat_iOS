@@ -65,18 +65,18 @@ func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
 }
 
 struct CreateMapAnnotationsAction: Action {
-    var addresses: [GQAddress]
+    var addresses: [GQInputObject]
     var actionType = ""
     var status: GeoCodeStatus = .Started
     var annotations: [MKPointAnnotation] = []
     
-    init(addresses: [GQAddress]) {
+    init(addresses: [GQInputObject]) {
         self.addresses = addresses
         actionType = String(describing: type(of: self))
     }
 }
 
-func createMapAnnotationsAction(addresses: [GQAddress]) -> CreateMapAnnotationsAction {
+func createMapAnnotationsAction(addresses: [GQInputObject]) -> CreateMapAnnotationsAction {
     var action = CreateMapAnnotationsAction(addresses: addresses)
     let resultArray = NSMutableArray()
     DispatchQueue.global(qos: .background).async {
@@ -101,30 +101,30 @@ func createMapAnnotationsAction(addresses: [GQAddress]) -> CreateMapAnnotationsA
 struct ParePlaceMarkToAddressAction: Action {
     let queryLoc: Bool
     let placeMark:CLPlacemark
-    var address: GQAddress
+    var inputObj: GQInputObject
     lazy var addressDqCmd = AddressDqCmd()
     
-    init(queryLoc: Bool,placeMark: CLPlacemark,address: GQAddress) {
+    init(queryLoc: Bool,placeMark: CLPlacemark,address: GQInputObject) {
         self.queryLoc = queryLoc
         self.placeMark = placeMark
-        self.address = address
+        self.inputObj = address
         if self.queryLoc {
             queryLocation()
         }
         parePlaceMarktoAddress()
     }
     private mutating func parePlaceMarktoAddress() {
-        address.address.latitude = String(format: "%.2f", placeMark.location?.coordinate.latitude ?? 0.0)
-        address.address.longitude = String(format: "%.2f", placeMark.location?.coordinate.longitude ?? 0.0)
-        address.address.nation = placeMark.country
-        address.address.isoNationCode = placeMark.isoCountryCode
-        address.address.locality = placeMark.locality
-        address.address.subLocality = placeMark.subLocality
-        address.address.administrativeArea = placeMark.administrativeArea
-        address.address.subAdministrativeArea = placeMark.subAdministrativeArea
-        address.address.postalCode = placeMark.postalCode
-        address.address.thoroughfare = placeMark.thoroughfare
-        address.address.subThoroughfare = placeMark.subThoroughfare
+        inputObj.address.latitude = String(format: "%.2f", placeMark.location?.coordinate.latitude ?? 0.0)
+        inputObj.address.longitude = String(format: "%.2f", placeMark.location?.coordinate.longitude ?? 0.0)
+        inputObj.address.nation = placeMark.country
+        inputObj.address.isoNationCode = placeMark.isoCountryCode
+        inputObj.address.locality = placeMark.locality
+        inputObj.address.subLocality = placeMark.subLocality
+        inputObj.address.administrativeArea = placeMark.administrativeArea
+        inputObj.address.subAdministrativeArea = placeMark.subAdministrativeArea
+        inputObj.address.postalCode = placeMark.postalCode
+        inputObj.address.thoroughfare = placeMark.thoroughfare
+        inputObj.address.subThoroughfare = placeMark.subThoroughfare
     }
     private mutating func queryLocation() {
         if placeMark.country != nil {
@@ -159,7 +159,7 @@ struct ParePlaceMarkToAddressAction: Action {
 }
 struct MKAnnotationDidSelectAction: Action {
     let selectedIndex: Int
-    let selectedAddress: GQAddress
+    let selectedAddress: GQInputObject
 }
 struct LocatePositionAction: Action {
     var status: LocatePositionStatus

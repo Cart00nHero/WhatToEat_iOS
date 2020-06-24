@@ -19,7 +19,7 @@ protocol ApiActionProtocol {
 struct CreateLocationAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func createLocationAction(newLoc: GQAddress) -> CreateLocationAction {
+func createLocationAction(newLoc: GQInputObject) -> CreateLocationAction {
     var action = CreateLocationAction()
     let service = ApolloService.shared.apollo
     let mutation = CreateLocationMutation(address: newLoc.address, shopBranch: newLoc.shopBranch, shop: newLoc.shop)

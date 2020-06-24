@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct GQAddress {
+struct GQInputObject {
     var address: InputAddress
     var shopBranch: InputBranch
     var shop: InputShop
@@ -21,8 +21,8 @@ struct GQAddress {
     }
 }
 
-func getInitGQAddress() -> GQAddress {
+func initGQInputObject() -> GQInputObject {
 //    shop: InputShop(title: "", underPrice: 0.00)
-    return GQAddress(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
+    return GQInputObject(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
                      shopBranch: InputBranch(name: ""), shop: InputShop(title: "", underPrice: 0.00))
 }

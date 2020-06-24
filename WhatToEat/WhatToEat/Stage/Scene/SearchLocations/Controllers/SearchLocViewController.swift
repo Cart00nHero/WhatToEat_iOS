@@ -100,8 +100,8 @@ class SearchLocViewController: UIViewController {
     // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if presenter.addressParcel.parcelType == "CreateMapAnnotationsAction" {
-            let parcelAction = presenter.addressParcel.parcel as! CreateMapAnnotationsAction
+        if presenter.locationParcel.parcelType == "CreateMapAnnotationsAction" {
+            let parcelAction = presenter.locationParcel.parcel as! CreateMapAnnotationsAction
             appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedAddress: parcelAction.addresses[view.tag]))
         }
     }
@@ -151,24 +151,24 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             if action?.place != nil {
                 appStore.dispatch(ParePlaceMarkToAddressAction(
                     queryLoc: true, placeMark: (action?.place)!,
-                    address: getInitGQAddress())
+                    address: initGQInputObject())
                 )
             }
         case is LocationsDynamicQueryAction:
             let action = state.currentAction as! LocationsDynamicQueryAction
             switch action.status {
             case .Success:
-                var markAddress = [GQAddress]()
+                var markAddress = [GQInputObject]()
                 if action.responseData?.count ?? 0 > 0 {
-                    presenter.addressParcel.parcelType = String(describing: type(of: action))
+                    presenter.locationParcel.parcelType = String(describing: type(of: action))
                     for queryData in action.responseData! {
                         let address = locationsDynamicQueryToGQAddress(result: queryData)
                         markAddress.append(address)
                     }
                     appStore.dispatch(createMapAnnotationsAction(addresses: markAddress))
                 } else {
-                    let parcelAction = presenter.addressParcel.parcel as? ParePlaceMarkToAddressAction
-                    guard let address = parcelAction?.address else { return }
+                    let parcelAction = presenter.locationParcel.parcel as? ParePlaceMarkToAddressAction
+                    guard let address = parcelAction?.inputObj else { return }
                     markAddress.append(address)
                     appStore.dispatch(createMapAnnotationsAction(addresses: markAddress))
                 }
@@ -176,18 +176,18 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             }
         case is ParePlaceMarkToAddressAction:
             var action = state.currentAction as! ParePlaceMarkToAddressAction
-            if presenter.addressParcel.parcelType == "LocatePositionAction" {
-                action.address.address.completeInfo = combineAddressCompleteInfo(address: action.address)
-                searchTextField.text = action.address.address.completeInfo
+            if presenter.locationParcel.parcelType == "LocatePositionAction" {
+                action.inputObj.address.completeInfo = combineAddressCompleteInfo(address: action.inputObj)
+                searchTextField.text = action.inputObj.address.completeInfo
             }
-            if presenter.addressParcel.parcelType != "LocationsDynamicQueryAction" {
-                presenter.addressParcel.parcelType = String(describing: type(of: action))
-                presenter.addressParcel.parcel = action
+            if presenter.locationParcel.parcelType != "LocationsDynamicQueryAction" {
+                presenter.locationParcel.parcelType = String(describing: type(of: action))
+                presenter.locationParcel.parcel = action
             }
         case is CreateMapAnnotationsAction:
             let action = state.currentAction as! CreateMapAnnotationsAction
-            presenter.addressParcel.parcelType = String(describing: type(of: action))
-            presenter.addressParcel.parcel = action
+            presenter.locationParcel.parcelType = String(describing: type(of: action))
+            presenter.locationParcel.parcel = action
             if action.status == GeoCodeStatus.Completed {
                 mapView.showAnnotations(action.annotations , animated: true)
             }
@@ -196,22 +196,22 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             switch action.status {
             case .DidUpdateLocation:
                 if action.locations?.count ?? 0 > 0 {
-                    presenter.addressParcel.parcelType = String(describing: type(of: action))
+                    presenter.locationParcel.parcelType = String(describing: type(of: action))
                     appStore.dispatch(reverseLocationAction(location: (action.locations?[0])!))
                 }
             default: break
             }
         case is MKAnnotationDidSelectAction:
             let action = state.currentAction as! MKAnnotationDidSelectAction
-            presenter.addressParcel.recipient = "AddGourmetViewController"
-            presenter.addressParcel.parcelType = String(describing: type(of: action))
-            presenter.addressParcel.parcel = action
+            presenter.locationParcel.recipient = "AddGourmetViewController"
+            presenter.locationParcel.parcelType = String(describing: type(of: action))
+            presenter.locationParcel.parcel = action
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC = storyboard.instantiateViewController(withIdentifier: "AddGourmetViewController")
             defaultTemplate?.basePushToViewController(toVC, Animated: true)
-            presenter.addressParcel.sender = String(describing: type(of: self))
+            presenter.locationParcel.sender = String(describing: type(of: self))
             let deliveryMan = DeliveryMan()
-            deliveryMan.applyDeliverService(parcel: presenter.addressParcel)
+            deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
         default: break
         }
     }

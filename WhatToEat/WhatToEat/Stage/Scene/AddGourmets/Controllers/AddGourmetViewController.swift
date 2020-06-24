@@ -11,7 +11,7 @@ import UIKit
 class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = GourmetsTableData(address: getInitGQAddress())
+    private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
     
@@ -97,12 +97,12 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
                 let gqAddress = parcelAction.selectedAddress
-                presenter.newAddress = gqAddress
-                if presenter.newAddress.address.completeInfo.isEmpty {
+                presenter.newLoc = gqAddress
+                if presenter.newLoc.address.completeInfo.isEmpty {
                     // To-Do: Here Upload to Insert
-                    presenter.newAddress.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
                 }
-                tableData = GourmetsTableData(address: presenter.newAddress)
+                tableData = GourmetsTableData(address: presenter.newLoc)
                 tableView.reloadData()
                 appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
             }
@@ -128,7 +128,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             let superTag = action?.dropdownView.superview?.tag ?? 0
-            var newShop = presenter.newAddress.shop
+            var newShop = presenter.newLoc.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData
@@ -145,10 +145,10 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             }
         case is RangeDatePickerSelectedAction:
             let action = state.currentAction as? RangeDatePickerSelectedAction
-            var branch = presenter.newAddress.shopBranch
+            var branch = presenter.newLoc.shopBranch
             branch.openTime = convertDateToUTC_ISO8601DateString(date: action?.startDate ?? Date())
             branch.closedTime = convertDateToUTC_ISO8601DateString(date: action?.endDate ?? Date())
-            presenter.newAddress.shopBranch = branch
+            presenter.newLoc.shopBranch = branch
             
             let cell = action?.rangeView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
@@ -170,8 +170,8 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let data = cell?.cellData?.rightCellProtocol as? LRTextFieldCellData
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
-            presenter.newAddress.address.fullInfo = combineFullInfo(address: presenter.newAddress)
-            appStore.dispatch(createLocationAction(newLoc: presenter.newAddress))
+            presenter.newLoc.address.fullInfo = combineFullInfo(address: presenter.newLoc)
+            appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
         case is CreateLocationAction:
             let action = state.currentAction as? CreateLocationAction
             switch action?.status {

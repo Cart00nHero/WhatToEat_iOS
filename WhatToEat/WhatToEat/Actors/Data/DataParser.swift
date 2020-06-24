@@ -8,7 +8,7 @@
 
 import UIKit
 
-func combineAddressCompleteInfo(address: GQAddress) -> String {
+func combineAddressCompleteInfo(address: GQInputObject) -> String {
     let mutabletext = NSMutableString(string: (address.address.administrativeArea ?? "") ?? "")
     mutabletext.append((address.address.subAdministrativeArea ?? "") ?? "")
     mutabletext.append((address.address.locality ?? "") ?? "")
@@ -18,7 +18,7 @@ func combineAddressCompleteInfo(address: GQAddress) -> String {
     return mutabletext as String
 }
 
-func combineFullInfo(address: GQAddress) -> String {
+func combineFullInfo(address: GQInputObject) -> String {
     let shop = address.shop
     let fullInfoText = NSMutableString(string: shop.title)
     fullInfoText.append("，")
@@ -28,8 +28,8 @@ func combineFullInfo(address: GQAddress) -> String {
     return fullInfoText as String
 }
 
-func locationsDynamicQueryToGQAddress(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?) -> GQAddress {
-    var address = getInitGQAddress()
+func locationsDynamicQueryToGQAddress(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?) -> GQInputObject {
+    var address = initGQInputObject()
     for key in result!.resultMap.keys {
         let value = result?.resultMap[key]
         address.address.graphQLMap.updateValue(value, forKey: key)
