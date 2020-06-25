@@ -29,23 +29,27 @@ func combineFullInfo(address: GQInputObject) -> String {
 }
 
 func locationsDynamicQueryToGQAddress(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?) -> GQInputObject {
-    var address = initGQInputObject()
-    for key in result!.resultMap.keys {
+    var inputObj = initGQInputObject()
+    var address = inputObj.address
+    for key in address.graphQLMap.keys {
         let value = result?.resultMap[key]
-        address.address.graphQLMap.updateValue(value, forKey: key)
+        address.graphQLMap.updateValue(value, forKey: key)
     }
-    var branch = address.shopBranch
-    for key in result!.shopBranch!.resultMap.keys {
+    inputObj.address = address
+    
+    var branch = inputObj.shopBranch
+    for key in branch.graphQLMap.keys {
         let value = result?.shopBranch?.resultMap[key]
         branch.graphQLMap.updateValue(value, forKey: key)
     }
-    var shop = address.shop
-    for key in result!.shopBranch!.shop!.resultMap.keys {
+    inputObj.shopBranch = branch
+    
+    var shop = inputObj.shop
+    for key in shop.graphQLMap.keys {
         let value = result?.shopBranch?.shop?.resultMap[key]
         shop.graphQLMap.updateValue(value, forKey: key)
     }
+    inputObj.shop = shop
     
-    address.shop = shop
-    
-    return address
+    return inputObj
 }
