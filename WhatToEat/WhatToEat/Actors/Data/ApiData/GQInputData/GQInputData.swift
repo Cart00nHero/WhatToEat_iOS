@@ -9,6 +9,8 @@
 import UIKit
 
 struct GQInputObject {
+    var shopId = ""
+    var branchId = ""
     var address: InputAddress
     var shopBranch: InputBranch
     var shop: InputShop

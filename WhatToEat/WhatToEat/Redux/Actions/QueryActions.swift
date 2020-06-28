@@ -39,6 +39,7 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
                 action.status = .Success
             }
             appStore.dispatch(action)
+            service.clearCache()
         case .failure(let error):
             print(error.localizedDescription)
             action.status = .Failed

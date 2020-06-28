@@ -9,9 +9,9 @@
 import UIKit
 
 class AddGourmetPresenter: NSObject {
-//    lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
+    
     lazy var newLoc = initGQInputObject()
-//    lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(), tel: ""))
+    var saveToUpload = false
     
     func updateTextFieldInputData(newText: String, indexPath: IndexPath) {
         var newShop = newLoc.shop
@@ -71,7 +71,7 @@ struct GourmetsTableData {
                                                                   inputText: String(format: "%.2f", self.inputObj.shop.underPrice)))
             ],
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData()),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData(inputText: self.inputObj.shopBranch.name)),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Business\nHours"),
                            rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
                                                               endDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.closedTime ?? "") ?? ""))),

@@ -1281,7 +1281,7 @@
           },
           {
             "name": "updateBranch",
-            "description": null,
+            "description": "update shop data",
             "args": [
               {
                 "name": "address",
@@ -1308,17 +1308,7 @@
                 "defaultValue": null
               },
               {
-                "name": "shop",
-                "description": null,
-                "type": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "InputShop",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "uniqueId",
+                "name": "branchId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1328,6 +1318,16 @@
                     "name": "String",
                     "ofType": null
                   }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "shop",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "InputShop",
+                  "ofType": null
                 },
                 "defaultValue": null
               }
@@ -1481,7 +1481,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updateShop",
+            "name": "updateShopInsertBranch",
             "description": "add new branches in shop table",
             "args": [
               {

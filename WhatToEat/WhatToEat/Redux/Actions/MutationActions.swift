@@ -40,3 +40,26 @@ func createLocationAction(newLoc: GQInputObject) -> CreateLocationAction {
     }
     return action
 }
+struct UpdateBranchAction: Action, ApiActionProtocol {
+    var status: ApiActionStatus = .Started
+}
+func updateBranchAction(inputObj: GQInputObject) -> UpdateBranchAction {
+    var action = UpdateBranchAction()
+    let service = ApolloService.shared.apollo
+    let mutation = UpdateBranchMutation(branchId: inputObj.branchId, branch: inputObj.shopBranch,shop: inputObj.shop,address: inputObj.address)
+    service.perform(mutation: mutation) { result in
+        switch result {
+        case .success(let graphQLResult):
+            if graphQLResult.errors != nil {
+                action.status = .Failed
+            } else {
+                action.status = .Success
+            }
+        case .failure(let error):
+            print(error.localizedDescription)
+            action.status = .Failed
+        }
+        appStore.dispatch(action)
+    }
+    return action
+}

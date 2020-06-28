@@ -98,9 +98,12 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
                 let gqAddress = parcelAction.selectedAddress
                 presenter.newLoc = gqAddress
-                if presenter.newLoc.address.completeInfo.isEmpty {
+                if presenter.newLoc.address.fullInfo.isEmpty {
                     // To-Do: Here Upload to Insert
-                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                    presenter.saveToUpload = false
+//                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                }else {
+                    presenter.saveToUpload = true
                 }
                 tableData = GourmetsTableData(address: presenter.newLoc)
                 tableView.reloadData()
@@ -109,12 +112,12 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
         }
         switch state.currentAction {
         case is AdjustForKeyboardAction:
-            let action = state.currentAction as? AdjustForKeyboardAction
-            let notification = action?.notification
-            guard let keyboardValue = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+            let action = state.currentAction as! AdjustForKeyboardAction
+            let notification = action.notification
+            guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
             let keyboardScreenEndFrame = keyboardValue.cgRectValue
             //        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-            if notification?.name == UIResponder.keyboardWillHideNotification {
+            if notification.name == UIResponder.keyboardWillHideNotification {
                 tableView.tableFooterView = nil
                 tableView.setContentOffset(.zero, animated: true)
             } else {
@@ -170,11 +173,23 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let data = cell?.cellData?.rightCellProtocol as? LRTextFieldCellData
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
-            presenter.newLoc.address.fullInfo = combineFullInfo(address: presenter.newLoc)
-            appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
+            if presenter.saveToUpload {
+                appStore.dispatch(updateBranchAction(inputObj: presenter.newLoc))
+            } else {
+                presenter.newLoc.address.fullInfo = combineFullInfo(address: presenter.newLoc)
+                appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
+            }
         case is CreateLocationAction:
-            let action = state.currentAction as? CreateLocationAction
-            switch action?.status {
+            let action = state.currentAction as! CreateLocationAction
+            switch action.status {
+            case .Success:
+                let stackVCs = self.navigationController?.viewControllers
+                self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
+            default: break
+            }
+        case is UpdateBranchAction:
+            let action = state.currentAction as! UpdateBranchAction
+            switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
