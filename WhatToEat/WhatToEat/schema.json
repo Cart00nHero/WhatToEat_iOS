@@ -138,7 +138,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "InputAddress",
+                    "name": "AddressDqCmd",
                     "ofType": null
                   }
                 },
@@ -842,8 +842,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "InputAddress",
-        "description": null,
+        "name": "AddressDqCmd",
+        "description": "address dynamic query parameters",
         "fields": null,
         "inputFields": [
           {
@@ -1117,122 +1117,30 @@
             "description": "create location",
             "args": [
               {
-                "name": "administrativeArea",
+                "name": "address",
                 "description": null,
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputAddress",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               },
               {
-                "name": "annotation",
+                "name": "shop",
                 "description": null,
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "completeInfo",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "floor",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "fullInfo",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "isoNationCode",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "latitude",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Decimal",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "locality",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "longitude",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Decimal",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "nation",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "ownerType",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "postalCode",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputShop",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               },
@@ -1247,46 +1155,6 @@
                     "name": "InputBranch",
                     "ofType": null
                   }
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "subAdministrativeArea",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "subLocality",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "subThoroughfare",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "thoroughfare",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
                 },
                 "defaultValue": null
               }
@@ -1413,7 +1281,7 @@
           },
           {
             "name": "updateBranch",
-            "description": null,
+            "description": "update shop data",
             "args": [
               {
                 "name": "address",
@@ -1426,42 +1294,30 @@
                 "defaultValue": null
               },
               {
-                "name": "closedTime",
+                "name": "branch",
                 "description": null,
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "NaiveDateTime",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputBranch",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               },
               {
-                "name": "name",
+                "name": "branchId",
                 "description": null,
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "openTime",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "NaiveDateTime",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "orderId",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               },
@@ -1472,30 +1328,6 @@
                   "kind": "INPUT_OBJECT",
                   "name": "InputShop",
                   "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "tel",
-                "description": null,
-                "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                },
-                "defaultValue": null
-              },
-              {
-                "name": "uniqueId",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
                 },
                 "defaultValue": null
               }
@@ -1580,7 +1412,76 @@
             "deprecationReason": null
           },
           {
-            "name": "updateShop",
+            "name": "updateLocation",
+            "description": "update location",
+            "args": [
+              {
+                "name": "address",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputAddress",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "branch",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputBranch",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "ownerType",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "shop",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "InputShop",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Address",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updateShopInsertBranch",
             "description": "add new branches in shop table",
             "args": [
               {
@@ -1682,9 +1583,13 @@
             "name": "token",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -1692,9 +1597,13 @@
             "name": "type",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -1705,32 +1614,12 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "InputBranch",
+        "name": "InputAddress",
         "description": null,
         "fields": null,
         "inputFields": [
           {
-            "name": "address",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "InputAddress",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "closedTime",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "NaiveDateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "name",
+            "name": "administrativeArea",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1740,37 +1629,7 @@
             "defaultValue": null
           },
           {
-            "name": "openTime",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "NaiveDateTime",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "orderId",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "shop",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "InputShop",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "tel",
+            "name": "annotation",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1780,7 +1639,143 @@
             "defaultValue": null
           },
           {
-            "name": "uniqueId",
+            "name": "completeInfo",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "floor",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "fullInfo",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "isoNationCode",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "latitude",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Decimal",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "locality",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "longitude",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Decimal",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nation",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "postalCode",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "subAdministrativeArea",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "subLocality",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "subThoroughfare",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "thoroughfare",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1824,9 +1819,13 @@
             "name": "title",
             "description": null,
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -1844,14 +1843,73 @@
             "name": "underPrice",
             "description": null,
             "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Float",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "InputBranch",
+        "description": null,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "closedTime",
+            "description": null,
+            "type": {
               "kind": "SCALAR",
-              "name": "Float",
+              "name": "NaiveDateTime",
               "ofType": null
             },
             "defaultValue": null
           },
           {
-            "name": "uniqueId",
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "openTime",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "NaiveDateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "orderId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "tel",
             "description": null,
             "type": {
               "kind": "SCALAR",

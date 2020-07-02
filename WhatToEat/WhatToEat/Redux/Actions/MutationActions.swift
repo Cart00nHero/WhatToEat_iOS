@@ -19,19 +19,40 @@ protocol ApiActionProtocol {
 struct CreateLocationAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func createLocationAction(newLoc: GQAddress) -> CreateLocationAction {
+func createLocationAction(newLoc: GQInputObject) -> CreateLocationAction {
     var action = CreateLocationAction()
     let service = ApolloService.shared.apollo
-    let mutation = CreateLocationMutation(ownerType: newLoc.ownerType, completeInfo: newLoc.completeInfo, fullInfo: newLoc.fullInfo, postalCode: newLoc.postalCode, nation: newLoc.nation, isoNationCode: newLoc.isoNationCode, locality: newLoc.locality, subLocality: newLoc.subLocality, administrativeArea: newLoc.administrativeArea, subAdministrativeArea: newLoc.subAdministrativeArea, thoroughfare: newLoc.thoroughfare, subThoroughfare: newLoc.subThoroughfare, floor: newLoc.floor, latitude: String(format:"%f", newLoc.latitude), longitude: String(format:"%f", newLoc.longitude), annotation: newLoc.annotation, shopBranch: newLoc.shopBranch)
+    let mutation = CreateLocationMutation(address: newLoc.address, shopBranch: newLoc.shopBranch, shop: newLoc.shop)
     service.perform(mutation: mutation) { result in
         switch result {
             
         case .success(let graphQLResult):
             if graphQLResult.errors != nil {
-                print(graphQLResult.errors?.description ?? "")
                 action.status = .Failed
+            } else {
+                action.status = .Success
             }
-            if (graphQLResult.data?.createLocation) != nil {
+        case .failure(let error):
+            print(error.localizedDescription)
+            action.status = .Failed
+        }
+        appStore.dispatch(action)
+    }
+    return action
+}
+struct UpdateBranchAction: Action, ApiActionProtocol {
+    var status: ApiActionStatus = .Started
+}
+func updateBranchAction(inputObj: GQInputObject) -> UpdateBranchAction {
+    var action = UpdateBranchAction()
+    let service = ApolloService.shared.apollo
+    let mutation = UpdateBranchMutation(branchId: inputObj.branchId, branch: inputObj.shopBranch,shop: inputObj.shop,address: inputObj.address)
+    service.perform(mutation: mutation) { result in
+        switch result {
+        case .success(let graphQLResult):
+            if graphQLResult.errors != nil {
+                action.status = .Failed
+            } else {
                 action.status = .Success
             }
         case .failure(let error):

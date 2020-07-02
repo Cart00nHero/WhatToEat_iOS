@@ -28,7 +28,7 @@ struct LRDropDownCellData: LRTableCellProtocol {
 struct LRAddressInputCellView: LRTableCellProtocol {
     var cellStyle: LRCellStyle = .AddressInput
     var cellHeight: CGFloat = 100.0
-    var address: GQAddress
+    var address: GQInputObject
     
 }
 struct LRLabelCellData: LRTableCellProtocol {

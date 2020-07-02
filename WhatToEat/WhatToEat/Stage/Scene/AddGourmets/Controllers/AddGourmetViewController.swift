@@ -11,7 +11,7 @@ import UIKit
 class AddGourmetViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = GourmetsTableData(address: getInitGQAddress())
+    private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
     
@@ -97,24 +97,27 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
                 let gqAddress = parcelAction.selectedAddress
-                presenter.newAddress = gqAddress
-                if presenter.newAddress.completeInfo == nil {
+                presenter.newLoc = gqAddress
+                if presenter.newLoc.address.fullInfo.isEmpty {
                     // To-Do: Here Upload to Insert
-                    presenter.newAddress.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                    presenter.saveToUpload = false
+//                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                }else {
+                    presenter.saveToUpload = true
                 }
-                tableData = GourmetsTableData(address: presenter.newAddress)
+                tableData = GourmetsTableData(address: presenter.newLoc)
                 tableView.reloadData()
                 appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
             }
         }
         switch state.currentAction {
         case is AdjustForKeyboardAction:
-            let action = state.currentAction as? AdjustForKeyboardAction
-            let notification = action?.notification
-            guard let keyboardValue = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+            let action = state.currentAction as! AdjustForKeyboardAction
+            let notification = action.notification
+            guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
             let keyboardScreenEndFrame = keyboardValue.cgRectValue
             //        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-            if notification?.name == UIResponder.keyboardWillHideNotification {
+            if notification.name == UIResponder.keyboardWillHideNotification {
                 tableView.tableFooterView = nil
                 tableView.setContentOffset(.zero, animated: true)
             } else {
@@ -128,27 +131,27 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             let superTag = action?.dropdownView.superview?.tag ?? 0
-            var newShop = presenter.newAddress.shopBranch.shop ?? InputShop()
+            var newShop = presenter.newLoc.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                newShop?.style = data?.selectedText
+                newShop.style = data?.selectedText
                 cellData?.leftCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
                 var data = cellData?.rightCellProtocol as? LRDropDownCellData
                 data?.selectedText = action?.selectedText ?? ""
-                newShop?.type = data?.selectedText
+                newShop.type = data?.selectedText
                 cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
         case is RangeDatePickerSelectedAction:
             let action = state.currentAction as? RangeDatePickerSelectedAction
-            var branch = presenter.newAddress.shopBranch
+            var branch = presenter.newLoc.shopBranch
             branch.openTime = convertDateToUTC_ISO8601DateString(date: action?.startDate ?? Date())
             branch.closedTime = convertDateToUTC_ISO8601DateString(date: action?.endDate ?? Date())
-            presenter.newAddress.shopBranch = branch
+            presenter.newLoc.shopBranch = branch
             
             let cell = action?.rangeView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
@@ -170,11 +173,23 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let data = cell?.cellData?.rightCellProtocol as? LRTextFieldCellData
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
-            presenter.newAddress.fullInfo = combineFullInfo(address: presenter.newAddress)
-            appStore.dispatch(createLocationAction(newLoc: presenter.newAddress))
+            if presenter.saveToUpload {
+                appStore.dispatch(updateBranchAction(inputObj: presenter.newLoc))
+            } else {
+                presenter.newLoc.address.fullInfo = combineFullInfo(address: presenter.newLoc)
+                appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
+            }
         case is CreateLocationAction:
-            let action = state.currentAction as? CreateLocationAction
-            switch action?.status {
+            let action = state.currentAction as! CreateLocationAction
+            switch action.status {
+            case .Success:
+                let stackVCs = self.navigationController?.viewControllers
+                self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
+            default: break
+            }
+        case is UpdateBranchAction:
+            let action = state.currentAction as! UpdateBranchAction
+            switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)

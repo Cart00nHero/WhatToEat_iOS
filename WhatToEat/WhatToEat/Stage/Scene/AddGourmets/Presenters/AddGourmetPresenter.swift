@@ -9,25 +9,25 @@
 import UIKit
 
 class AddGourmetPresenter: NSObject {
-//    lazy var newShop = Shop(branches: [ShopBranch(address: Address())])
-    lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(style: "", title: "", type: "", underPrice: 0.0), tel: ""))
-//    lazy var newAddress = GQAddress(shopBranch: InputBranch(closedTime: "", name: "", openTime: "", shop: InputShop(), tel: ""))
+    
+    lazy var newLoc = initGQInputObject()
+    var saveToUpload = false
     
     func updateTextFieldInputData(newText: String, indexPath: IndexPath) {
-        var newShop = newAddress.shopBranch.shop ?? InputShop()
+        var newShop = newLoc.shop
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                newShop?.title = newText
+                newShop.title = newText
             case 2:
-                newShop?.underPrice! = Float64(newText) ?? 0.0
+                newShop.underPrice = Float64(newText) ?? 0.0
             default: break
             }
-            newAddress.shopBranch.shop = newShop
+            newLoc.shop = newShop
             return
         }
         if indexPath.section == 1 {
-            var branch = newAddress.shopBranch
+            var branch = newLoc.shopBranch
             switch indexPath.row {
             case 0:
                 branch.name = newText
@@ -35,24 +35,24 @@ class AddGourmetPresenter: NSObject {
                 branch.tel = newText
             default: break
             }
-            newAddress.shopBranch = branch
+            newLoc.shopBranch = branch
             return
         }
     }
     func combineAddressFullInfo() -> String {
-        let newShop = newAddress.shopBranch.shop ?? InputShop()
-        let mutableText = NSMutableString(string: newShop?.title! ?? "")
-        let branch = newAddress.shopBranch
-        mutableText.append(branch.name! ?? "")
-        mutableText.append(newAddress.completeInfo ?? "")
+        let newShop = newLoc.shop
+        let mutableText = NSMutableString(string: newShop.title )
+        let branch = newLoc.shopBranch
+        mutableText.append(branch.name)
+        mutableText.append(newLoc.address.completeInfo)
         return mutableText as String
     }
 }
 struct GourmetsTableData {
-    var address: GQAddress
+    var inputObj: GQInputObject
     var dataSource: Array<Array<CellDataProtocol>> = []
-    init(address: GQAddress) {
-        self.address = address
+    init(address: GQInputObject) {
+        self.inputObj = address
         dataSource = createDataSource()
     }
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
@@ -60,27 +60,27 @@ struct GourmetsTableData {
         return [
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: self.address.shopBranch.shop!?.title! ?? "")),
+                           rightCellProtocol: LRTextFieldCellData(inputText: self.inputObj.shop.title)),
                 LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
-                                                                selectedText: (self.address.shopBranch.shop!?.style ?? "") ?? ""),
+                                                                selectedText: (self.inputObj.shop.style ?? "") ?? ""),
                            rightCellProtocol: LRDropDownCellData(placeHolder:"Type",
                                                                  optionArray: DropDownMenuData().typeSource,
-                                                                 selectedText: (self.address.shopBranch.shop!?.type ?? "") ?? "")),
+                                                                 selectedText: (self.inputObj.shop.type ?? "") ?? "")),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"),
                            rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,
-                                                                  inputText: String(format: "%.2f", (self.address.shopBranch.shop!?.underPrice ?? 0.0) ?? 0.0)))
+                                                                  inputText: String(format: "%.2f", self.inputObj.shop.underPrice)))
             ],
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData()),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData(inputText: self.inputObj.shopBranch.name)),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Business\nHours"),
-                           rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: (address.shopBranch.openTime ?? "") ?? ""),
-                                                              endDate: convertStringToUTC_ISO8601Date(dateString: (address.shopBranch.closedTime ?? "") ?? ""))),
+                           rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
+                                                              endDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.closedTime ?? "") ?? ""))),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
-                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: (address.shopBranch.tel ?? "") ?? ""))
+                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: (inputObj.shopBranch.tel ?? "") ?? ""))
             ],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                           rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: address.completeInfo ?? "")),
+                           rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: inputObj.address.completeInfo)),
                 ButtonCellData(cornerRadius: 2.0, titleText: "Save")
             ]
         ]
