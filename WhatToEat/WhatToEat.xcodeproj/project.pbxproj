@@ -41,6 +41,7 @@
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
 		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
+		AF5A833E24ADF39E008ECAF7 /* FindFoodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */; };
 		AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */; };
 		AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FA247D73300023F3FC /* LocationMaster.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
@@ -61,6 +62,7 @@
 		AF8224842472F4160034C928 /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247F2472F4160034C928 /* CommonActions.swift */; };
 		AF8224852472F4160034C928 /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224802472F4160034C928 /* SignActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
+		AFAF8BC024B0718800CD5539 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAF8BBF24B0718800CD5539 /* Sphere.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
 		AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8843724965F4A00646088 /* CodableExtension.swift */; };
 /* End PBXBuildFile section */
@@ -126,6 +128,7 @@
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
+		AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFoodPresenter.swift; sourceTree = "<group>"; };
 		AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF5F16FA247D73300023F3FC /* LocationMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMaster.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
@@ -146,6 +149,7 @@
 		AF82247F2472F4160034C928 /* CommonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
 		AF8224802472F4160034C928 /* SignActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		AFAF8BBF24B0718800CD5539 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
 		AFF8843724965F4A00646088 /* CodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtension.swift; sourceTree = "<group>"; };
 		B094A1456F89E4C27A08F93E /* Pods-WhatToEat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.release.xcconfig"; sourceTree = "<group>"; };
@@ -343,6 +347,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		AF5A833C24ADF36A008ECAF7 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
 		AF5F16F9247D73180023F3FC /* GPS */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +384,7 @@
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				AFAF8BBC24B06F6300CD5539 /* Mathematician */,
 				AF40DC09247F8B7F00ED4BB1 /* Express */,
 				AF5F16F9247D73180023F3FC /* GPS */,
 				AF0EDF65247A9C9C003D84C0 /* Data */,
@@ -441,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				AF82244F2472F21D0034C928 /* Controllers */,
+				AF5A833C24ADF36A008ECAF7 /* Presenters */,
 				AF8224512472F21D0034C928 /* Views */,
 			);
 			path = FindMyFood;
@@ -543,6 +557,14 @@
 				AF8224822472F4160034C928 /* AppReducer.swift */,
 			);
 			path = Reducers;
+			sourceTree = "<group>";
+		};
+		AFAF8BBC24B06F6300CD5539 /* Mathematician */ = {
+			isa = PBXGroup;
+			children = (
+				AFAF8BBF24B0718800CD5539 /* Sphere.swift */,
+			);
+			path = Mathematician;
 			sourceTree = "<group>";
 		};
 		AFF884342496586A00646088 /* GQResponseData */ = {
@@ -869,6 +891,7 @@
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
 				AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
+				AFAF8BC024B0718800CD5539 /* Sphere.swift in Sources */,
 				AF501ECC249712B700628DB0 /* DataParser.swift in Sources */,
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
@@ -877,6 +900,7 @@
 				AF8224852472F4160034C928 /* SignActions.swift in Sources */,
 				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
+				AF5A833E24ADF39E008ECAF7 /* FindFoodPresenter.swift in Sources */,
 				AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */,
 				AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,

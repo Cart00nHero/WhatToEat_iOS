@@ -48,3 +48,33 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
     }
     return action
 }
+struct SearchInRangeAction: Action, ApiActionProtocol {
+    var status: ApiActionStatus = .Started
+    var responseData: [SearchInRangeQuery.Data.SearchInRange?]?
+}
+func searchInRangeAction(min: InputCoordinate, max: InputCoordinate) -> SearchInRangeAction {
+    var action = SearchInRangeAction()
+    let service = ApolloService.shared.apollo
+    let query = SearchInRangeQuery(minCoordinate: min, maxCoordinate: max)
+    service.fetch(query: query) { result in
+        switch result {
+        case .success(let graphQLResult):
+            if graphQLResult.errors != nil {
+                print(graphQLResult.errors?.description ?? "")
+                action.status = .Failed
+                appStore.dispatch(action)
+                return
+            }
+            if graphQLResult.data?.searchInRange != nil {
+                action.responseData = graphQLResult.data?.searchInRange
+            }
+            
+        case .failure(let error):
+            print(error.localizedDescription)
+            action.status = .Failed
+            appStore.dispatch(action)
+        }
+    }
+    
+    return action
+}
