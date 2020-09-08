@@ -121,7 +121,7 @@ public class HTTPNetworkTransport {
   ///
   /// - Parameters:
   ///   - url: The URL of a GraphQL server to connect to.
-  ///   - session: The URLSession to use. Defaults to `URLSession.shared`,
+  ///   - client: The client to handle URL Session calls.
   ///   - sendOperationIdentifiers: Whether to send operation identifiers rather than full operation text, for use with servers that support query persistence. Defaults to false.
   ///   - useGETForQueries: If query operation should be sent using GET instead of POST. Defaults to false.
   ///   - enableAutoPersistedQueries: Whether to send persistedQuery extension. QueryDocument will be absent at 1st request, retry with QueryDocument if server respond PersistedQueryNotFound or PersistedQueryNotSupport. Defaults to false.
@@ -140,6 +140,10 @@ public class HTTPNetworkTransport {
     self.enableAutoPersistedQueries = enableAutoPersistedQueries
     self.useGETForPersistedQueryRetry = useGETForPersistedQueryRetry
     self.requestCreator = requestCreator
+  }
+  
+  deinit {
+    self.client.invalidate()
   }
 
   private func send<Operation: GraphQLOperation>(operation: Operation,
@@ -173,7 +177,7 @@ public class HTTPNetworkTransport {
                                 response: nil,
                                 completionHandler: completionHandler)
       case .success(let (data, httpResponse)):
-        guard httpResponse.isSuccessful == true else {
+        guard httpResponse.apollo.isSuccessful == true else {
           let unsuccessfulError = GraphQLHTTPResponseError(body: data,
                                                            response: httpResponse,
                                                            kind: .errorResponse)
@@ -226,7 +230,7 @@ public class HTTPNetworkTransport {
     guard
       let delegate = self.delegate as? HTTPNetworkTransportGraphQLErrorDelegate,
       let graphQLErrors = response.parseErrorsOnlyFast(),
-      graphQLErrors.isNotEmpty else {
+      graphQLErrors.apollo.isNotEmpty else {
         completionHandler(.success(response))
         return
     }
@@ -391,7 +395,7 @@ public class HTTPNetworkTransport {
       do {
         if
           let files = files,
-          files.isNotEmpty {
+          files.apollo.isNotEmpty {
             let formData = try requestCreator.requestMultipartFormData(
               for: operation,
               files: files,

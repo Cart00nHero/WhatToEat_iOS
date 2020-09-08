@@ -520,9 +520,11 @@ public final class CreateFoodieMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["RootMutationType"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("createFoodie", arguments: ["email": GraphQLVariable("email"), "gender": GraphQLVariable("gender"), "name": GraphQLVariable("name"), "token": GraphQLVariable("token")], type: .object(CreateFoodie.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("createFoodie", arguments: ["email": GraphQLVariable("email"), "gender": GraphQLVariable("gender"), "name": GraphQLVariable("name"), "token": GraphQLVariable("token")], type: .object(CreateFoodie.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -547,13 +549,15 @@ public final class CreateFoodieMutation: GraphQLMutation {
     public struct CreateFoodie: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Foodie"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("email", type: .scalar(String.self)),
-        GraphQLField("name", type: .scalar(String.self)),
-        GraphQLField("gender", type: .scalar(Int.self)),
-        GraphQLField("token", type: .object(Token.selections)),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("email", type: .scalar(String.self)),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("gender", type: .scalar(Int.self)),
+          GraphQLField("token", type: .object(Token.selections)),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -613,11 +617,13 @@ public final class CreateFoodieMutation: GraphQLMutation {
       public struct Token: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["SignToken"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("type", type: .scalar(String.self)),
-          GraphQLField("token", type: .scalar(String.self)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("type", type: .scalar(String.self)),
+            GraphQLField("token", type: .scalar(String.self)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -724,9 +730,11 @@ public final class CreateLocationMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["RootMutationType"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("createLocation", arguments: ["address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch"), "shop": GraphQLVariable("shop")], type: .object(CreateLocation.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("createLocation", arguments: ["address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch"), "shop": GraphQLVariable("shop")], type: .object(CreateLocation.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -751,26 +759,28 @@ public final class CreateLocationMutation: GraphQLMutation {
     public struct CreateLocation: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Address"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("ownerType", type: .scalar(String.self)),
-        GraphQLField("completeInfo", type: .scalar(String.self)),
-        GraphQLField("fullInfo", type: .scalar(String.self)),
-        GraphQLField("postalCode", type: .scalar(String.self)),
-        GraphQLField("nation", type: .scalar(String.self)),
-        GraphQLField("isoNationCode", type: .scalar(String.self)),
-        GraphQLField("locality", type: .scalar(String.self)),
-        GraphQLField("subLocality", type: .scalar(String.self)),
-        GraphQLField("administrativeArea", type: .scalar(String.self)),
-        GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
-        GraphQLField("thoroughfare", type: .scalar(String.self)),
-        GraphQLField("subThoroughfare", type: .scalar(String.self)),
-        GraphQLField("floor", type: .scalar(String.self)),
-        GraphQLField("latitude", type: .scalar(String.self)),
-        GraphQLField("longitude", type: .scalar(String.self)),
-        GraphQLField("annotation", type: .scalar(String.self)),
-        GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("ownerType", type: .scalar(String.self)),
+          GraphQLField("completeInfo", type: .scalar(String.self)),
+          GraphQLField("fullInfo", type: .scalar(String.self)),
+          GraphQLField("postalCode", type: .scalar(String.self)),
+          GraphQLField("nation", type: .scalar(String.self)),
+          GraphQLField("isoNationCode", type: .scalar(String.self)),
+          GraphQLField("locality", type: .scalar(String.self)),
+          GraphQLField("subLocality", type: .scalar(String.self)),
+          GraphQLField("administrativeArea", type: .scalar(String.self)),
+          GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
+          GraphQLField("thoroughfare", type: .scalar(String.self)),
+          GraphQLField("subThoroughfare", type: .scalar(String.self)),
+          GraphQLField("floor", type: .scalar(String.self)),
+          GraphQLField("latitude", type: .scalar(String.self)),
+          GraphQLField("longitude", type: .scalar(String.self)),
+          GraphQLField("annotation", type: .scalar(String.self)),
+          GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -947,16 +957,18 @@ public final class CreateLocationMutation: GraphQLMutation {
       public struct ShopBranch: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["ShopBranch"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("uniqueId", type: .scalar(String.self)),
-          GraphQLField("orderId", type: .scalar(Int.self)),
-          GraphQLField("name", type: .scalar(String.self)),
-          GraphQLField("openTime", type: .scalar(String.self)),
-          GraphQLField("closedTime", type: .scalar(String.self)),
-          GraphQLField("tel", type: .scalar(String.self)),
-          GraphQLField("shop", type: .object(Shop.selections)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("uniqueId", type: .scalar(String.self)),
+            GraphQLField("orderId", type: .scalar(Int.self)),
+            GraphQLField("name", type: .scalar(String.self)),
+            GraphQLField("openTime", type: .scalar(String.self)),
+            GraphQLField("closedTime", type: .scalar(String.self)),
+            GraphQLField("tel", type: .scalar(String.self)),
+            GraphQLField("shop", type: .object(Shop.selections)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1043,15 +1055,17 @@ public final class CreateLocationMutation: GraphQLMutation {
         public struct Shop: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Shop"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("uniqueId", type: .scalar(String.self)),
-            GraphQLField("title", type: .scalar(String.self)),
-            GraphQLField("style", type: .scalar(String.self)),
-            GraphQLField("type", type: .scalar(String.self)),
-            GraphQLField("underPrice", type: .scalar(Double.self)),
-            GraphQLField("status", type: .scalar(Int.self)),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("uniqueId", type: .scalar(String.self)),
+              GraphQLField("title", type: .scalar(String.self)),
+              GraphQLField("style", type: .scalar(String.self)),
+              GraphQLField("type", type: .scalar(String.self)),
+              GraphQLField("underPrice", type: .scalar(Double.self)),
+              GraphQLField("status", type: .scalar(Int.self)),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 
@@ -1197,9 +1211,11 @@ public final class UpdateBranchMutation: GraphQLMutation {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["RootMutationType"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("updateBranch", arguments: ["branchId": GraphQLVariable("branchId"), "branch": GraphQLVariable("branch"), "shop": GraphQLVariable("shop"), "address": GraphQLVariable("address")], type: .object(UpdateBranch.selections)),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("updateBranch", arguments: ["branchId": GraphQLVariable("branchId"), "branch": GraphQLVariable("branch"), "shop": GraphQLVariable("shop"), "address": GraphQLVariable("address")], type: .object(UpdateBranch.selections)),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1224,17 +1240,19 @@ public final class UpdateBranchMutation: GraphQLMutation {
     public struct UpdateBranch: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ShopBranch"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("uniqueId", type: .scalar(String.self)),
-        GraphQLField("orderId", type: .scalar(Int.self)),
-        GraphQLField("name", type: .scalar(String.self)),
-        GraphQLField("openTime", type: .scalar(String.self)),
-        GraphQLField("closedTime", type: .scalar(String.self)),
-        GraphQLField("tel", type: .scalar(String.self)),
-        GraphQLField("shop", type: .object(Shop.selections)),
-        GraphQLField("address", type: .object(Address.selections)),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("uniqueId", type: .scalar(String.self)),
+          GraphQLField("orderId", type: .scalar(Int.self)),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("openTime", type: .scalar(String.self)),
+          GraphQLField("closedTime", type: .scalar(String.self)),
+          GraphQLField("tel", type: .scalar(String.self)),
+          GraphQLField("shop", type: .object(Shop.selections)),
+          GraphQLField("address", type: .object(Address.selections)),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -1330,15 +1348,17 @@ public final class UpdateBranchMutation: GraphQLMutation {
       public struct Shop: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Shop"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("uniqueId", type: .scalar(String.self)),
-          GraphQLField("title", type: .scalar(String.self)),
-          GraphQLField("style", type: .scalar(String.self)),
-          GraphQLField("type", type: .scalar(String.self)),
-          GraphQLField("underPrice", type: .scalar(Double.self)),
-          GraphQLField("status", type: .scalar(Int.self)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("uniqueId", type: .scalar(String.self)),
+            GraphQLField("title", type: .scalar(String.self)),
+            GraphQLField("style", type: .scalar(String.self)),
+            GraphQLField("type", type: .scalar(String.self)),
+            GraphQLField("underPrice", type: .scalar(Double.self)),
+            GraphQLField("status", type: .scalar(Int.self)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1417,25 +1437,27 @@ public final class UpdateBranchMutation: GraphQLMutation {
       public struct Address: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["Address"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("ownerType", type: .scalar(String.self)),
-          GraphQLField("completeInfo", type: .scalar(String.self)),
-          GraphQLField("fullInfo", type: .scalar(String.self)),
-          GraphQLField("postalCode", type: .scalar(String.self)),
-          GraphQLField("nation", type: .scalar(String.self)),
-          GraphQLField("isoNationCode", type: .scalar(String.self)),
-          GraphQLField("locality", type: .scalar(String.self)),
-          GraphQLField("subLocality", type: .scalar(String.self)),
-          GraphQLField("administrativeArea", type: .scalar(String.self)),
-          GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
-          GraphQLField("thoroughfare", type: .scalar(String.self)),
-          GraphQLField("subThoroughfare", type: .scalar(String.self)),
-          GraphQLField("floor", type: .scalar(String.self)),
-          GraphQLField("latitude", type: .scalar(String.self)),
-          GraphQLField("longitude", type: .scalar(String.self)),
-          GraphQLField("annotation", type: .scalar(String.self)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("ownerType", type: .scalar(String.self)),
+            GraphQLField("completeInfo", type: .scalar(String.self)),
+            GraphQLField("fullInfo", type: .scalar(String.self)),
+            GraphQLField("postalCode", type: .scalar(String.self)),
+            GraphQLField("nation", type: .scalar(String.self)),
+            GraphQLField("isoNationCode", type: .scalar(String.self)),
+            GraphQLField("locality", type: .scalar(String.self)),
+            GraphQLField("subLocality", type: .scalar(String.self)),
+            GraphQLField("administrativeArea", type: .scalar(String.self)),
+            GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
+            GraphQLField("thoroughfare", type: .scalar(String.self)),
+            GraphQLField("subThoroughfare", type: .scalar(String.self)),
+            GraphQLField("floor", type: .scalar(String.self)),
+            GraphQLField("latitude", type: .scalar(String.self)),
+            GraphQLField("longitude", type: .scalar(String.self)),
+            GraphQLField("annotation", type: .scalar(String.self)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1664,9 +1686,11 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
   public struct Data: GraphQLSelectionSet {
     public static let possibleTypes: [String] = ["RootQueryType"]
 
-    public static let selections: [GraphQLSelection] = [
-      GraphQLField("locationsDynamicQuery", arguments: ["whereAnd": GraphQLVariable("whereAnd")], type: .list(.object(LocationsDynamicQuery.selections))),
-    ]
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("locationsDynamicQuery", arguments: ["whereAnd": GraphQLVariable("whereAnd")], type: .list(.object(LocationsDynamicQuery.selections))),
+      ]
+    }
 
     public private(set) var resultMap: ResultMap
 
@@ -1691,26 +1715,28 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
     public struct LocationsDynamicQuery: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Address"]
 
-      public static let selections: [GraphQLSelection] = [
-        GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-        GraphQLField("ownerType", type: .scalar(String.self)),
-        GraphQLField("completeInfo", type: .scalar(String.self)),
-        GraphQLField("fullInfo", type: .scalar(String.self)),
-        GraphQLField("postalCode", type: .scalar(String.self)),
-        GraphQLField("nation", type: .scalar(String.self)),
-        GraphQLField("isoNationCode", type: .scalar(String.self)),
-        GraphQLField("locality", type: .scalar(String.self)),
-        GraphQLField("subLocality", type: .scalar(String.self)),
-        GraphQLField("administrativeArea", type: .scalar(String.self)),
-        GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
-        GraphQLField("thoroughfare", type: .scalar(String.self)),
-        GraphQLField("subThoroughfare", type: .scalar(String.self)),
-        GraphQLField("floor", type: .scalar(String.self)),
-        GraphQLField("latitude", type: .scalar(String.self)),
-        GraphQLField("longitude", type: .scalar(String.self)),
-        GraphQLField("annotation", type: .scalar(String.self)),
-        GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
-      ]
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("ownerType", type: .scalar(String.self)),
+          GraphQLField("completeInfo", type: .scalar(String.self)),
+          GraphQLField("fullInfo", type: .scalar(String.self)),
+          GraphQLField("postalCode", type: .scalar(String.self)),
+          GraphQLField("nation", type: .scalar(String.self)),
+          GraphQLField("isoNationCode", type: .scalar(String.self)),
+          GraphQLField("locality", type: .scalar(String.self)),
+          GraphQLField("subLocality", type: .scalar(String.self)),
+          GraphQLField("administrativeArea", type: .scalar(String.self)),
+          GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
+          GraphQLField("thoroughfare", type: .scalar(String.self)),
+          GraphQLField("subThoroughfare", type: .scalar(String.self)),
+          GraphQLField("floor", type: .scalar(String.self)),
+          GraphQLField("latitude", type: .scalar(String.self)),
+          GraphQLField("longitude", type: .scalar(String.self)),
+          GraphQLField("annotation", type: .scalar(String.self)),
+          GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
+        ]
+      }
 
       public private(set) var resultMap: ResultMap
 
@@ -1887,16 +1913,18 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
       public struct ShopBranch: GraphQLSelectionSet {
         public static let possibleTypes: [String] = ["ShopBranch"]
 
-        public static let selections: [GraphQLSelection] = [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("uniqueId", type: .scalar(String.self)),
-          GraphQLField("orderId", type: .scalar(Int.self)),
-          GraphQLField("name", type: .scalar(String.self)),
-          GraphQLField("openTime", type: .scalar(String.self)),
-          GraphQLField("closedTime", type: .scalar(String.self)),
-          GraphQLField("tel", type: .scalar(String.self)),
-          GraphQLField("shop", type: .object(Shop.selections)),
-        ]
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("uniqueId", type: .scalar(String.self)),
+            GraphQLField("orderId", type: .scalar(Int.self)),
+            GraphQLField("name", type: .scalar(String.self)),
+            GraphQLField("openTime", type: .scalar(String.self)),
+            GraphQLField("closedTime", type: .scalar(String.self)),
+            GraphQLField("tel", type: .scalar(String.self)),
+            GraphQLField("shop", type: .object(Shop.selections)),
+          ]
+        }
 
         public private(set) var resultMap: ResultMap
 
@@ -1983,15 +2011,17 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
         public struct Shop: GraphQLSelectionSet {
           public static let possibleTypes: [String] = ["Shop"]
 
-          public static let selections: [GraphQLSelection] = [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("uniqueId", type: .scalar(String.self)),
-            GraphQLField("title", type: .scalar(String.self)),
-            GraphQLField("style", type: .scalar(String.self)),
-            GraphQLField("type", type: .scalar(String.self)),
-            GraphQLField("underPrice", type: .scalar(Double.self)),
-            GraphQLField("status", type: .scalar(Int.self)),
-          ]
+          public static var selections: [GraphQLSelection] {
+            return [
+              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+              GraphQLField("uniqueId", type: .scalar(String.self)),
+              GraphQLField("title", type: .scalar(String.self)),
+              GraphQLField("style", type: .scalar(String.self)),
+              GraphQLField("type", type: .scalar(String.self)),
+              GraphQLField("underPrice", type: .scalar(Double.self)),
+              GraphQLField("status", type: .scalar(Int.self)),
+            ]
+          }
 
           public private(set) var resultMap: ResultMap
 

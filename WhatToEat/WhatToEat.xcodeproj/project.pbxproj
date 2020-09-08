@@ -30,7 +30,6 @@
 		AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */; };
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
-		AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */; };
 		AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6EA0248269F70052719A /* DateUtil.swift */; };
 		AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF3C6EA42482FDD40052719A /* WhatToEat.graphql */; };
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
@@ -115,7 +114,6 @@
 		AF13AF71245E90DC0026A5C8 /* WhatToEatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatToEatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopObjectMapper.swift; sourceTree = "<group>"; };
 		AF3C6EA0248269F70052719A /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		AF3C6EA42482FDD40052719A /* WhatToEat.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatToEat.graphql; sourceTree = "<group>"; };
 		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
@@ -304,7 +302,6 @@
 			children = (
 				AFF884342496586A00646088 /* GQResponseData */,
 				AF007A22248C0FE500DF61DB /* GQInputData */,
-				AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */,
 			);
 			path = ApiData;
 			sourceTree = "<group>";
@@ -851,7 +848,6 @@
 				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
 				AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
-				AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
