@@ -55,12 +55,12 @@ extension SignViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
         case _ as SignAppAction:
-            let toVC = self.storyboard?.instantiateViewController(identifier: "OptionalViewController")
+            let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
             defaultTemplate?.basePushToViewController(toVC!, Animated: true)
         case _ as FacebookLoginAction:
             let action = state.currentAction as! FacebookLoginAction
             if action.status == .Success {
-                let toVC = self.storyboard?.instantiateViewController(identifier: "OptionalViewController")
+                let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
                 defaultTemplate?.basePushToViewController(toVC!, Animated: true)
             }
         default: break
