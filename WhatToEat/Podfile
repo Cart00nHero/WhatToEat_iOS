@@ -10,7 +10,10 @@ target 'WhatToEat' do
   pod 'RealmSwift'
   pod 'Apollo'
   pod 'iOSDropDown'
-  pod 'ObjectMapper'
+#  pod 'ObjectMapper'
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 
   target 'WhatToEatTests' do
     inherit! :search_paths
