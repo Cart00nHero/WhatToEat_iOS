@@ -35,6 +35,7 @@
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
 		AF23466E24C727ED001B033E /* FindFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF23466D24C727ED001B033E /* FindFoodTableViewCell.swift */; };
+		AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */; };
 		AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6EA0248269F70052719A /* DateUtil.swift */; };
 		AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF3C6EA42482FDD40052719A /* WhatToEat.graphql */; };
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
@@ -248,7 +249,6 @@
 				AF13AF51245E90DB0026A5C8 /* Products */,
 				B80175B4875867781181DCF6 /* Pods */,
 				C513DCEC7091D7250ECE6E78 /* Frameworks */,
-				AFBE6F182507FE3C001F389F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -584,14 +584,6 @@
 			path = Mathematician;
 			sourceTree = "<group>";
 		};
-		AFBE6F182507FE3C001F389F /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		AFF884342496586A00646088 /* GQResponseData */ = {
 			isa = PBXGroup;
 			children = (
@@ -901,6 +893,7 @@
 				AF7A026224D14092009716BE /* MapkitExtension.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
 				AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */,
+				AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
