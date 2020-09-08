@@ -10,12 +10,12 @@ import UIKit
 import ReSwift
 import MapKit
 
-enum GeoCodeStatus: Int {
+enum GeoActionStatus: Int {
     case Started, Completed, NotFound, Failed
 }
 struct GeoCodeAddressAction: Action {
     var codedAdress: String
-    var status: GeoCodeStatus = .Started
+    var status: GeoActionStatus = .Started
     var location: CLLocation? = nil
     var error: Error? = nil
 }
@@ -44,7 +44,7 @@ func geoCodeAddressAction(address: String) -> GeoCodeAddressAction {
 
 struct ReverseLocationAction: Action {
     var reversedLocation: CLLocation
-    var status: GeoCodeStatus = .Started
+    var status: GeoActionStatus = .Started
     var place: CLPlacemark? = nil
     var error: Error? = nil
 }
@@ -64,40 +64,7 @@ func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
     return action
 }
 
-struct CreateMapAnnotationsAction: Action {
-    var addresses: [GQInputObject]
-    var actionType = ""
-    var status: GeoCodeStatus = .Started
-    var annotations: [MKPointAnnotation] = []
-    
-    init(addresses: [GQInputObject]) {
-        self.addresses = addresses
-        actionType = String(describing: type(of: self))
-    }
-}
 
-func createMapAnnotationsAction(addresses: [GQInputObject]) -> CreateMapAnnotationsAction {
-    var action = CreateMapAnnotationsAction(addresses: addresses)
-    let resultArray = NSMutableArray()
-    DispatchQueue.global(qos: .background).async {
-        for address in addresses {
-            let latitude = Double(address.address.latitude) ?? 0.0
-            let longitude = Double(address.address.longitude) ?? 0.0
-            let location = CLLocation(latitude: latitude, longitude: longitude)
-            let annotation = MKPointAnnotation()
-            annotation.title = address.shop.title 
-            annotation.subtitle = address.shopBranch.name
-            annotation.coordinate = location.coordinate
-            resultArray.add(annotation)
-        }
-        action.annotations = resultArray as? [MKPointAnnotation] ?? []
-        DispatchQueue.main.async {
-            action.status = .Completed
-            appStore.dispatch(action)
-        }
-    }
-    return action
-}
 struct ParePlaceMarkToAddressAction: Action {
     let queryLoc: Bool
     let placeMark:CLPlacemark
@@ -114,8 +81,8 @@ struct ParePlaceMarkToAddressAction: Action {
         parePlaceMarktoAddress()
     }
     private mutating func parePlaceMarktoAddress() {
-        inputObj.address.latitude = String(format: "%.2f", placeMark.location?.coordinate.latitude ?? 0.0)
-        inputObj.address.longitude = String(format: "%.2f", placeMark.location?.coordinate.longitude ?? 0.0)
+        inputObj.address.latitude = String(format: "%f", placeMark.location?.coordinate.latitude ?? 0.0)
+        inputObj.address.longitude = String(format: "%f", placeMark.location?.coordinate.longitude ?? 0.0)
         inputObj.address.nation = placeMark.country
         inputObj.address.isoNationCode = placeMark.isoCountryCode
         inputObj.address.locality = placeMark.locality
@@ -165,4 +132,16 @@ struct LocatePositionAction: Action {
     var status: LocatePositionStatus
     var locations: [CLLocation]?
     var error: Error?
+}
+
+struct SearchNearbyAction: Action {
+    let center: CLLocationCoordinate2D
+    let range: Float64
+    
+    init(center: CLLocationCoordinate2D, range: Float64) {
+        self.center = center
+        self.range = range
+        let rangePoint = calculateRange(coordinate: center, range: range)
+        appStore.dispatch(searchInRangeAction(min: rangePoint.min, max: rangePoint.max))
+    }
 }

@@ -39,7 +39,6 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
                 action.status = .Success
             }
             appStore.dispatch(action)
-            service.clearCache()
         case .failure(let error):
             print(error.localizedDescription)
             action.status = .Failed
@@ -66,8 +65,12 @@ func searchInRangeAction(min: InputCoordinate, max: InputCoordinate) -> SearchIn
                 return
             }
             if graphQLResult.data?.searchInRange != nil {
+                action.status = .Success
                 action.responseData = graphQLResult.data?.searchInRange
+            } else {
+                action.status = .Failed
             }
+            appStore.dispatch(action)
             
         case .failure(let error):
             print(error.localizedDescription)
@@ -75,6 +78,6 @@ func searchInRangeAction(min: InputCoordinate, max: InputCoordinate) -> SearchIn
             appStore.dispatch(action)
         }
     }
-    
+    service.clearCache()
     return action
 }

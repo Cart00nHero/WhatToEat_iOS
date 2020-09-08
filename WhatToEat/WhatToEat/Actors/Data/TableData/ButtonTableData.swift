@@ -12,5 +12,4 @@ struct ButtonCellData: CellDataProtocol {
     let templateStyle: CellTemplateStyle = .Button
     var cornerRadius: CGFloat = 0.0
     var titleText = ""
-    
 }
