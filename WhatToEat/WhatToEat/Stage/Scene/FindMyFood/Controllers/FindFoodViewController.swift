@@ -10,21 +10,120 @@ import UIKit
 
 class FindFoodViewController: UIViewController {
 
+    @IBOutlet fileprivate weak var tableView: UITableView!
+    
+    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
+    private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
+        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
+        LocationMaster.shared.requestCurrentLocation()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate?.stateDelegate = self
+//        let barImage = #imageLiteral(resourceName: "Icon_Locate_On")
+//        barImage.withRenderingMode(.alwaysOriginal)
+//        let rightBarButtonItem =
+//            UIBarButtonItem(image: barImage, style: .plain, target: self, action: #selector(rigtBarButtonClickAction(sender:)))
+//        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
+        defaultTemplate?.title = "Find My Food"
+    }
 
-        // Do any additional setup after loading the view.
+    // MARK: - UI Actions
+    @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
+        
+    }
+
+}
+
+extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableData.sectionTitles.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableData.dataSource[section].count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let data = tableData.dataSource[indexPath.section][indexPath.row]
+        var cellIdentifier = "RadarMapCell"
+        if data.templateStyle == .LeftRight {
+            cellIdentifier = "FindFoodTableCell"
+        }
+        let cell =
+            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if cellIdentifier == "RadarMapCell" {
+            let contentCell = cell as? RadarMapTableViewCell
+            contentCell?.startRadarScanning()
+        }else {
+            let contentCell = cell as? FindFoodTableViewCell
+            contentCell?.cellData = data as? LRCellData
+        }
+        return cell
     }
-    */
+    
+}
 
+extension FindFoodViewController: DefaultTemplateDelegate {
+    func receiveNewState(state: DefaultTemplateState) {
+        switch state.currentAction {
+        case is TableCellDidLayoutSubviewsAction:
+            let action = state.currentAction as! TableCellDidLayoutSubviewsAction
+            presenter.searchMapCell = action.cell as? RadarMapTableViewCell
+        case is TableCellButtonClickAction:
+            LocationMaster.shared.requestCurrentLocation()
+        case is LocatePositionAction:
+            let action = state.currentAction as! LocatePositionAction
+            switch action.status {
+            case .DidUpdateLocation:
+                if action.locations?.count ?? 0 > 0 {
+                    presenter.currentLoc = action.locations?.first
+                    presenter.centerCoordinate = presenter.currentLoc?.coordinate
+                    presenter.searchMapCell?.setMapZoomLevel(level: 16, center: presenter.centerCoordinate!)
+                    appStore.dispatch(SearchNearbyAction(center: presenter.centerCoordinate!,
+                                                         range: presenter.searchRange(zoomLevel: 16)))
+                }
+            default: break
+            }
+        case is SearchInRangeAction:
+            let action = state.currentAction as! SearchInRangeAction
+            switch action.status {
+            case .Success:
+                presenter.searchMapCell?.stopRadarScanning()
+                if action.responseData?.count ?? 0 > 0 {
+                    appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
+                }
+            case .Failed:
+                presenter.searchMapCell?.stopRadarScanning()
+            default: break
+            }
+        case is MarkRangeSearchDataAction:
+            let action = state.currentAction as! MarkRangeSearchDataAction
+            presenter.searchMapCell?.stopRadarScanning()
+            if action.status == .Completed {
+                presenter.annotations = action.annotations
+                presenter.searchMapCell?.showAnnotationsOnMap(annotations: action.annotations, animated: false)
+            }
+        case is MapDidChangeVisibleRegionAction:
+            presenter.searchMapCell?.updateRangeValue()
+        case is MapRegionDidChangeAction:
+            if presenter.currentLoc != nil {
+                if presenter.isNeedUpdating() {
+                    presenter.searchMapCell?.startRadarScanning()
+                    presenter.centerCoordinate = presenter.searchMapCell?.centerCoordinate()
+                    let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
+                    appStore.dispatch(SearchNearbyAction(center: presenter.centerCoordinate!,
+                                                         range: presenter.searchRange(zoomLevel: level)))
+                }
+            }
+        default: break
+        }
+    }
+    
+    
 }

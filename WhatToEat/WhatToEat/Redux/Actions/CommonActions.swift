@@ -12,3 +12,11 @@ import ReSwift
 struct RegisterStateAction: Action {
     let subscriber: String
 }
+
+struct TableCellDidLayoutSubviewsAction: Action {
+    let cell: UITableViewCell
+}
+
+struct UIPanGestureRecognizerAction: Action {
+    let sender: UIPanGestureRecognizer
+}

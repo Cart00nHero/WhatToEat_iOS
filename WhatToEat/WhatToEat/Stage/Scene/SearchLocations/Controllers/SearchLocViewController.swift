@@ -70,7 +70,7 @@ class SearchLocViewController: UIViewController {
         toolBar.setItems([flexible, barButton], animated: false)
         return toolBar
     }
-    // MARK: - UI actions
+    // MARK: - UI Actions
     @IBAction func searchButtonClickAction(sender: UIButton) {
         searchTextField.resignFirstResponder()
         switch presenter.searchMode {
@@ -162,22 +162,22 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 if action.responseData?.count ?? 0 > 0 {
                     presenter.locationParcel.parcelType = String(describing: type(of: action))
                     for queryData in action.responseData! {
-                        let address = locationsDynamicQueryToGQAddress(result: queryData)
+                        let address = locationsDynamicQueryToGQInputObj(result: queryData!)
                         markAddress.append(address)
                     }
-                    appStore.dispatch(createMapAnnotationsAction(addresses: markAddress))
+                    appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
                 } else {
                     let parcelAction = presenter.locationParcel.parcel as? ParePlaceMarkToAddressAction
                     guard let address = parcelAction?.inputObj else { return }
                     markAddress.append(address)
-                    appStore.dispatch(createMapAnnotationsAction(addresses: markAddress))
+                    appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
                 }
             default: break
             }
         case is ParePlaceMarkToAddressAction:
             var action = state.currentAction as! ParePlaceMarkToAddressAction
             if presenter.locationParcel.parcelType == "LocatePositionAction" {
-                action.inputObj.address.completeInfo = combineAddressCompleteInfo(address: action.inputObj)
+                action.inputObj.address.completeInfo = combineAddressCompleteInfo(input: action.inputObj)
                 searchTextField.text = action.inputObj.address.completeInfo
             }
             if presenter.locationParcel.parcelType != "LocationsDynamicQueryAction" {
@@ -188,7 +188,7 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! CreateMapAnnotationsAction
             presenter.locationParcel.parcelType = String(describing: type(of: action))
             presenter.locationParcel.parcel = action
-            if action.status == GeoCodeStatus.Completed {
+            if action.status == GeoActionStatus.Completed {
                 mapView.showAnnotations(action.annotations , animated: true)
             }
         case is LocatePositionAction:

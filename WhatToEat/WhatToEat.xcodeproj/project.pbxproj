@@ -13,6 +13,10 @@
 		6D809A68EB2CEE85CC3363AD /* Pods_WhatToEat_WhatToEatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */; };
 		AF007A152489F12200DF61DB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AF007A142489F12200DF61DB /* schema.json */; };
 		AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF007A25248C12F700DF61DB /* GQInputData.swift */; };
+		AF00CB5324CBFEC6002FF63B /* RadarMapTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00CB5224CBFEC6002FF63B /* RadarMapTableData.swift */; };
+		AF0BA27224B570F9007F382E /* Haversin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA27124B570F9007F382E /* Haversin.swift */; };
+		AF0EB13224C2F09D0022C36E /* RadarScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EB13124C2F09D0022C36E /* RadarScanView.xib */; };
+		AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EB13324C2F0E40022C36E /* RadarScanView.swift */; };
 		AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */; };
 		AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */; };
 		AF0EDF5D247A5012003D84C0 /* DropDownCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */; };
@@ -30,6 +34,8 @@
 		AF13AF60245E90DC0026A5C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF13AF5E245E90DC0026A5C8 /* LaunchScreen.storyboard */; };
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
+		AF23466E24C727ED001B033E /* FindFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF23466D24C727ED001B033E /* FindFoodTableViewCell.swift */; };
+		AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */; };
 		AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6EA0248269F70052719A /* DateUtil.swift */; };
 		AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF3C6EA42482FDD40052719A /* WhatToEat.graphql */; };
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
@@ -40,10 +46,12 @@
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
 		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
+		AF5A833E24ADF39E008ECAF7 /* FindFoodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */; };
 		AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */; };
 		AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FA247D73300023F3FC /* LocationMaster.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
 		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
+		AF7A026224D14092009716BE /* MapkitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7A026124D14092009716BE /* MapkitExtension.swift */; };
 		AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801504248E8DCE009E6214 /* MutationActions.swift */; };
 		AF801507248E8E20009E6214 /* QueryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801506248E8E20009E6214 /* QueryActions.swift */; };
 		AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */; };
@@ -52,7 +60,7 @@
 		AF82246A2472F21D0034C928 /* AddGourmets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF82244D2472F21D0034C928 /* AddGourmets.storyboard */; };
 		AF82246B2472F21D0034C928 /* FindFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224502472F21D0034C928 /* FindFoodViewController.swift */; };
 		AF82246C2472F21D0034C928 /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8224522472F21D0034C928 /* FindMyFood.storyboard */; };
-		AF82246D2472F21D0034C928 /* OptionalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224552472F21D0034C928 /* OptionalViewController.swift */; };
+		AF82246D2472F21D0034C928 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224552472F21D0034C928 /* MainMenuViewController.swift */; };
 		AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224562472F21D0034C928 /* SignViewController.swift */; };
 		AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF8224582472F21D0034C928 /* Entrance.storyboard */; };
 		AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224792472F2FE0034C928 /* ApolloService.swift */; };
@@ -60,6 +68,7 @@
 		AF8224842472F4160034C928 /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247F2472F4160034C928 /* CommonActions.swift */; };
 		AF8224852472F4160034C928 /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224802472F4160034C928 /* SignActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
+		AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB490724D6AB3200D28A79 /* MapActions.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
 		AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8843724965F4A00646088 /* CodableExtension.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +100,10 @@
 		9F808F0CB39BE61F56DA0471 /* Pods-WhatToEatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF007A142489F12200DF61DB /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		AF007A25248C12F700DF61DB /* GQInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQInputData.swift; sourceTree = "<group>"; };
+		AF00CB5224CBFEC6002FF63B /* RadarMapTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarMapTableData.swift; sourceTree = "<group>"; };
+		AF0BA27124B570F9007F382E /* Haversin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haversin.swift; sourceTree = "<group>"; };
+		AF0EB13124C2F09D0022C36E /* RadarScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadarScanView.xib; sourceTree = "<group>"; };
+		AF0EB13324C2F0E40022C36E /* RadarScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarScanView.swift; sourceTree = "<group>"; };
 		AF0EDF41247A08EC003D84C0 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
 		AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCellView.swift; sourceTree = "<group>"; };
 		AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCellView.xib; sourceTree = "<group>"; };
@@ -114,6 +127,8 @@
 		AF13AF71245E90DC0026A5C8 /* WhatToEatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhatToEatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AF23466D24C727ED001B033E /* FindFoodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodTableViewCell.swift; sourceTree = "<group>"; };
+		AF3C6E9C2481177B0052719A /* ShopObjectMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopObjectMapper.swift; sourceTree = "<group>"; };
 		AF3C6EA0248269F70052719A /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		AF3C6EA42482FDD40052719A /* WhatToEat.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatToEat.graphql; sourceTree = "<group>"; };
 		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
@@ -124,10 +139,12 @@
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
+		AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindFoodPresenter.swift; sourceTree = "<group>"; };
 		AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF5F16FA247D73300023F3FC /* LocationMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMaster.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
 		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
+		AF7A026124D14092009716BE /* MapkitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapkitExtension.swift; sourceTree = "<group>"; };
 		AF801504248E8DCE009E6214 /* MutationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationActions.swift; sourceTree = "<group>"; };
 		AF801506248E8E20009E6214 /* QueryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryActions.swift; sourceTree = "<group>"; };
 		AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
@@ -136,7 +153,7 @@
 		AF82244D2472F21D0034C928 /* AddGourmets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddGourmets.storyboard; sourceTree = "<group>"; };
 		AF8224502472F21D0034C928 /* FindFoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodViewController.swift; sourceTree = "<group>"; };
 		AF8224522472F21D0034C928 /* FindMyFood.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
-		AF8224552472F21D0034C928 /* OptionalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionalViewController.swift; sourceTree = "<group>"; };
+		AF8224552472F21D0034C928 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		AF8224562472F21D0034C928 /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
 		AF8224582472F21D0034C928 /* Entrance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Entrance.storyboard; sourceTree = "<group>"; };
 		AF8224792472F2FE0034C928 /* ApolloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloService.swift; sourceTree = "<group>"; };
@@ -144,6 +161,7 @@
 		AF82247F2472F4160034C928 /* CommonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
 		AF8224802472F4160034C928 /* SignActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		AFCB490724D6AB3200D28A79 /* MapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapActions.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
 		AFF8843724965F4A00646088 /* CodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtension.swift; sourceTree = "<group>"; };
 		B094A1456F89E4C27A08F93E /* Pods-WhatToEat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.release.xcconfig"; sourceTree = "<group>"; };
@@ -201,6 +219,8 @@
 		AF0EDF54247A5012003D84C0 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				AF0EB13324C2F0E40022C36E /* RadarScanView.swift */,
+				AF0EB13124C2F09D0022C36E /* RadarScanView.xib */,
 				AF0EDF55247A5012003D84C0 /* DropDownCellView.swift */,
 				AF0EDF56247A5012003D84C0 /* DropDownCellView.xib */,
 				AF0EDF57247A5012003D84C0 /* SetRangeCellView.swift */,
@@ -293,6 +313,7 @@
 			children = (
 				AF550D56247AA79E00A8625D /* ButtonTableData.swift */,
 				AF550D55247AA79E00A8625D /* LRTableData.swift */,
+				AF00CB5224CBFEC6002FF63B /* RadarMapTableData.swift */,
 			);
 			path = TableData;
 			sourceTree = "<group>";
@@ -340,6 +361,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		AF5A833C24ADF36A008ECAF7 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
 		AF5F16F9247D73180023F3FC /* GPS */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +391,7 @@
 				AF719D7D2474D569003A7285 /* XibSetupView.swift */,
 				AF40DC0E248055E700ED4BB1 /* StructObserver.swift */,
 				AF3C6EA0248269F70052719A /* DateUtil.swift */,
+				AF7A026124D14092009716BE /* MapkitExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -369,6 +399,7 @@
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				AFAF8BBC24B06F6300CD5539 /* Mathematician */,
 				AF40DC09247F8B7F00ED4BB1 /* Express */,
 				AF5F16F9247D73180023F3FC /* GPS */,
 				AF0EDF65247A9C9C003D84C0 /* Data */,
@@ -438,6 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				AF82244F2472F21D0034C928 /* Controllers */,
+				AF5A833C24ADF36A008ECAF7 /* Presenters */,
 				AF8224512472F21D0034C928 /* Views */,
 			);
 			path = FindMyFood;
@@ -454,6 +486,7 @@
 		AF8224512472F21D0034C928 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF23466D24C727ED001B033E /* FindFoodTableViewCell.swift */,
 				AF8224522472F21D0034C928 /* FindMyFood.storyboard */,
 			);
 			path = Views;
@@ -471,7 +504,7 @@
 		AF8224542472F21D0034C928 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AF8224552472F21D0034C928 /* OptionalViewController.swift */,
+				AF8224552472F21D0034C928 /* MainMenuViewController.swift */,
 				AF8224562472F21D0034C928 /* SignViewController.swift */,
 			);
 			path = Controllers;
@@ -530,6 +563,7 @@
 				AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */,
 				AF801504248E8DCE009E6214 /* MutationActions.swift */,
 				AF801506248E8E20009E6214 /* QueryActions.swift */,
+				AFCB490724D6AB3200D28A79 /* MapActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -540,6 +574,14 @@
 				AF8224822472F4160034C928 /* AppReducer.swift */,
 			);
 			path = Reducers;
+			sourceTree = "<group>";
+		};
+		AFAF8BBC24B06F6300CD5539 /* Mathematician */ = {
+			isa = PBXGroup;
+			children = (
+				AF0BA27124B570F9007F382E /* Haversin.swift */,
+			);
+			path = Mathematician;
 			sourceTree = "<group>";
 		};
 		AFF884342496586A00646088 /* GQResponseData */ = {
@@ -683,6 +725,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF0EB13224C2F09D0022C36E /* RadarScanView.xib in Resources */,
 				AF82246A2472F21D0034C928 /* AddGourmets.storyboard in Resources */,
 				AF82246C2472F21D0034C928 /* FindMyFood.storyboard in Resources */,
 				AF82246F2472F21D0034C928 /* Entrance.storyboard in Resources */,
@@ -841,24 +884,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */,
-				AF82246D2472F21D0034C928 /* OptionalViewController.swift in Sources */,
+				AF82246D2472F21D0034C928 /* MainMenuViewController.swift in Sources */,
 				AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AF8224692472F21D0034C928 /* AddGLRTableViewCell.swift in Sources */,
 				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
 				AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */,
+				AF7A026224D14092009716BE /* MapkitExtension.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
+				AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */,
+				AF3C6E9D2481177B0052719A /* ShopObjectMapper.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
+				AF0BA27224B570F9007F382E /* Haversin.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,
+				AF23466E24C727ED001B033E /* FindFoodTableViewCell.swift in Sources */,
 				AF0EDF5E247A5012003D84C0 /* SetRangeCellView.swift in Sources */,
 				AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */,
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
 				AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */,
+				AF00CB5324CBFEC6002FF63B /* RadarMapTableData.swift in Sources */,
 				AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
 				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,
@@ -870,9 +919,11 @@
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
 				AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */,
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,
+				AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */,
 				AF8224852472F4160034C928 /* SignActions.swift in Sources */,
 				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
+				AF5A833E24ADF39E008ECAF7 /* FindFoodPresenter.swift in Sources */,
 				AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */,
 				AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
@@ -1062,7 +1113,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = YuCheng.WhatToEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1081,7 +1132,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = YuCheng.WhatToEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

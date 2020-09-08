@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OptionalViewController: UIViewController {
+class MainMenuViewController: UIViewController {
 
     private var defaultTemplate: DefaultVCTemplate? = nil
     
@@ -35,10 +35,16 @@ class OptionalViewController: UIViewController {
         let toVC = addGourmetsSB.instantiateViewController(withIdentifier: "SearchLocViewController")
         defaultTemplate?.basePushToViewController(toVC, Animated: true)
     }
+    @IBAction func toFindFoodButtonClickAction(sender: UIButton) {
+        let findMyFoodSB = UIStoryboard.init(name: "FindMyFood", bundle: nil)
+        let toVC = findMyFoodSB.instantiateViewController(identifier: "FindFoodViewController")
+        defaultTemplate?.basePushToViewController(toVC, Animated: true)
+        
+    }
 
 }
 
-extension OptionalViewController: DefaultTemplateDelegate {
+extension MainMenuViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
     }
 }

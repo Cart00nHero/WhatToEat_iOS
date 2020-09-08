@@ -56,7 +56,7 @@ struct GourmetsTableData {
         dataSource = createDataSource()
     }
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
-    func createDataSource() -> Array<Array<CellDataProtocol>> {
+    private func createDataSource() -> Array<Array<CellDataProtocol>> {
         return [
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),

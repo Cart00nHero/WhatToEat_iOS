@@ -101,7 +101,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 if presenter.newLoc.address.fullInfo.isEmpty {
                     // To-Do: Here Upload to Insert
                     presenter.saveToUpload = false
-//                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(address: gqAddress)
+                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: gqAddress)
                 }else {
                     presenter.saveToUpload = true
                 }
@@ -176,7 +176,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             if presenter.saveToUpload {
                 appStore.dispatch(updateBranchAction(inputObj: presenter.newLoc))
             } else {
-                presenter.newLoc.address.fullInfo = combineFullInfo(address: presenter.newLoc)
+                presenter.newLoc.address.fullInfo = combineFullInfo(input: presenter.newLoc)
                 appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
             }
         case is CreateLocationAction:

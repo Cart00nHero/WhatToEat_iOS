@@ -9,7 +9,7 @@
 import UIKit
 
 enum CellTemplateStyle : Int {
-    case LeftRight,Button
+    case LeftRight,Button,RadarMap
 }
 protocol CellDataProtocol {
     var templateStyle: CellTemplateStyle { get }

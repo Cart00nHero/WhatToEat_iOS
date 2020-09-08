@@ -28,3 +28,8 @@ func initGQInputObject() -> GQInputObject {
     return GQInputObject(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
                      shopBranch: InputBranch(name: ""), shop: InputShop(title: "", underPrice: 0.00))
 }
+
+struct GQSearchRange {
+    let max: InputCoordinate
+    let min: InputCoordinate
+}
