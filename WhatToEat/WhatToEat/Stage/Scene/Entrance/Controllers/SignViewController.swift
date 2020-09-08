@@ -29,6 +29,7 @@ class SignViewController: UIViewController {
 
     // MARK: - actions
     @IBAction func loginButtonClickAction(_ sender: UIButton) {
+        appStore.dispatch(facebookLoginAction(loginVC: self))
 //        let service = ApolloService.shared.apollo
 //        let createFoodie = CreateFoodieMutation(email: "abc@gmail.com", name: "Morris", token: InputTo)
 //        service.perform(mutation: createFoodie) { result in
@@ -56,6 +57,12 @@ extension SignViewController: DefaultTemplateDelegate {
         case _ as SignAppAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "OptionalViewController")
             defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+        case _ as FacebookLoginAction:
+            let action = state.currentAction as! FacebookLoginAction
+            if action.status == .Success {
+                let toVC = self.storyboard?.instantiateViewController(identifier: "OptionalViewController")
+                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+            }
         default: break
         }
     }
