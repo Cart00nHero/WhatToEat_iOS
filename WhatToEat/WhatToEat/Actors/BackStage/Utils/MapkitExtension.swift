@@ -29,10 +29,7 @@ extension MKMapView {
                                      animated: Bool){
         let span = MKCoordinateSpan(latitudeDelta: 0,
                                     longitudeDelta: 360 / pow(2, Double(zoomLevel)) * Double(self.frame.size.width) / 256)
-//        let span = MKCoordinateSpanMake(0,
-//                                        360 / pow(2, Double(zoomLevel)) * Double(self.frame.size.width) / 256)
         setRegion(MKCoordinateRegion(center: centerCoordinate, span: span), animated: animated)
-//        setRegion(MKCoordinateRegionMake(centerCoordinate, span), animated: animated)
     }
 }
 

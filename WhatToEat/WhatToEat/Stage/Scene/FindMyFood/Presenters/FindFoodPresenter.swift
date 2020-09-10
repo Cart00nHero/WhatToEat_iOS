@@ -37,7 +37,7 @@ class FindFoodPresenter: NSObject {
     
     func isNeedUpdating() -> Bool {
         let distance = calculateCoordinateDistance(from: centerCoordinate!, to: (searchMapCell?.centerCoordinate())!)
-        if distance > searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16) {
+        if distance > searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16)*1000 {
             return true
         }
         if searchMapCell?.mapZoomLevel() != mapZoomLevel {

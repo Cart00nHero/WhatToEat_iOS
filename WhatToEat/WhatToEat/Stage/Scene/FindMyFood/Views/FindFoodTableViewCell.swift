@@ -66,8 +66,8 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(receivePanGestureRecognizer(sender:)))
-//        mkMapView.addGestureRecognizer(panGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(receivePanGestureRecognizer(sender:)))
+        mkMapView.addGestureRecognizer(panGesture)
         mkMapView.delegate = self
         appStore.dispatch(TableCellDidLayoutSubviewsAction(cell: self))
     }
@@ -205,5 +205,7 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
 //        leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
         return annotationView
+    }
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
     }
 }
