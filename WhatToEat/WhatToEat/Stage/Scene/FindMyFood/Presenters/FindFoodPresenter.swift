@@ -15,10 +15,9 @@ class FindFoodPresenter: NSObject {
     var currentLoc: CLLocation? = nil
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
-    var mapZoomLevel = 16
+    var mapZoomLevel: Int = 16
+    var willMarkAnnotations = false
     
-    
-//    var currentRange: Float64 = 0.0
     
     
     func searchRange(zoomLevel: Int) -> Float64 {
@@ -37,13 +36,16 @@ class FindFoodPresenter: NSObject {
     
     func isNeedUpdating() -> Bool {
         let distance = calculateCoordinateDistance(from: centerCoordinate!, to: (searchMapCell?.centerCoordinate())!)
-        if distance > searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16)*1000 {
-            return true
+        let searchingDistance = (searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16)*1000)*2
+        
+        if searchMapCell?.mapZoomLevel() == mapZoomLevel {
+            if distance > searchingDistance {
+                return true
+            }
+            return false
         }
-        if searchMapCell?.mapZoomLevel() != mapZoomLevel {
-            return true
-        }
-        return false
+        
+        return true
     }
 }
 
