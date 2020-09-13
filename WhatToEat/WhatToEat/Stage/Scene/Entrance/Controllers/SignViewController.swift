@@ -8,6 +8,7 @@
 
 import UIKit
 import ReSwift
+import FacebookLogin
 
 class SignViewController: UIViewController {
 
@@ -56,12 +57,12 @@ extension SignViewController: DefaultTemplateDelegate {
         case _ as SignAppAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
             defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-        case _ as FacebookLoginAction:
-            let action = state.currentAction as! FacebookLoginAction
-            if action.status == .Success {
-                let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
-                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-            }
+//        case _ as FacebookLoginAction:
+//            let action = state.currentAction as! FacebookLoginAction
+//            if action.status == .Success {
+//                let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
+//                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+//            }
         default: break
         }
     }
