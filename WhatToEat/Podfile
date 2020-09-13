@@ -9,8 +9,8 @@ target 'WhatToEat' do
   pod 'ReSwift'
   pod 'RealmSwift'
   pod 'Apollo'
-  pod 'iOSDropDown'
-  pod 'ObjectMapper'
+#  pod 'iOSDropDown'
+#  pod 'ObjectMapper'
 
   target 'WhatToEatTests' do
     inherit! :search_paths
