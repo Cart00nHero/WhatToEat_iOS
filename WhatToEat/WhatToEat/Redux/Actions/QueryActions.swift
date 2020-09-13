@@ -81,3 +81,12 @@ func searchInRangeAction(min: InputCoordinate, max: InputCoordinate) -> SearchIn
     service.clearCache()
     return action
 }
+struct ApolloServiceClearCacheAction: Action {
+    init() {
+        clearCacheAction()
+    }
+    private func clearCacheAction() {
+        let service = ApolloService.shared.apollo
+        service.clearCache()
+    }
+}

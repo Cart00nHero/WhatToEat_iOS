@@ -20,3 +20,7 @@ struct TableCellDidLayoutSubviewsAction: Action {
 struct UIPanGestureRecognizerAction: Action {
     let sender: UIPanGestureRecognizer
 }
+
+struct ReceivedGestureRecognizerAction: Action {
+    let sender: UIGestureRecognizer
+}

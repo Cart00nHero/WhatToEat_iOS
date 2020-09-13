@@ -33,6 +33,7 @@ class FindFoodTableViewCell: LRTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         createLeftView()
+        createRightView()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -44,6 +45,31 @@ class FindFoodTableViewCell: LRTableViewCell {
         let data = cellData!.leftCellProtocol as? LRLabelCellData
         cellLeftLabel.text = data?.labelText
     }
+    private func createRightView() {
+        createTextLabelOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+    }
+    private func createTextLabelOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+        if cellRightView.subviews.count == 0 {
+            let data = cellProtocol as? LRLabelCellData
+            let textLabel = UILabel()
+            textLabel.translatesAutoresizingMaskIntoConstraints = false
+            textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            textLabel.font = UIFont.systemFont(ofSize: 14.0)
+            textLabel.text = data?.labelText
+            textLabel.numberOfLines = 0
+            textLabel.lineBreakMode = .byWordWrapping
+            var contentView : UIView? = nil
+            switch contentSide {
+            case .Left:
+                contentView = cellLeftView
+            case .Right:
+                contentView = cellRightView
+            }
+            contentView?.addSubview(textLabel)
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+        }
+    }
     
 }
 
@@ -53,6 +79,7 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     @IBOutlet weak var mkMapView: MKMapView!
     @IBOutlet weak private var radarView: RadarScanView!
     @IBOutlet weak private var rangeButton: UIButton!
+    private var annotationViewTag: Int = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,8 +93,8 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-//        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(receivePanGestureRecognizer(sender:)))
-//        mkMapView.addGestureRecognizer(panGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(receivePanGestureRecognizer(sender:)))
+        mkMapView.addGestureRecognizer(panGesture)
         mkMapView.delegate = self
         appStore.dispatch(TableCellDidLayoutSubviewsAction(cell: self))
     }
@@ -108,12 +135,13 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
         radarView.isUserInteractionEnabled = false
         radarView.stopRadarAnimation()
     }
+    func setCenterCoordinate(coordinate: CLLocationCoordinate2D) {
+        mkMapView.centerCoordinate = coordinate
+    }
     func centerCoordinate() -> CLLocationCoordinate2D {
         return mkMapView.camera.centerCoordinate
     }
-    func mapZoomLevel() -> Int {
-        return mkMapView.zoomLevel
-    }
+    
     func updateRangeValue() {
         let zoomLevel = mkMapView.zoomLevel
         if zoomLevel >= 17 {
@@ -137,6 +165,9 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
                                          longitudinalMeters: CLLocationDistance(exactly: regionDistance(zoomLevel: level))!)
         mkMapView.setRegion(mkMapView.regionThatFits(region), animated: true)
     }
+    func mapZoomLevel() -> Int {
+        return mkMapView.zoomLevel
+    }
     func showCircleOverlay(radius: CLLocationDistance) {
         showCircle(coordinate: mkMapView.camera.centerCoordinate, radius: radius)
     }
@@ -157,8 +188,17 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     @objc private func receivePanGestureRecognizer(sender: UIPanGestureRecognizer) {
         appStore.dispatch(UIPanGestureRecognizerAction(sender: sender))
     }
-    
+    // MARK: - Gesture Delegate
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UILongPressGestureRecognizer {
+            appStore.dispatch(ReceivedGestureRecognizerAction(sender: gestureRecognizer))
+        }
+        return true
+    }
     // MARK: - MKMapViewDelegate
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        appStore.dispatch(RegionWillChangeAction())
+    }
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         appStore.dispatch(MapRegionDidChangeAction())
     }
@@ -180,17 +220,11 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
         // If other shapes are required, handle them here
         return MKOverlayRenderer()
     }
-    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        var viewTag = 0
-        for view in views {
-            view.tag = viewTag
-            viewTag += 1
-            view.displayPriority = .defaultLow
-        }
-        appStore.dispatch(MapDidAddAnnotationsAction())
-    }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotationViewTag == 0 {
+            appStore.dispatch(MapWillAddAnnotationsAction())
+        }
         let identifier = "MyPin"
         if annotation.isKind(of: MKUserLocation.self) {
             return nil
@@ -204,6 +238,23 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
 //        leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
+        annotationView?.tag = annotationViewTag
+        annotationViewTag += 1
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
+    //        var viewTag = 0
+    //        for view in views {
+    //            view.tag = viewTag
+    //            viewTag += 1
+    //            view.displayPriority = .defaultLow
+    //        }
+            annotationViewTag = 0
+            appStore.dispatch(MapDidAddAnnotationsAction())
+    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedAddress: nil))
+    }
+    
 }

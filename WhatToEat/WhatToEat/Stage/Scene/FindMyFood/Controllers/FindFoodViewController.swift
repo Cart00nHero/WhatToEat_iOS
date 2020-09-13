@@ -9,11 +9,10 @@
 import UIKit
 
 class FindFoodViewController: UIViewController {
-
+    
     @IBOutlet fileprivate weak var tableView: UITableView!
     
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
     override func viewDidLoad() {
@@ -26,31 +25,31 @@ class FindFoodViewController: UIViewController {
         super.viewWillAppear(animated)
         self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
-//        let barImage = #imageLiteral(resourceName: "Icon_Locate_On")
-//        barImage.withRenderingMode(.alwaysOriginal)
-//        let rightBarButtonItem =
-//            UIBarButtonItem(image: barImage, style: .plain, target: self, action: #selector(rigtBarButtonClickAction(sender:)))
-//        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
+        //        let barImage = #imageLiteral(resourceName: "Icon_Locate_On")
+        //        barImage.withRenderingMode(.alwaysOriginal)
+        //        let rightBarButtonItem =
+        //            UIBarButtonItem(image: barImage, style: .plain, target: self, action: #selector(rigtBarButtonClickAction(sender:)))
+        //        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
         defaultTemplate?.title = "Find My Food"
     }
-
+    
     // MARK: - UI Actions
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
         
     }
-
+    
 }
 
 extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableData.sectionTitles.count
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.dataSource[section].count
+        return presenter.tableData.dataSource[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = tableData.dataSource[indexPath.section][indexPath.row]
+        let data = presenter.tableData.dataSource[indexPath.section][indexPath.row]
         var cellIdentifier = "RadarMapCell"
         if data.templateStyle == .LeftRight {
             cellIdentifier = "FindFoodTableCell"
@@ -96,6 +95,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             case .Success:
                 presenter.searchMapCell?.stopRadarScanning()
                 if action.responseData?.count ?? 0 > 0 {
+                    presenter.searchResults = action.responseData!
                     appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
                 }
             case .Failed:
@@ -109,21 +109,41 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 presenter.annotations = action.annotations
                 presenter.searchMapCell?.showAnnotationsOnMap(annotations: action.annotations, animated: false)
             }
+        case is MapWillAddAnnotationsAction:
+            presenter.willMarkAnnotations = true
+        case is MapDidAddAnnotationsAction:
+            if presenter.willMarkAnnotations {
+                presenter.searchMapCell?.setCenterCoordinate(coordinate: presenter.centerCoordinate!)
+                presenter.willMarkAnnotations = false
+            }
+        case is ReceivedGestureRecognizerAction:
+            if presenter.isNeedUpdating() {
+                presenter.searchMapCell?.startRadarScanning()
+                let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
+                appStore.dispatch(SearchNearbyAction(center: (presenter.searchMapCell?.centerCoordinate())!,
+                                                     range: presenter.searchRange(zoomLevel: level)))
+                presenter.centerCoordinate = presenter.searchMapCell?.centerCoordinate()
+            }
         case is MapDidChangeVisibleRegionAction:
             presenter.searchMapCell?.updateRangeValue()
-        case is MapRegionDidChangeAction:
-            if presenter.currentLoc != nil {
-                if presenter.isNeedUpdating() {
-                    presenter.searchMapCell?.startRadarScanning()
-                    presenter.centerCoordinate = presenter.searchMapCell?.centerCoordinate()
-                    let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
-                    appStore.dispatch(SearchNearbyAction(center: presenter.centerCoordinate!,
-                                                         range: presenter.searchRange(zoomLevel: level)))
-                }
+            if presenter.isFirsTimeEntrance {
+                presenter.isFirsTimeEntrance = false
+                return
+            }
+            if presenter.searchMapCell?.mapZoomLevel() != presenter.mapZoomLevel {
+                let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
+                appStore.dispatch(SearchNearbyAction(center: (presenter.searchMapCell?.centerCoordinate())!,
+                                                     range: presenter.searchRange(zoomLevel: level)))
+                presenter.mapZoomLevel = level
+            }
+        case is MKAnnotationDidSelectAction:
+            let action = state.currentAction as! MKAnnotationDidSelectAction
+            if presenter.searchResults.count > 0 {
+                presenter.tableData.reloadData(data: presenter.searchResults[action.selectedIndex]!)
+                tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
             }
         default: break
         }
     }
-    
     
 }
