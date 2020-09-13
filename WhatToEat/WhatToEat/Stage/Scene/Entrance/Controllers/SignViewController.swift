@@ -29,7 +29,6 @@ class SignViewController: UIViewController {
 
     // MARK: - actions
     @IBAction func loginButtonClickAction(_ sender: UIButton) {
-        appStore.dispatch(facebookLoginAction(loginVC: self))
 //        let service = ApolloService.shared.apollo
 //        let createFoodie = CreateFoodieMutation(email: "abc@gmail.com", name: "Morris", token: InputTo)
 //        service.perform(mutation: createFoodie) { result in
