@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="973-yh-Mes">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="973-yh-Mes">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,14 +24,14 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="DJT-eW-kxw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="bEg-rU-vr5" firstAttribute="leading" secondItem="DJT-eW-kxw" secondAttribute="leading" id="FRa-yb-iNn"/>
                             <constraint firstItem="bEg-rU-vr5" firstAttribute="top" secondItem="DJT-eW-kxw" secondAttribute="top" id="SUL-Bm-pVt"/>
                             <constraint firstItem="bEg-rU-vr5" firstAttribute="bottom" secondItem="DJT-eW-kxw" secondAttribute="bottom" id="aet-Me-tiY"/>
                             <constraint firstItem="bEg-rU-vr5" firstAttribute="trailing" secondItem="DJT-eW-kxw" secondAttribute="trailing" id="o7l-pA-c8H"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="DJT-eW-kxw"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ln1-v4-gnb"/>
                     <connections>
@@ -75,13 +77,13 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="UEo-oH-cfN"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="centerY" secondItem="QCr-9N-KOu" secondAttribute="centerY" id="09B-5a-roP"/>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="centerX" secondItem="QCr-9N-KOu" secondAttribute="centerX" id="71d-hb-l7T"/>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="leading" secondItem="QCr-9N-KOu" secondAttribute="leading" constant="15" id="qjK-oZ-wq0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="UEo-oH-cfN"/>
                     </view>
                     <connections>
                         <segue destination="Qel-oS-6gd" kind="show" id="pes-45-leD"/>
@@ -94,7 +96,7 @@
         <!--Main Menu View Controller-->
         <scene sceneID="iTB-Rb-N5G">
             <objects>
-                <viewController storyboardIdentifier="OptionalViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qel-oS-6gd" customClass="MainMenuViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qel-oS-6gd" customClass="MainMenuViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g1g-59-mZd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,6 +122,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Sk0-i5-p1v"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="N2m-IC-U1J" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="1TB-6c-ih9"/>
@@ -129,7 +132,6 @@
                             <constraint firstItem="Oh9-A0-j7T" firstAttribute="centerX" secondItem="g1g-59-mZd" secondAttribute="centerX" id="mf6-pa-yRh"/>
                             <constraint firstItem="Oh9-A0-j7T" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="pdX-eK-9PZ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Sk0-i5-p1v"/>
                     </view>
                     <navigationItem key="navigationItem" id="GHe-ag-CIx"/>
                 </viewController>
@@ -138,4 +140,9 @@
             <point key="canvasLocation" x="1305" y="81"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
