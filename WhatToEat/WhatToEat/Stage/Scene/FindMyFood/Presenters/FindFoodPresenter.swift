@@ -11,14 +11,15 @@ import MapKit
 
 class FindFoodPresenter: NSObject {
     
+    var isFirsTimeEntrance = true
+    var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
     var searchMapCell: RadarMapTableViewCell? = nil
     var currentLoc: CLLocation? = nil
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
     var mapZoomLevel: Int = 16
     var willMarkAnnotations = false
-    
-    
+    var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
     
     func searchRange(zoomLevel: Int) -> Float64 {
         // KM
@@ -56,33 +57,33 @@ struct FindFoodTableData {
         self.dataObj = dataObj
         dataSource = createDataSource()
     }
-    let sectionTitles : Array<String> = ["Shop","Branch","Location"]
+//    let sectionTitles : Array<String> = ["Shop","Branch","Location"]
+    mutating func reloadData(data: SearchInRangeQuery.Data.SearchInRange) {
+        self.dataObj = data
+        dataSource = createDataSource()
+    }
     private func createDataSource() -> Array<Array<CellDataProtocol>> {
         return [
             [RadarMapTableData()],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: self.dataObj.shopBranch?.shop?.title ?? "")),
+                           rightCellProtocol: LRLabelCellData(labelText: self.dataObj.shopBranch?.shop?.title ?? "")),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Style"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: (self.dataObj.shopBranch?.shop?.style ?? "") )),
+                           rightCellProtocol: LRLabelCellData(labelText: (self.dataObj.shopBranch?.shop?.style ?? "") )),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Type"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: (self.dataObj.shopBranch?.shop?.type ?? "") )),
+                           rightCellProtocol: LRLabelCellData(labelText: (self.dataObj.shopBranch?.shop?.type ?? "") )),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"),
-                           rightCellProtocol: LRTextFieldCellData(inputText:
-                            String(format: "%.2f", (self.dataObj.shopBranch?.shop?.underPrice ?? 0.0)!)))
-            ],
-            [
+                           rightCellProtocol: LRLabelCellData(labelText:
+                            String(format: "%.2f", (self.dataObj.shopBranch?.shop?.underPrice ?? 0.0)!))),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"),
                 rightCellProtocol: LRLabelCellData(labelText: "")),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Business\nHours"),
                            rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: (dataObj.shopBranch?.openTime ?? "")),
                                                               endDate: convertStringToUTC_ISO8601Date(dateString: (dataObj.shopBranch?.closedTime ?? "")))),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
-                           rightCellProtocol: LRLabelCellData(labelText: (dataObj.shopBranch?.tel ?? "") ))
-            ],
-            [
+                           rightCellProtocol: LRLabelCellData(labelText: (dataObj.shopBranch?.tel ?? "") )),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                           rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? ""))
+                rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? ""))
             ]
         ]
     }

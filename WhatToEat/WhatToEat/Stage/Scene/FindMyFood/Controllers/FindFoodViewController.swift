@@ -13,7 +13,6 @@ class FindFoodViewController: UIViewController {
     @IBOutlet fileprivate weak var tableView: UITableView!
     
     private var defaultTemplate: DefaultVCTemplate? = nil
-    private var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
     override func viewDidLoad() {
@@ -43,14 +42,14 @@ class FindFoodViewController: UIViewController {
 
 extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return tableData.sectionTitles.count
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.dataSource[section].count
+        return presenter.tableData.dataSource[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = tableData.dataSource[indexPath.section][indexPath.row]
+        let data = presenter.tableData.dataSource[indexPath.section][indexPath.row]
         var cellIdentifier = "RadarMapCell"
         if data.templateStyle == .LeftRight {
             cellIdentifier = "FindFoodTableCell"
@@ -96,6 +95,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             case .Success:
                 presenter.searchMapCell?.stopRadarScanning()
                 if action.responseData?.count ?? 0 > 0 {
+                    presenter.searchResults = action.responseData!
                     appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
                 }
             case .Failed:
@@ -126,13 +126,24 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             }
         case is MapDidChangeVisibleRegionAction:
             presenter.searchMapCell?.updateRangeValue()
-            if presenter.searchMapCell?.mapZoomLevel() != presenter.mapZoomLevel {
-                presenter.mapZoomLevel = presenter.searchMapCell?.mapZoomLevel() ?? 16
+            if presenter.isFirsTimeEntrance {
+                presenter.isFirsTimeEntrance = false
+                return
             }
-        case is MapRegionDidChangeAction: break
+            if presenter.searchMapCell?.mapZoomLevel() != presenter.mapZoomLevel {
+                let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
+                appStore.dispatch(SearchNearbyAction(center: (presenter.searchMapCell?.centerCoordinate())!,
+                                                     range: presenter.searchRange(zoomLevel: level)))
+                presenter.mapZoomLevel = level
+            }
+        case is MKAnnotationDidSelectAction:
+            let action = state.currentAction as! MKAnnotationDidSelectAction
+            if presenter.searchResults.count > 0 {
+                presenter.tableData.reloadData(data: presenter.searchResults[action.selectedIndex]!)
+                tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+            }
         default: break
         }
     }
-    
     
 }

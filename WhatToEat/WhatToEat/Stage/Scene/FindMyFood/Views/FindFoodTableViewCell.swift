@@ -33,6 +33,7 @@ class FindFoodTableViewCell: LRTableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         createLeftView()
+        createRightView()
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -43,6 +44,31 @@ class FindFoodTableViewCell: LRTableViewCell {
     private func createLeftView() {
         let data = cellData!.leftCellProtocol as? LRLabelCellData
         cellLeftLabel.text = data?.labelText
+    }
+    private func createRightView() {
+        createTextLabelOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+    }
+    private func createTextLabelOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+        if cellRightView.subviews.count == 0 {
+            let data = cellProtocol as? LRLabelCellData
+            let textLabel = UILabel()
+            textLabel.translatesAutoresizingMaskIntoConstraints = false
+            textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            textLabel.font = UIFont.systemFont(ofSize: 14.0)
+            textLabel.text = data?.labelText
+            textLabel.numberOfLines = 0
+            textLabel.lineBreakMode = .byWordWrapping
+            var contentView : UIView? = nil
+            switch contentSide {
+            case .Left:
+                contentView = cellLeftView
+            case .Right:
+                contentView = cellRightView
+            }
+            contentView?.addSubview(textLabel)
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
+        }
     }
     
 }
@@ -212,8 +238,8 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
 //        leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
-        annotationViewTag += 1
         annotationView?.tag = annotationViewTag
+        annotationViewTag += 1
         return annotationView
     }
     
@@ -226,5 +252,9 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     //        }
             annotationViewTag = 0
             appStore.dispatch(MapDidAddAnnotationsAction())
-        }
+    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedAddress: nil))
+    }
+    
 }
