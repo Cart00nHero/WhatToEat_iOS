@@ -20,6 +20,8 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
       errors = nil
     }
 
+    let extensions = body["extensions"] as? JSONObject
+
     if let dataEntry = body["data"] as? JSONObject {
       let executor = GraphQLExecutor { object, info in
         return .result(.success(object[info.responseKeyForField]))
@@ -40,15 +42,17 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
         }.map { (data, records, dependentKeys) in
           (
             GraphQLResult(data: data,
-                         errors: errors,
-                         source: .server,
-                         dependentKeys: dependentKeys),
+                          extensions: extensions,
+                          errors: errors,
+                          source: .server,
+                          dependentKeys: dependentKeys),
             records
           )
       }
     } else {
       return Promise(fulfilled: (
         GraphQLResult(data: nil,
+                      extensions: extensions,
                       errors: errors,
                       source: .server,
                       dependentKeys: nil),
@@ -57,7 +61,7 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
     }
   }
 
-  func parseErrorsOnlyFast() -> [GraphQLError]? {
+  public func parseErrorsOnlyFast() -> [GraphQLError]? {
     guard let errorsEntry = self.body["errors"] as? [JSONObject] else {
       return nil
     }
@@ -65,8 +69,9 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
     return errorsEntry.map(GraphQLError.init)
   }
 
-  func parseResultFast() throws -> GraphQLResult<Data>  {
+  public func parseResultFast() throws -> GraphQLResult<Data>  {
     let errors = self.parseErrorsOnlyFast()
+    let extensions = body["extensions"] as? JSONObject
 
     if let dataEntry = body["data"] as? JSONObject {
       let data = try decode(selectionSet: Data.self,
@@ -74,11 +79,13 @@ public final class GraphQLResponse<Data: GraphQLSelectionSet> {
                             variables: variables)
 
       return GraphQLResult(data: data,
+                           extensions: extensions,
                            errors: errors,
                            source: .server,
                            dependentKeys: nil)
     } else {
       return GraphQLResult(data: nil,
+                           extensions: extensions,
                            errors: errors,
                            source: .server,
                            dependentKeys: nil)

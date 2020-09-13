@@ -9,7 +9,7 @@ target 'WhatToEat' do
   pod 'ReSwift'
   pod 'RealmSwift'
   pod 'Apollo'
-#  pod 'iOSDropDown'
+  pod 'iOSDropDown'
 #  pod 'ObjectMapper'
 
   target 'WhatToEatTests' do

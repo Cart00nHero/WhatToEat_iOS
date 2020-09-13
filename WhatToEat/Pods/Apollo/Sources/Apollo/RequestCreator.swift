@@ -1,4 +1,7 @@
 import Foundation
+#if !COCOAPODS
+import ApolloCore
+#endif
 
 public protocol RequestCreator {
   /// Creates a `GraphQLMap` out of the passed-in operation
@@ -64,17 +67,8 @@ extension RequestCreator {
         preconditionFailure("To enable `autoPersistQueries`, Apollo types must be generated with operationIdentifiers")
       }
 
-      let hash: String
-      if operation.operationDefinition == operation.queryDocument {
-        // The codegen had everything it needed to generate the hash
-        hash = operationIdentifier
-      } else {
-        // The codegen needed more info for the correct hash - regenerate it.
-        hash = operation.queryDocument.sha256Hash
-      }
-
       body["extensions"] = [
-        "persistedQuery" : ["sha256Hash": hash, "version": 1]
+        "persistedQuery" : ["sha256Hash": operationIdentifier, "version": 1]
       ]
     }
 
@@ -106,15 +100,15 @@ extension RequestCreator {
 
     // Make sure all fields for files are set to null, or the server won't look
     // for the files in the rest of the form data
-    let fieldsForFiles = Set(files.map { $0.fieldName })
+    let fieldsForFiles = Set(files.map { $0.fieldName }).sorted()
     var fields = requestBody(for: operation, sendOperationIdentifiers: sendOperationIdentifiers)
     var variables = fields["variables"] as? GraphQLMap ?? GraphQLMap()
     for fieldName in fieldsForFiles {
       if
         let value = variables[fieldName],
         let arrayValue = value as? [JSONEncodable] {
-        let updatedArray: [JSONEncodable?] = arrayValue.map { _ in nil }
-          variables.updateValue(updatedArray, forKey: fieldName)
+        let arrayOfNils: [JSONEncodable?] = arrayValue.map { _ in nil }
+          variables.updateValue(arrayOfNils, forKey: fieldName)
       } else {
         variables.updateValue(nil, forKey: fieldName)
       }
@@ -124,20 +118,33 @@ extension RequestCreator {
     let operationData = try serializationFormat.serialize(value: fields)
     formData.appendPart(data: operationData, name: "operations")
 
+    // If there are multiple files for the same field, make sure to include them with indexes for the field. If there are multiple files for different fields, just use the field name.
     var map = [String: [String]]()
-    if files.count == 1 {
-      let firstFile = files.first!
-      map["0"] = ["variables.\(firstFile.fieldName)"]
-    } else {
-      for (index, file) in files.enumerated() {
-        map["\(index)"] = ["variables.\(file.fieldName).\(index)"]
+    var currentIndex = 0
+    
+    var sortedFiles = [GraphQLFile]()
+    for fieldName in fieldsForFiles {
+      let filesForField = files.filter { $0.fieldName == fieldName }
+      if filesForField.count == 1 {
+        let firstFile = filesForField.first!
+        map["\(currentIndex)"] = ["variables.\(firstFile.fieldName)"]
+        sortedFiles.append(firstFile)
+        currentIndex += 1
+      } else {
+        for (index, file) in filesForField.enumerated() {
+          map["\(currentIndex)"] = ["variables.\(file.fieldName).\(index)"]
+          sortedFiles.append(file)
+          currentIndex += 1
+        }
       }
     }
+    
+    assert(sortedFiles.count == files.count, "Number of sorted files did not equal the number of incoming files - some field name has been left out.")
 
     let mapData = try serializationFormat.serialize(value: map)
     formData.appendPart(data: mapData, name: "map")
 
-    for (index, file) in files.enumerated() {
+    for (index, file) in sortedFiles.enumerated() {
       formData.appendPart(inputStream: try file.generateInputStream(),
                           contentLength: file.contentLength,
                           name: "\(index)",

@@ -1,20 +1,18 @@
 PODS:
-  - Apollo (0.27.1):
-    - Apollo/Core (= 0.27.1)
-  - Apollo/Core (0.27.1)
+  - Apollo (0.32.1):
+    - Apollo/Core (= 0.32.1)
+  - Apollo/Core (0.32.1)
   - iOSDropDown (0.3.4)
-  - ObjectMapper (4.2.0)
-  - Realm (5.0.0):
-    - Realm/Headers (= 5.0.0)
-  - Realm/Headers (5.0.0)
-  - RealmSwift (5.0.0):
-    - Realm (= 5.0.0)
+  - Realm (5.4.0):
+    - Realm/Headers (= 5.4.0)
+  - Realm/Headers (5.4.0)
+  - RealmSwift (5.4.0):
+    - Realm (= 5.4.0)
   - ReSwift (5.0.0)
 
 DEPENDENCIES:
   - Apollo
   - iOSDropDown
-  - ObjectMapper
   - RealmSwift
   - ReSwift
 
@@ -22,19 +20,17 @@ SPEC REPOS:
   trunk:
     - Apollo
     - iOSDropDown
-    - ObjectMapper
     - Realm
     - RealmSwift
     - ReSwift
 
 SPEC CHECKSUMS:
-  Apollo: e5c057c155bf28bcfbf928e0d69e3ce643f1a1c6
+  Apollo: 55d9a99774dd06dd6cc865d16a6c13d0d6804211
   iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
-  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
-  Realm: 76066d333de26f97e9caedaa85ee3ff4a62ca265
-  RealmSwift: c1bdff09b422569dc6881410d9ccf712bcdb79b0
+  Realm: 8949757d76e2451a53d727954c607e49c2542b77
+  RealmSwift: 0b7d7121e842724188123c6086831ae6d2952050
   ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
 
-PODFILE CHECKSUM: e0c5dfd69ec1ed7f1462aa0f8ad1f16a03e996d7
+PODFILE CHECKSUM: b949b795ba1301af411b1eaca68a0ff5481f0f5c
 
 COCOAPODS: 1.8.4

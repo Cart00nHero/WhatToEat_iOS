@@ -1,3 +1,7 @@
+#if !COCOAPODS
+import ApolloCore
+#endif
+
 public typealias ResultMap = [String: Any?]
 
 public protocol GraphQLSelectionSet {
@@ -56,7 +60,7 @@ public struct GraphQLField: GraphQLSelection {
   func cacheKey(with variables: [String: JSONEncodable]?) throws -> String {
     if
       let argumentValues = try arguments?.evaluate(with: variables),
-      argumentValues.isNotEmpty {
+      argumentValues.apollo.isNotEmpty {
         let argumentsKey = orderIndependentKey(for: argumentValues)
         return "\(name)(\(argumentsKey))"
     } else {
@@ -85,6 +89,8 @@ private func orderIndependentKey(for object: JSONObject) -> String {
   return object.sorted { $0.key < $1.key }.map {
     if let object = $0.value as? JSONObject {
       return "[\($0.key):\(orderIndependentKey(for: object))]"
+    } else if let array = $0.value as? [JSONObject] {
+      return "\($0.key):[\(array.map { orderIndependentKey(for: $0) }.joined(separator: ","))]"
     } else {
       return "\($0.key):\($0.value)"
     }
