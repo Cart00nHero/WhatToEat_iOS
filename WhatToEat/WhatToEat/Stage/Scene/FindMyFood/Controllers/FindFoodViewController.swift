@@ -58,7 +58,7 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
             tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "RadarMapCell" {
             let contentCell = cell as? RadarMapTableViewCell
-            contentCell?.startRadarScanning()
+            contentCell?.stopRadarScanning()
         }else {
             let contentCell = cell as? FindFoodTableViewCell
             contentCell?.cellData = data as? LRCellData
@@ -74,10 +74,17 @@ extension FindFoodViewController: DefaultTemplateDelegate {
         case is TableCellDidLayoutSubviewsAction:
             let action = state.currentAction as! TableCellDidLayoutSubviewsAction
             presenter.searchMapCell = action.cell as? RadarMapTableViewCell
+            if presenter.currentLoc != nil {
+                presenter.searchMapCell?.startRadarScanning()
+                let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
+                appStore.dispatch(SearchNearbyAction(center: (presenter.searchMapCell?.centerCoordinate())!,
+                                                     range: presenter.searchRange(zoomLevel: level)))
+            }
         case is TableCellButtonClickAction:
             LocationMaster.shared.requestCurrentLocation()
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
+            presenter.searchMapCell?.startRadarScanning()
             switch action.status {
             case .DidUpdateLocation:
                 if action.locations?.count ?? 0 > 0 {
@@ -106,8 +113,10 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! MarkRangeSearchDataAction
             presenter.searchMapCell?.stopRadarScanning()
             if action.status == .Completed {
+                presenter.searchMapCell?.removeAllMapAnnotations()
+                presenter.annotations.removeAll()
                 presenter.annotations = action.annotations
-                presenter.searchMapCell?.showAnnotationsOnMap(annotations: action.annotations, animated: false)
+                presenter.searchMapCell?.showAnnotationsOnMap(annotations: presenter.annotations, animated: false)
             }
         case is MapWillAddAnnotationsAction:
             presenter.willMarkAnnotations = true
@@ -118,6 +127,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             }
         case is ReceivedGestureRecognizerAction:
             if presenter.isNeedUpdating() {
+                clearApolloServiceCache()
                 presenter.searchMapCell?.startRadarScanning()
                 let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
                 appStore.dispatch(SearchNearbyAction(center: (presenter.searchMapCell?.centerCoordinate())!,
@@ -131,6 +141,8 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 return
             }
             if presenter.searchMapCell?.mapZoomLevel() != presenter.mapZoomLevel {
+                clearApolloServiceCache()
+                presenter.searchMapCell?.startRadarScanning()
                 let level = presenter.searchMapCell?.mapZoomLevel() ?? 16
                 appStore.dispatch(SearchNearbyAction(center: (presenter.searchMapCell?.centerCoordinate())!,
                                                      range: presenter.searchRange(zoomLevel: level)))
