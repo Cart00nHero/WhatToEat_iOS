@@ -15,9 +15,9 @@ class RadarScanView: XibSetupView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.view.backgroundColor = self.backgroundColor
-        self.layer.borderColor = self.layer.borderColor
-        self.view.layer.cornerRadius = self.view.bounds.size.height/2;
+        self.backgroundColor = self.view.backgroundColor
+        self.layer.borderColor = self.view.layer.borderColor
+        self.layer.cornerRadius = self.view.bounds.size.height/2;
         self.layer.cornerRadius = self.view.layer.cornerRadius;
         
         centerDot.backgroundColor = UIColor(red: 73.0/255.0, green: 143.0/255.0, blue: 225.0/255.0, alpha: 0.45)

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17124"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,14 +24,14 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="NHs-7x-1gb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Qdk-IW-GKk" firstAttribute="top" secondItem="NHs-7x-1gb" secondAttribute="top" id="DWg-mq-PVY"/>
                             <constraint firstAttribute="bottom" secondItem="Qdk-IW-GKk" secondAttribute="bottom" id="Gcp-eG-f7v"/>
                             <constraint firstItem="Qdk-IW-GKk" firstAttribute="leading" secondItem="NHs-7x-1gb" secondAttribute="leading" id="hhb-Fi-7WX"/>
                             <constraint firstItem="Qdk-IW-GKk" firstAttribute="trailing" secondItem="NHs-7x-1gb" secondAttribute="trailing" id="rWF-pB-ELF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="NHs-7x-1gb"/>
                     </view>
                     <navigationItem key="navigationItem" id="r2G-RA-4IK"/>
                     <connections>
@@ -92,7 +94,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" title="1.0km" backgroundImage="Icon_Range_Bg">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="titleColor" systemColor="darkTextColor"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lWa-xn-Idm">
@@ -103,7 +105,7 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <state key="normal" image="Icon_Locate_Off">
-                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <color key="titleColor" systemColor="darkTextColor"/>
                                                     </state>
                                                     <state key="selected" image="Icon_Locate_On"/>
                                                     <connections>
@@ -187,6 +189,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3m5-4y-Q3z"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Zdk-g1-QPB" firstAttribute="top" secondItem="3m5-4y-Q3z" secondAttribute="top" id="3UI-V8-Bd8"/>
@@ -194,7 +197,6 @@
                             <constraint firstItem="Zdk-g1-QPB" firstAttribute="trailing" secondItem="3m5-4y-Q3z" secondAttribute="trailing" id="NX0-ps-Kka"/>
                             <constraint firstItem="Zdk-g1-QPB" firstAttribute="leading" secondItem="3m5-4y-Q3z" secondAttribute="leading" id="dgN-qC-y91"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3m5-4y-Q3z"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Zdk-g1-QPB" id="0Nb-6i-fdf"/>
@@ -206,9 +208,21 @@
             <point key="canvasLocation" x="984.79999999999995" y="-43.628185907046479"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="vt7-Fb-f5W"/>
+    </designables>
     <resources>
         <image name="Icon_Locate_Off" width="41" height="41"/>
         <image name="Icon_Locate_On" width="41" height="41"/>
         <image name="Icon_Range_Bg" width="41" height="41"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

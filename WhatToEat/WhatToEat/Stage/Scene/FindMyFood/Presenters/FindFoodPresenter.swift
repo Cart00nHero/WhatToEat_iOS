@@ -83,7 +83,27 @@ struct FindFoodTableData {
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
                            rightCellProtocol: LRLabelCellData(labelText: (dataObj.shopBranch?.tel ?? "") )),
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? ""))
+                rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? "")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test")),
+                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
+                rightCellProtocol: LRLabelCellData(labelText: "Test"))
             ]
         ]
     }

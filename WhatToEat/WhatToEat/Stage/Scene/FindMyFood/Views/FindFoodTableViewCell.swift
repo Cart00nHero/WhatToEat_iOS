@@ -76,10 +76,11 @@ class FindFoodTableViewCell: LRTableViewCell {
 // MARK: - RadarMapTableViewCell
 class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     
-    @IBOutlet weak var mkMapView: MKMapView!
+    @IBOutlet weak private var mkMapView: MKMapView!
     @IBOutlet weak private var radarView: RadarScanView!
     @IBOutlet weak private var rangeButton: UIButton!
     private var annotationViewTag: Int = 0
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -93,8 +94,6 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(receivePanGestureRecognizer(sender:)))
-        mkMapView.addGestureRecognizer(panGesture)
         mkMapView.delegate = self
         appStore.dispatch(TableCellDidLayoutSubviewsAction(cell: self))
     }
@@ -175,8 +174,8 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
         mkMapView.showAnnotations(annotations, animated: animated)
     }
     
-    func removeAllMapAnnotations(annotations: [MKPointAnnotation]) {
-        mkMapView.removeAnnotations(annotations)
+    func removeAllMapAnnotations() {
+        mkMapView.removeAnnotations(mkMapView.annotations)
     }
     
     
