@@ -12,21 +12,20 @@ import MapKit
 class FindFoodViewController: UIViewController {
     
     @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak private var mkMapView: MKMapView!
     @IBOutlet weak private var radarView: RadarScanView!
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
     private var annotationViewTag: Int = 0
     
+    
     private var defaultTemplate: DefaultVCTemplate? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mkMapView.delegate = self
-        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
-        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
-        LocationMaster.shared.requestCurrentLocation()
+        initialViewContorller()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,6 +39,14 @@ class FindFoodViewController: UIViewController {
         defaultTemplate?.title = "Find My Food"
     }
     
+    private func initialViewContorller() {
+        mkMapView.delegate = self
+        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
+        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
+        LocationMaster.shared.requestCurrentLocation()
+        
+        tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
+    }
     private func updateRangeValue() {
         let zoomLevel = mkMapView.zoomLevel
         if zoomLevel >= 17 {
@@ -70,10 +77,10 @@ class FindFoodViewController: UIViewController {
 
 extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return presenter.tableData.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -126,13 +133,6 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 presenter.annotations.removeAll()
                 presenter.annotations = action.annotations
                 MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
-            }
-        case is ReceivedGestureRecognizerAction:
-            if presenter.isNeedUpdating() {
-                clearApolloServiceCache()
-                radarView.startRadarAnimation()
-                let level = mkMapView.zoomLevel
-                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
             }
         default: break
         }
@@ -205,6 +205,15 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        let distance =
+            calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
+        let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
+        if distance > searchingDistance {
+            clearApolloServiceCache()
+            radarView.startRadarAnimation()
+            let level = mkMapView.zoomLevel
+            appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
+        }
         return true
     }
 }

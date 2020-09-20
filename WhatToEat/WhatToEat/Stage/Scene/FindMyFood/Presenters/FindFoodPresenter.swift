@@ -56,19 +56,6 @@ class FindFoodPresenter: NSObject {
         return 1.0
     }
     
-    func isNeedUpdating() -> Bool {
-        //        let distance = calculateCoordinateDistance(from: centerCoordinate!, to: (searchMapCell?.centerCoordinate())!)
-        //        let searchingDistance = (searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16)*1000)*2
-        //
-        //        if searchMapCell?.mapZoomLevel() == mapZoomLevel {
-        //            if distance > searchingDistance {
-        //                return true
-        //            }
-        //            return false
-        //        }
-        
-        return true
-    }
 }
 
 struct FindFoodTableData {
