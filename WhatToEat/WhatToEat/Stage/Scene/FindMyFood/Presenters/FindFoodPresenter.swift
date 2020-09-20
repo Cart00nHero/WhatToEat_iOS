@@ -13,13 +13,34 @@ class FindFoodPresenter: NSObject {
     
     var isFirsTimeEntrance = true
     var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
-    var searchMapCell: RadarMapTableViewCell? = nil
     var currentLoc: CLLocation? = nil
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
     var mapZoomLevel: Int = 16
     var willMarkAnnotations = false
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
+    
+    func setMapZoomLevel(mapView: MKMapView, level: Int,center: CLLocationCoordinate2D) {
+        
+        let region = MKCoordinateRegion( center: center,
+                                         latitudinalMeters: CLLocationDistance(exactly: regionDistance(zoomLevel: level))!,
+                                         longitudinalMeters: CLLocationDistance(exactly: regionDistance(zoomLevel: level))!)
+        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+    }
+    
+    private func regionDistance(zoomLevel: Int) -> Float64 {
+        if zoomLevel >= 17 {
+            return 400.0
+        }
+        
+        if zoomLevel == 16 {
+            return 1000.0
+        }
+        if zoomLevel <= 15 {
+            return 2000.0
+        }
+        return 1000.0
+    }
     
     func searchRange(zoomLevel: Int) -> Float64 {
         // KM
@@ -36,15 +57,15 @@ class FindFoodPresenter: NSObject {
     }
     
     func isNeedUpdating() -> Bool {
-        let distance = calculateCoordinateDistance(from: centerCoordinate!, to: (searchMapCell?.centerCoordinate())!)
-        let searchingDistance = (searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16)*1000)*2
-        
-        if searchMapCell?.mapZoomLevel() == mapZoomLevel {
-            if distance > searchingDistance {
-                return true
-            }
-            return false
-        }
+//        let distance = calculateCoordinateDistance(from: centerCoordinate!, to: (searchMapCell?.centerCoordinate())!)
+//        let searchingDistance = (searchRange(zoomLevel: searchMapCell?.mapZoomLevel() ?? 16)*1000)*2
+//
+//        if searchMapCell?.mapZoomLevel() == mapZoomLevel {
+//            if distance > searchingDistance {
+//                return true
+//            }
+//            return false
+//        }
         
         return true
     }
@@ -64,7 +85,6 @@ struct FindFoodTableData {
     }
     private func createDataSource() -> Array<Array<CellDataProtocol>> {
         return [
-            [RadarMapTableData()],
             [
                 LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
                            rightCellProtocol: LRLabelCellData(labelText: self.dataObj.shopBranch?.shop?.title ?? "")),
