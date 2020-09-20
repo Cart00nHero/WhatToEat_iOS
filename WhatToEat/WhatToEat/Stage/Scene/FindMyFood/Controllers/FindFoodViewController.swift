@@ -146,21 +146,27 @@ extension FindFoodViewController: DefaultTemplateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        NSLog("Test regionWillChangeAnimated")
-        if presenter.mapZoomLevel != mapView.zoomLevel {
-            presenter.mapZoomLevel = mapView.zoomLevel
+        if presenter.zoomStatus == .LevelChanged {
+            presenter.zoomStatus = .None
+            presenter.setMapZoomLevel(mapView: mapView,
+                                      level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
         }
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        NSLog("Test mapViewDidChangeVisibleRegion")
+        updateRangeValue()
         if presenter.isFirsTimeEntrance {
             return
         }
-        if presenter.mapZoomLevel != mkMapView.zoomLevel {
-            clearApolloServiceCache()
-            let level = mapView.zoomLevel
-            appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
-            updateRangeValue()
+        if presenter.isRangeChanged(currentLevel: mapView.zoomLevel) {
+            presenter.mapZoomLevel = mapView.zoomLevel
+            if presenter.zoomStatus == .FingersTouched {
+                presenter.zoomStatus = .LevelChanged
+                clearApolloServiceCache()
+                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
+                                                     range: presenter.searchRange(zoomLevel: mapView.zoomLevel)))
+            }
+        } else {
+            presenter.zoomStatus = .None
         }
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -192,12 +198,12 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
+            annotationView?.tag = annotationViewTag
+            annotationViewTag += 1
         }
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
 //        leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
-        annotationView?.tag = annotationViewTag
-        annotationViewTag += 1
         return annotationView
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
@@ -206,7 +212,6 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
             MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
             presenter.willMarkAnnotations = false
         }
-        NSLog("Test didAdd")
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if presenter.searchResults.count > 0 {
@@ -216,7 +221,11 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        if gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UILongPressGestureRecognizer {
+        if gestureRecognizer is UIPanGestureRecognizer {
+            if gestureRecognizer.numberOfTouches == 2 {
+                presenter.zoomStatus = .FingersTouched
+                return true
+            }
             let distance =
                 calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
             let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
@@ -224,7 +233,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
                 clearApolloServiceCache()
                 radarView.startRadarAnimation()
                 let level = mkMapView.zoomLevel
-                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
+                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
         }

@@ -11,14 +11,20 @@ import MapKit
 
 class FindFoodPresenter: NSObject {
     
+    enum MapZoomStus {
+        case None,FingersTouched,LevelChanged
+    }
+    
     var isFirsTimeEntrance = true
+    var willMarkAnnotations = false
     var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
     var currentLoc: CLLocation? = nil
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
     var mapZoomLevel: Int = 16
-    var willMarkAnnotations = false
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
+    var zoomStatus: MapZoomStus = .None
+    
     
     func setMapZoomLevel(mapView: MKMapView, level: Int,center: CLLocationCoordinate2D) {
         
@@ -40,6 +46,14 @@ class FindFoodPresenter: NSObject {
             return 1.0
         }
         return 1.0
+    }
+    func isRangeChanged(currentLevel: Int) -> Bool {
+        let previous = searchRange(zoomLevel: mapZoomLevel)
+        let current = searchRange(zoomLevel: currentLevel)
+        if previous != current {
+            return true
+        }
+        return false
     }
     
     private func regionDistance(zoomLevel: Int) -> Float64 {
