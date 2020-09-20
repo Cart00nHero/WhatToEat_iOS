@@ -74,6 +74,7 @@ class FindFoodTableViewCell: LRTableViewCell {
 }
 
 // MARK: - RadarMapTableViewCell
+/*
 class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     
     @IBOutlet weak private var mkMapView: MKMapView!
@@ -257,3 +258,4 @@ class RadarMapTableViewCell: UITableViewCell, MKMapViewDelegate {
     }
     
 }
+*/

@@ -36,17 +36,19 @@ class XibSetupView: UIView {
     }
 
     func xibSetup() {
-        view = loadViewFromNib()
+        if self.subviews.count == 0 {
+            view = loadViewFromNib()
 
-        // use bounds not frame or it'll be offset
-        self.view.frame = self.bounds
-        self.icSize = self.bounds.size
+            // use bounds not frame or it'll be offset
+            self.view.frame = self.bounds
+            self.icSize = self.bounds.size
 
-        // Make the view stretch with containing view
-        view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+            // Make the view stretch with containing view
+            view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
 
-        // Adding custom subview on top of our view (over any custom drawing > see note below)
-        addSubview(view)
+            // Adding custom subview on top of our view (over any custom drawing > see note below)
+            addSubview(view)
+        }
     }
 
     func loadViewFromNib() -> UIView {
