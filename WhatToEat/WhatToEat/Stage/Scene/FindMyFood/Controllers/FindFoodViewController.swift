@@ -49,16 +49,17 @@ class FindFoodViewController: UIViewController {
     }
     
     private func updateRangeValue() {
-        if presenter.mapZoomLevel >= 17 {
+        let level = mkMapView.zoomLevel
+        if level >= 17 {
             rangeButton.setTitle("0.2KM", for: .normal)
             return
         }
         
-        if presenter.mapZoomLevel == 16 {
+        if level == 16 {
             rangeButton.setTitle("0.5KM", for: .normal)
             return
         }
-        if presenter.mapZoomLevel <= 15 {
+        if level <= 15 {
             rangeButton.setTitle("1.0KM", for: .normal)
             return
         }
@@ -145,18 +146,21 @@ extension FindFoodViewController: DefaultTemplateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        NSLog("Level:%zd", mapView.zoomLevel)
+        NSLog("Test regionWillChangeAnimated")
+        if presenter.mapZoomLevel != mapView.zoomLevel {
+            presenter.mapZoomLevel = mapView.zoomLevel
+        }
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        updateRangeValue()
+        NSLog("Test mapViewDidChangeVisibleRegion")
         if presenter.isFirsTimeEntrance {
             return
         }
         if presenter.mapZoomLevel != mkMapView.zoomLevel {
             clearApolloServiceCache()
-            let level = mkMapView.zoomLevel
+            let level = mapView.zoomLevel
             appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
-            presenter.mapZoomLevel = mkMapView.zoomLevel
+            updateRangeValue()
         }
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -202,6 +206,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
             MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
             presenter.willMarkAnnotations = false
         }
+        NSLog("Test didAdd")
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if presenter.searchResults.count > 0 {
