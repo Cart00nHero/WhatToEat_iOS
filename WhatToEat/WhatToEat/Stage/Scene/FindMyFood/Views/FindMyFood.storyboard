@@ -79,6 +79,10 @@
                                                 <subviews>
                                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TTS-eq-LR8">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                        <gestureRecognizers/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="JYo-Kh-Bfb" appends="YES" id="XrF-H6-8wo"/>
+                                                        </connections>
                                                     </mapView>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LuD-wx-Sqw" customClass="RadarScanView" customModule="WhatToEat" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
@@ -232,6 +236,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ax0-SL-sE3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="JYo-Kh-Bfb">
+                    <connections>
+                        <outlet property="delegate" destination="92u-bM-Mag" id="MuO-cV-7fv"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="980" y="-43"/>
         </scene>

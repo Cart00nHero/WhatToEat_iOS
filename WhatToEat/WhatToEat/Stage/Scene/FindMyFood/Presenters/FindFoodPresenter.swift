@@ -28,20 +28,6 @@ class FindFoodPresenter: NSObject {
         mapView.setRegion(mapView.regionThatFits(region), animated: true)
     }
     
-    private func regionDistance(zoomLevel: Int) -> Float64 {
-        if zoomLevel >= 17 {
-            return 400.0
-        }
-        
-        if zoomLevel == 16 {
-            return 1000.0
-        }
-        if zoomLevel <= 15 {
-            return 2000.0
-        }
-        return 1000.0
-    }
-    
     func searchRange(zoomLevel: Int) -> Float64 {
         // KM
         if zoomLevel >= 17 {
@@ -54,6 +40,20 @@ class FindFoodPresenter: NSObject {
             return 1.0
         }
         return 1.0
+    }
+    
+    private func regionDistance(zoomLevel: Int) -> Float64 {
+        if zoomLevel >= 17 {
+            return 400.0
+        }
+        
+        if zoomLevel == 16 {
+            return 1000.0
+        }
+        if zoomLevel <= 15 {
+            return 2000.0
+        }
+        return 1000.0
     }
     
 }

@@ -43,7 +43,7 @@ func createMapAnnotationsAction(inputObj: [GQInputObject]) -> CreateMapAnnotatio
     }
     return action
 }
-struct RegionWillChangeAction: Action{
+struct MapRegionWillChangeAction: Action{
 }
 struct MapRegionDidChangeAction: Action {
 }

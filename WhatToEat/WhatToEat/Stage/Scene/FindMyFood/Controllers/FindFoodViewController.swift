@@ -47,18 +47,18 @@ class FindFoodViewController: UIViewController {
         
         tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
     }
+    
     private func updateRangeValue() {
-        let zoomLevel = mkMapView.zoomLevel
-        if zoomLevel >= 17 {
+        if presenter.mapZoomLevel >= 17 {
             rangeButton.setTitle("0.2KM", for: .normal)
             return
         }
         
-        if zoomLevel == 16 {
+        if presenter.mapZoomLevel == 16 {
             rangeButton.setTitle("0.5KM", for: .normal)
             return
         }
-        if zoomLevel <= 15 {
+        if presenter.mapZoomLevel <= 15 {
             rangeButton.setTitle("1.0KM", for: .normal)
             return
         }
@@ -106,13 +106,16 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 if action.locations?.count ?? 0 > 0 {
                     presenter.currentLoc = action.locations?.first
                     presenter.centerCoordinate = presenter.currentLoc?.coordinate
-                    presenter.setMapZoomLevel(mapView: mkMapView, level: 16, center: presenter.centerCoordinate!)
                     appStore.dispatch(SearchNearbyAction(center: presenter.centerCoordinate!,
-                                                         range: presenter.searchRange(zoomLevel: 16)))
+                                                         range: presenter.searchRange(zoomLevel: 17)))
                 }
             default: break
             }
         case is SearchInRangeAction:
+            if presenter.isFirsTimeEntrance {
+                presenter.isFirsTimeEntrance = false
+                return
+            }
             let action = state.currentAction as! SearchInRangeAction
             switch action.status {
             case .Success:
@@ -141,17 +144,19 @@ extension FindFoodViewController: DefaultTemplateDelegate {
 }
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        NSLog("Level:%zd", mapView.zoomLevel)
+    }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         updateRangeValue()
         if presenter.isFirsTimeEntrance {
-            presenter.isFirsTimeEntrance = false
             return
         }
-        if mkMapView.zoomLevel != presenter.mapZoomLevel {
+        if presenter.mapZoomLevel != mkMapView.zoomLevel {
             clearApolloServiceCache()
             let level = mkMapView.zoomLevel
             appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
-            presenter.mapZoomLevel = level
+            presenter.mapZoomLevel = mkMapView.zoomLevel
         }
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -201,18 +206,22 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if presenter.searchResults.count > 0 {
             presenter.tableData.reloadData(data: presenter.searchResults[view.tag]!)
-            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+            tableView.reloadData()
+//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         }
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let distance =
-            calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
-        let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
-        if distance > searchingDistance {
-            clearApolloServiceCache()
-            radarView.startRadarAnimation()
-            let level = mkMapView.zoomLevel
-            appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
+        if gestureRecognizer is UIPanGestureRecognizer || gestureRecognizer is UILongPressGestureRecognizer {
+            let distance =
+                calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
+            let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
+            if distance > searchingDistance {
+                clearApolloServiceCache()
+                radarView.startRadarAnimation()
+                let level = mkMapView.zoomLevel
+                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
+            }
+            presenter.centerCoordinate = mkMapView.camera.centerCoordinate
         }
         return true
     }
