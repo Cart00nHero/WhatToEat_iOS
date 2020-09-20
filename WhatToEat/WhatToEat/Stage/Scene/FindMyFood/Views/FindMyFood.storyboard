@@ -232,6 +232,9 @@
             <point key="canvasLocation" x="980" y="-43"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="LuD-wx-Sqw"/>
+    </designables>
     <resources>
         <image name="Icon_Locate_Off" width="41" height="41"/>
         <image name="Icon_Locate_On" width="41" height="41"/>

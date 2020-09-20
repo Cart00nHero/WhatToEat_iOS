@@ -73,11 +73,11 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.tableData.dataSource[section].count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = presenter.tableData.dataSource[indexPath.section][indexPath.row]
+        let data = presenter.tableData.dataSource[indexPath.row]
         let cellIdentifier = "FindFoodTableCell"
         let cell =
             tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FindFoodTableViewCell
@@ -134,19 +134,13 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 let level = mkMapView.zoomLevel
                 appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: Float64(level)))
             }
-        case is MKAnnotationDidSelectAction:
-            let action = state.currentAction as! MKAnnotationDidSelectAction
-            if presenter.searchResults.count > 0 {
-                presenter.tableData.reloadData(data: presenter.searchResults[action.selectedIndex]!)
-                tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
-            }
         default: break
         }
     }
     
 }
 
-extension FindFoodViewController: MKMapViewDelegate {
+extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         updateRangeValue()
         if presenter.isFirsTimeEntrance {
@@ -203,5 +197,14 @@ extension FindFoodViewController: MKMapViewDelegate {
             MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
             presenter.willMarkAnnotations = false
         }
+    }
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        if presenter.searchResults.count > 0 {
+            presenter.tableData.reloadData(data: presenter.searchResults[view.tag]!)
+            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        }
+    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
