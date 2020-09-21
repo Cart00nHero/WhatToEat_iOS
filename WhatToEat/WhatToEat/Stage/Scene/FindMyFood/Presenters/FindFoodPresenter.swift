@@ -21,7 +21,8 @@ class FindFoodPresenter: NSObject {
     var currentLoc: CLLocation? = nil
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
-    var mapZoomLevel: Int = 16
+    var mapZoomLevel: Int = 17
+    var preZoomLevel: Int = 17
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
     var zoomStatus: MapZoomStus = .None
     
@@ -47,10 +48,8 @@ class FindFoodPresenter: NSObject {
         }
         return 1.0
     }
-    func isRangeChanged(currentLevel: Int) -> Bool {
-        let previous = searchRange(zoomLevel: mapZoomLevel)
-        let current = searchRange(zoomLevel: currentLevel)
-        if previous != current {
+    func isRangeChanged() -> Bool {
+        if preZoomLevel != mapZoomLevel {
             return true
         }
         return false
@@ -103,27 +102,7 @@ struct FindFoodTableData {
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
                        rightCellProtocol: LRLabelCellData(labelText: (dataObj.shopBranch?.tel ?? "") )),
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                       rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? "")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test")),
-            LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Test"),
-                       rightCellProtocol: LRLabelCellData(labelText: "Test"))
+                       rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? ""))
         ]
     }
 }
