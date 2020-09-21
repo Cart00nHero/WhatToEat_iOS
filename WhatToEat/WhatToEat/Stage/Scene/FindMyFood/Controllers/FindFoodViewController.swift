@@ -51,15 +51,18 @@ class FindFoodViewController: UIViewController {
     private func updateRangeValue() {
         let level = mkMapView.zoomLevel
         if level >= 17 {
+            presenter.mapZoomLevel = 17
             rangeButton.setTitle("0.2KM", for: .normal)
             return
         }
         
         if level == 16 {
+            presenter.mapZoomLevel = 16
             rangeButton.setTitle("0.5KM", for: .normal)
             return
         }
         if level <= 15 {
+            presenter.mapZoomLevel = 15
             rangeButton.setTitle("1.0KM", for: .normal)
             return
         }
@@ -154,6 +157,25 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
+        case is MapRegionWillChangeAction:
+            if presenter.zoomStatus == .LevelChanged {
+                presenter.zoomStatus = .None
+                presenter.setMapZoomLevel(mapView: mkMapView,
+                                          level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
+            }
+        case is MapDidChangeVisibleRegionAction:
+            updateRangeValue()
+            if presenter.isFirsTimeEntrance {
+                return
+            }
+            if presenter.isRangeChanged(currentLevel: mkMapView.zoomLevel) {
+                if presenter.zoomStatus == .FingersTouched {
+                    presenter.zoomStatus = .LevelChanged
+                    clearApolloServiceCache()
+                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
+                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
+                }
+            }
         default: break
         }
     }
@@ -162,26 +184,11 @@ extension FindFoodViewController: DefaultTemplateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        if presenter.zoomStatus == .LevelChanged {
-            presenter.zoomStatus = .None
-            presenter.setMapZoomLevel(mapView: mapView,
-                                      level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
-        }
+        NSLog("Will:%zd", mapView.zoomLevel)
+        appStore.dispatch(MapRegionWillChangeAction())
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        updateRangeValue()
-        if presenter.isFirsTimeEntrance {
-            return
-        }
-        if presenter.isRangeChanged(currentLevel: mapView.zoomLevel) {
-            presenter.mapZoomLevel = mapView.zoomLevel
-            if presenter.zoomStatus == .FingersTouched {
-                presenter.zoomStatus = .LevelChanged
-                clearApolloServiceCache()
-                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
-                                                     range: presenter.searchRange(zoomLevel: mapView.zoomLevel)))
-            }
-        }
+        appStore.dispatch(MapDidChangeVisibleRegionAction())
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.

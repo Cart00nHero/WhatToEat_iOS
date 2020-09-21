@@ -50,8 +50,6 @@ class FindFoodPresenter: NSObject {
     func isRangeChanged(currentLevel: Int) -> Bool {
         let previous = searchRange(zoomLevel: mapZoomLevel)
         let current = searchRange(zoomLevel: currentLevel)
-        NSLog("previous:%lf", previous)
-        NSLog("current:%lf", current)
         if previous != current {
             return true
         }
