@@ -138,6 +138,22 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 presenter.annotations = action.annotations
                 MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
             }
+        case is UIPanGestureRecognizerAction:
+            let action = state.currentAction as! UIPanGestureRecognizerAction
+            if action.sender.numberOfTouches >= 2 {
+                presenter.zoomStatus = .FingersTouched
+                return
+            }
+            let distance =
+                calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
+            let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
+            if distance > searchingDistance {
+                clearApolloServiceCache()
+                radarView.startRadarAnimation()
+                let level = mkMapView.zoomLevel
+                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
+            }
+            presenter.centerCoordinate = mkMapView.camera.centerCoordinate
         default: break
         }
     }
@@ -165,8 +181,6 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
                 appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
                                                      range: presenter.searchRange(zoomLevel: mapView.zoomLevel)))
             }
-        } else {
-            presenter.zoomStatus = .None
         }
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -222,20 +236,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {
-            if gestureRecognizer.numberOfTouches == 2 {
-                presenter.zoomStatus = .FingersTouched
-                return true
-            }
-            let distance =
-                calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
-            let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
-            if distance > searchingDistance {
-                clearApolloServiceCache()
-                radarView.startRadarAnimation()
-                let level = mkMapView.zoomLevel
-                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
-            }
-            presenter.centerCoordinate = mkMapView.camera.centerCoordinate
+            let gesture = gestureRecognizer as! UIPanGestureRecognizer
+            appStore.dispatch(UIPanGestureRecognizerAction(sender: gesture))
         }
         return true
     }
