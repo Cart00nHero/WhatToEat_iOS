@@ -40,6 +40,8 @@
 		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
 		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
 		AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0E248055E700ED4BB1 /* StructObserver.swift */; };
+		AF4290092519D3F7007903F8 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4290082519D3F7007903F8 /* NavigationViewController.swift */; };
+		AF42900E2519E6A4007903F8 /* NavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */; };
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
 		AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D55247AA79E00A8625D /* LRTableData.swift */; };
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
@@ -133,6 +135,8 @@
 		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
 		AF40DC0E248055E700ED4BB1 /* StructObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
+		AF4290082519D3F7007903F8 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPresenter.swift; sourceTree = "<group>"; };
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
 		AF550D55247AA79E00A8625D /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
@@ -365,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				AF5A833D24ADF39E008ECAF7 /* FindFoodPresenter.swift */,
+				AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 			isa = PBXGroup;
 			children = (
 				AF8224502472F21D0034C928 /* FindFoodViewController.swift */,
+				AF4290082519D3F7007903F8 /* NavigationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -900,6 +906,7 @@
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
+				AF42900E2519E6A4007903F8 /* NavigationPresenter.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
 				AF0BA27224B570F9007F382E /* Haversin.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,
@@ -908,6 +915,7 @@
 				AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */,
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
 				AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */,
+				AF4290092519D3F7007903F8 /* NavigationViewController.swift in Sources */,
 				AF00CB5324CBFEC6002FF63B /* RadarMapTableData.swift in Sources */,
 				AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,

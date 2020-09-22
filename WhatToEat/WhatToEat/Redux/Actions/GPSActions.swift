@@ -65,7 +65,7 @@ func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
 }
 
 
-struct ParePlaceMarkToAddressAction: Action {
+struct ParcePlaceMarkToAddressAction: Action {
     let queryLoc: Bool
     let placeMark:CLPlacemark
     var inputObj: GQInputObject

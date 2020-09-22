@@ -18,8 +18,6 @@ class FindFoodViewController: UIViewController {
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
     private var annotationViewTag: Int = 0
-    
-    
     private var defaultTemplate: DefaultVCTemplate? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
@@ -101,7 +99,6 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
 extension FindFoodViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
-        
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
             radarView.startRadarAnimation()
@@ -250,6 +247,10 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
             tableView.reloadData()
 //            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         }
+    }
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")
+        defaultTemplate?.basePushToViewController(toVC!, Animated: true)
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {
