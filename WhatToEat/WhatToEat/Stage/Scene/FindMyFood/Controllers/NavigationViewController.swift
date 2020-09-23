@@ -13,6 +13,7 @@ import ReSwift
 class NavigationViewController: UIViewController {
 
     @IBOutlet weak var mkMapView: MKMapView!
+    @IBOutlet var modeTabButtons: [UIButton]!
     private var defaultTemplate: DefaultVCTemplate? = nil
     private lazy var presenter: NavigationPresenter = NavigationPresenter()
     
@@ -30,6 +31,8 @@ class NavigationViewController: UIViewController {
     
     private func initialViewContorller() {
         mkMapView.delegate = self
+        for button in modeTabButtons {
+        }
     }
 
     /*
