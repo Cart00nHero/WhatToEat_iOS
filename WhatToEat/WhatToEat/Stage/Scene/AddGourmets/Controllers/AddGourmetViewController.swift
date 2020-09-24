@@ -96,7 +96,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
-                let gqAddress = parcelAction.selectedAddress
+                let gqAddress = parcelAction.selectedLoc
                 presenter.newLoc = gqAddress!
                 if presenter.newLoc.address.fullInfo.isEmpty {
                     // To-Do: Here Upload to Insert

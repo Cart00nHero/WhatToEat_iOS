@@ -142,7 +142,6 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! UIPanGestureRecognizerAction
             if action.sender.numberOfTouches >= 2 {
                 presenter.zoomStatus = .FingersTouched
-                presenter.preZoomLevel = presenter.mapZoomLevel
                 return
             }
             let distance =
@@ -161,8 +160,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 NSLog("Current: %zd", presenter.mapZoomLevel)
                 NSLog("Pre: %zd", presenter.preZoomLevel)
                 presenter.setMapZoomLevel(mapView: mkMapView,
-                                          level: presenter.preZoomLevel, center: presenter.centerCoordinate!)
-                presenter.mapZoomLevel = presenter.preZoomLevel
+                                          level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
             }
         case is MapDidChangeVisibleRegionAction:
             updateRangeValue()
@@ -184,6 +182,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                                                          range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
                 }
             }
+            presenter.preZoomLevel = presenter.mapZoomLevel
         default: break
         }
     }
@@ -235,7 +234,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         return annotationView
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        annotationViewTag = 0
+//        annotationViewTag = 0
         if presenter.willMarkAnnotations {
             MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
             presenter.willMarkAnnotations = false
@@ -249,8 +248,11 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
     }
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")
-        defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+        NSLog("太格：%zd", view.tag)
+//        let inputObj = searchInRangeQueryDataToGQInputObj(result: presenter.searchResults[view.tag]!)
+//        MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: inputObj)
+//        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")
+//        defaultTemplate?.basePushToViewController(toVC!, Animated: true)
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {

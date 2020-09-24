@@ -126,7 +126,7 @@ struct ParcePlaceMarkToAddressAction: Action {
 }
 struct MKAnnotationDidSelectAction: Action {
     let selectedIndex: Int
-    let selectedAddress: GQInputObject?
+    let selectedLoc: GQInputObject?
 }
 struct LocatePositionAction: Action {
     var status: LocatePositionStatus

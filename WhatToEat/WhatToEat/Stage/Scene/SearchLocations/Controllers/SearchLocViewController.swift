@@ -102,7 +102,7 @@ extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if presenter.locationParcel.parcelType == "CreateMapAnnotationsAction" {
             let parcelAction = presenter.locationParcel.parcel as! CreateMapAnnotationsAction
-            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedAddress: parcelAction.addresses[view.tag]))
+            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: parcelAction.addresses[view.tag]))
         }
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
