@@ -17,7 +17,7 @@ class FindFoodViewController: UIViewController {
     @IBOutlet weak private var radarView: RadarScanView!
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
-    private var annotationViewTag: Int = 0
+    private var annotationViewTag: Int = -1
     private var defaultTemplate: DefaultVCTemplate? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
@@ -122,6 +122,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             case .Success:
                 radarView.stopRadarAnimation()
                 if action.responseData?.count ?? 0 > 0 {
+                    presenter.searchCounts = action.responseData?.count ?? 0
                     presenter.searchResults = action.responseData!
                     appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
                 }
@@ -157,8 +158,6 @@ extension FindFoodViewController: DefaultTemplateDelegate {
         case is MapRegionWillChangeAction:
             if presenter.zoomStatus == .LevelChanged {
                 presenter.zoomStatus = .None
-                NSLog("Current: %zd", presenter.mapZoomLevel)
-                NSLog("Pre: %zd", presenter.preZoomLevel)
                 presenter.setMapZoomLevel(mapView: mkMapView,
                                           level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
             }
@@ -213,7 +212,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotationViewTag == 0 {
+        if annotationViewTag == -1 {
+            annotationViewTag = presenter.searchCounts-1
             presenter.willMarkAnnotations = true
         }
         let identifier = "MyPin"
@@ -225,16 +225,20 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
-            annotationView?.tag = annotationViewTag
-            annotationViewTag += 1
         }
+        /*
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
-//        leftIconView.image = UIImage(named: restaurant.image)
+        leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
+         */
+        annotationView?.tag = annotationViewTag
+        if annotationViewTag > 0 {
+            annotationViewTag -= 1
+        }
         return annotationView
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-//        annotationViewTag = 0
+        annotationViewTag = -1
         if presenter.willMarkAnnotations {
             MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
             presenter.willMarkAnnotations = false
@@ -248,7 +252,6 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
     }
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        NSLog("太格：%zd", view.tag)
 //        let inputObj = searchInRangeQueryDataToGQInputObj(result: presenter.searchResults[view.tag]!)
 //        MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: inputObj)
 //        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")

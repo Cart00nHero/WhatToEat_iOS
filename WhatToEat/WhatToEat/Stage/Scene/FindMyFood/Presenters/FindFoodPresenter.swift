@@ -25,6 +25,8 @@ class FindFoodPresenter: NSObject {
     var preZoomLevel: Int = 17
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
     var zoomStatus: MapZoomStus = .None
+    var searchCounts = 0
+    
     
     
     func setMapZoomLevel(mapView: MKMapView, level: Int,center: CLLocationCoordinate2D) {
