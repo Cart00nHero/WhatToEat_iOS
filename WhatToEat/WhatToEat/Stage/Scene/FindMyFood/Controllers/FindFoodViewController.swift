@@ -141,10 +141,11 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             }
         case is UIPanGestureRecognizerAction:
             let action = state.currentAction as! UIPanGestureRecognizerAction
-            if action.sender.numberOfTouches >= 2 {
+            if action.sender.numberOfTouches == 2 {
                 presenter.zoomStatus = .FingersTouched
                 return
             }
+            presenter.zoomStatus = .None
             let distance =
                 calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
             let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
@@ -156,32 +157,28 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
         case is MapRegionWillChangeAction:
+            presenter.setMapZoomLevel(mapView: mkMapView,
+                                      level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
             if presenter.zoomStatus == .LevelChanged {
                 presenter.zoomStatus = .None
-                presenter.setMapZoomLevel(mapView: mkMapView,
-                                          level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
+                NSLog("previous:%zd", presenter.preZoomLevel)
+                NSLog("current:%zd", presenter.mapZoomLevel)
             }
         case is MapDidChangeVisibleRegionAction:
             updateRangeValue()
             if presenter.isFirsTimeEntrance {
+                presenter.preZoomLevel = presenter.mapZoomLevel
                 return
             }
-            if presenter.zoomStatus == .FingersTouched {
-                if presenter.isRangeChanged() {
-                    clearApolloServiceCache()
-                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
-                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
-                    presenter.zoomStatus = .LevelChanged
-                }
-            }
+            
             if presenter.zoomStatus == .FingersTouched {
                 if presenter.preZoomLevel != presenter.mapZoomLevel {
                     presenter.zoomStatus = .LevelChanged
                     appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
                                                          range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
                 }
+                presenter.preZoomLevel = presenter.mapZoomLevel
             }
-            presenter.preZoomLevel = presenter.mapZoomLevel
         default: break
         }
     }
