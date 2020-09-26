@@ -45,6 +45,14 @@ class FindFoodViewController: UIViewController {
         
         tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
     }
+    func startRadarAnimating() {
+        mkMapView.isUserInteractionEnabled = false
+        radarView.startRadarAnimation()
+    }
+    func stopRadarAnimating() {
+        mkMapView.isUserInteractionEnabled = true
+        radarView.stopRadarAnimation()
+    }
     
     private func updateRangeValue() {
         let level = mkMapView.zoomLevel
@@ -65,7 +73,7 @@ class FindFoodViewController: UIViewController {
     
     // MARK: - UI Actions
     @IBAction func locateButtonClickAction(_ sender: UIButton) {
-        radarView.startRadarAnimation()
+        startRadarAnimating()
         LocationMaster.shared.requestCurrentLocation()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
@@ -98,7 +106,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
         switch state.currentAction {
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
-            radarView.startRadarAnimation()
+            startRadarAnimating()
             switch action.status {
             case .DidUpdateLocation:
                 if action.locations?.count ?? 0 > 0 {
@@ -117,31 +125,26 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! SearchInRangeAction
             switch action.status {
             case .Success:
-                radarView.stopRadarAnimation()
+                stopRadarAnimating()
                 if action.responseData?.count ?? 0 > 0 {
                     presenter.searchCounts = action.responseData?.count ?? 0
                     presenter.searchResults = action.responseData!
                     appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
                 }
             case .Failed:
-                radarView.stopRadarAnimation()
+                stopRadarAnimating()
             default: break
             }
         case is MarkRangeSearchDataAction:
             let action = state.currentAction as! MarkRangeSearchDataAction
-            radarView.stopRadarAnimation()
+            stopRadarAnimating()
             if action.status == .Completed {
                 MapNavigator.removeAllMapAnnotations(mapView: mkMapView)
                 presenter.annotations.removeAll()
                 presenter.annotations = action.annotations
                 MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
             }
-        case is UIPanGestureRecognizerAction: break
-//            let action = state.currentAction as! UIPanGestureRecognizerAction
         case is GestureRecognizerEndedAction:
-//            let action = state.currentAction as! GestureRecognizerEndedAction
-            NSLog("pre: %lf", presenter.searchRange(zoomLevel: presenter.preZoomLevel))
-            NSLog("current: %lf", presenter.searchRange(zoomLevel: presenter.mapZoomLevel))
             if presenter.isSearchRangeChanged() {
                 appStore.dispatch(
                     SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
@@ -154,7 +157,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
             if distance > searchingDistance {
                 clearApolloServiceCache()
-                radarView.startRadarAnimation()
+                startRadarAnimating()
                 let level = mkMapView.zoomLevel
                 appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
             }
@@ -252,6 +255,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
     }
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        NSLog("導頁")
 //        let inputObj = searchInRangeQueryDataToGQInputObj(result: presenter.searchResults[view.tag]!)
 //        MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: inputObj)
 //        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")
