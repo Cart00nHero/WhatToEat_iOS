@@ -49,18 +49,15 @@ class FindFoodViewController: UIViewController {
     private func updateRangeValue() {
         let level = mkMapView.zoomLevel
         if level >= 17 {
-            presenter.mapZoomLevel = 17
             rangeButton.setTitle("0.2KM", for: .normal)
             return
         }
         
         if level == 16 {
-            presenter.mapZoomLevel = 16
             rangeButton.setTitle("0.5KM", for: .normal)
             return
         }
         if level <= 15 {
-            presenter.mapZoomLevel = 15
             rangeButton.setTitle("1.0KM", for: .normal)
             return
         }
@@ -139,13 +136,19 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 presenter.annotations = action.annotations
                 MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
             }
-        case is UIPanGestureRecognizerAction:
-            let action = state.currentAction as! UIPanGestureRecognizerAction
-            if action.sender.numberOfTouches == 2 {
-                presenter.zoomStatus = .FingersTouched
+        case is UIPanGestureRecognizerAction: break
+//            let action = state.currentAction as! UIPanGestureRecognizerAction
+        case is GestureRecognizerEndedAction:
+//            let action = state.currentAction as! GestureRecognizerEndedAction
+            NSLog("pre: %lf", presenter.searchRange(zoomLevel: presenter.preZoomLevel))
+            NSLog("current: %lf", presenter.searchRange(zoomLevel: presenter.mapZoomLevel))
+            if presenter.isSearchRangeChanged() {
+                appStore.dispatch(
+                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
+                presenter.preZoomLevel = presenter.mapZoomLevel
+                presenter.centerCoordinate = mkMapView.camera.centerCoordinate
                 return
             }
-            presenter.zoomStatus = .None
             let distance =
                 calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
             let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
@@ -157,28 +160,27 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
         case is MapRegionWillChangeAction:
-            presenter.setMapZoomLevel(mapView: mkMapView,
-                                      level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
-            if presenter.zoomStatus == .LevelChanged {
-                presenter.zoomStatus = .None
-                NSLog("previous:%zd", presenter.preZoomLevel)
-                NSLog("current:%zd", presenter.mapZoomLevel)
+            let action = state.currentAction as! MapRegionWillChangeAction
+            if presenter.preZoomLevel == presenter.mapZoomLevel {
+                
             }
+            presenter.preZoomLevel = action.mapView.zoomLevel
         case is MapDidChangeVisibleRegionAction:
+            let action = state.currentAction as! MapDidChangeVisibleRegionAction
             updateRangeValue()
+            presenter.mapZoomLevel = action.mapView.zoomLevel
             if presenter.isFirsTimeEntrance {
-                presenter.preZoomLevel = presenter.mapZoomLevel
                 return
             }
             
-            if presenter.zoomStatus == .FingersTouched {
-                if presenter.preZoomLevel != presenter.mapZoomLevel {
-                    presenter.zoomStatus = .LevelChanged
-                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
-                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
-                }
-                presenter.preZoomLevel = presenter.mapZoomLevel
-            }
+//            if presenter.zoomStatus == .FingersTouched {
+//                if presenter.preZoomLevel != presenter.mapZoomLevel {
+//                    presenter.zoomStatus = .LevelChanged
+//                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
+//                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
+//                }
+//                presenter.preZoomLevel = presenter.mapZoomLevel
+//            }
         default: break
         }
     }
@@ -187,10 +189,13 @@ extension FindFoodViewController: DefaultTemplateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        appStore.dispatch(MapRegionWillChangeAction())
+        appStore.dispatch(MapRegionWillChangeAction(mapView: mapView))
+    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        appStore.dispatch(MapRegionDidChangeAction(mapView: mapView))
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        appStore.dispatch(MapDidChangeVisibleRegionAction())
+        appStore.dispatch(MapDidChangeVisibleRegionAction(mapView: mapView))
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.
@@ -254,10 +259,14 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
 //        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")
 //        defaultTemplate?.basePushToViewController(toVC!, Animated: true)
     }
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {
             let gesture = gestureRecognizer as! UIPanGestureRecognizer
             appStore.dispatch(UIPanGestureRecognizerAction(sender: gesture))
+            if gestureRecognizer.state == .ended {
+                appStore.dispatch(GestureRecognizerEndedAction(sender: gestureRecognizer))
+            }
         }
         return true
     }

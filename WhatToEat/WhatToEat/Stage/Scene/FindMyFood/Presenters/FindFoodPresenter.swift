@@ -11,8 +11,8 @@ import MapKit
 
 class FindFoodPresenter: NSObject {
     
-    enum MapZoomStus {
-        case None,FingersTouched,LevelChanged
+    enum GestureStaus {
+        case None,TouchBegin,MutiTouches,Ended
     }
     
     var isFirsTimeEntrance = true
@@ -24,7 +24,7 @@ class FindFoodPresenter: NSObject {
     var mapZoomLevel: Int = 17
     var preZoomLevel: Int = 17
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
-    var zoomStatus: MapZoomStus = .None
+    var gestureStaus: GestureStaus = .None
     var searchCounts = 0
     
     
@@ -50,7 +50,7 @@ class FindFoodPresenter: NSObject {
         }
         return 1.0
     }
-    func isRangeChanged() -> Bool {
+    func isSearchRangeChanged() -> Bool {
         if preZoomLevel != mapZoomLevel {
             return true
         }
