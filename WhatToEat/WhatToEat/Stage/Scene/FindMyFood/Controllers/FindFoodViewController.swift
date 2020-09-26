@@ -144,14 +144,7 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 presenter.annotations = action.annotations
                 MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
             }
-        case is GestureRecognizerEndedAction:
-            if presenter.isSearchRangeChanged() {
-                appStore.dispatch(
-                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
-                presenter.preZoomLevel = presenter.mapZoomLevel
-                presenter.centerCoordinate = mkMapView.camera.centerCoordinate
-                return
-            }
+        case is UIPanGestureRecognizerAction:
             let distance =
                 calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
             let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
@@ -162,11 +155,18 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
+        case is GestureRecognizerEndedAction:
+            if presenter.isSearchRangeChanged() {
+                appStore.dispatch(
+                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
+                presenter.preZoomLevel = presenter.mapZoomLevel
+                presenter.centerCoordinate = mkMapView.camera.centerCoordinate
+            }
         case is MapRegionWillChangeAction:
             let action = state.currentAction as! MapRegionWillChangeAction
             if presenter.preZoomLevel == presenter.mapZoomLevel {
                 presenter.setMapZoomLevel(mapView: action.mapView,
-                                          level: presenter.preZoomLevel, center: presenter.centerCoordinate!)
+                                          level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
             }
             presenter.preZoomLevel = action.mapView.zoomLevel
         case is MapDidChangeVisibleRegionAction:
