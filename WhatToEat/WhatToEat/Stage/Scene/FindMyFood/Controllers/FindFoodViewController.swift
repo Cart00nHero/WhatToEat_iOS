@@ -162,16 +162,14 @@ extension FindFoodViewController: DefaultTemplateDelegate {
         case is MapRegionWillChangeAction:
             let action = state.currentAction as! MapRegionWillChangeAction
             if presenter.preZoomLevel == presenter.mapZoomLevel {
-                
+                presenter.setMapZoomLevel(mapView: action.mapView,
+                                          level: presenter.preZoomLevel, center: presenter.centerCoordinate!)
             }
             presenter.preZoomLevel = action.mapView.zoomLevel
         case is MapDidChangeVisibleRegionAction:
             let action = state.currentAction as! MapDidChangeVisibleRegionAction
             updateRangeValue()
             presenter.mapZoomLevel = action.mapView.zoomLevel
-            if presenter.isFirsTimeEntrance {
-                return
-            }
             
 //            if presenter.zoomStatus == .FingersTouched {
 //                if presenter.preZoomLevel != presenter.mapZoomLevel {

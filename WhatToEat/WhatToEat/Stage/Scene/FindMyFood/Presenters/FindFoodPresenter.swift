@@ -22,7 +22,7 @@ class FindFoodPresenter: NSObject {
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
     var mapZoomLevel: Int = 17
-    var preZoomLevel: Int = 17
+    var preZoomLevel: Int = 0
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
     var gestureStaus: GestureStaus = .None
     var searchCounts = 0
