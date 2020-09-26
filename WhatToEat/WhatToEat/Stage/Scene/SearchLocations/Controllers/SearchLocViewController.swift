@@ -46,6 +46,11 @@ class SearchLocViewController: UIViewController {
         searchTextField.inputAccessoryView = createInputAccessoryView()
         coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        coverView.removeFromSuperview()
+    }
 
     // MARK: - Private methods
     private func createWebViewOnBottom() {

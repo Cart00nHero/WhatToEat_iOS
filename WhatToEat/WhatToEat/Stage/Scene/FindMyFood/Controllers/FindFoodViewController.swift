@@ -29,11 +29,6 @@ class FindFoodViewController: UIViewController {
         super.viewWillAppear(animated)
         self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
-        //        let barImage = #imageLiteral(resourceName: "Icon_Locate_On")
-        //        barImage.withRenderingMode(.alwaysOriginal)
-        //        let rightBarButtonItem =
-        //            UIBarButtonItem(image: barImage, style: .plain, target: self, action: #selector(rigtBarButtonClickAction(sender:)))
-        //        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
         defaultTemplate?.title = "Find My Food"
     }
     
@@ -41,8 +36,8 @@ class FindFoodViewController: UIViewController {
         mkMapView.delegate = self
         LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
         LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
+        startRadarAnimating()
         LocationMaster.shared.requestCurrentLocation()
-        
         tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
     }
     func startRadarAnimating() {
@@ -173,15 +168,6 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! MapDidChangeVisibleRegionAction
             updateRangeValue()
             presenter.mapZoomLevel = action.mapView.zoomLevel
-            
-//            if presenter.zoomStatus == .FingersTouched {
-//                if presenter.preZoomLevel != presenter.mapZoomLevel {
-//                    presenter.zoomStatus = .LevelChanged
-//                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
-//                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
-//                }
-//                presenter.preZoomLevel = presenter.mapZoomLevel
-//            }
         default: break
         }
     }
@@ -254,13 +240,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
 //            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         }
     }
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        NSLog("導頁")
-//        let inputObj = searchInRangeQueryDataToGQInputObj(result: presenter.searchResults[view.tag]!)
-//        MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: inputObj)
-//        let toVC = self.storyboard?.instantiateViewController(withIdentifier: "NavigationViewController")
-//        defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-    }
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {
