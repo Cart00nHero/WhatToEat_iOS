@@ -134,10 +134,11 @@
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hx5-ga-qUs">
                                                 <rect key="frame" x="0.0" y="375" width="375" height="248"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="248" id="jwT-C1-2Qh"/>
                                                 </constraints>
+                                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FindFoodTableCell" rowHeight="80" id="fia-un-xDk" customClass="FindFoodTableViewCell" customModule="WhatToEat" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
@@ -193,7 +194,7 @@
                                                 </connections>
                                             </tableView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.96092993019999995" green="1" blue="0.98039144280000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstItem="vtW-az-G7k" firstAttribute="top" secondItem="A4Z-gv-ZZZ" secondAttribute="top" id="0Bt-Gu-i9O"/>
                                             <constraint firstAttribute="bottom" secondItem="Hx5-ga-qUs" secondAttribute="bottom" id="3mY-YX-wf2"/>
@@ -205,6 +206,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="A4Z-gv-ZZZ" firstAttribute="leading" secondItem="RuG-8Q-RZt" secondAttribute="leading" id="4JP-VB-w1D"/>
                                     <constraint firstItem="A4Z-gv-ZZZ" firstAttribute="trailing" secondItem="RuG-8Q-RZt" secondAttribute="trailing" id="FHg-3g-jOy"/>
@@ -218,7 +220,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mmr-Si-tj7"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.96092993019999995" green="1" blue="0.98039144280000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="Afb-ZX-Oao" firstAttribute="leading" secondItem="mmr-Si-tj7" secondAttribute="leading" id="6XE-on-870"/>
                             <constraint firstItem="Afb-ZX-Oao" firstAttribute="trailing" secondItem="mmr-Si-tj7" secondAttribute="trailing" id="8eK-5i-pDn"/>
@@ -327,6 +329,9 @@
             <point key="canvasLocation" x="1688.8" y="-24.7376311844078"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="LuD-wx-Sqw"/>
+    </designables>
     <resources>
         <image name="Icon_Locate_Off" width="41" height="41"/>
         <image name="Icon_Locate_On" width="41" height="41"/>
