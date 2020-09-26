@@ -87,10 +87,21 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = presenter.tableData.dataSource[indexPath.row]
-        let cellIdentifier = "FindFoodTableCell"
+        var cellIdentifier = "FindFoodTableViewCell"
+        switch data.templateStyle {
+        case .Button:
+            cellIdentifier = "FFBtnTableViewCell"
+        default: break
+        }
         let cell =
-            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FindFoodTableViewCell
-        cell.cellData = data as? LRCellData
+            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if cellIdentifier == "FindFoodTableViewCell" {
+            let contentCell = cell as! FindFoodTableViewCell
+            contentCell.cellData = data as? LRCellData
+        }else {
+            let contentCell = cell as! FFBtnTableViewCell
+            contentCell.cellData = data as? ButtonCellData
+        }
         return cell
     }
     
@@ -168,6 +179,9 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! MapDidChangeVisibleRegionAction
             updateRangeValue()
             presenter.mapZoomLevel = action.mapView.zoomLevel
+        case is TableCellButtonClickAction:
+            let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
+            defaultTemplate?.basePushToViewController(toVC!, Animated: true)
         default: break
         }
     }
@@ -237,7 +251,6 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         if presenter.searchResults.count > 0 {
             presenter.tableData.reloadData(data: presenter.searchResults[view.tag]!)
             tableView.reloadData()
-//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         }
     }
     

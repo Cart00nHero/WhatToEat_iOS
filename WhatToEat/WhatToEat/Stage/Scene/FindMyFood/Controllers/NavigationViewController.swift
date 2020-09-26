@@ -31,8 +31,8 @@ class NavigationViewController: UIViewController {
     
     private func initialViewContorller() {
         mkMapView.delegate = self
-        for button in modeTabButtons {
-        }
+//        for button in modeTabButtons {
+//        }
     }
 
     /*

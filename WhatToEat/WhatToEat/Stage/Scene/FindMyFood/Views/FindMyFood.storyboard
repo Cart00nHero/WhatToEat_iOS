@@ -140,7 +140,7 @@
                                                 </constraints>
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FindFoodTableCell" rowHeight="80" id="fia-un-xDk" customClass="FindFoodTableViewCell" customModule="WhatToEat" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FindFoodTableViewCell" rowHeight="80" id="fia-un-xDk" customClass="FindFoodTableViewCell" customModule="WhatToEat" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fia-un-xDk" id="o88-lR-0Md">
@@ -185,6 +185,37 @@
                                                             <outlet property="cellLeftView" destination="lqW-3A-Ryz" id="ry5-fr-Ihb"/>
                                                             <outlet property="cellRightView" destination="Tzl-ux-8GX" id="rfg-Ia-wRW"/>
                                                             <outlet property="leftWidthConstraint" destination="BCD-Fy-pu6" id="Qyd-R0-tne"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FFBtnTableViewCell" rowHeight="109" id="0dg-Lt-zFu" customClass="FFBtnTableViewCell" customModule="WhatToEat" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="108" width="375" height="109"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0dg-Lt-zFu" id="nD6-ZV-TkZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCV-JL-kRa">
+                                                                    <rect key="frame" x="10" y="66" width="355" height="33"/>
+                                                                    <color key="backgroundColor" red="0.1333333333" green="0.5450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="pCV-JL-kRa" secondAttribute="height" multiplier="375:35" id="bgp-Ip-3zf"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                    <state key="normal" title="上傳儲存"/>
+                                                                    <connections>
+                                                                        <action selector="cellButtonClickActionWithSender:" destination="0dg-Lt-zFu" eventType="touchUpInside" id="fEd-Pm-AuX"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.96078431369999995" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="pCV-JL-kRa" secondAttribute="bottom" constant="10" id="549-T3-jjG"/>
+                                                                <constraint firstItem="pCV-JL-kRa" firstAttribute="leading" secondItem="nD6-ZV-TkZ" secondAttribute="leading" constant="10" id="DY7-l2-Hdn"/>
+                                                                <constraint firstItem="pCV-JL-kRa" firstAttribute="centerX" secondItem="nD6-ZV-TkZ" secondAttribute="centerX" id="qgb-bj-juO"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="cellButton" destination="pCV-JL-kRa" id="Zlx-au-3SR"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
