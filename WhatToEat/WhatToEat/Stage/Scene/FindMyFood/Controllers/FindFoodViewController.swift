@@ -136,6 +136,9 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                     presenter.searchCounts = action.responseData?.count ?? 0
                     presenter.searchResults = action.responseData!
                     appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
+                } else {
+                    presenter.setMapZoomLevel(mapView: mkMapView,
+                                              level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
                 }
             case .Failed:
                 stopRadarAnimating()
