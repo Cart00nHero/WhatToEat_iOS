@@ -76,7 +76,7 @@ class FindFoodPresenter: NSObject {
 struct FindFoodTableData {
     var dataObj: SearchInRangeQuery.Data.SearchInRange
     var dataSource: Array<CellDataProtocol> = []
-    var hideButton = false
+    var hideNavButton = true
     
     init(dataObj: SearchInRangeQuery.Data.SearchInRange) {
         self.dataObj = dataObj
@@ -107,7 +107,7 @@ struct FindFoodTableData {
                        rightCellProtocol: LRLabelCellData(labelText: (dataObj.shopBranch?.tel ?? "") )),
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
                        rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? "")),
-            ButtonCellData(cornerRadius: 2.0, titleText: "Navigation",isHidden: true)
+            ButtonCellData(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
         ]
     }
 }
