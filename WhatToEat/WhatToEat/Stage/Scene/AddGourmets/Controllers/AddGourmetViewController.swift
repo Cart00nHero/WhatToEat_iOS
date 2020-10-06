@@ -174,21 +174,21 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             if presenter.saveToUpload {
-                appStore.dispatch(updateBranchAction(inputObj: presenter.newLoc))
+                appStore.dispatch(updateGroumetAction(inputObj: presenter.newLoc))
             } else {
                 presenter.newLoc.address.fullInfo = combineFullInfo(input: presenter.newLoc)
-                appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
+                appStore.dispatch(createOwnGourmetAction(inputObj: presenter.newLoc))
             }
-        case is CreateLocationAction:
-            let action = state.currentAction as! CreateLocationAction
+        case is CreateOwnGourmetAction:
+            let action = state.currentAction as! CreateOwnGourmetAction
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
             default: break
             }
-        case is UpdateBranchAction:
-            let action = state.currentAction as! UpdateBranchAction
+        case is UpdateGroumetAction:
+            let action = state.currentAction as! UpdateGroumetAction
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
