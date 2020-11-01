@@ -9,51 +9,48 @@
 import UIKit
 import ReSwift
 
-class ParcelObject: NSObject {
-    public typealias T = Action
-    @objc dynamic var parcelType: String = ""
-    @objc dynamic var sender = ""
-    @objc dynamic var recipient = ""
-    var parcel: Action?
-}
 class DeliveryMan: NSObject {
     
-//    struct ParcelObject {
-//        var parcelType: Observable<String>
-//        var sender: Observable<String>
-//        var recipient: Observable<String>
-//        var parcel: Action?
-//
-//        init(parcelType: String, sender: String, recipient: String) {
-//            self.parcelType = Observable(parcelType)
-//            self.sender = Observable(sender)
-//            self.recipient = Observable(recipient)
-//        }
-//    }
+    struct ParcelObject {
+        var parcelType: String = ""
+        var sender = ""
+        var recipient = ""
+        var parcel: Action?
+    }
+    
     static let shareInstance = DeliveryMan()
-    private var parcelObj: ParcelObject?
+    private var parcel: ParcelObject?
     private var isSubscribed = true
     
     override init() {
         super.init()
         subscribeDeliveryState()
     }
+    
+    func packageParcel(sender: Any, to: Any,content: Action) -> ParcelObject {
+        var parcel = ParcelObject()
+        parcel.sender = String(describing: type(of: sender))
+        parcel.recipient = String(describing: type(of: to))
+        parcel.parcel = content
+        parcel.parcelType = String(describing: type(of: content))
+        return parcel
+    }
     func applyExpressService(applicant: AnyObject, parcel: ParcelObject,actionSelector: Selector) {
         if !isSubscribed {
             subscribeDeliveryState()
         }
-        parcelObj = parcel
+        self.parcel = parcel
         _ = applicant.perform(actionSelector)
     }
     func applyDeliverService(parcel: ParcelObject) {
         if !isSubscribed {
             subscribeDeliveryState()
         }
-        parcelObj = parcel
+        self.parcel = parcel
         appStore.dispatch(SendParcelAction( parcel: parcel))
     }
     
-    func subscribeDeliveryState() {
+    private func subscribeDeliveryState() {
         appStore.subscribe(self) {
             $0.select {
                 $0.deliveryState
@@ -61,11 +58,12 @@ class DeliveryMan: NSObject {
         }
         isSubscribed = true
     }
-    func unsubscribeDeliveryState() {
+    private func unsubscribeDeliveryState() {
         appStore.unsubscribe(self)
         isSubscribed = false
     }
 }
+
 func classFromString(_ className: String) -> AnyClass! {
 
     /// get namespace
@@ -82,9 +80,9 @@ extension DeliveryMan: StoreSubscriber {
         if state.currentAction is SignParcelReceiptAction {
             unsubscribeDeliveryState()
         } else {
-            if parcelObj?.parcelType == String(describing: type(of: state.currentAction)) {
-                parcelObj?.parcel = state.currentAction
-                appStore.dispatch(SendParcelAction(parcel: parcelObj!))
+            if parcel?.parcelType == String(describing: type(of: state.currentAction)) {
+                parcel?.parcel = state.currentAction
+                appStore.dispatch(SendParcelAction(parcel: parcel!))
             }
         }
     }

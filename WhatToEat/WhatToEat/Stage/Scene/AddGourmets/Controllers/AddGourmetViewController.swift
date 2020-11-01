@@ -111,8 +111,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             }
         }
         switch state.currentAction {
-        case is AdjustForKeyboardAction:
-            let action = state.currentAction as! AdjustForKeyboardAction
+        case let action as AdjustForKeyboardAction:
             let notification = action.notification
             guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
             let keyboardScreenEndFrame = keyboardValue.cgRectValue
@@ -125,35 +124,33 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 keyboardFooterView.frame = CGRect(x: 0,y: 0,width: tableView.bounds.width,height: keyboardScreenEndFrame.height)
                 tableView.tableFooterView = keyboardFooterView
             }
-        case is CellDropDownMenuSelectedAction:
-            let action = state.currentAction as? CellDropDownMenuSelectedAction
-            let cell = action?.dropdownView.superTableViewCell as? LRTableViewCell
+        case let action as CellDropDownMenuSelectedAction:
+            let cell = action.dropdownView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
-            let superTag = action?.dropdownView.superview?.tag ?? 0
+            let superTag = action.dropdownView.superview?.tag ?? 0
             var newShop = presenter.newLoc.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
                 var data = cellData?.leftCellProtocol as? LRDropDownCellData
-                data?.selectedText = action?.selectedText ?? ""
+                data?.selectedText = action.selectedText
                 newShop.style = data?.selectedText
                 cellData?.leftCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
                 var data = cellData?.rightCellProtocol as? LRDropDownCellData
-                data?.selectedText = action?.selectedText ?? ""
+                data?.selectedText = action.selectedText
                 newShop.type = data?.selectedText
                 cellData?.rightCellProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
-        case is RangeDatePickerSelectedAction:
-            let action = state.currentAction as? RangeDatePickerSelectedAction
+        case let action as RangeDatePickerSelectedAction:
             var branch = presenter.newLoc.shopBranch
-            branch.openTime = convertDateToUTC_ISO8601DateString(date: action?.startDate ?? Date())
-            branch.closedTime = convertDateToUTC_ISO8601DateString(date: action?.endDate ?? Date())
+            branch.openTime = convertDateToUTC_ISO8601DateString(date: action.startDate )
+            branch.closedTime = convertDateToUTC_ISO8601DateString(date: action.endDate )
             presenter.newLoc.shopBranch = branch
             
-            let cell = action?.rangeView.superTableViewCell as? LRTableViewCell
+            let cell = action.rangeView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellData
             var data = cellData?.rightCellProtocol as? LRRangeCellData
@@ -164,9 +161,8 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             cellData?.rightCellProtocol = data!
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             
-        case is CellTextFieldDidChangedAction:
-            let action = state.currentAction as? CellTextFieldDidChangedAction
-            let cell = action?.cell as? LRTableViewCell
+        case let action as CellTextFieldDidChangedAction:
+            let cell = action.cell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
                 = (cell?.cellData)!
@@ -179,16 +175,14 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 presenter.newLoc.address.fullInfo = combineFullInfo(input: presenter.newLoc)
                 appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
             }
-        case is CreateLocationAction:
-            let action = state.currentAction as! CreateLocationAction
+        case let action as CreateLocationAction:
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
             default: break
             }
-        case is UpdateBranchAction:
-            let action = state.currentAction as! UpdateBranchAction
+        case let action as UpdateBranchAction:
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers

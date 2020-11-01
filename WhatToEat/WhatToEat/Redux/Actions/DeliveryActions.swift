@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 
 struct SendParcelAction: Action {
-    let parcel: ParcelObject
+    let parcel: DeliveryMan.ParcelObject
 }
 struct ReceivedParcelAction: Action {
 }

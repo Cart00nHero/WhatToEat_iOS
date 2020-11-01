@@ -17,7 +17,7 @@ class SearchLocPresenter: NSObject {
     
     var searchMode: SearchMode = .MapLocation
     var isWebViewCreated = false
-    lazy var locationParcel = ParcelObject()
+    lazy var locationParcel = DeliveryMan.ParcelObject()
     
     func googleSearchUrl(queryText: String) -> String {
         let query = queryText.replacingOccurrences(of: " ", with: "+")

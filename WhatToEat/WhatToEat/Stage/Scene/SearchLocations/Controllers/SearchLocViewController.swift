@@ -41,12 +41,12 @@ class SearchLocViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let rightBarButtonItem = UIBarButtonItem(title: "Locate", style: .plain, target: self,
-                                             action: #selector(rigtBarButtonClickAction(sender:)))
+                                                 action: #selector(rigtBarButtonClickAction(sender:)))
         defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
         searchTextField.inputAccessoryView = createInputAccessoryView()
         coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
     }
-
+    
     // MARK: - Private methods
     private func createWebViewOnBottom() {
         presenter.isWebViewCreated = true
@@ -97,7 +97,7 @@ class SearchLocViewController: UIViewController {
         LocationMaster.shared.requestCurrentLocation()
     }
 }
-    // MARK: - MKMapViewDelegate
+// MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if presenter.locationParcel.parcelType == "CreateMapAnnotationsAction" {
@@ -150,8 +150,8 @@ extension SearchLocViewController: DefaultTemplateDelegate {
             let action = state.currentAction as? ReverseLocationAction
             if action?.place != nil {
                 appStore.dispatch(ParePlaceMarkToAddressAction(
-                    queryLoc: true, placeMark: (action?.place)!,
-                    address: initGQInputObject())
+                                    queryLoc: true, placeMark: (action?.place)!,
+                                    address: initGQInputObject())
                 )
             }
         case is LocationsDynamicQueryAction:
@@ -201,17 +201,17 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 }
             default: break
             }
-        case is MKAnnotationDidSelectAction:
-            let action = state.currentAction as! MKAnnotationDidSelectAction
-            presenter.locationParcel.recipient = "AddGourmetViewController"
-            presenter.locationParcel.parcelType = String(describing: type(of: action))
-            presenter.locationParcel.parcel = action
+        case let action as MKAnnotationDidSelectAction:
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-            let toVC = storyboard.instantiateViewController(withIdentifier: "AddGourmetViewController")
+            let toVC =
+                storyboard.instantiateViewController(
+                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+            let deliveryMan = DeliveryMan()
+            presenter.locationParcel = deliveryMan.packageParcel(
+                sender: self, to: AddGourmetViewController(), content: action)
+            deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
             defaultTemplate?.basePushToViewController(toVC, Animated: true)
             presenter.locationParcel.sender = String(describing: type(of: self))
-            let deliveryMan = DeliveryMan()
-            deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
         default: break
         }
     }

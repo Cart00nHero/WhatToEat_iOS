@@ -69,6 +69,7 @@
 		AF8224852472F4160034C928 /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224802472F4160034C928 /* SignActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
 		AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB490724D6AB3200D28A79 /* MapActions.swift */; };
+		AFF370DB254EA5E70012E019 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF370DA254EA5E70012E019 /* Actor.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
 		AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8843724965F4A00646088 /* CodableExtension.swift */; };
 /* End PBXBuildFile section */
@@ -162,6 +163,7 @@
 		AF8224802472F4160034C928 /* SignActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		AFCB490724D6AB3200D28A79 /* MapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapActions.swift; sourceTree = "<group>"; };
+		AFF370DA254EA5E70012E019 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
 		AFF8843724965F4A00646088 /* CodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtension.swift; sourceTree = "<group>"; };
 		B094A1456F89E4C27A08F93E /* Pods-WhatToEat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.release.xcconfig"; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 				AF0EDF65247A9C9C003D84C0 /* Data */,
 				AF719D732474D225003A7285 /* BackStage */,
 				AF8224752472F27D0034C928 /* Network */,
+				AFF370DA254EA5E70012E019 /* Actor.swift */,
 			);
 			path = Actors;
 			sourceTree = "<group>";
@@ -899,6 +902,7 @@
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
+				AFF370DB254EA5E70012E019 /* Actor.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
 				AF0BA27224B570F9007F382E /* Haversin.swift in Sources */,
