@@ -16,7 +16,7 @@ struct AppState : StateType {
 // MARK: - SubStates
 struct DefaultTemplateState : StateType {
     let currentAction : Action?
-    var receivedParcel: ParcelObject?
+    var receivedParcel: DeliveryMan.ParcelObject?
 }
 
 struct DeliveryState {
