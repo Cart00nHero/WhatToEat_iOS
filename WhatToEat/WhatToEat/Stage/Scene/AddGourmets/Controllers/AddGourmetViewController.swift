@@ -173,16 +173,16 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 appStore.dispatch(updateGroumetAction(inputObj: presenter.newLoc))
             } else {
                 presenter.newLoc.address.fullInfo = combineFullInfo(input: presenter.newLoc)
-                appStore.dispatch(createOwnGourmetAction(inputObj: presenter.newLoc))
+                appStore.dispatch(createGourmetAction(foodieId: nil, inputObj: presenter.newLoc))
             }
-        case let action as CreateLocationAction:
+        case let action as CreateGourmetAction:
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
                 self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
             default: break
             }
-        case let action as UpdateBranchAction:
+        case let action as UpdateGroumetAction:
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers

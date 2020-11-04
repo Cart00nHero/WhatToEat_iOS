@@ -695,12 +695,12 @@ public final class CreateFoodieMutation: GraphQLMutation {
   }
 }
 
-public final class CreateOwnGourmetMutation: GraphQLMutation {
+public final class CreateGourmetMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation CreateOwnGourmet($foodieId: String!, $address: InputAddress!, $shopBranch: InputBranch!, $shop: InputShop!) {
-      createOwnGourmet(foodieId: $foodieId, address: $address, shopBranch: $shopBranch, shop: $shop) {
+    mutation CreateGourmet($foodieId: String!, $address: InputAddress!, $shopBranch: InputBranch!, $shop: InputShop!) {
+      createGourmet(foodieId: $foodieId, address: $address, shopBranch: $shopBranch, shop: $shop) {
         __typename
         uniqueId
         orderId
@@ -740,7 +740,7 @@ public final class CreateOwnGourmetMutation: GraphQLMutation {
     }
     """
 
-  public let operationName: String = "CreateOwnGourmet"
+  public let operationName: String = "CreateGourmet"
 
   public var foodieId: String
   public var address: InputAddress
@@ -763,7 +763,7 @@ public final class CreateOwnGourmetMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createOwnGourmet", arguments: ["foodieId": GraphQLVariable("foodieId"), "address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch"), "shop": GraphQLVariable("shop")], type: .object(CreateOwnGourmet.selections)),
+        GraphQLField("createGourmet", arguments: ["foodieId": GraphQLVariable("foodieId"), "address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch"), "shop": GraphQLVariable("shop")], type: .object(CreateGourmet.selections)),
       ]
     }
 
@@ -773,21 +773,21 @@ public final class CreateOwnGourmetMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(createOwnGourmet: CreateOwnGourmet? = nil) {
-      self.init(unsafeResultMap: ["__typename": "RootMutationType", "createOwnGourmet": createOwnGourmet.flatMap { (value: CreateOwnGourmet) -> ResultMap in value.resultMap }])
+    public init(createGourmet: CreateGourmet? = nil) {
+      self.init(unsafeResultMap: ["__typename": "RootMutationType", "createGourmet": createGourmet.flatMap { (value: CreateGourmet) -> ResultMap in value.resultMap }])
     }
 
     /// create shop with foddie
-    public var createOwnGourmet: CreateOwnGourmet? {
+    public var createGourmet: CreateGourmet? {
       get {
-        return (resultMap["createOwnGourmet"] as? ResultMap).flatMap { CreateOwnGourmet(unsafeResultMap: $0) }
+        return (resultMap["createGourmet"] as? ResultMap).flatMap { CreateGourmet(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "createOwnGourmet")
+        resultMap.updateValue(newValue?.resultMap, forKey: "createGourmet")
       }
     }
 
-    public struct CreateOwnGourmet: GraphQLSelectionSet {
+    public struct CreateGourmet: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ShopBranch"]
 
       public static var selections: [GraphQLSelection] {
@@ -1663,8 +1663,8 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query LocationsDynamicQuery($whereAnd: AddressDqCmd!) {
-      locationsDynamicQuery(whereAnd: $whereAnd) {
+    query LocationsDynamicQuery($foodieId: String, $whereAnd: AddressDqCmd!) {
+      locationsDynamicQuery(foodieId: $foodieId, whereAnd: $whereAnd) {
         __typename
         ownerType
         completeInfo
@@ -1706,14 +1706,16 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
 
   public let operationName: String = "LocationsDynamicQuery"
 
+  public var foodieId: String?
   public var whereAnd: AddressDqCmd
 
-  public init(whereAnd: AddressDqCmd) {
+  public init(foodieId: String? = nil, whereAnd: AddressDqCmd) {
+    self.foodieId = foodieId
     self.whereAnd = whereAnd
   }
 
   public var variables: GraphQLMap? {
-    return ["whereAnd": whereAnd]
+    return ["foodieId": foodieId, "whereAnd": whereAnd]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -1721,7 +1723,7 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("locationsDynamicQuery", arguments: ["whereAnd": GraphQLVariable("whereAnd")], type: .list(.object(LocationsDynamicQuery.selections))),
+        GraphQLField("locationsDynamicQuery", arguments: ["foodieId": GraphQLVariable("foodieId"), "whereAnd": GraphQLVariable("whereAnd")], type: .list(.object(LocationsDynamicQuery.selections))),
       ]
     }
 
@@ -2134,12 +2136,12 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
   }
 }
 
-public final class SearchInRangeQuery: GraphQLQuery {
+public final class SearchForRangeQuery: GraphQLQuery {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    query SearchInRange($minCoordinate: InputCoordinate!, $maxCoordinate: InputCoordinate!) {
-      searchInRange(minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate) {
+    query SearchForRange($foodieId: String, $minCoordinate: InputCoordinate!, $maxCoordinate: InputCoordinate!) {
+      searchForRange(foodieId: $foodieId, minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate) {
         __typename
         ownerType
         completeInfo
@@ -2179,18 +2181,20 @@ public final class SearchInRangeQuery: GraphQLQuery {
     }
     """
 
-  public let operationName: String = "SearchInRange"
+  public let operationName: String = "SearchForRange"
 
+  public var foodieId: String?
   public var minCoordinate: InputCoordinate
   public var maxCoordinate: InputCoordinate
 
-  public init(minCoordinate: InputCoordinate, maxCoordinate: InputCoordinate) {
+  public init(foodieId: String? = nil, minCoordinate: InputCoordinate, maxCoordinate: InputCoordinate) {
+    self.foodieId = foodieId
     self.minCoordinate = minCoordinate
     self.maxCoordinate = maxCoordinate
   }
 
   public var variables: GraphQLMap? {
-    return ["minCoordinate": minCoordinate, "maxCoordinate": maxCoordinate]
+    return ["foodieId": foodieId, "minCoordinate": minCoordinate, "maxCoordinate": maxCoordinate]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -2198,7 +2202,7 @@ public final class SearchInRangeQuery: GraphQLQuery {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("searchInRange", arguments: ["minCoordinate": GraphQLVariable("minCoordinate"), "maxCoordinate": GraphQLVariable("maxCoordinate")], type: .list(.object(SearchInRange.selections))),
+        GraphQLField("searchForRange", arguments: ["foodieId": GraphQLVariable("foodieId"), "minCoordinate": GraphQLVariable("minCoordinate"), "maxCoordinate": GraphQLVariable("maxCoordinate")], type: .list(.object(SearchForRange.selections))),
       ]
     }
 
@@ -2208,21 +2212,21 @@ public final class SearchInRangeQuery: GraphQLQuery {
       self.resultMap = unsafeResultMap
     }
 
-    public init(searchInRange: [SearchInRange?]? = nil) {
-      self.init(unsafeResultMap: ["__typename": "RootQueryType", "searchInRange": searchInRange.flatMap { (value: [SearchInRange?]) -> [ResultMap?] in value.map { (value: SearchInRange?) -> ResultMap? in value.flatMap { (value: SearchInRange) -> ResultMap in value.resultMap } } }])
+    public init(searchForRange: [SearchForRange?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "RootQueryType", "searchForRange": searchForRange.flatMap { (value: [SearchForRange?]) -> [ResultMap?] in value.map { (value: SearchForRange?) -> ResultMap? in value.flatMap { (value: SearchForRange) -> ResultMap in value.resultMap } } }])
     }
 
     /// 利用球體公式計算出邊界座標後上傳搜尋
-    public var searchInRange: [SearchInRange?]? {
+    public var searchForRange: [SearchForRange?]? {
       get {
-        return (resultMap["searchInRange"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [SearchInRange?] in value.map { (value: ResultMap?) -> SearchInRange? in value.flatMap { (value: ResultMap) -> SearchInRange in SearchInRange(unsafeResultMap: value) } } }
+        return (resultMap["searchForRange"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [SearchForRange?] in value.map { (value: ResultMap?) -> SearchForRange? in value.flatMap { (value: ResultMap) -> SearchForRange in SearchForRange(unsafeResultMap: value) } } }
       }
       set {
-        resultMap.updateValue(newValue.flatMap { (value: [SearchInRange?]) -> [ResultMap?] in value.map { (value: SearchInRange?) -> ResultMap? in value.flatMap { (value: SearchInRange) -> ResultMap in value.resultMap } } }, forKey: "searchInRange")
+        resultMap.updateValue(newValue.flatMap { (value: [SearchForRange?]) -> [ResultMap?] in value.map { (value: SearchForRange?) -> ResultMap? in value.flatMap { (value: SearchForRange) -> ResultMap in value.resultMap } } }, forKey: "searchForRange")
       }
     }
 
-    public struct SearchInRange: GraphQLSelectionSet {
+    public struct SearchForRange: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["Address"]
 
       public static var selections: [GraphQLSelection] {

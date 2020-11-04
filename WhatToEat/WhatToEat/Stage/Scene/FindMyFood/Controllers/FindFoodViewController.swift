@@ -123,12 +123,12 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 }
             default: break
             }
-        case is SearchInRangeAction:
+        case is SearchForRangeAction:
             if presenter.isFirsTimeEntrance {
                 presenter.isFirsTimeEntrance = false
                 return
             }
-            let action = state.currentAction as! SearchInRangeAction
+            let action = state.currentAction as! SearchForRangeAction
             switch action.status {
             case .Success:
                 stopRadarAnimating()

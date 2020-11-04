@@ -65,7 +65,7 @@ func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
 }
 
 
-struct ParcePlaceMarkToAddressAction: Action {
+struct ParsePlaceMarkToAddressAction: Action {
     let queryLoc: Bool
     let placeMark:CLPlacemark
     var inputObj: GQInputObject
@@ -78,9 +78,9 @@ struct ParcePlaceMarkToAddressAction: Action {
         if self.queryLoc {
             queryLocation()
         }
-        parePlaceMarktoAddress()
+        parsePlaceMarktoAddress()
     }
-    private mutating func parePlaceMarktoAddress() {
+    private mutating func parsePlaceMarktoAddress() {
         inputObj.address.latitude = String(format: "%f", placeMark.location?.coordinate.latitude ?? 0.0)
         inputObj.address.longitude = String(format: "%f", placeMark.location?.coordinate.longitude ?? 0.0)
         inputObj.address.nation = placeMark.country
@@ -142,6 +142,6 @@ struct SearchNearbyAction: Action {
         self.center = center
         self.range = range
         let rangePoint = calculateRange(coordinate: center, range: range)
-        appStore.dispatch(searchInRangeAction(min: rangePoint.min, max: rangePoint.max))
+        appStore.dispatch(searchForRangeAction(foodieId: nil, min: rangePoint.min, max: rangePoint.max))
     }
 }

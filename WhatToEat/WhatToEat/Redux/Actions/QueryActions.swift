@@ -47,14 +47,14 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
     }
     return action
 }
-struct SearchInRangeAction: Action, ApiActionProtocol {
+struct SearchForRangeAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
-    var responseData: [SearchInRangeQuery.Data.SearchInRange?]?
+    var responseData: [SearchForRangeQuery.Data.SearchForRange?]?
 }
-func searchInRangeAction(min: InputCoordinate, max: InputCoordinate) -> SearchInRangeAction {
-    var action = SearchInRangeAction()
+func searchForRangeAction(foodieId: String?,min: InputCoordinate, max: InputCoordinate) -> SearchForRangeAction {
+    var action = SearchForRangeAction()
     let service = ApolloService.shared.apollo
-    let query = SearchInRangeQuery(minCoordinate: min, maxCoordinate: max)
+    let query = SearchForRangeQuery(foodieId: foodieId, minCoordinate: min, maxCoordinate: max)
     service.fetch(query: query) { result in
         switch result {
         case .success(let graphQLResult):
@@ -64,9 +64,9 @@ func searchInRangeAction(min: InputCoordinate, max: InputCoordinate) -> SearchIn
                 appStore.dispatch(action)
                 return
             }
-            if graphQLResult.data?.searchInRange != nil {
+            if graphQLResult.data?.searchForRange != nil {
                 action.status = .Success
-                action.responseData = graphQLResult.data?.searchInRange
+                action.responseData = graphQLResult.data?.searchForRange
             } else {
                 action.status = .Failed
             }

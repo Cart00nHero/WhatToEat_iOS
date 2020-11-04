@@ -61,7 +61,7 @@ func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.L
     
     return inputObj
 }
-func searchInRangeQueryDataToGQInputObj(result: SearchInRangeQuery.Data.SearchInRange) -> GQInputObject {
+func parseSearchForRangeGQInputObj(result: SearchForRangeQuery.Data.SearchForRange) -> GQInputObject {
     var inputObj = initGQInputObject()
     var address = inputObj.address
     for key in address.graphQLMap.keys {

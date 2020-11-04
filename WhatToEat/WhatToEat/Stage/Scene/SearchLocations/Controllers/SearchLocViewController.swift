@@ -154,7 +154,7 @@ extension SearchLocViewController: DefaultTemplateDelegate {
         case is ReverseLocationAction:
             let action = state.currentAction as? ReverseLocationAction
             if action?.place != nil {
-                appStore.dispatch(ParePlaceMarkToAddressAction(
+                appStore.dispatch(ParsePlaceMarkToAddressAction(
                                     queryLoc: true, placeMark: (action?.place)!,
                                     address: initGQInputObject())
                 )
@@ -172,15 +172,15 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                     }
                     appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
                 } else {
-                    let parcelAction = presenter.locationParcel.parcel as? ParcePlaceMarkToAddressAction
+                    let parcelAction = presenter.locationParcel.parcel as? ParsePlaceMarkToAddressAction
                     guard let address = parcelAction?.inputObj else { return }
                     markAddress.append(address)
                     appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
                 }
             default: break
             }
-        case is ParcePlaceMarkToAddressAction:
-            var action = state.currentAction as! ParcePlaceMarkToAddressAction
+        case is ParsePlaceMarkToAddressAction:
+            var action = state.currentAction as! ParsePlaceMarkToAddressAction
             if presenter.locationParcel.parcelType == "LocatePositionAction" {
                 action.inputObj.address.completeInfo = combineAddressCompleteInfo(input: action.inputObj)
                 searchTextField.text = action.inputObj.address.completeInfo

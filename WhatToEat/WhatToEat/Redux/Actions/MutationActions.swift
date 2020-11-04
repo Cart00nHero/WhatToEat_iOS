@@ -16,13 +16,13 @@ protocol ApiActionProtocol {
     var status: ApiActionStatus { get set }
 }
 
-struct CreateOwnGourmetAction: Action, ApiActionProtocol {
+struct CreateGourmetAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func createOwnGourmetAction(inputObj: GQInputObject) -> CreateOwnGourmetAction {
-    var action = CreateOwnGourmetAction()
+func createGourmetAction(foodieId: String?,inputObj: GQInputObject) -> CreateGourmetAction {
+    var action = CreateGourmetAction()
     let service = ApolloService.shared.apollo
-    let mutation = CreateOwnGourmetMutation(foodieId: "", address: inputObj.address, shopBranch: inputObj.shopBranch, shop: inputObj.shop)
+    let mutation = CreateGourmetMutation(foodieId: foodieId ?? "", address: inputObj.address, shopBranch: inputObj.shopBranch, shop: inputObj.shop)
     service.perform(mutation: mutation) { result in
         switch result {
         case .success(let graphQLResult):

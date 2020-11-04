@@ -11,13 +11,13 @@ mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: Inp
   }
 }
 
-mutation CreateOwnGourmet(
+mutation CreateGourmet(
   $foodieId: String!,
   $address: InputAddress!,
   $shopBranch:InputBranch!,
   $shop:InputShop!
 ) {
-  createOwnGourmet(foodieId:$foodieId,address:$address,shopBranch: $shopBranch,shop:$shop) {
+  createGourmet(foodieId:$foodieId,address:$address,shopBranch: $shopBranch,shop:$shop) {
     uniqueId
     orderId
     name
@@ -89,8 +89,8 @@ mutation UpdateGroumet($foodieId: String,$branchId: String!,$branch: InputBranch
   }
 }
 
-query LocationsDynamicQuery($whereAnd: AddressDqCmd!) {
-  locationsDynamicQuery(whereAnd: $whereAnd) {
+query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
+  locationsDynamicQuery(foodieId:$foodieId,whereAnd: $whereAnd) {
     ownerType
     completeInfo
     fullInfo
@@ -125,8 +125,8 @@ query LocationsDynamicQuery($whereAnd: AddressDqCmd!) {
     }
   }
 }
-query SearchInRange($minCoordinate: InputCoordinate!,$maxCoordinate: InputCoordinate!) {
-  searchInRange(minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate){
+query SearchForRange($foodieId: String,$minCoordinate: InputCoordinate!,$maxCoordinate: InputCoordinate!) {
+  searchForRange(foodieId:$foodieId,minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate){
     ownerType
     completeInfo
     fullInfo

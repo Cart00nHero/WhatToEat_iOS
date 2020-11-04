@@ -17,13 +17,13 @@ class FindFoodPresenter: NSObject {
     
     var isFirsTimeEntrance = true
     var willMarkAnnotations = false
-    var tableData = FindFoodTableData(dataObj: SearchInRangeQuery.Data.SearchInRange())
+    var tableData = FindFoodTableData(dataObj: SearchForRangeQuery.Data.SearchForRange())
     var currentLoc: CLLocation? = nil
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
     var mapZoomLevel: Int = 17
     var preZoomLevel: Int = 0
-    var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
+    var searchResults = [SearchForRangeQuery.Data.SearchForRange?]()
     var gestureStaus: GestureStaus = .None
     var searchCounts = 0
     
@@ -74,16 +74,16 @@ class FindFoodPresenter: NSObject {
 }
 
 struct FindFoodTableData {
-    var dataObj: SearchInRangeQuery.Data.SearchInRange
+    var dataObj: SearchForRangeQuery.Data.SearchForRange
     var dataSource: Array<CellDataProtocol> = []
     var hideNavButton = true
     
-    init(dataObj: SearchInRangeQuery.Data.SearchInRange) {
+    init(dataObj: SearchForRangeQuery.Data.SearchForRange) {
         self.dataObj = dataObj
         dataSource = createDataSource()
     }
     //    let sectionTitles : Array<String> = ["Shop","Branch","Location"]
-    mutating func reloadData(data: SearchInRangeQuery.Data.SearchInRange) {
+    mutating func reloadData(data: SearchForRangeQuery.Data.SearchForRange) {
         self.dataObj = data
         dataSource = createDataSource()
     }

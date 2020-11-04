@@ -62,7 +62,7 @@ struct MarkRangeSearchDataAction: Action {
     var status: GeoActionStatus = .Started
     var annotations: [MKPointAnnotation] = []
 }
-func markRangeSearchDataActions(queryData:[SearchInRangeQuery.Data.SearchInRange?]) -> MarkRangeSearchDataAction {
+func markRangeSearchDataActions(queryData:[SearchForRangeQuery.Data.SearchForRange?]) -> MarkRangeSearchDataAction {
     var action = MarkRangeSearchDataAction()
     let annotations = NSMutableArray()
     DispatchQueue.global(qos: .background).async {
