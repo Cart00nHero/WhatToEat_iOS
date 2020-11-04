@@ -11,8 +11,8 @@ import MapKit
 
 class FindFoodPresenter: NSObject {
     
-    enum MapZoomStus {
-        case None,FingersTouched,LevelChanged
+    enum GestureStaus {
+        case None,TouchBegin,MutiTouches,Ended
     }
     
     var isFirsTimeEntrance = true
@@ -22,9 +22,11 @@ class FindFoodPresenter: NSObject {
     var centerCoordinate: CLLocationCoordinate2D? = nil
     var annotations: [MKPointAnnotation] = []
     var mapZoomLevel: Int = 17
-    var preZoomLevel: Int = 17
+    var preZoomLevel: Int = 0
     var searchResults = [SearchInRangeQuery.Data.SearchInRange?]()
-    var zoomStatus: MapZoomStus = .None
+    var gestureStaus: GestureStaus = .None
+    var searchCounts = 0
+    
     
     
     func setMapZoomLevel(mapView: MKMapView, level: Int,center: CLLocationCoordinate2D) {
@@ -48,7 +50,7 @@ class FindFoodPresenter: NSObject {
         }
         return 1.0
     }
-    func isRangeChanged() -> Bool {
+    func isSearchRangeChanged() -> Bool {
         if preZoomLevel != mapZoomLevel {
             return true
         }
@@ -74,6 +76,8 @@ class FindFoodPresenter: NSObject {
 struct FindFoodTableData {
     var dataObj: SearchInRangeQuery.Data.SearchInRange
     var dataSource: Array<CellDataProtocol> = []
+    var hideNavButton = true
+    
     init(dataObj: SearchInRangeQuery.Data.SearchInRange) {
         self.dataObj = dataObj
         dataSource = createDataSource()
@@ -102,7 +106,8 @@ struct FindFoodTableData {
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
                        rightCellProtocol: LRLabelCellData(labelText: (dataObj.shopBranch?.tel ?? "") )),
             LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                       rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? ""))
+                       rightCellProtocol: LRLabelCellData(labelText: dataObj.completeInfo ?? "")),
+            ButtonCellData(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
         ]
     }
 }

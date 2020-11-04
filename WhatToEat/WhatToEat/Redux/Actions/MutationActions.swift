@@ -16,16 +16,15 @@ protocol ApiActionProtocol {
     var status: ApiActionStatus { get set }
 }
 
-struct CreateLocationAction: Action, ApiActionProtocol {
+struct CreateOwnGourmetAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func createLocationAction(newLoc: GQInputObject) -> CreateLocationAction {
-    var action = CreateLocationAction()
+func createOwnGourmetAction(inputObj: GQInputObject) -> CreateOwnGourmetAction {
+    var action = CreateOwnGourmetAction()
     let service = ApolloService.shared.apollo
-    let mutation = CreateLocationMutation(address: newLoc.address, shopBranch: newLoc.shopBranch, shop: newLoc.shop)
+    let mutation = CreateOwnGourmetMutation(foodieId: "", address: inputObj.address, shopBranch: inputObj.shopBranch, shop: inputObj.shop)
     service.perform(mutation: mutation) { result in
         switch result {
-            
         case .success(let graphQLResult):
             if graphQLResult.errors != nil {
                 action.status = .Failed
@@ -40,13 +39,13 @@ func createLocationAction(newLoc: GQInputObject) -> CreateLocationAction {
     }
     return action
 }
-struct UpdateBranchAction: Action, ApiActionProtocol {
+struct UpdateGroumetAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func updateBranchAction(inputObj: GQInputObject) -> UpdateBranchAction {
-    var action = UpdateBranchAction()
+func updateGroumetAction(inputObj: GQInputObject) -> UpdateGroumetAction {
+    var action = UpdateGroumetAction()
     let service = ApolloService.shared.apollo
-    let mutation = UpdateBranchMutation(branchId: inputObj.branchId, branch: inputObj.shopBranch,shop: inputObj.shop,address: inputObj.address)
+    let mutation = UpdateGroumetMutation(branchId: inputObj.branchId, branch: inputObj.shopBranch,shop: inputObj.shop,address: inputObj.address)
     service.perform(mutation: mutation) { result in
         switch result {
         case .success(let graphQLResult):

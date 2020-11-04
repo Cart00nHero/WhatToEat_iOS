@@ -47,6 +47,11 @@ class SearchLocViewController: UIViewController {
         coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        coverView.removeFromSuperview()
+    }
+
     // MARK: - Private methods
     private func createWebViewOnBottom() {
         presenter.isWebViewCreated = true
@@ -102,7 +107,7 @@ extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         if presenter.locationParcel.parcelType == "CreateMapAnnotationsAction" {
             let parcelAction = presenter.locationParcel.parcel as! CreateMapAnnotationsAction
-            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedAddress: parcelAction.addresses[view.tag]))
+            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: parcelAction.addresses[view.tag]))
         }
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
@@ -167,15 +172,15 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                     }
                     appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
                 } else {
-                    let parcelAction = presenter.locationParcel.parcel as? ParePlaceMarkToAddressAction
+                    let parcelAction = presenter.locationParcel.parcel as? ParcePlaceMarkToAddressAction
                     guard let address = parcelAction?.inputObj else { return }
                     markAddress.append(address)
                     appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
                 }
             default: break
             }
-        case is ParePlaceMarkToAddressAction:
-            var action = state.currentAction as! ParePlaceMarkToAddressAction
+        case is ParcePlaceMarkToAddressAction:
+            var action = state.currentAction as! ParcePlaceMarkToAddressAction
             if presenter.locationParcel.parcelType == "LocatePositionAction" {
                 action.inputObj.address.completeInfo = combineAddressCompleteInfo(input: action.inputObj)
                 searchTextField.text = action.inputObj.address.completeInfo

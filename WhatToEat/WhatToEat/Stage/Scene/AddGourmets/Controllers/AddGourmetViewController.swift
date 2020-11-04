@@ -96,7 +96,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
-                let gqAddress = parcelAction.selectedAddress
+                let gqAddress = parcelAction.selectedLoc
                 presenter.newLoc = gqAddress!
                 if presenter.newLoc.address.fullInfo.isEmpty {
                     // To-Do: Here Upload to Insert
@@ -170,10 +170,10 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             if presenter.saveToUpload {
-                appStore.dispatch(updateBranchAction(inputObj: presenter.newLoc))
+                appStore.dispatch(updateGroumetAction(inputObj: presenter.newLoc))
             } else {
                 presenter.newLoc.address.fullInfo = combineFullInfo(input: presenter.newLoc)
-                appStore.dispatch(createLocationAction(newLoc: presenter.newLoc))
+                appStore.dispatch(createOwnGourmetAction(inputObj: presenter.newLoc))
             }
         case let action as CreateLocationAction:
             switch action.status {

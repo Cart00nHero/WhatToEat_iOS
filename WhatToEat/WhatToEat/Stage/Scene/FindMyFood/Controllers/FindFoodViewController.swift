@@ -17,9 +17,7 @@ class FindFoodViewController: UIViewController {
     @IBOutlet weak private var radarView: RadarScanView!
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
-    private var annotationViewTag: Int = 0
-    
-    
+    private var annotationViewTag: Int = -1
     private var defaultTemplate: DefaultVCTemplate? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
@@ -31,11 +29,6 @@ class FindFoodViewController: UIViewController {
         super.viewWillAppear(animated)
         self.defaultTemplate = self.parent as? DefaultVCTemplate
         self.defaultTemplate?.stateDelegate = self
-        //        let barImage = #imageLiteral(resourceName: "Icon_Locate_On")
-        //        barImage.withRenderingMode(.alwaysOriginal)
-        //        let rightBarButtonItem =
-        //            UIBarButtonItem(image: barImage, style: .plain, target: self, action: #selector(rigtBarButtonClickAction(sender:)))
-        //        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
         defaultTemplate?.title = "Find My Food"
     }
     
@@ -43,26 +36,31 @@ class FindFoodViewController: UIViewController {
         mkMapView.delegate = self
         LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
         LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
+        startRadarAnimating()
         LocationMaster.shared.requestCurrentLocation()
-        
         tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
+    }
+    func startRadarAnimating() {
+        mkMapView.isUserInteractionEnabled = false
+        radarView.startRadarAnimation()
+    }
+    func stopRadarAnimating() {
+        mkMapView.isUserInteractionEnabled = true
+        radarView.stopRadarAnimation()
     }
     
     private func updateRangeValue() {
         let level = mkMapView.zoomLevel
         if level >= 17 {
-            presenter.mapZoomLevel = 17
             rangeButton.setTitle("0.2KM", for: .normal)
             return
         }
         
         if level == 16 {
-            presenter.mapZoomLevel = 16
             rangeButton.setTitle("0.5KM", for: .normal)
             return
         }
         if level <= 15 {
-            presenter.mapZoomLevel = 15
             rangeButton.setTitle("1.0KM", for: .normal)
             return
         }
@@ -70,7 +68,7 @@ class FindFoodViewController: UIViewController {
     
     // MARK: - UI Actions
     @IBAction func locateButtonClickAction(_ sender: UIButton) {
-        radarView.startRadarAnimation()
+        startRadarAnimating()
         LocationMaster.shared.requestCurrentLocation()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
@@ -89,10 +87,21 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = presenter.tableData.dataSource[indexPath.row]
-        let cellIdentifier = "FindFoodTableCell"
+        var cellIdentifier = "FindFoodTableViewCell"
+        switch data.templateStyle {
+        case .Button:
+            cellIdentifier = "FFBtnTableViewCell"
+        default: break
+        }
         let cell =
-            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FindFoodTableViewCell
-        cell.cellData = data as? LRCellData
+            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        if cellIdentifier == "FindFoodTableViewCell" {
+            let contentCell = cell as! FindFoodTableViewCell
+            contentCell.cellData = data as? LRCellData
+        }else {
+            let contentCell = cell as! FFBtnTableViewCell
+            contentCell.cellData = data as? ButtonCellData
+        }
         return cell
     }
     
@@ -101,10 +110,9 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
 extension FindFoodViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
-        
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
-            radarView.startRadarAnimation()
+            startRadarAnimating()
             switch action.status {
             case .DidUpdateLocation:
                 if action.locations?.count ?? 0 > 0 {
@@ -123,18 +131,22 @@ extension FindFoodViewController: DefaultTemplateDelegate {
             let action = state.currentAction as! SearchInRangeAction
             switch action.status {
             case .Success:
-                radarView.stopRadarAnimation()
+                stopRadarAnimating()
                 if action.responseData?.count ?? 0 > 0 {
+                    presenter.searchCounts = action.responseData?.count ?? 0
                     presenter.searchResults = action.responseData!
                     appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
+                } else {
+                    presenter.setMapZoomLevel(mapView: mkMapView,
+                                              level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
                 }
             case .Failed:
-                radarView.stopRadarAnimation()
+                stopRadarAnimating()
             default: break
             }
         case is MarkRangeSearchDataAction:
             let action = state.currentAction as! MarkRangeSearchDataAction
-            radarView.stopRadarAnimation()
+            stopRadarAnimating()
             if action.status == .Completed {
                 MapNavigator.removeAllMapAnnotations(mapView: mkMapView)
                 presenter.annotations.removeAll()
@@ -142,51 +154,37 @@ extension FindFoodViewController: DefaultTemplateDelegate {
                 MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
             }
         case is UIPanGestureRecognizerAction:
-            let action = state.currentAction as! UIPanGestureRecognizerAction
-            if action.sender.numberOfTouches >= 2 {
-                presenter.zoomStatus = .FingersTouched
-                presenter.preZoomLevel = presenter.mapZoomLevel
-                return
-            }
             let distance =
                 calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
             let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
             if distance > searchingDistance {
                 clearApolloServiceCache()
-                radarView.startRadarAnimation()
+                startRadarAnimating()
                 let level = mkMapView.zoomLevel
                 appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
+        case is GestureRecognizerEndedAction:
+            if presenter.isSearchRangeChanged() {
+                appStore.dispatch(
+                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
+                presenter.preZoomLevel = presenter.mapZoomLevel
+                presenter.centerCoordinate = mkMapView.camera.centerCoordinate
+            }
         case is MapRegionWillChangeAction:
-            if presenter.zoomStatus == .LevelChanged {
-                presenter.zoomStatus = .None
-                NSLog("Current: %zd", presenter.mapZoomLevel)
-                NSLog("Pre: %zd", presenter.preZoomLevel)
-                presenter.setMapZoomLevel(mapView: mkMapView,
-                                          level: presenter.preZoomLevel, center: presenter.centerCoordinate!)
-                presenter.mapZoomLevel = presenter.preZoomLevel
+            let action = state.currentAction as! MapRegionWillChangeAction
+            if presenter.preZoomLevel == presenter.mapZoomLevel {
+                presenter.setMapZoomLevel(mapView: action.mapView,
+                                          level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
             }
+            presenter.preZoomLevel = action.mapView.zoomLevel
         case is MapDidChangeVisibleRegionAction:
+            let action = state.currentAction as! MapDidChangeVisibleRegionAction
             updateRangeValue()
-            if presenter.isFirsTimeEntrance {
-                return
-            }
-            if presenter.zoomStatus == .FingersTouched {
-                if presenter.isRangeChanged() {
-                    clearApolloServiceCache()
-                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
-                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
-                    presenter.zoomStatus = .LevelChanged
-                }
-            }
-            if presenter.zoomStatus == .FingersTouched {
-                if presenter.preZoomLevel != presenter.mapZoomLevel {
-                    presenter.zoomStatus = .LevelChanged
-                    appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate,
-                                                         range: presenter.searchRange(zoomLevel: mkMapView.zoomLevel)))
-                }
-            }
+            presenter.mapZoomLevel = action.mapView.zoomLevel
+        case is TableCellButtonClickAction:
+            let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
+            defaultTemplate?.basePushToViewController(toVC!, Animated: true)
         default: break
         }
     }
@@ -195,10 +193,13 @@ extension FindFoodViewController: DefaultTemplateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        appStore.dispatch(MapRegionWillChangeAction())
+        appStore.dispatch(MapRegionWillChangeAction(mapView: mapView))
+    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        appStore.dispatch(MapRegionDidChangeAction(mapView: mapView))
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        appStore.dispatch(MapDidChangeVisibleRegionAction())
+        appStore.dispatch(MapDidChangeVisibleRegionAction(mapView: mapView))
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.
@@ -217,7 +218,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotationViewTag == 0 {
+        if annotationViewTag == -1 {
+            annotationViewTag = presenter.searchCounts-1
             presenter.willMarkAnnotations = true
         }
         let identifier = "MyPin"
@@ -229,16 +231,20 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
-            annotationView?.tag = annotationViewTag
-            annotationViewTag += 1
         }
+        /*
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
-//        leftIconView.image = UIImage(named: restaurant.image)
+        leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView
+         */
+        annotationView?.tag = annotationViewTag
+        if annotationViewTag > 0 {
+            annotationViewTag -= 1
+        }
         return annotationView
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
-        annotationViewTag = 0
+        annotationViewTag = -1
         if presenter.willMarkAnnotations {
             MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
             presenter.willMarkAnnotations = false
@@ -248,13 +254,17 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         if presenter.searchResults.count > 0 {
             presenter.tableData.reloadData(data: presenter.searchResults[view.tag]!)
             tableView.reloadData()
-//            tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
         }
     }
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {
             let gesture = gestureRecognizer as! UIPanGestureRecognizer
             appStore.dispatch(UIPanGestureRecognizerAction(sender: gesture))
+            if gestureRecognizer.state == .ended {
+                appStore.dispatch(GestureRecognizerEndedAction(sender: gestureRecognizer))
+            }
         }
         return true
     }

@@ -695,491 +695,12 @@ public final class CreateFoodieMutation: GraphQLMutation {
   }
 }
 
-public final class CreateLocationMutation: GraphQLMutation {
+public final class CreateOwnGourmetMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation CreateLocation($address: InputAddress!, $shopBranch: InputBranch!, $shop: InputShop!) {
-      createLocation(address: $address, shopBranch: $shopBranch, shop: $shop) {
-        __typename
-        ownerType
-        completeInfo
-        fullInfo
-        postalCode
-        nation
-        isoNationCode
-        locality
-        subLocality
-        administrativeArea
-        subAdministrativeArea
-        thoroughfare
-        subThoroughfare
-        floor
-        latitude
-        longitude
-        annotation
-        shopBranch {
-          __typename
-          uniqueId
-          orderId
-          name
-          openTime
-          closedTime
-          tel
-          shop {
-            __typename
-            uniqueId
-            title
-            style
-            type
-            underPrice
-            status
-          }
-        }
-      }
-    }
-    """
-
-  public let operationName: String = "CreateLocation"
-
-  public var address: InputAddress
-  public var shopBranch: InputBranch
-  public var shop: InputShop
-
-  public init(address: InputAddress, shopBranch: InputBranch, shop: InputShop) {
-    self.address = address
-    self.shopBranch = shopBranch
-    self.shop = shop
-  }
-
-  public var variables: GraphQLMap? {
-    return ["address": address, "shopBranch": shopBranch, "shop": shop]
-  }
-
-  public struct Data: GraphQLSelectionSet {
-    public static let possibleTypes: [String] = ["RootMutationType"]
-
-    public static var selections: [GraphQLSelection] {
-      return [
-        GraphQLField("createLocation", arguments: ["address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch"), "shop": GraphQLVariable("shop")], type: .object(CreateLocation.selections)),
-      ]
-    }
-
-    public private(set) var resultMap: ResultMap
-
-    public init(unsafeResultMap: ResultMap) {
-      self.resultMap = unsafeResultMap
-    }
-
-    public init(createLocation: CreateLocation? = nil) {
-      self.init(unsafeResultMap: ["__typename": "RootMutationType", "createLocation": createLocation.flatMap { (value: CreateLocation) -> ResultMap in value.resultMap }])
-    }
-
-    /// create location
-    public var createLocation: CreateLocation? {
-      get {
-        return (resultMap["createLocation"] as? ResultMap).flatMap { CreateLocation(unsafeResultMap: $0) }
-      }
-      set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "createLocation")
-      }
-    }
-
-    public struct CreateLocation: GraphQLSelectionSet {
-      public static let possibleTypes: [String] = ["Address"]
-
-      public static var selections: [GraphQLSelection] {
-        return [
-          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-          GraphQLField("ownerType", type: .scalar(String.self)),
-          GraphQLField("completeInfo", type: .scalar(String.self)),
-          GraphQLField("fullInfo", type: .scalar(String.self)),
-          GraphQLField("postalCode", type: .scalar(String.self)),
-          GraphQLField("nation", type: .scalar(String.self)),
-          GraphQLField("isoNationCode", type: .scalar(String.self)),
-          GraphQLField("locality", type: .scalar(String.self)),
-          GraphQLField("subLocality", type: .scalar(String.self)),
-          GraphQLField("administrativeArea", type: .scalar(String.self)),
-          GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
-          GraphQLField("thoroughfare", type: .scalar(String.self)),
-          GraphQLField("subThoroughfare", type: .scalar(String.self)),
-          GraphQLField("floor", type: .scalar(String.self)),
-          GraphQLField("latitude", type: .scalar(String.self)),
-          GraphQLField("longitude", type: .scalar(String.self)),
-          GraphQLField("annotation", type: .scalar(String.self)),
-          GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
-        ]
-      }
-
-      public private(set) var resultMap: ResultMap
-
-      public init(unsafeResultMap: ResultMap) {
-        self.resultMap = unsafeResultMap
-      }
-
-      public init(ownerType: String? = nil, completeInfo: String? = nil, fullInfo: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, floor: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil, shopBranch: ShopBranch? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Address", "ownerType": ownerType, "completeInfo": completeInfo, "fullInfo": fullInfo, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "floor": floor, "latitude": latitude, "longitude": longitude, "annotation": annotation, "shopBranch": shopBranch.flatMap { (value: ShopBranch) -> ResultMap in value.resultMap }])
-      }
-
-      public var __typename: String {
-        get {
-          return resultMap["__typename"]! as! String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "__typename")
-        }
-      }
-
-      public var ownerType: String? {
-        get {
-          return resultMap["ownerType"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "ownerType")
-        }
-      }
-
-      public var completeInfo: String? {
-        get {
-          return resultMap["completeInfo"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "completeInfo")
-        }
-      }
-
-      public var fullInfo: String? {
-        get {
-          return resultMap["fullInfo"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "fullInfo")
-        }
-      }
-
-      public var postalCode: String? {
-        get {
-          return resultMap["postalCode"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "postalCode")
-        }
-      }
-
-      public var nation: String? {
-        get {
-          return resultMap["nation"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "nation")
-        }
-      }
-
-      public var isoNationCode: String? {
-        get {
-          return resultMap["isoNationCode"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "isoNationCode")
-        }
-      }
-
-      public var locality: String? {
-        get {
-          return resultMap["locality"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "locality")
-        }
-      }
-
-      public var subLocality: String? {
-        get {
-          return resultMap["subLocality"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "subLocality")
-        }
-      }
-
-      public var administrativeArea: String? {
-        get {
-          return resultMap["administrativeArea"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "administrativeArea")
-        }
-      }
-
-      public var subAdministrativeArea: String? {
-        get {
-          return resultMap["subAdministrativeArea"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "subAdministrativeArea")
-        }
-      }
-
-      public var thoroughfare: String? {
-        get {
-          return resultMap["thoroughfare"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "thoroughfare")
-        }
-      }
-
-      public var subThoroughfare: String? {
-        get {
-          return resultMap["subThoroughfare"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "subThoroughfare")
-        }
-      }
-
-      public var floor: String? {
-        get {
-          return resultMap["floor"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "floor")
-        }
-      }
-
-      public var latitude: String? {
-        get {
-          return resultMap["latitude"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "latitude")
-        }
-      }
-
-      public var longitude: String? {
-        get {
-          return resultMap["longitude"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "longitude")
-        }
-      }
-
-      public var annotation: String? {
-        get {
-          return resultMap["annotation"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "annotation")
-        }
-      }
-
-      public var shopBranch: ShopBranch? {
-        get {
-          return (resultMap["shopBranch"] as? ResultMap).flatMap { ShopBranch(unsafeResultMap: $0) }
-        }
-        set {
-          resultMap.updateValue(newValue?.resultMap, forKey: "shopBranch")
-        }
-      }
-
-      public struct ShopBranch: GraphQLSelectionSet {
-        public static let possibleTypes: [String] = ["ShopBranch"]
-
-        public static var selections: [GraphQLSelection] {
-          return [
-            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-            GraphQLField("uniqueId", type: .scalar(String.self)),
-            GraphQLField("orderId", type: .scalar(Int.self)),
-            GraphQLField("name", type: .scalar(String.self)),
-            GraphQLField("openTime", type: .scalar(String.self)),
-            GraphQLField("closedTime", type: .scalar(String.self)),
-            GraphQLField("tel", type: .scalar(String.self)),
-            GraphQLField("shop", type: .object(Shop.selections)),
-          ]
-        }
-
-        public private(set) var resultMap: ResultMap
-
-        public init(unsafeResultMap: ResultMap) {
-          self.resultMap = unsafeResultMap
-        }
-
-        public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil) {
-          self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }])
-        }
-
-        public var __typename: String {
-          get {
-            return resultMap["__typename"]! as! String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "__typename")
-          }
-        }
-
-        public var uniqueId: String? {
-          get {
-            return resultMap["uniqueId"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "uniqueId")
-          }
-        }
-
-        public var orderId: Int? {
-          get {
-            return resultMap["orderId"] as? Int
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "orderId")
-          }
-        }
-
-        public var name: String? {
-          get {
-            return resultMap["name"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        public var openTime: String? {
-          get {
-            return resultMap["openTime"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "openTime")
-          }
-        }
-
-        public var closedTime: String? {
-          get {
-            return resultMap["closedTime"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "closedTime")
-          }
-        }
-
-        public var tel: String? {
-          get {
-            return resultMap["tel"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "tel")
-          }
-        }
-
-        public var shop: Shop? {
-          get {
-            return (resultMap["shop"] as? ResultMap).flatMap { Shop(unsafeResultMap: $0) }
-          }
-          set {
-            resultMap.updateValue(newValue?.resultMap, forKey: "shop")
-          }
-        }
-
-        public struct Shop: GraphQLSelectionSet {
-          public static let possibleTypes: [String] = ["Shop"]
-
-          public static var selections: [GraphQLSelection] {
-            return [
-              GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
-              GraphQLField("uniqueId", type: .scalar(String.self)),
-              GraphQLField("title", type: .scalar(String.self)),
-              GraphQLField("style", type: .scalar(String.self)),
-              GraphQLField("type", type: .scalar(String.self)),
-              GraphQLField("underPrice", type: .scalar(Double.self)),
-              GraphQLField("status", type: .scalar(Int.self)),
-            ]
-          }
-
-          public private(set) var resultMap: ResultMap
-
-          public init(unsafeResultMap: ResultMap) {
-            self.resultMap = unsafeResultMap
-          }
-
-          public init(uniqueId: String? = nil, title: String? = nil, style: String? = nil, type: String? = nil, underPrice: Double? = nil, status: Int? = nil) {
-            self.init(unsafeResultMap: ["__typename": "Shop", "uniqueId": uniqueId, "title": title, "style": style, "type": type, "underPrice": underPrice, "status": status])
-          }
-
-          public var __typename: String {
-            get {
-              return resultMap["__typename"]! as! String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "__typename")
-            }
-          }
-
-          public var uniqueId: String? {
-            get {
-              return resultMap["uniqueId"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "uniqueId")
-            }
-          }
-
-          public var title: String? {
-            get {
-              return resultMap["title"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "title")
-            }
-          }
-
-          public var style: String? {
-            get {
-              return resultMap["style"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "style")
-            }
-          }
-
-          public var type: String? {
-            get {
-              return resultMap["type"] as? String
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "type")
-            }
-          }
-
-          public var underPrice: Double? {
-            get {
-              return resultMap["underPrice"] as? Double
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "underPrice")
-            }
-          }
-
-          public var status: Int? {
-            get {
-              return resultMap["status"] as? Int
-            }
-            set {
-              resultMap.updateValue(newValue, forKey: "status")
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-public final class UpdateBranchMutation: GraphQLMutation {
-  /// The raw GraphQL definition of this operation.
-  public let operationDefinition: String =
-    """
-    mutation UpdateBranch($branchId: String!, $branch: InputBranch!, $shop: InputShop, $address: InputAddress) {
-      updateBranch(branchId: $branchId, branch: $branch, shop: $shop, address: $address) {
+    mutation CreateOwnGourmet($foodieId: String!, $address: InputAddress!, $shopBranch: InputBranch!, $shop: InputShop!) {
+      createOwnGourmet(foodieId: $foodieId, address: $address, shopBranch: $shopBranch, shop: $shop) {
         __typename
         uniqueId
         orderId
@@ -1219,22 +740,22 @@ public final class UpdateBranchMutation: GraphQLMutation {
     }
     """
 
-  public let operationName: String = "UpdateBranch"
+  public let operationName: String = "CreateOwnGourmet"
 
-  public var branchId: String
-  public var branch: InputBranch
-  public var shop: InputShop?
-  public var address: InputAddress?
+  public var foodieId: String
+  public var address: InputAddress
+  public var shopBranch: InputBranch
+  public var shop: InputShop
 
-  public init(branchId: String, branch: InputBranch, shop: InputShop? = nil, address: InputAddress? = nil) {
-    self.branchId = branchId
-    self.branch = branch
-    self.shop = shop
+  public init(foodieId: String, address: InputAddress, shopBranch: InputBranch, shop: InputShop) {
+    self.foodieId = foodieId
     self.address = address
+    self.shopBranch = shopBranch
+    self.shop = shop
   }
 
   public var variables: GraphQLMap? {
-    return ["branchId": branchId, "branch": branch, "shop": shop, "address": address]
+    return ["foodieId": foodieId, "address": address, "shopBranch": shopBranch, "shop": shop]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -1242,7 +763,7 @@ public final class UpdateBranchMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("updateBranch", arguments: ["branchId": GraphQLVariable("branchId"), "branch": GraphQLVariable("branch"), "shop": GraphQLVariable("shop"), "address": GraphQLVariable("address")], type: .object(UpdateBranch.selections)),
+        GraphQLField("createOwnGourmet", arguments: ["foodieId": GraphQLVariable("foodieId"), "address": GraphQLVariable("address"), "shopBranch": GraphQLVariable("shopBranch"), "shop": GraphQLVariable("shop")], type: .object(CreateOwnGourmet.selections)),
       ]
     }
 
@@ -1252,21 +773,504 @@ public final class UpdateBranchMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(updateBranch: UpdateBranch? = nil) {
-      self.init(unsafeResultMap: ["__typename": "RootMutationType", "updateBranch": updateBranch.flatMap { (value: UpdateBranch) -> ResultMap in value.resultMap }])
+    public init(createOwnGourmet: CreateOwnGourmet? = nil) {
+      self.init(unsafeResultMap: ["__typename": "RootMutationType", "createOwnGourmet": createOwnGourmet.flatMap { (value: CreateOwnGourmet) -> ResultMap in value.resultMap }])
     }
 
-    /// update shop data
-    public var updateBranch: UpdateBranch? {
+    /// create shop with foddie
+    public var createOwnGourmet: CreateOwnGourmet? {
       get {
-        return (resultMap["updateBranch"] as? ResultMap).flatMap { UpdateBranch(unsafeResultMap: $0) }
+        return (resultMap["createOwnGourmet"] as? ResultMap).flatMap { CreateOwnGourmet(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "updateBranch")
+        resultMap.updateValue(newValue?.resultMap, forKey: "createOwnGourmet")
       }
     }
 
-    public struct UpdateBranch: GraphQLSelectionSet {
+    public struct CreateOwnGourmet: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["ShopBranch"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("uniqueId", type: .scalar(String.self)),
+          GraphQLField("orderId", type: .scalar(Int.self)),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("openTime", type: .scalar(String.self)),
+          GraphQLField("closedTime", type: .scalar(String.self)),
+          GraphQLField("tel", type: .scalar(String.self)),
+          GraphQLField("shop", type: .object(Shop.selections)),
+          GraphQLField("address", type: .object(Address.selections)),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var uniqueId: String? {
+        get {
+          return resultMap["uniqueId"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "uniqueId")
+        }
+      }
+
+      public var orderId: Int? {
+        get {
+          return resultMap["orderId"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "orderId")
+        }
+      }
+
+      public var name: String? {
+        get {
+          return resultMap["name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var openTime: String? {
+        get {
+          return resultMap["openTime"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "openTime")
+        }
+      }
+
+      public var closedTime: String? {
+        get {
+          return resultMap["closedTime"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "closedTime")
+        }
+      }
+
+      public var tel: String? {
+        get {
+          return resultMap["tel"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "tel")
+        }
+      }
+
+      public var shop: Shop? {
+        get {
+          return (resultMap["shop"] as? ResultMap).flatMap { Shop(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "shop")
+        }
+      }
+
+      public var address: Address? {
+        get {
+          return (resultMap["address"] as? ResultMap).flatMap { Address(unsafeResultMap: $0) }
+        }
+        set {
+          resultMap.updateValue(newValue?.resultMap, forKey: "address")
+        }
+      }
+
+      public struct Shop: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Shop"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("uniqueId", type: .scalar(String.self)),
+            GraphQLField("title", type: .scalar(String.self)),
+            GraphQLField("style", type: .scalar(String.self)),
+            GraphQLField("type", type: .scalar(String.self)),
+            GraphQLField("underPrice", type: .scalar(Double.self)),
+            GraphQLField("status", type: .scalar(Int.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(uniqueId: String? = nil, title: String? = nil, style: String? = nil, type: String? = nil, underPrice: Double? = nil, status: Int? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Shop", "uniqueId": uniqueId, "title": title, "style": style, "type": type, "underPrice": underPrice, "status": status])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var uniqueId: String? {
+          get {
+            return resultMap["uniqueId"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "uniqueId")
+          }
+        }
+
+        public var title: String? {
+          get {
+            return resultMap["title"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "title")
+          }
+        }
+
+        public var style: String? {
+          get {
+            return resultMap["style"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "style")
+          }
+        }
+
+        public var type: String? {
+          get {
+            return resultMap["type"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "type")
+          }
+        }
+
+        public var underPrice: Double? {
+          get {
+            return resultMap["underPrice"] as? Double
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "underPrice")
+          }
+        }
+
+        public var status: Int? {
+          get {
+            return resultMap["status"] as? Int
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "status")
+          }
+        }
+      }
+
+      public struct Address: GraphQLSelectionSet {
+        public static let possibleTypes: [String] = ["Address"]
+
+        public static var selections: [GraphQLSelection] {
+          return [
+            GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+            GraphQLField("ownerType", type: .scalar(String.self)),
+            GraphQLField("completeInfo", type: .scalar(String.self)),
+            GraphQLField("fullInfo", type: .scalar(String.self)),
+            GraphQLField("postalCode", type: .scalar(String.self)),
+            GraphQLField("nation", type: .scalar(String.self)),
+            GraphQLField("isoNationCode", type: .scalar(String.self)),
+            GraphQLField("locality", type: .scalar(String.self)),
+            GraphQLField("subLocality", type: .scalar(String.self)),
+            GraphQLField("administrativeArea", type: .scalar(String.self)),
+            GraphQLField("subAdministrativeArea", type: .scalar(String.self)),
+            GraphQLField("thoroughfare", type: .scalar(String.self)),
+            GraphQLField("subThoroughfare", type: .scalar(String.self)),
+            GraphQLField("floor", type: .scalar(String.self)),
+            GraphQLField("latitude", type: .scalar(String.self)),
+            GraphQLField("longitude", type: .scalar(String.self)),
+            GraphQLField("annotation", type: .scalar(String.self)),
+          ]
+        }
+
+        public private(set) var resultMap: ResultMap
+
+        public init(unsafeResultMap: ResultMap) {
+          self.resultMap = unsafeResultMap
+        }
+
+        public init(ownerType: String? = nil, completeInfo: String? = nil, fullInfo: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, floor: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil) {
+          self.init(unsafeResultMap: ["__typename": "Address", "ownerType": ownerType, "completeInfo": completeInfo, "fullInfo": fullInfo, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "floor": floor, "latitude": latitude, "longitude": longitude, "annotation": annotation])
+        }
+
+        public var __typename: String {
+          get {
+            return resultMap["__typename"]! as! String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "__typename")
+          }
+        }
+
+        public var ownerType: String? {
+          get {
+            return resultMap["ownerType"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "ownerType")
+          }
+        }
+
+        public var completeInfo: String? {
+          get {
+            return resultMap["completeInfo"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "completeInfo")
+          }
+        }
+
+        public var fullInfo: String? {
+          get {
+            return resultMap["fullInfo"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "fullInfo")
+          }
+        }
+
+        public var postalCode: String? {
+          get {
+            return resultMap["postalCode"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "postalCode")
+          }
+        }
+
+        public var nation: String? {
+          get {
+            return resultMap["nation"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "nation")
+          }
+        }
+
+        public var isoNationCode: String? {
+          get {
+            return resultMap["isoNationCode"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "isoNationCode")
+          }
+        }
+
+        public var locality: String? {
+          get {
+            return resultMap["locality"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "locality")
+          }
+        }
+
+        public var subLocality: String? {
+          get {
+            return resultMap["subLocality"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "subLocality")
+          }
+        }
+
+        public var administrativeArea: String? {
+          get {
+            return resultMap["administrativeArea"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "administrativeArea")
+          }
+        }
+
+        public var subAdministrativeArea: String? {
+          get {
+            return resultMap["subAdministrativeArea"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "subAdministrativeArea")
+          }
+        }
+
+        public var thoroughfare: String? {
+          get {
+            return resultMap["thoroughfare"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "thoroughfare")
+          }
+        }
+
+        public var subThoroughfare: String? {
+          get {
+            return resultMap["subThoroughfare"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "subThoroughfare")
+          }
+        }
+
+        public var floor: String? {
+          get {
+            return resultMap["floor"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "floor")
+          }
+        }
+
+        public var latitude: String? {
+          get {
+            return resultMap["latitude"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "latitude")
+          }
+        }
+
+        public var longitude: String? {
+          get {
+            return resultMap["longitude"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "longitude")
+          }
+        }
+
+        public var annotation: String? {
+          get {
+            return resultMap["annotation"] as? String
+          }
+          set {
+            resultMap.updateValue(newValue, forKey: "annotation")
+          }
+        }
+      }
+    }
+  }
+}
+
+public final class UpdateGroumetMutation: GraphQLMutation {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    mutation UpdateGroumet($foodieId: String, $branchId: String!, $branch: InputBranch!, $shop: InputShop, $address: InputAddress) {
+      updateGroumet(foodieId: $foodieId, branchId: $branchId, branch: $branch, shop: $shop, address: $address) {
+        __typename
+        uniqueId
+        orderId
+        name
+        openTime
+        closedTime
+        tel
+        shop {
+          __typename
+          uniqueId
+          title
+          style
+          type
+          underPrice
+          status
+        }
+        address {
+          __typename
+          ownerType
+          completeInfo
+          fullInfo
+          postalCode
+          nation
+          isoNationCode
+          locality
+          subLocality
+          administrativeArea
+          subAdministrativeArea
+          thoroughfare
+          subThoroughfare
+          floor
+          latitude
+          longitude
+          annotation
+        }
+      }
+    }
+    """
+
+  public let operationName: String = "UpdateGroumet"
+
+  public var foodieId: String?
+  public var branchId: String
+  public var branch: InputBranch
+  public var shop: InputShop?
+  public var address: InputAddress?
+
+  public init(foodieId: String? = nil, branchId: String, branch: InputBranch, shop: InputShop? = nil, address: InputAddress? = nil) {
+    self.foodieId = foodieId
+    self.branchId = branchId
+    self.branch = branch
+    self.shop = shop
+    self.address = address
+  }
+
+  public var variables: GraphQLMap? {
+    return ["foodieId": foodieId, "branchId": branchId, "branch": branch, "shop": shop, "address": address]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["RootMutationType"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("updateGroumet", arguments: ["foodieId": GraphQLVariable("foodieId"), "branchId": GraphQLVariable("branchId"), "branch": GraphQLVariable("branch"), "shop": GraphQLVariable("shop"), "address": GraphQLVariable("address")], type: .object(UpdateGroumet.selections)),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(updateGroumet: UpdateGroumet? = nil) {
+      self.init(unsafeResultMap: ["__typename": "RootMutationType", "updateGroumet": updateGroumet.flatMap { (value: UpdateGroumet) -> ResultMap in value.resultMap }])
+    }
+
+    /// update groumet
+    public var updateGroumet: UpdateGroumet? {
+      get {
+        return (resultMap["updateGroumet"] as? ResultMap).flatMap { UpdateGroumet(unsafeResultMap: $0) }
+      }
+      set {
+        resultMap.updateValue(newValue?.resultMap, forKey: "updateGroumet")
+      }
+    }
+
+    public struct UpdateGroumet: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ShopBranch"]
 
       public static var selections: [GraphQLSelection] {

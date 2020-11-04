@@ -24,3 +24,7 @@ struct UIPanGestureRecognizerAction: Action {
 struct ReceivedGestureRecognizerAction: Action {
     let sender: UIGestureRecognizer
 }
+
+struct GestureRecognizerEndedAction: Action {
+    let sender: UIGestureRecognizer
+}

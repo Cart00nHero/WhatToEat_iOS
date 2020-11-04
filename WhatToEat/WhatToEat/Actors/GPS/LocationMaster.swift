@@ -37,7 +37,7 @@ class LocationMaster: NSObject {
     private var locationManager: CLLocationManager?
     var delegate: LocationServiceDelegate?
 
-    var isStartUpdatingLocation = false
+    private var isStartUpdatingLocation = false
 
     override init() {
         super.init()
@@ -72,7 +72,6 @@ class LocationMaster: NSObject {
     func requestAuthorization(_ authorization: RequestAuthorization) {
         switch authorization {
         case .REQUEST_AUTHORIZATION_ALWAYS:
-
             if UIDevice.current.systemVersion.compare("8.0", options: .numeric) == .orderedDescending {
               locationManager?.requestAlwaysAuthorization()
             }
@@ -80,7 +79,6 @@ class LocationMaster: NSObject {
               locationManager?.allowsBackgroundLocationUpdates = true
           }
         case .REQUEST_AUTHORIZATION_WHENINUSE:
-
           if UIDevice.current.systemVersion.compare("8.0", options: .numeric) == .orderedDescending {
             locationManager?.requestWhenInUseAuthorization()
           }
