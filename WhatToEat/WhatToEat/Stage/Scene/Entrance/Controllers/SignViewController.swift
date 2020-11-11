@@ -30,39 +30,37 @@ class SignViewController: UIViewController {
 
     // MARK: - actions
     @IBAction func loginButtonClickAction(_ sender: UIButton) {
-//        let service = ApolloService.shared.apollo
-//        let createFoodie = CreateFoodieMutation(email: "abc@gmail.com", name: "Morris", token: InputTo)
-//        service.perform(mutation: createFoodie) { result in
-//            switch result {
-//            case .success(let graphQLResult):
-//                if (graphQLResult.data?.createFoodie) != nil {
-//                    print("成功")
-//                }
-//                if graphQLResult.errors != nil {
-//                    print("幹咧")
-//                    print(graphQLResult.errors?.description ?? "")
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-        
-        appStore.dispatch(SignAppAction())
+        var whereCMD = FoodieDqCmd()
+        whereCMD.email = "morris@email.com"
+        appStore.dispatch(foodiesDynamicQueryAction(whereCMD: whereCMD))
     }
 }
 
 extension SignViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
+        case let action as FoodiesDynamicQueryAction:
+            switch action.status {
+            case .Success:
+                if action.responseData?.count == 0 {
+                    let tokenData =
+                        InputToken(token: "dafjnsdss", type: "FaceBook")
+                    appStore.dispatch(
+                        createFoodieAction(email: "morris@gmail.com", name: "Morris", gender: 1, token: tokenData))
+                    
+                } else {
+                    // update
+                }
+            default: break
+            }
+        case let action as CreateFoodieAction:
+            switch action.status {
+            case .Success: break
+            default: break
+            }
         case _ as SignAppAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
             defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-//        case _ as FacebookLoginAction:
-//            let action = state.currentAction as! FacebookLoginAction
-//            if action.status == .Success {
-//                let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
-//                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-//            }
         default: break
         }
     }

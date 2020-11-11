@@ -563,9 +563,10 @@ public final class CreateFoodieMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: InputToken!) {
-      createFoodie(email: $email, gender: $gender, name: $name, token: $token) {
+    mutation CreateFoodie($email: String!, $name: String!, $gender: Int, $token: InputToken!) {
+      createFoodie(email: $email, name: $name, gender: $gender, token: $token) {
         __typename
+        uniqueId
         email
         name
         gender
@@ -581,19 +582,19 @@ public final class CreateFoodieMutation: GraphQLMutation {
   public let operationName: String = "CreateFoodie"
 
   public var email: String
-  public var gender: Int?
   public var name: String
+  public var gender: Int?
   public var token: InputToken
 
-  public init(email: String, gender: Int? = nil, name: String, token: InputToken) {
+  public init(email: String, name: String, gender: Int? = nil, token: InputToken) {
     self.email = email
-    self.gender = gender
     self.name = name
+    self.gender = gender
     self.token = token
   }
 
   public var variables: GraphQLMap? {
-    return ["email": email, "gender": gender, "name": name, "token": token]
+    return ["email": email, "name": name, "gender": gender, "token": token]
   }
 
   public struct Data: GraphQLSelectionSet {
@@ -601,7 +602,7 @@ public final class CreateFoodieMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("createFoodie", arguments: ["email": GraphQLVariable("email"), "gender": GraphQLVariable("gender"), "name": GraphQLVariable("name"), "token": GraphQLVariable("token")], type: .object(CreateFoodie.selections)),
+        GraphQLField("createFoodie", arguments: ["email": GraphQLVariable("email"), "name": GraphQLVariable("name"), "gender": GraphQLVariable("gender"), "token": GraphQLVariable("token")], type: .object(CreateFoodie.selections)),
       ]
     }
 
@@ -631,6 +632,7 @@ public final class CreateFoodieMutation: GraphQLMutation {
       public static var selections: [GraphQLSelection] {
         return [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("uniqueId", type: .scalar(String.self)),
           GraphQLField("email", type: .scalar(String.self)),
           GraphQLField("name", type: .scalar(String.self)),
           GraphQLField("gender", type: .scalar(Int.self)),
@@ -644,8 +646,8 @@ public final class CreateFoodieMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(email: String? = nil, name: String? = nil, gender: Int? = nil, token: Token? = nil) {
-        self.init(unsafeResultMap: ["__typename": "Foodie", "email": email, "name": name, "gender": gender, "token": token.flatMap { (value: Token) -> ResultMap in value.resultMap }])
+      public init(uniqueId: String? = nil, email: String? = nil, name: String? = nil, gender: Int? = nil, token: Token? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Foodie", "uniqueId": uniqueId, "email": email, "name": name, "gender": gender, "token": token.flatMap { (value: Token) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -654,6 +656,15 @@ public final class CreateFoodieMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var uniqueId: String? {
+        get {
+          return resultMap["uniqueId"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "uniqueId")
         }
       }
 

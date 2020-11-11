@@ -1,6 +1,7 @@
 
-mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: InputToken!) {
-  createFoodie(email: $email, gender: $gender,name: $name, token:$token) {
+mutation CreateFoodie($email: String!, $name: String!, $gender: Int, $token: InputToken!) {
+  createFoodie(email: $email,name: $name, gender: $gender, token:$token) {
+    uniqueId
     email
     name
     gender

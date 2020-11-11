@@ -15,7 +15,30 @@ enum ApiActionStatus {
 protocol ApiActionProtocol {
     var status: ApiActionStatus { get set }
 }
-
+struct CreateFoodieAction: Action,ApiActionProtocol {
+    var status: ApiActionStatus = .Started
+    var responseData: CreateFoodieMutation.Data.CreateFoodie?
+}
+func createFoodieAction(email: String,name: String,gender: Int, token: InputToken) -> CreateFoodieAction {
+    var action = CreateFoodieAction()
+    let service = ApolloService.shared.apollo
+    let mutation = CreateFoodieMutation(email: email, name: name, token: token)
+    service.perform(mutation: mutation) { result in
+        switch result {
+        case .success(let graphQLResult):
+            if graphQLResult.errors != nil {
+                action.status = .Failed
+                action.responseData = graphQLResult.data?.createFoodie
+            } else {
+                action.status = .Success
+            }
+        case .failure(let error):
+            print(error.localizedDescription)
+            action.status = .Failed
+        }
+    }
+    return action
+}
 struct CreateGourmetAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
