@@ -9,6 +9,32 @@
 import UIKit
 import ReSwift
 
+struct FoodiesDynamicQueryAction: Action,ApiActionProtocol {
+    var status: ApiActionStatus = .Started
+    var responseData: [FoodiesDynamicQueryQuery.Data.FoodiesDynamicQuery?]?
+}
+
+func foodiesDynamicQueryAction(whereCMD: FoodieDqCmd) -> FoodiesDynamicQueryAction {
+    var action = FoodiesDynamicQueryAction()
+    let service = ApolloService.shared.apollo
+    let query = FoodiesDynamicQueryQuery(whereAnd: whereCMD)
+    service.fetch(query: query){ result in
+        switch result {
+        case .success(let graphQLResult):
+            if graphQLResult.errors != nil {
+                action.status = .Success
+                action.responseData = graphQLResult.data?.foodiesDynamicQuery
+                action.status = .Success
+            }
+        case .failure(let error):
+            print(error.localizedDescription)
+            action.status = .Failed
+            appStore.dispatch(action)
+        }
+    }
+    
+    return action
+}
 struct LocationsDynamicQueryAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
     var responseData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]?

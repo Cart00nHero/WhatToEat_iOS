@@ -89,6 +89,14 @@ mutation UpdateGroumet($foodieId: String,$branchId: String!,$branch: InputBranch
   }
 }
 
+query FoodiesDynamicQuery($whereAnd: FoodieDqCmd!) {
+  foodiesDynamicQuery(whereAnd: $whereAnd){
+    uniqueId
+    email
+    name
+    gender
+  }
+}
 query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
   locationsDynamicQuery(foodieId:$foodieId,whereAnd: $whereAnd) {
     ownerType

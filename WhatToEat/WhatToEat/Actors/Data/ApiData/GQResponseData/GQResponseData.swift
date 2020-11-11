@@ -14,8 +14,8 @@ struct Foodie: MapConvertable {
     let title: String?
     let style: String?
     let type: String?
-    let status: Int = 0
-    let underPrice: Float64 = 0.0
+    var status: Int = 0
+    var underPrice: Float64 = 0.0
     let branches: [ShopBranch]?
 }
 
@@ -73,8 +73,8 @@ struct Shop: MapConvertable {
     let title: String?
     let style: String?
     let type: String?
-    let status: Int = 0
-    let underPrice: Float64 = 0.0
+    var status: Int = 0
+    var underPrice: Float64 = 0.0
     let branches: [Branch]?
 }
 

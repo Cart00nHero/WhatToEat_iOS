@@ -310,6 +310,56 @@ public struct InputShop: GraphQLMapConvertible {
   }
 }
 
+/// foodie dynamic query parameters
+public struct FoodieDqCmd: GraphQLMapConvertible {
+  public var graphQLMap: GraphQLMap
+
+  /// - Parameters:
+  ///   - email
+  ///   - gender
+  ///   - name
+  ///   - uniqueId
+  public init(email: Swift.Optional<String?> = nil, gender: Swift.Optional<Int?> = nil, name: Swift.Optional<String?> = nil, uniqueId: Swift.Optional<String?> = nil) {
+    graphQLMap = ["email": email, "gender": gender, "name": name, "uniqueId": uniqueId]
+  }
+
+  public var email: Swift.Optional<String?> {
+    get {
+      return graphQLMap["email"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "email")
+    }
+  }
+
+  public var gender: Swift.Optional<Int?> {
+    get {
+      return graphQLMap["gender"] as? Swift.Optional<Int?> ?? Swift.Optional<Int?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "gender")
+    }
+  }
+
+  public var name: Swift.Optional<String?> {
+    get {
+      return graphQLMap["name"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "name")
+    }
+  }
+
+  public var uniqueId: Swift.Optional<String?> {
+    get {
+      return graphQLMap["uniqueId"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "uniqueId")
+    }
+  }
+}
+
 /// address dynamic query parameters
 public struct AddressDqCmd: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
@@ -1653,6 +1703,132 @@ public final class UpdateGroumetMutation: GraphQLMutation {
           set {
             resultMap.updateValue(newValue, forKey: "annotation")
           }
+        }
+      }
+    }
+  }
+}
+
+public final class FoodiesDynamicQueryQuery: GraphQLQuery {
+  /// The raw GraphQL definition of this operation.
+  public let operationDefinition: String =
+    """
+    query FoodiesDynamicQuery($whereAnd: FoodieDqCmd!) {
+      foodiesDynamicQuery(whereAnd: $whereAnd) {
+        __typename
+        uniqueId
+        email
+        name
+        gender
+      }
+    }
+    """
+
+  public let operationName: String = "FoodiesDynamicQuery"
+
+  public var whereAnd: FoodieDqCmd
+
+  public init(whereAnd: FoodieDqCmd) {
+    self.whereAnd = whereAnd
+  }
+
+  public var variables: GraphQLMap? {
+    return ["whereAnd": whereAnd]
+  }
+
+  public struct Data: GraphQLSelectionSet {
+    public static let possibleTypes: [String] = ["RootQueryType"]
+
+    public static var selections: [GraphQLSelection] {
+      return [
+        GraphQLField("foodiesDynamicQuery", arguments: ["whereAnd": GraphQLVariable("whereAnd")], type: .list(.object(FoodiesDynamicQuery.selections))),
+      ]
+    }
+
+    public private(set) var resultMap: ResultMap
+
+    public init(unsafeResultMap: ResultMap) {
+      self.resultMap = unsafeResultMap
+    }
+
+    public init(foodiesDynamicQuery: [FoodiesDynamicQuery?]? = nil) {
+      self.init(unsafeResultMap: ["__typename": "RootQueryType", "foodiesDynamicQuery": foodiesDynamicQuery.flatMap { (value: [FoodiesDynamicQuery?]) -> [ResultMap?] in value.map { (value: FoodiesDynamicQuery?) -> ResultMap? in value.flatMap { (value: FoodiesDynamicQuery) -> ResultMap in value.resultMap } } }])
+    }
+
+    public var foodiesDynamicQuery: [FoodiesDynamicQuery?]? {
+      get {
+        return (resultMap["foodiesDynamicQuery"] as? [ResultMap?]).flatMap { (value: [ResultMap?]) -> [FoodiesDynamicQuery?] in value.map { (value: ResultMap?) -> FoodiesDynamicQuery? in value.flatMap { (value: ResultMap) -> FoodiesDynamicQuery in FoodiesDynamicQuery(unsafeResultMap: value) } } }
+      }
+      set {
+        resultMap.updateValue(newValue.flatMap { (value: [FoodiesDynamicQuery?]) -> [ResultMap?] in value.map { (value: FoodiesDynamicQuery?) -> ResultMap? in value.flatMap { (value: FoodiesDynamicQuery) -> ResultMap in value.resultMap } } }, forKey: "foodiesDynamicQuery")
+      }
+    }
+
+    public struct FoodiesDynamicQuery: GraphQLSelectionSet {
+      public static let possibleTypes: [String] = ["Foodie"]
+
+      public static var selections: [GraphQLSelection] {
+        return [
+          GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
+          GraphQLField("uniqueId", type: .scalar(String.self)),
+          GraphQLField("email", type: .scalar(String.self)),
+          GraphQLField("name", type: .scalar(String.self)),
+          GraphQLField("gender", type: .scalar(Int.self)),
+        ]
+      }
+
+      public private(set) var resultMap: ResultMap
+
+      public init(unsafeResultMap: ResultMap) {
+        self.resultMap = unsafeResultMap
+      }
+
+      public init(uniqueId: String? = nil, email: String? = nil, name: String? = nil, gender: Int? = nil) {
+        self.init(unsafeResultMap: ["__typename": "Foodie", "uniqueId": uniqueId, "email": email, "name": name, "gender": gender])
+      }
+
+      public var __typename: String {
+        get {
+          return resultMap["__typename"]! as! String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "__typename")
+        }
+      }
+
+      public var uniqueId: String? {
+        get {
+          return resultMap["uniqueId"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "uniqueId")
+        }
+      }
+
+      public var email: String? {
+        get {
+          return resultMap["email"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "email")
+        }
+      }
+
+      public var name: String? {
+        get {
+          return resultMap["name"] as? String
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "name")
+        }
+      }
+
+      public var gender: Int? {
+        get {
+          return resultMap["gender"] as? Int
+        }
+        set {
+          resultMap.updateValue(newValue, forKey: "gender")
         }
       }
     }
