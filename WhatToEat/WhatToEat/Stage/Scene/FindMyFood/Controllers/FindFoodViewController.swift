@@ -97,10 +97,10 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
             tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "FindFoodTableViewCell" {
             let contentCell = cell as! FindFoodTableViewCell
-            contentCell.cellData = data as? LRCellData
+            contentCell.cellTemplate = data as? LRCellTemplate
         }else {
             let contentCell = cell as! FFBtnTableViewCell
-            contentCell.cellData = data as? ButtonCellData
+            contentCell.cellData = data as? ButtonCellTmplt
         }
         return cell
     }

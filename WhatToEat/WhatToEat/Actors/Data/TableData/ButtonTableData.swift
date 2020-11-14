@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct ButtonCellData: CellDataProtocol {
+struct ButtonCellTmplt: CellTemplateProtocol {
     let templateStyle: CellTemplateStyle = .Button
     var cornerRadius: CGFloat = 0.0
     var titleText = ""

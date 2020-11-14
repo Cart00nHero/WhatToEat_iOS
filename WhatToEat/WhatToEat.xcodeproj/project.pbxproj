@@ -13,7 +13,6 @@
 		6D809A68EB2CEE85CC3363AD /* Pods_WhatToEat_WhatToEatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634D05B32582CE02DCC22568 /* Pods_WhatToEat_WhatToEatUITests.framework */; };
 		AF007A152489F12200DF61DB /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AF007A142489F12200DF61DB /* schema.json */; };
 		AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF007A25248C12F700DF61DB /* GQInputData.swift */; };
-		AF00CB5324CBFEC6002FF63B /* RadarMapTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF00CB5224CBFEC6002FF63B /* RadarMapTableData.swift */; };
 		AF0BA27224B570F9007F382E /* Haversin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA27124B570F9007F382E /* Haversin.swift */; };
 		AF0EB13224C2F09D0022C36E /* RadarScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF0EB13124C2F09D0022C36E /* RadarScanView.xib */; };
 		AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0EB13324C2F0E40022C36E /* RadarScanView.swift */; };
@@ -43,7 +42,6 @@
 		AF4290092519D3F7007903F8 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4290082519D3F7007903F8 /* NavigationViewController.swift */; };
 		AF42900E2519E6A4007903F8 /* NavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */; };
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
-		AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D55247AA79E00A8625D /* LRTableData.swift */; };
 		AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D56247AA79E00A8625D /* ButtonTableData.swift */; };
 		AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF550D6C247C399B00A8625D /* SearchLocViewController.swift */; };
 		AF550D6F247C39BA00A8625D /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */; };
@@ -70,6 +68,7 @@
 		AF8224842472F4160034C928 /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247F2472F4160034C928 /* CommonActions.swift */; };
 		AF8224852472F4160034C928 /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224802472F4160034C928 /* SignActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
+		AFBB6D77255FF98200A92E21 /* TableCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6D76255FF98200A92E21 /* TableCellData.swift */; };
 		AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB490724D6AB3200D28A79 /* MapActions.swift */; };
 		AFF370DB254EA5E70012E019 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF370DA254EA5E70012E019 /* Actor.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
@@ -103,7 +102,6 @@
 		9F808F0CB39BE61F56DA0471 /* Pods-WhatToEatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEatTests.release.xcconfig"; path = "Target Support Files/Pods-WhatToEatTests/Pods-WhatToEatTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF007A142489F12200DF61DB /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		AF007A25248C12F700DF61DB /* GQInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQInputData.swift; sourceTree = "<group>"; };
-		AF00CB5224CBFEC6002FF63B /* RadarMapTableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarMapTableData.swift; sourceTree = "<group>"; };
 		AF0BA27124B570F9007F382E /* Haversin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haversin.swift; sourceTree = "<group>"; };
 		AF0EB13124C2F09D0022C36E /* RadarScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RadarScanView.xib; sourceTree = "<group>"; };
 		AF0EB13324C2F0E40022C36E /* RadarScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarScanView.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 		AF4290082519D3F7007903F8 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPresenter.swift; sourceTree = "<group>"; };
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
-		AF550D55247AA79E00A8625D /* LRTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRTableData.swift; sourceTree = "<group>"; };
 		AF550D56247AA79E00A8625D /* ButtonTableData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableData.swift; sourceTree = "<group>"; };
 		AF550D6C247C399B00A8625D /* SearchLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF550D6E247C39BA00A8625D /* SearchLocations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
@@ -166,6 +163,7 @@
 		AF82247F2472F4160034C928 /* CommonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
 		AF8224802472F4160034C928 /* SignActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		AFBB6D76255FF98200A92E21 /* TableCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellData.swift; sourceTree = "<group>"; };
 		AFCB490724D6AB3200D28A79 /* MapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapActions.swift; sourceTree = "<group>"; };
 		AFF370DA254EA5E70012E019 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
@@ -318,8 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				AF550D56247AA79E00A8625D /* ButtonTableData.swift */,
-				AF550D55247AA79E00A8625D /* LRTableData.swift */,
-				AF00CB5224CBFEC6002FF63B /* RadarMapTableData.swift */,
+				AFBB6D76255FF98200A92E21 /* TableCellData.swift */,
 			);
 			path = TableData;
 			sourceTree = "<group>";
@@ -920,8 +917,8 @@
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
 				AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */,
 				AF4290092519D3F7007903F8 /* NavigationViewController.swift in Sources */,
-				AF00CB5324CBFEC6002FF63B /* RadarMapTableData.swift in Sources */,
 				AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */,
+				AFBB6D77255FF98200A92E21 /* TableCellData.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
 				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
@@ -937,7 +934,6 @@
 				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
 				AF5A833E24ADF39E008ECAF7 /* FindFoodPresenter.swift in Sources */,
-				AF550D57247AA79E00A8625D /* LRTableData.swift in Sources */,
 				AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF801507248E8E20009E6214 /* QueryActions.swift in Sources */,

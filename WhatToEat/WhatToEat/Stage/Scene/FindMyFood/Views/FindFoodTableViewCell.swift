@@ -42,15 +42,15 @@ class FindFoodTableViewCell: LRTableViewCell {
     }
     
     private func createLeftView() {
-        let data = cellData!.leftCellProtocol as? LRLabelCellData
+        let data = cellTemplate!.leftCellProtocol as? LabelCell
         cellLeftLabel.text = data?.labelText
     }
     private func createRightView() {
-        createTextLabelOnCell(cellProtocol: cellData!.rightCellProtocol, contentSide: .Right)
+        createTextLabelOnCell(cellProtocol: cellTemplate!.rightCellProtocol, contentSide: .Right)
     }
-    private func createTextLabelOnCell(cellProtocol: LRTableCellProtocol, contentSide: ContentSide) {
+    private func createTextLabelOnCell(cellProtocol: CellProtocol, contentSide: ContentSide) {
         if cellRightView.subviews.count == 0 {
-            let data = cellProtocol as? LRLabelCellData
+            let data = cellProtocol as? LabelCell
             let textLabel = UILabel()
             textLabel.translatesAutoresizingMaskIntoConstraints = false
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)

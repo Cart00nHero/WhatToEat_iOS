@@ -50,38 +50,38 @@ class AddGourmetPresenter: NSObject {
 }
 struct GourmetsTableData {
     var inputObj: GQInputObject
-    var dataSource: Array<Array<CellDataProtocol>> = []
+    var dataSource: Array<Array<CellTemplateProtocol>> = []
     init(address: GQInputObject) {
         self.inputObj = address
         dataSource = createDataSource()
     }
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
-    private func createDataSource() -> Array<Array<CellDataProtocol>> {
+    private func createDataSource() -> Array<Array<CellTemplateProtocol>> {
         return [
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Title"),
-                           rightCellProtocol: LRTextFieldCellData(inputText: self.inputObj.shop.title)),
-                LRCellData(leftCellProtocol: LRDropDownCellData(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
+                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Title"),
+                           rightCellProtocol: TextFieldCell(inputText: self.inputObj.shop.title)),
+                LRCellTemplate(leftCellProtocol: DropDownCell(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
                                                                 selectedText: (self.inputObj.shop.style ?? "") ?? ""),
-                           rightCellProtocol: LRDropDownCellData(placeHolder:"Type",
+                           rightCellProtocol: DropDownCell(placeHolder:"Type",
                                                                  optionArray: DropDownMenuData().typeSource,
                                                                  selectedText: (self.inputObj.shop.type ?? "") ?? "")),
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Under\nPrice"),
-                           rightCellProtocol: LRTextFieldCellData(keyboardType: .decimalPad,
+                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Under\nPrice"),
+                           rightCellProtocol: TextFieldCell(keyboardType: .decimalPad,
                                                                   inputText: String(format: "%.2f", self.inputObj.shop.underPrice)))
             ],
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Name"), rightCellProtocol: LRTextFieldCellData(inputText: self.inputObj.shopBranch.name)),
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Business\nHours"),
-                           rightCellProtocol: LRRangeCellData(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
+                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Name"), rightCellProtocol: TextFieldCell(inputText: self.inputObj.shopBranch.name)),
+                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Business\nHours"),
+                           rightCellProtocol: RangeCell(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
                                                               endDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.closedTime ?? "") ?? ""))),
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Tel"),
-                           rightCellProtocol: LRTextFieldCellData(keyboardType: .phonePad, inputText: (inputObj.shopBranch.tel ?? "") ?? ""))
+                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Tel"),
+                           rightCellProtocol: TextFieldCell(keyboardType: .phonePad, inputText: (inputObj.shopBranch.tel ?? "") ?? ""))
             ],
             [
-                LRCellData(leftCellProtocol: LRLabelCellData(labelText: "Address"),
-                           rightCellProtocol: LRLabelCellData(cellHeight: 64.0, numberOfLines: 0, labelText: inputObj.address.completeInfo)),
-                ButtonCellData(cornerRadius: 2.0, titleText: "Save")
+                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Address"),
+                           rightCellProtocol: LabelCell(cellHeight: 64.0, numberOfLines: 0, labelText: inputObj.address.completeInfo)),
+                ButtonCellTmplt(cornerRadius: 2.0, titleText: "Save")
             ]
         ]
     }

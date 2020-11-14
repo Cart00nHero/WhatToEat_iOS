@@ -8,13 +8,6 @@
 
 import UIKit
 
-enum CellTemplateStyle : Int {
-    case LeftRight,Button,RadarMap
-}
-protocol CellDataProtocol {
-    var templateStyle: CellTemplateStyle { get }
-}
-
 class LRTableViewCell: UITableViewCell {
 
     enum ContentSide : Int {
@@ -25,7 +18,7 @@ class LRTableViewCell: UITableViewCell {
     @IBOutlet weak var leftWidthConstraint: NSLayoutConstraint!
     
     var indexPath : IndexPath? = nil
-    var cellData: LRCellData?
+    var cellTemplate: LRCellTemplate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,7 +36,7 @@ class LRTableViewCell: UITableViewCell {
 class ButtonTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellButton: UIButton!
-    var cellData: ButtonCellData?
+    var cellData: ButtonCellTmplt?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
