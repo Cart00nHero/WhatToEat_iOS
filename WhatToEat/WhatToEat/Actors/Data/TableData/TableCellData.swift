@@ -22,8 +22,8 @@ protocol CellTemplateProtocol {
 
 struct LRCellTemplate: CellTemplateProtocol {
     let templateStyle: CellTemplateStyle = .LeftRight
-    var leftCellProtocol: CellProtocol
-    var rightCellProtocol: CellProtocol
+    var leftProtocol: CellProtocol
+    var rightProtocol: CellProtocol
 }
 
 protocol CellProtocol {

@@ -9,7 +9,7 @@
 import UIKit
 import iOSDropDown
 
-class DropDownCellView: XibSetupView {
+class DropDownCellView: XibView {
     @IBOutlet weak var dropDownField: DropDown!
     lazy var superTableViewCell = UITableViewCell()
     

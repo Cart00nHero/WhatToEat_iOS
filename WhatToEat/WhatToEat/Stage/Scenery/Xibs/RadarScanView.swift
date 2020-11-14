@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RadarScanView: XibSetupView {
+class RadarScanView: XibView {
 
     @IBOutlet weak var centerDot: UIView!
     @IBOutlet weak var radarImageView: UIImageView!

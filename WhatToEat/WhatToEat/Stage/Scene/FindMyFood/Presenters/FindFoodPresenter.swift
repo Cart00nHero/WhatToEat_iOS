@@ -89,24 +89,24 @@ struct FindFoodTableData {
     }
     private func createDataSource() -> Array<CellTemplateProtocol> {
         return [
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Title"),
-                       rightCellProtocol: LabelCell(labelText: self.dataObj.shopBranch?.shop?.title ?? "")),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Style"),
-                       rightCellProtocol: LabelCell(labelText: (self.dataObj.shopBranch?.shop?.style ?? "") )),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Type"),
-                       rightCellProtocol: LabelCell(labelText: (self.dataObj.shopBranch?.shop?.type ?? "") )),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Under\nPrice"),
-                       rightCellProtocol: LabelCell(labelText:
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Title"),
+                       rightProtocol: LabelCell(labelText: self.dataObj.shopBranch?.shop?.title ?? "")),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Style"),
+                       rightProtocol: LabelCell(labelText: (self.dataObj.shopBranch?.shop?.style ?? "") )),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Type"),
+                       rightProtocol: LabelCell(labelText: (self.dataObj.shopBranch?.shop?.type ?? "") )),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Under\nPrice"),
+                       rightProtocol: LabelCell(labelText:
                                                             String(format: "%.2f", (self.dataObj.shopBranch?.shop?.underPrice ?? 0.0)!))),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Name"),
-                       rightCellProtocol: LabelCell(labelText: "")),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Business\nHours"),
-                       rightCellProtocol: RangeCell(starDate: convertStringToUTC_ISO8601Date(dateString: (dataObj.shopBranch?.openTime ?? "")),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Name"),
+                       rightProtocol: LabelCell(labelText: "")),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Business\nHours"),
+                       rightProtocol: RangeCell(starDate: convertStringToUTC_ISO8601Date(dateString: (dataObj.shopBranch?.openTime ?? "")),
                                                           endDate: convertStringToUTC_ISO8601Date(dateString: (dataObj.shopBranch?.closedTime ?? "")))),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Tel"),
-                       rightCellProtocol: LabelCell(labelText: (dataObj.shopBranch?.tel ?? "") )),
-            LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Address"),
-                       rightCellProtocol: LabelCell(labelText: dataObj.completeInfo ?? "")),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Tel"),
+                       rightProtocol: LabelCell(labelText: (dataObj.shopBranch?.tel ?? "") )),
+            LRCellTemplate(leftProtocol: LabelCell(labelText: "Address"),
+                       rightProtocol: LabelCell(labelText: dataObj.completeInfo ?? "")),
             ButtonCellTmplt(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
         ]
     }
