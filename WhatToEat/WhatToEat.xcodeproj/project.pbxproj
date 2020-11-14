@@ -34,11 +34,8 @@
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
 		AF23466E24C727ED001B033E /* FindFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF23466D24C727ED001B033E /* FindFoodTableViewCell.swift */; };
-		AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3C6EA0248269F70052719A /* DateUtil.swift */; };
 		AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF3C6EA42482FDD40052719A /* WhatToEat.graphql */; };
-		AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */; };
 		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
-		AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0E248055E700ED4BB1 /* StructObserver.swift */; };
 		AF4290092519D3F7007903F8 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4290082519D3F7007903F8 /* NavigationViewController.swift */; };
 		AF42900E2519E6A4007903F8 /* NavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */; };
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
@@ -50,8 +47,6 @@
 		AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */; };
 		AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FA247D73300023F3FC /* LocationMaster.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
-		AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF719D7D2474D569003A7285 /* XibSetupView.swift */; };
-		AF7A026224D14092009716BE /* MapkitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7A026124D14092009716BE /* MapkitExtension.swift */; };
 		AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801504248E8DCE009E6214 /* MutationActions.swift */; };
 		AF801507248E8E20009E6214 /* QueryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801506248E8E20009E6214 /* QueryActions.swift */; };
 		AF8224672472F21D0034C928 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */; };
@@ -69,6 +64,11 @@
 		AF8224852472F4160034C928 /* SignActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224802472F4160034C928 /* SignActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
 		AFBB6D77255FF98200A92E21 /* TableCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6D76255FF98200A92E21 /* TableCellData.swift */; };
+		AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */; };
+		AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB1256012ED00A92E21 /* StructObserver.swift */; };
+		AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB2256012ED00A92E21 /* DateUtil.swift */; };
+		AFBB6DB6256012ED00A92E21 /* MapkitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB3256012ED00A92E21 /* MapkitExtension.swift */; };
+		AFBB6DBB256012FE00A92E21 /* XibSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DBA256012FE00A92E21 /* XibSetupView.swift */; };
 		AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB490724D6AB3200D28A79 /* MapActions.swift */; };
 		AFF370DB254EA5E70012E019 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF370DA254EA5E70012E019 /* Actor.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
@@ -129,11 +129,8 @@
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF23466D24C727ED001B033E /* FindFoodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodTableViewCell.swift; sourceTree = "<group>"; };
-		AF3C6EA0248269F70052719A /* DateUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		AF3C6EA42482FDD40052719A /* WhatToEat.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatToEat.graphql; sourceTree = "<group>"; };
-		AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
-		AF40DC0E248055E700ED4BB1 /* StructObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
 		AF4290082519D3F7007903F8 /* NavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		AF42900D2519E6A4007903F8 /* NavigationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationPresenter.swift; sourceTree = "<group>"; };
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
@@ -145,8 +142,6 @@
 		AF5F16F7247CC2CA0023F3FC /* SearchLocPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF5F16FA247D73300023F3FC /* LocationMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMaster.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
-		AF719D7D2474D569003A7285 /* XibSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
-		AF7A026124D14092009716BE /* MapkitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapkitExtension.swift; sourceTree = "<group>"; };
 		AF801504248E8DCE009E6214 /* MutationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationActions.swift; sourceTree = "<group>"; };
 		AF801506248E8E20009E6214 /* QueryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryActions.swift; sourceTree = "<group>"; };
 		AF8224482472F21D0034C928 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
@@ -164,6 +159,11 @@
 		AF8224802472F4160034C928 /* SignActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		AFBB6D76255FF98200A92E21 /* TableCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCellData.swift; sourceTree = "<group>"; };
+		AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
+		AFBB6DB1256012ED00A92E21 /* StructObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
+		AFBB6DB2256012ED00A92E21 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
+		AFBB6DB3256012ED00A92E21 /* MapkitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapkitExtension.swift; sourceTree = "<group>"; };
+		AFBB6DBA256012FE00A92E21 /* XibSetupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibSetupView.swift; sourceTree = "<group>"; };
 		AFCB490724D6AB3200D28A79 /* MapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapActions.swift; sourceTree = "<group>"; };
 		AFF370DA254EA5E70012E019 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
@@ -212,6 +212,7 @@
 		AF0EDF53247A5012003D84C0 /* Scenery */ = {
 			isa = PBXGroup;
 			children = (
+				AFBB6DBA256012FE00A92E21 /* XibSetupView.swift */,
 				AF0EDF54247A5012003D84C0 /* Xibs */,
 				AF0EDF59247A5012003D84C0 /* TableViewCellTemplate.swift */,
 				AF0EDF5A247A5012003D84C0 /* UIBaseViewController.swift */,
@@ -303,15 +304,6 @@
 			path = WhatToEatUITests;
 			sourceTree = "<group>";
 		};
-		AF40DC09247F8B7F00ED4BB1 /* Express */ = {
-			isa = PBXGroup;
-			children = (
-				AF40DC0A247F8BF400ED4BB1 /* DeliveryMan.swift */,
-			);
-			name = Express;
-			path = BackStage/Express;
-			sourceTree = "<group>";
-		};
 		AF550D54247AA78500A8625D /* TableData */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,33 +374,14 @@
 			path = GPS;
 			sourceTree = "<group>";
 		};
-		AF719D732474D225003A7285 /* BackStage */ = {
-			isa = PBXGroup;
-			children = (
-				AF719D742474D225003A7285 /* Utils */,
-			);
-			path = BackStage;
-			sourceTree = "<group>";
-		};
-		AF719D742474D225003A7285 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				AF719D7D2474D569003A7285 /* XibSetupView.swift */,
-				AF40DC0E248055E700ED4BB1 /* StructObserver.swift */,
-				AF3C6EA0248269F70052719A /* DateUtil.swift */,
-				AF7A026124D14092009716BE /* MapkitExtension.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
+				AFBB6DAB2560129000A92E21 /* Express */,
+				AFBB6DAA2560127300A92E21 /* ToolMan */,
 				AFAF8BBC24B06F6300CD5539 /* Mathematician */,
-				AF40DC09247F8B7F00ED4BB1 /* Express */,
 				AF5F16F9247D73180023F3FC /* GPS */,
 				AF0EDF65247A9C9C003D84C0 /* Data */,
-				AF719D732474D225003A7285 /* BackStage */,
 				AF8224752472F27D0034C928 /* Network */,
 				AFF370DA254EA5E70012E019 /* Actor.swift */,
 			);
@@ -589,6 +562,24 @@
 				AF0BA27124B570F9007F382E /* Haversin.swift */,
 			);
 			path = Mathematician;
+			sourceTree = "<group>";
+		};
+		AFBB6DAA2560127300A92E21 /* ToolMan */ = {
+			isa = PBXGroup;
+			children = (
+				AFBB6DB2256012ED00A92E21 /* DateUtil.swift */,
+				AFBB6DB3256012ED00A92E21 /* MapkitExtension.swift */,
+				AFBB6DB1256012ED00A92E21 /* StructObserver.swift */,
+			);
+			path = ToolMan;
+			sourceTree = "<group>";
+		};
+		AFBB6DAB2560129000A92E21 /* Express */ = {
+			isa = PBXGroup;
+			children = (
+				AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */,
+			);
+			path = Express;
 			sourceTree = "<group>";
 		};
 		AFF884342496586A00646088 /* GQResponseData */ = {
@@ -890,21 +881,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF719D7E2474D569003A7285 /* XibSetupView.swift in Sources */,
+				AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */,
 				AF82246D2472F21D0034C928 /* MainMenuViewController.swift in Sources */,
 				AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AF8224692472F21D0034C928 /* AddGLRTableViewCell.swift in Sources */,
 				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
-				AF3C6EA1248269F70052719A /* DateUtil.swift in Sources */,
+				AFBB6DB6256012ED00A92E21 /* MapkitExtension.swift in Sources */,
 				AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */,
-				AF7A026224D14092009716BE /* MapkitExtension.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* DefaultVCTemplate.swift in Sources */,
 				AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
+				AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
+				AFBB6DBB256012FE00A92E21 /* XibSetupView.swift in Sources */,
 				AFF370DB254EA5E70012E019 /* Actor.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
 				AF42900E2519E6A4007903F8 /* NavigationPresenter.swift in Sources */,
@@ -917,7 +909,6 @@
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
 				AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */,
 				AF4290092519D3F7007903F8 /* NavigationViewController.swift in Sources */,
-				AF40DC0B247F8BF400ED4BB1 /* DeliveryMan.swift in Sources */,
 				AFBB6D77255FF98200A92E21 /* TableCellData.swift in Sources */,
 				AF8224682472F21D0034C928 /* AddGourmetViewController.swift in Sources */,
 				AF550D6D247C399B00A8625D /* SearchLocViewController.swift in Sources */,
@@ -928,6 +919,7 @@
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
 				AF0EDF42247A08EC003D84C0 /* AddBtnTableViewCell.swift in Sources */,
+				AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */,
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,
 				AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */,
 				AF8224852472F4160034C928 /* SignActions.swift in Sources */,
@@ -937,7 +929,6 @@
 				AF0EDF60247A5012003D84C0 /* TableViewCellTemplate.swift in Sources */,
 				20A5F1F02469445900DD3AFD /* API.swift in Sources */,
 				AF801507248E8E20009E6214 /* QueryActions.swift in Sources */,
-				AF40DC0F248055E700ED4BB1 /* StructObserver.swift in Sources */,
 				AF82246B2472F21D0034C928 /* FindFoodViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
