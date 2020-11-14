@@ -42,32 +42,20 @@ class FindFoodTableViewCell: LRTableViewCell {
     }
     
     private func createLeftView() {
-        let data = cellTemplate!.leftCellProtocol as? LabelCell
+        let data = cellTemplate!.leftProtocol as? LabelCell
         cellLeftLabel.text = data?.labelText
     }
+    
     private func createRightView() {
-        createTextLabelOnCell(cellProtocol: cellTemplate!.rightCellProtocol, contentSide: .Right)
-    }
-    private func createTextLabelOnCell(cellProtocol: CellProtocol, contentSide: ContentSide) {
-        if cellRightView.subviews.count == 0 {
-            let data = cellProtocol as? LabelCell
+        if rightContentView?.subviews.count == 0 {
             let textLabel = UILabel()
-            textLabel.translatesAutoresizingMaskIntoConstraints = false
+            buildCellContent(content: textLabel, contentSide: .Right)
+            let data = cellTemplate!.rightProtocol as? LabelCell
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
             textLabel.font = UIFont.systemFont(ofSize: 14.0)
             textLabel.text = data?.labelText
             textLabel.numberOfLines = 0
             textLabel.lineBreakMode = .byWordWrapping
-            var contentView : UIView? = nil
-            switch contentSide {
-            case .Left:
-                contentView = cellLeftView
-            case .Right:
-                contentView = cellRightView
-            }
-            contentView?.addSubview(textLabel)
-            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
-            contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
         }
     }
     

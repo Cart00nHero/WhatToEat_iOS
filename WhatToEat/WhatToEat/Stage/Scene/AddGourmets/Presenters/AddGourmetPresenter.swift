@@ -59,28 +59,28 @@ struct GourmetsTableData {
     private func createDataSource() -> Array<Array<CellTemplateProtocol>> {
         return [
             [
-                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Title"),
-                           rightCellProtocol: TextFieldCell(inputText: self.inputObj.shop.title)),
-                LRCellTemplate(leftCellProtocol: DropDownCell(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
+                LRCellTemplate(leftProtocol: LabelCell(labelText: "Title"),
+                           rightProtocol: TextFieldCell(inputText: self.inputObj.shop.title)),
+                LRCellTemplate(leftProtocol: DropDownCell(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
                                                                 selectedText: (self.inputObj.shop.style ?? "") ?? ""),
-                           rightCellProtocol: DropDownCell(placeHolder:"Type",
+                           rightProtocol: DropDownCell(placeHolder:"Type",
                                                                  optionArray: DropDownMenuData().typeSource,
                                                                  selectedText: (self.inputObj.shop.type ?? "") ?? "")),
-                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Under\nPrice"),
-                           rightCellProtocol: TextFieldCell(keyboardType: .decimalPad,
+                LRCellTemplate(leftProtocol: LabelCell(labelText: "Under\nPrice"),
+                           rightProtocol: TextFieldCell(keyboardType: .decimalPad,
                                                                   inputText: String(format: "%.2f", self.inputObj.shop.underPrice)))
             ],
             [
-                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Name"), rightCellProtocol: TextFieldCell(inputText: self.inputObj.shopBranch.name)),
-                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Business\nHours"),
-                           rightCellProtocol: RangeCell(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
+                LRCellTemplate(leftProtocol: LabelCell(labelText: "Name"), rightProtocol: TextFieldCell(inputText: self.inputObj.shopBranch.name)),
+                LRCellTemplate(leftProtocol: LabelCell(labelText: "Business\nHours"),
+                           rightProtocol: RangeCell(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
                                                               endDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.closedTime ?? "") ?? ""))),
-                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Tel"),
-                           rightCellProtocol: TextFieldCell(keyboardType: .phonePad, inputText: (inputObj.shopBranch.tel ?? "") ?? ""))
+                LRCellTemplate(leftProtocol: LabelCell(labelText: "Tel"),
+                           rightProtocol: TextFieldCell(keyboardType: .phonePad, inputText: (inputObj.shopBranch.tel ?? "") ?? ""))
             ],
             [
-                LRCellTemplate(leftCellProtocol: LabelCell(labelText: "Address"),
-                           rightCellProtocol: LabelCell(cellHeight: 64.0, numberOfLines: 0, labelText: inputObj.address.completeInfo)),
+                LRCellTemplate(leftProtocol: LabelCell(labelText: "Address"),
+                           rightProtocol: LabelCell(cellHeight: 64.0, numberOfLines: 0, labelText: inputObj.address.completeInfo)),
                 ButtonCellTmplt(cornerRadius: 2.0, titleText: "Save")
             ]
         ]

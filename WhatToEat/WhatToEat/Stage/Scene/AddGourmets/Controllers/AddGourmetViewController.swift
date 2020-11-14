@@ -132,16 +132,16 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             var newShop = presenter.newLoc.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
-                var data = cellData?.leftCellProtocol as? DropDownCell
+                var data = cellData?.leftProtocol as? DropDownCell
                 data?.selectedText = action.selectedText
                 newShop.style = data?.selectedText
-                cellData?.leftCellProtocol = data!
+                cellData?.leftProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
-                var data = cellData?.rightCellProtocol as? DropDownCell
+                var data = cellData?.rightProtocol as? DropDownCell
                 data?.selectedText = action.selectedText
                 newShop.type = data?.selectedText
-                cellData?.rightCellProtocol = data!
+                cellData?.rightProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
         case let action as RangeDatePickerSelectedAction:
@@ -153,12 +153,12 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let cell = action.rangeView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellTemplate
-            var data = cellData?.rightCellProtocol as? RangeCell
+            var data = cellData?.rightProtocol as? RangeCell
             data?.starDate =
                 convertStringToUTC_ISO8601Date(dateString: branch.openTime! ?? "")
             data?.endDate =
                 convertStringToUTC_ISO8601Date(dateString: branch.closedTime! ?? "")
-            cellData?.rightCellProtocol = data!
+            cellData?.rightProtocol = data!
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             
         case let action as CellTextFieldDidChangedAction:
@@ -166,7 +166,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
                 = (cell?.cellTemplate)!
-            let data = cell?.cellTemplate?.rightCellProtocol as? TextFieldCell
+            let data = cell?.cellTemplate?.rightProtocol as? TextFieldCell
             presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             if presenter.saveToUpload {

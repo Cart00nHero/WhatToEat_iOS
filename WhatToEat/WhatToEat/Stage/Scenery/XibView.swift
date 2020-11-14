@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class XibSetupView: UIView {
+class XibView: UIView {
 
     @IBOutlet weak var view: UIView!
 

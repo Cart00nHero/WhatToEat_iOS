@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SetRangeCellView: XibSetupView {
+class SetRangeCellView: XibView {
 
     private enum TextFieldTag: Int {
         case StartField, EndField
