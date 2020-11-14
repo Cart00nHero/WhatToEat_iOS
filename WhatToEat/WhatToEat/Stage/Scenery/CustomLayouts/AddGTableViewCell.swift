@@ -40,13 +40,13 @@ class AddGTableViewCell: LRTableViewCell {
     }
     // MARK: - build content
     private func createLeft() {
-        let style = cellTemplate?.leftProtocol.cellStyle
-        if style != .TextLabel {
+        let type = cellTemplate?.leftProtocol.contentType
+        if type != .TextLabel {
             for subView in cellLeftView.subviews {
                 subView.removeFromSuperview()
             }
         }
-        switch style {
+        switch type {
         case .TextLabel:
             putLeftTitleTextOnLabel(cellProtocol: cellTemplate!.leftProtocol)
         case .DropDown:
@@ -62,7 +62,7 @@ class AddGTableViewCell: LRTableViewCell {
         }
     }
     private func createRight() {
-        switch cellTemplate?.rightProtocol.cellStyle {
+        switch cellTemplate?.rightProtocol.contentType {
         case .TextField:
             let textField = UITextField()
             buildCellContent(content: textField, contentSide: .Right)

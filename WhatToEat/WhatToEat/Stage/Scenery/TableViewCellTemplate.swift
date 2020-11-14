@@ -58,4 +58,7 @@ class ButtonTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    @IBAction func cellButtonClickAction(sender: UIButton) {
+        appStore.dispatch(TableCellButtonClickAction(cell: self, button: sender))
+    }
 }

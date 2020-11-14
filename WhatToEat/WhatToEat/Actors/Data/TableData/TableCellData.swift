@@ -12,7 +12,7 @@ enum CellTemplateStyle : Int {
     case LeftRight,Button,RadarMap
 }
 
-enum CellContentStyle : Int {
+enum CellContentType : Int {
     case TextLabel,TextField, DropDown, Range, AddressInput
 }
 
@@ -27,17 +27,17 @@ struct LRCellTemplate: CellTemplateProtocol {
 }
 
 protocol CellProtocol {
-    var cellStyle: CellContentStyle { get }
+    var contentType: CellContentType { get }
     var cellHeight: CGFloat { get set }
 }
 struct RangeCell: CellProtocol {
-    let cellStyle: CellContentStyle = .Range
+    let contentType: CellContentType = .Range
     var starDate: Date = Date()
     var endDate: Date = Date()
     var cellHeight: CGFloat = 48.0
 }
 struct DropDownCell: CellProtocol {
-    let cellStyle: CellContentStyle = .DropDown
+    let contentType: CellContentType = .DropDown
     var cellHeight: CGFloat = 48.0
     var placeHolder = ""
     var optionArray: Array<String>?
@@ -45,20 +45,20 @@ struct DropDownCell: CellProtocol {
     var selectedText = ""
 }
 struct AddressInputCell: CellProtocol {
-    var cellStyle: CellContentStyle = .AddressInput
+    var contentType: CellContentType = .AddressInput
     var cellHeight: CGFloat = 100.0
     var address: GQInputObject
     
 }
 struct LabelCell: CellProtocol {
-    let cellStyle: CellContentStyle = .TextLabel
+    let contentType: CellContentType = .TextLabel
     var cellHeight: CGFloat = 48.0
     var numberOfLines = 1
     var labelText = ""
 }
 
 struct TextFieldCell: CellProtocol {
-    let cellStyle: CellContentStyle = .TextField
+    let contentType: CellContentType = .TextField
     var cellHeight: CGFloat = 48.0
     var keyboardType: UIKeyboardType = .default
     var placeHolder = ""
