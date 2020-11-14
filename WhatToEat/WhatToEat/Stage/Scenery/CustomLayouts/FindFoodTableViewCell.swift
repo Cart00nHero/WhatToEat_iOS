@@ -47,16 +47,14 @@ class FindFoodTableViewCell: LRTableViewCell {
     }
     
     private func createRightView() {
-        if rightContentView?.subviews.count == 0 {
-            let textLabel = UILabel()
-            buildCellContent(content: textLabel, contentSide: .Right)
-            let data = cellTemplate!.rightProtocol as? LabelCell
-            textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-            textLabel.font = UIFont.systemFont(ofSize: 14.0)
-            textLabel.text = data?.labelText
-            textLabel.numberOfLines = 0
-            textLabel.lineBreakMode = .byWordWrapping
-        }
+        let textLabel = UILabel()
+        buildCellContent(content: textLabel, contentSide: .Right)
+        let data = cellTemplate!.rightProtocol as? LabelCell
+        textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+        textLabel.font = UIFont.systemFont(ofSize: 14.0)
+        textLabel.text = data?.labelText
+        textLabel.numberOfLines = 0
+        textLabel.lineBreakMode = .byWordWrapping
     }
     
 }

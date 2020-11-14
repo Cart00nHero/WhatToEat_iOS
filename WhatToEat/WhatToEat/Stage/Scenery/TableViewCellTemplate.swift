@@ -44,23 +44,6 @@ class LRTableViewCell: UITableViewCell {
         parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[content]-|", options: [], metrics: nil, views: ["content": content]))
         parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[content]-|", options: [], metrics: nil, views: ["content": content]))
     }
-//    func createTextLabelOnCell(contentSide: ContentSide) -> UILabel {
-//        let textLabel = UILabel()
-//        textLabel.translatesAutoresizingMaskIntoConstraints = false
-//        var contentView : UIView? = nil
-//        switch contentSide {
-//        case .Left:
-//            contentView = cellLeftView
-//        case .Right:
-//            contentView = cellRightView
-//        }
-//        contentView?.addSubview(textLabel)
-//        contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
-//        contentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))
-//        if cellRightView.subviews.count == 0 {
-//        }
-//        return textLabel
-//    }
 }
 
 class ButtonTableViewCell: UITableViewCell {
