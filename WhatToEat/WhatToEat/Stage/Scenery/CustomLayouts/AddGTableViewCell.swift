@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddGLRTableViewCell: LRTableViewCell {
+class AddGTableViewCell: LRTableViewCell {
 
     @IBOutlet weak var cellLeftLabel: UILabel!
     private var leftContent: UIView? = nil
@@ -127,7 +127,7 @@ class AddGLRTableViewCell: LRTableViewCell {
     }
 
 }
-extension AddGLRTableViewCell: UITextFieldDelegate {
+extension AddGTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

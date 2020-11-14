@@ -63,18 +63,18 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableData.dataSource[indexPath.section][indexPath.row]
-        var cellIdentifier = "AddGLRTableViewCell"
+        var cellIdentifier = "AddGTableViewCell"
         if data.templateStyle == .Button {
             cellIdentifier = "AddBtnTableViewCell"
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        if cellIdentifier == "AddGLRTableViewCell" {
-            let contentCell = cell as? AddGLRTableViewCell
+        if cellIdentifier == "AddGTableViewCell" {
+            let contentCell = cell as? AddGTableViewCell
             contentCell?.cellTemplate = data as? LRCellTemplate
         }
         if cellIdentifier == "AddBtnTableViewCell" {
             let contentCell = cell as? AddBtnTableViewCell
-            contentCell?.cellData = data as? ButtonCellTmplt
+            contentCell?.cellData = data as? BtnCellTemplate
         }
         return cell
     }

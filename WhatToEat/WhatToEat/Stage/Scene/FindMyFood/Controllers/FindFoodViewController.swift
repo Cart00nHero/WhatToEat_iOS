@@ -100,7 +100,7 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
             contentCell.cellTemplate = data as? LRCellTemplate
         }else {
             let contentCell = cell as! FFBtnTableViewCell
-            contentCell.cellData = data as? ButtonCellTmplt
+            contentCell.cellData = data as? BtnCellTemplate
         }
         return cell
     }

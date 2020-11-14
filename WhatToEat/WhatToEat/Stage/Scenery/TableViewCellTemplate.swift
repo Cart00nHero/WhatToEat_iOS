@@ -49,7 +49,7 @@ class LRTableViewCell: UITableViewCell {
 class ButtonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellButton: UIButton!
-    var cellData: ButtonCellTmplt?
+    var cellData: BtnCellTemplate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

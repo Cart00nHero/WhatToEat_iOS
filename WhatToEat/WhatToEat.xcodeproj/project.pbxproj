@@ -63,13 +63,13 @@
 		AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DBA256012FE00A92E21 /* XibView.swift */; };
 		AFBB6DE22560138C00A92E21 /* UIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DE12560138C00A92E21 /* UIFactory.swift */; };
 		AFBB6E08256015C100A92E21 /* AddGourmets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBB6E07256015C100A92E21 /* AddGourmets.storyboard */; };
-		AFBB6E122560163600A92E21 /* AddGLRTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E102560163600A92E21 /* AddGLRTableViewCell.swift */; };
 		AFBB6E132560163600A92E21 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */; };
 		AFBB6E1A2560172800A92E21 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E192560172800A92E21 /* AddGourmetPresenter.swift */; };
 		AFBB6E1F2560175C00A92E21 /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBB6E1E2560175C00A92E21 /* SearchLocations.storyboard */; };
 		AFBB6E27256017CF00A92E21 /* FindFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */; };
 		AFBB6E2D256017F200A92E21 /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBB6E2C256017F200A92E21 /* FindMyFood.storyboard */; };
 		AFBB6E332560182800A92E21 /* Entrance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBB6E322560182800A92E21 /* Entrance.storyboard */; };
+		AFBB6E82256058EB00A92E21 /* AddGTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E81256058EB00A92E21 /* AddGTableViewCell.swift */; };
 		AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB490724D6AB3200D28A79 /* MapActions.swift */; };
 		AFF370DB254EA5E70012E019 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF370DA254EA5E70012E019 /* Actor.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
@@ -159,13 +159,13 @@
 		AFBB6DBA256012FE00A92E21 /* XibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
 		AFBB6DE12560138C00A92E21 /* UIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactory.swift; sourceTree = "<group>"; };
 		AFBB6E07256015C100A92E21 /* AddGourmets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddGourmets.storyboard; sourceTree = "<group>"; };
-		AFBB6E102560163600A92E21 /* AddGLRTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGLRTableViewCell.swift; sourceTree = "<group>"; };
 		AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
 		AFBB6E192560172800A92E21 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AFBB6E1E2560175C00A92E21 /* SearchLocations.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
 		AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodTableViewCell.swift; sourceTree = "<group>"; };
 		AFBB6E2C256017F200A92E21 /* FindMyFood.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
 		AFBB6E322560182800A92E21 /* Entrance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Entrance.storyboard; sourceTree = "<group>"; };
+		AFBB6E81256058EB00A92E21 /* AddGTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGTableViewCell.swift; sourceTree = "<group>"; };
 		AFCB490724D6AB3200D28A79 /* MapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapActions.swift; sourceTree = "<group>"; };
 		AFF370DA254EA5E70012E019 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
@@ -554,9 +554,9 @@
 		AFBB6E0C256015E300A92E21 /* CustomLayouts */ = {
 			isa = PBXGroup;
 			children = (
+				AFBB6E81256058EB00A92E21 /* AddGTableViewCell.swift */,
 				AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */,
 				AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */,
-				AFBB6E102560163600A92E21 /* AddGLRTableViewCell.swift */,
 			);
 			path = CustomLayouts;
 			sourceTree = "<group>";
@@ -908,7 +908,6 @@
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */,
 				AFF370DB254EA5E70012E019 /* Actor.swift in Sources */,
-				AFBB6E122560163600A92E21 /* AddGLRTableViewCell.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
 				AF42900E2519E6A4007903F8 /* NavigationPresenter.swift in Sources */,
 				AF82246E2472F21D0034C928 /* SignViewController.swift in Sources */,
@@ -942,6 +941,7 @@
 				AF801507248E8E20009E6214 /* QueryActions.swift in Sources */,
 				AFBB6E132560163600A92E21 /* AddBtnTableViewCell.swift in Sources */,
 				AF82246B2472F21D0034C928 /* FindFoodViewController.swift in Sources */,
+				AFBB6E82256058EB00A92E21 /* AddGTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

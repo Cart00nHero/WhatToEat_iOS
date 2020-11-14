@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,14 +24,14 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="93g-AE-rc7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="oxe-l3-WLG" firstAttribute="leading" secondItem="93g-AE-rc7" secondAttribute="leading" id="0te-4f-mqf"/>
                             <constraint firstItem="oxe-l3-WLG" firstAttribute="top" secondItem="93g-AE-rc7" secondAttribute="top" id="cpr-YT-nE5"/>
                             <constraint firstItem="oxe-l3-WLG" firstAttribute="bottom" secondItem="93g-AE-rc7" secondAttribute="bottom" id="d9i-WW-P0O"/>
                             <constraint firstItem="93g-AE-rc7" firstAttribute="trailing" secondItem="oxe-l3-WLG" secondAttribute="trailing" id="wev-i5-JEo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="93g-AE-rc7"/>
                     </view>
                     <navigationItem key="navigationItem" id="cAz-sE-8Xv"/>
                 </viewController>
@@ -68,7 +70,7 @@
                                 <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddGLRTableViewCell" rowHeight="80" id="2u9-PD-Vqw" customClass="AddGLRTableViewCell" customModule="WhatToEat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AddGTableViewCell" rowHeight="80" id="2u9-PD-Vqw" customClass="AddGTableViewCell" customModule="WhatToEat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2u9-PD-Vqw" id="QTV-pO-hEj">
@@ -154,6 +156,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="OUN-nw-iP0"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="x5F-iB-NIx" firstAttribute="leading" secondItem="OUN-nw-iP0" secondAttribute="leading" id="1fx-QL-EZ9"/>
@@ -161,7 +164,6 @@
                             <constraint firstItem="OUN-nw-iP0" firstAttribute="trailing" secondItem="x5F-iB-NIx" secondAttribute="trailing" id="zab-Eb-RGW"/>
                             <constraint firstItem="OUN-nw-iP0" firstAttribute="bottom" secondItem="x5F-iB-NIx" secondAttribute="bottom" id="zmF-4f-LD4"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="OUN-nw-iP0"/>
                     </view>
                     <navigationItem key="navigationItem" id="Q4i-zN-D2d"/>
                     <connections>
@@ -173,4 +175,9 @@
             <point key="canvasLocation" x="1586" y="188"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

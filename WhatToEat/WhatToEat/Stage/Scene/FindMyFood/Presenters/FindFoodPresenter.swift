@@ -107,7 +107,7 @@ struct FindFoodTableData {
                        rightProtocol: LabelCell(labelText: (dataObj.shopBranch?.tel ?? "") )),
             LRCellTemplate(leftProtocol: LabelCell(labelText: "Address"),
                        rightProtocol: LabelCell(labelText: dataObj.completeInfo ?? "")),
-            ButtonCellTmplt(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
+            BtnCellTemplate(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
         ]
     }
 }

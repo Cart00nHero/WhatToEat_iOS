@@ -81,7 +81,7 @@ struct GourmetsTableData {
             [
                 LRCellTemplate(leftProtocol: LabelCell(labelText: "Address"),
                            rightProtocol: LabelCell(cellHeight: 64.0, numberOfLines: 0, labelText: inputObj.address.completeInfo)),
-                ButtonCellTmplt(cornerRadius: 2.0, titleText: "Save")
+                BtnCellTemplate(cornerRadius: 2.0, titleText: "Save")
             ]
         ]
     }
