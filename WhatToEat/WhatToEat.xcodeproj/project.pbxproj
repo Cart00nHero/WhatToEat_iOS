@@ -406,9 +406,9 @@
 		AF8224462472F21D0034C928 /* AddGourmets */ = {
 			isa = PBXGroup;
 			children = (
-				AFBB6DF5256015AB00A92E21 /* Story */,
-				AFBB6E182560172800A92E21 /* Presenters */,
 				AF8224492472F21D0034C928 /* Controllers */,
+				AFBB6E182560172800A92E21 /* Presenters */,
+				AFBB6DF5256015AB00A92E21 /* Story */,
 			);
 			path = AddGourmets;
 			sourceTree = "<group>";
