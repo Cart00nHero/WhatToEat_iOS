@@ -167,7 +167,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
                 = (cell?.cellTemplate)!
             let data = cell?.cellTemplate?.rightProtocol as? TextFieldCell
-            presenter.updateTextFieldInputData(newText: data?.inputText ?? "", indexPath: indexPath!)
+            presenter.updateTextFieldInputData(newText: data?.text ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             if presenter.saveToUpload {
                 appStore.dispatch(updateGroumetAction(inputObj: presenter.newLoc))

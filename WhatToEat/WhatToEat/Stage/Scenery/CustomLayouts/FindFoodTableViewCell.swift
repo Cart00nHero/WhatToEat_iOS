@@ -43,7 +43,7 @@ class FindFoodTableViewCell: LRTableViewCell {
     
     private func createLeftView() {
         let data = cellTemplate!.leftProtocol as? LabelCell
-        cellLeftLabel.text = data?.labelText
+        cellLeftLabel.text = data?.text
     }
     
     private func createRightView() {
@@ -52,7 +52,7 @@ class FindFoodTableViewCell: LRTableViewCell {
         let data = cellTemplate!.rightProtocol as? LabelCell
         textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
         textLabel.font = UIFont.systemFont(ofSize: 14.0)
-        textLabel.text = data?.labelText
+        textLabel.text = data?.text
         textLabel.numberOfLines = 0
         textLabel.lineBreakMode = .byWordWrapping
     }

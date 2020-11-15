@@ -74,10 +74,10 @@ class AddGTableViewCell: LRTableViewCell {
             textField.returnKeyType = .done
             textField.clearButtonMode = .whileEditing
             textField.delegate = self
-            if data?.inputText.isEmpty == false {
-                textField.text = data?.inputText
+            if data?.text.isEmpty == false {
+                textField.text = data?.text
             } else {
-                textField.placeholder = data?.placeHolder
+                textField.placeholder = data?.hint
             }
             textField.addTarget(self, action: #selector(textFieldDidChanged(sender:)), for: .editingChanged)
         case .TextLabel:
@@ -86,7 +86,7 @@ class AddGTableViewCell: LRTableViewCell {
             let data = cellTemplate!.rightProtocol as? LabelCell
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
             textLabel.font = UIFont.systemFont(ofSize: 14.0)
-            textLabel.text = data?.labelText
+            textLabel.text = data?.text
             textLabel.numberOfLines = 0
             textLabel.lineBreakMode = .byWordWrapping
         case .DropDown:
@@ -108,7 +108,7 @@ class AddGTableViewCell: LRTableViewCell {
     
     private func putLeftTitleTextOnLabel(cellProtocol: CellProtocol) {
         let data = cellProtocol as? LabelCell
-        cellLeftLabel.text = data?.labelText
+        cellLeftLabel.text = data?.text
     }
     
     // MARK: - UI Actions
@@ -116,11 +116,11 @@ class AddGTableViewCell: LRTableViewCell {
         let superViewTag = ContentSide(rawValue: sender.superview?.tag ?? 0)
         if superViewTag == ContentSide.Right {
             var data = cellTemplate?.rightProtocol as? TextFieldCell
-            data?.inputText = sender.text ?? ""
+            data?.text = sender.text ?? ""
             cellTemplate?.rightProtocol = data ?? TextFieldCell()
         } else {
             var data = cellTemplate?.leftProtocol as? TextFieldCell
-            data?.inputText = sender.text ?? ""
+            data?.text = sender.text ?? ""
             cellTemplate?.leftProtocol = data ?? TextFieldCell()
         }
         appStore.dispatch(CellTextFieldDidChangedAction(cell: self, textField: sender))

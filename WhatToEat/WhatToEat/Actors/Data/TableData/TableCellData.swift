@@ -54,13 +54,13 @@ struct LabelCell: CellProtocol {
     let contentType: CellContentType = .TextLabel
     var cellHeight: CGFloat = 48.0
     var numberOfLines = 1
-    var labelText = ""
+    var text = ""
 }
 
 struct TextFieldCell: CellProtocol {
     let contentType: CellContentType = .TextField
     var cellHeight: CGFloat = 48.0
     var keyboardType: UIKeyboardType = .default
-    var placeHolder = ""
-    var inputText = ""
+    var hint = ""
+    var text = ""
 }

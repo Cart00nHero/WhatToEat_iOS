@@ -61,7 +61,6 @@
 		AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB2256012ED00A92E21 /* DateUtil.swift */; };
 		AFBB6DB6256012ED00A92E21 /* MapkitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB3256012ED00A92E21 /* MapkitExtension.swift */; };
 		AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DBA256012FE00A92E21 /* XibView.swift */; };
-		AFBB6DE22560138C00A92E21 /* UIFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DE12560138C00A92E21 /* UIFactory.swift */; };
 		AFBB6E08256015C100A92E21 /* AddGourmets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBB6E07256015C100A92E21 /* AddGourmets.storyboard */; };
 		AFBB6E132560163600A92E21 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */; };
 		AFBB6E1A2560172800A92E21 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E192560172800A92E21 /* AddGourmetPresenter.swift */; };
@@ -157,7 +156,6 @@
 		AFBB6DB2256012ED00A92E21 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		AFBB6DB3256012ED00A92E21 /* MapkitExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapkitExtension.swift; sourceTree = "<group>"; };
 		AFBB6DBA256012FE00A92E21 /* XibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
-		AFBB6DE12560138C00A92E21 /* UIFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFactory.swift; sourceTree = "<group>"; };
 		AFBB6E07256015C100A92E21 /* AddGourmets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddGourmets.storyboard; sourceTree = "<group>"; };
 		AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
 		AFBB6E192560172800A92E21 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
@@ -530,7 +528,6 @@
 				AFBB6DB2256012ED00A92E21 /* DateUtil.swift */,
 				AFBB6DB3256012ED00A92E21 /* MapkitExtension.swift */,
 				AFBB6DB1256012ED00A92E21 /* StructObserver.swift */,
-				AFBB6DE12560138C00A92E21 /* UIFactory.swift */,
 			);
 			path = ToolMan;
 			sourceTree = "<group>";
@@ -925,7 +922,6 @@
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
 				AF5F16F8247CC2CA0023F3FC /* SearchLocPresenter.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
-				AFBB6DE22560138C00A92E21 /* UIFactory.swift in Sources */,
 				AF501ECC249712B700628DB0 /* DataParser.swift in Sources */,
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AF550D58247AA79E00A8625D /* ButtonTableData.swift in Sources */,
