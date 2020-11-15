@@ -31,10 +31,10 @@ class LRTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
     }
-    func buildCellContent(content: UIView, contentSide: ContentSide) {
+    func buildConstraints(content: UIView, side: ContentSide) {
         content.translatesAutoresizingMaskIntoConstraints = false
         var parentView : UIView? = nil
-        switch contentSide {
+        switch side {
         case .Left:
             parentView = cellLeftView
         case .Right:

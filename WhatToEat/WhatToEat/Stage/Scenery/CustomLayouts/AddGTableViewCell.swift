@@ -51,7 +51,7 @@ class AddGTableViewCell: LRTableViewCell {
             putLeftTitleTextOnLabel(cellProtocol: cellTemplate!.leftProtocol)
         case .DropDown:
             let dropDownView = DropDownCellView()
-            buildCellContent(content: dropDownView, contentSide: .Left)
+            buildConstraints(content: dropDownView, side: .Left)
             let data = cellTemplate!.leftProtocol as? DropDownCell
             dropDownView.superTableViewCell = self
             dropDownView.dropDownField.placeholder = data?.placeHolder
@@ -65,7 +65,7 @@ class AddGTableViewCell: LRTableViewCell {
         switch cellTemplate?.rightProtocol.contentType {
         case .TextField:
             let textField = UITextField()
-            buildCellContent(content: textField, contentSide: .Right)
+            buildConstraints(content: textField, side: .Right)
             let data = cellTemplate!.rightProtocol as? TextFieldCell
             textField.borderStyle = .roundedRect
             textField.backgroundColor = UIColor(red: 240.0/255.0, green: 248.0/255.0, blue: 255.0/255.0, alpha: 1.0)
@@ -77,12 +77,12 @@ class AddGTableViewCell: LRTableViewCell {
             if data?.text.isEmpty == false {
                 textField.text = data?.text
             } else {
-                textField.placeholder = data?.hint
+                textField.placeholder = data?.placeHolder
             }
             textField.addTarget(self, action: #selector(textFieldDidChanged(sender:)), for: .editingChanged)
         case .TextLabel:
             let textLabel = UILabel()
-            buildCellContent(content: textLabel, contentSide: .Right)
+            buildConstraints(content: textLabel, side: .Right)
             let data = cellTemplate!.rightProtocol as? LabelCell
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
             textLabel.font = UIFont.systemFont(ofSize: 14.0)
@@ -91,7 +91,7 @@ class AddGTableViewCell: LRTableViewCell {
             textLabel.lineBreakMode = .byWordWrapping
         case .DropDown:
             let dropDownView = DropDownCellView()
-            buildCellContent(content: dropDownView, contentSide: .Right)
+            buildConstraints(content: dropDownView, side: .Right)
             let data = cellTemplate!.rightProtocol as? DropDownCell
             dropDownView.superTableViewCell = self
             dropDownView.dropDownField.placeholder = data?.placeHolder
@@ -101,7 +101,7 @@ class AddGTableViewCell: LRTableViewCell {
         case .Range:
             let rangeView = SetRangeCellView()
             rangeView.superTableViewCell = self
-            buildCellContent(content: rangeView, contentSide: .Right)
+            buildConstraints(content: rangeView, side: .Right)
         default: break
         }
     }

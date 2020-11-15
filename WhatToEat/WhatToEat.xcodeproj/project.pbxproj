@@ -326,9 +326,9 @@
 		AF550D68247BBB2800A8625D /* SearchLocations */ = {
 			isa = PBXGroup;
 			children = (
-				AFBB6E172560165200A92E21 /* Story */,
 				AF550D6A247BBB2800A8625D /* Controllers */,
 				AF550D69247BBB2800A8625D /* Presenters */,
+				AFBB6E172560165200A92E21 /* Story */,
 			);
 			path = SearchLocations;
 			sourceTree = "<group>";
@@ -422,9 +422,9 @@
 		AF82244E2472F21D0034C928 /* FindMyFood */ = {
 			isa = PBXGroup;
 			children = (
-				AFBB6E2B256017E000A92E21 /* Story */,
 				AF82244F2472F21D0034C928 /* Controllers */,
 				AF5A833C24ADF36A008ECAF7 /* Presenters */,
+				AFBB6E2B256017E000A92E21 /* Story */,
 			);
 			path = FindMyFood;
 			sourceTree = "<group>";

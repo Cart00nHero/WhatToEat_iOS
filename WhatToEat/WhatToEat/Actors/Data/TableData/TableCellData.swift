@@ -61,6 +61,6 @@ struct TextFieldCell: CellProtocol {
     let contentType: CellContentType = .TextField
     var cellHeight: CGFloat = 48.0
     var keyboardType: UIKeyboardType = .default
-    var hint = ""
+    var placeHolder = ""
     var text = ""
 }
