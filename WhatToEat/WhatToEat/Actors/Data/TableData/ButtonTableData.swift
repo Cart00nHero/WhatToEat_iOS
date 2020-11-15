@@ -13,4 +13,5 @@ struct BtnCellTemplate: CellTemplateProtocol {
     var cornerRadius: CGFloat = 0.0
     var titleText = ""
     var isHidden = false
+    var cellHeight: CGFloat = 48.0
 }

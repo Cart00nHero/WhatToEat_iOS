@@ -18,27 +18,26 @@ enum CellContentType : Int {
 
 protocol CellTemplateProtocol {
     var templateStyle: CellTemplateStyle { get }
+    var cellHeight: CGFloat { get set }
 }
 
 struct LRCellTemplate: CellTemplateProtocol {
     let templateStyle: CellTemplateStyle = .LeftRight
     var leftProtocol: CellProtocol
     var rightProtocol: CellProtocol
+    var cellHeight: CGFloat = 48.0
 }
 
 protocol CellProtocol {
     var contentType: CellContentType { get }
-    var cellHeight: CGFloat { get set }
 }
 struct RangeCell: CellProtocol {
     let contentType: CellContentType = .Range
     var starDate: Date = Date()
     var endDate: Date = Date()
-    var cellHeight: CGFloat = 48.0
 }
 struct DropDownCell: CellProtocol {
     let contentType: CellContentType = .DropDown
-    var cellHeight: CGFloat = 48.0
     var placeHolder = ""
     var optionArray: Array<String>?
     var optionImages: Array<UIImage>?
@@ -46,20 +45,17 @@ struct DropDownCell: CellProtocol {
 }
 struct AddressInputCell: CellProtocol {
     var contentType: CellContentType = .AddressInput
-    var cellHeight: CGFloat = 100.0
     var address: GQInputObject
     
 }
 struct LabelCell: CellProtocol {
     let contentType: CellContentType = .TextLabel
-    var cellHeight: CGFloat = 48.0
     var numberOfLines = 1
     var text = ""
 }
 
 struct TextFieldCell: CellProtocol {
     let contentType: CellContentType = .TextField
-    var cellHeight: CGFloat = 48.0
     var keyboardType: UIKeyboardType = .default
     var placeHolder = ""
     var text = ""

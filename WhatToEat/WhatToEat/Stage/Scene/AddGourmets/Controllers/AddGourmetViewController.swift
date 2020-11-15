@@ -53,7 +53,6 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.textColor = UIColor(red: 255.0/255.0, green: 0.0, blue: 0.0, alpha: 1.0)
         textLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
-//        textLabel.font = UIFont.systemFont(ofSize: 18.0)
         textLabel.text = tableData.sectionTitles[section]
         headerView.addSubview(textLabel)
         headerView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[textLabel]-|", options: [], metrics: nil, views: ["textLabel": textLabel]))

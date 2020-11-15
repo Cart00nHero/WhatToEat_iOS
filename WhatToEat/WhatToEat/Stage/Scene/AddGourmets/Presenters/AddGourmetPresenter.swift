@@ -80,7 +80,9 @@ struct GourmetsTableData {
             ],
             [
                 LRCellTemplate(leftProtocol: LabelCell(text: "Address"),
-                           rightProtocol: LabelCell(cellHeight: 64.0, numberOfLines: 0, text: inputObj.address.completeInfo)),
+                           rightProtocol: LabelCell(numberOfLines: 0, text: inputObj.address.completeInfo),
+                           cellHeight: 64.0
+                ),
                 BtnCellTemplate(cornerRadius: 2.0, titleText: "Save")
             ]
         ]
