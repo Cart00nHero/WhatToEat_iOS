@@ -88,7 +88,42 @@ mutation UpdateGroumet($foodieId: String,$branchId: String!,$branch: InputBranch
     }
   }
 }
-
+mutation DislikeGourmet($foodieId: String!,$branchId: String!){
+  dislikeGourmet(foodieId: $foodieId,$branchId: $branchId){
+    uniqueId
+    orderId
+    name
+    openTime
+    closedTime
+    tel
+    shop{
+      uniqueId
+      title
+      style
+      type
+      underPrice
+      status
+    }
+    address{
+      ownerType
+      completeInfo
+      fullInfo
+      postalCode
+      nation
+      isoNationCode
+      locality
+      subLocality
+      administrativeArea
+      subAdministrativeArea
+      thoroughfare
+      subThoroughfare
+      floor
+      latitude
+      longitude
+      annotation
+    }
+  }
+}
 query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
   locationsDynamicQuery(foodieId:$foodieId,whereAnd: $whereAnd) {
     ownerType
