@@ -1,6 +1,7 @@
 
-mutation CreateFoodie($email: String!, $gender: Int, $name: String!, $token: InputToken!) {
-  createFoodie(email: $email, gender: $gender,name: $name, token:$token) {
+mutation SignFoodie($signData: SignData!) {
+  signFoodie(signData: $signData) {
+    uniqueId
     email
     name
     gender
@@ -89,7 +90,7 @@ mutation UpdateGroumet($foodieId: String,$branchId: String!,$branch: InputBranch
   }
 }
 mutation DislikeGourmet($foodieId: String!,$branchId: String!){
-  dislikeGourmet(foodieId: $foodieId,$branchId: $branchId){
+  dislikeGourmet(foodieId:$foodieId,branchId:$branchId){
     uniqueId
     orderId
     name

@@ -159,8 +159,7 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                                     address: initGQInputObject())
                 )
             }
-        case is LocationsDynamicQueryAction:
-            let action = state.currentAction as! LocationsDynamicQueryAction
+        case let action as LocationsDynamicQueryAction:
             switch action.status {
             case .Success:
                 var markAddress = [GQInputObject]()
