@@ -21,14 +21,14 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
     let query = LocationsDynamicQueryQuery(whereAnd: whereCMD)
     service.fetch(query: query) { result in
         switch result {
-        case .success(let graphQLResult):
-            if graphQLResult.errors != nil {
-                print(graphQLResult.errors?.description ?? "")
+        case .success(let gqlResult):
+            if gqlResult.errors != nil {
+                print(gqlResult.errors?.description ?? "")
                 action.status = .Failed
             }
-            if (graphQLResult.data?.locationsDynamicQuery) != nil {
-                action.responseData = graphQLResult.data?.locationsDynamicQuery
-                let serialized = try! JSONSerialization.data(withJSONObject: graphQLResult.data?.jsonObject as Any, options: .prettyPrinted)
+            if (gqlResult.data?.locationsDynamicQuery) != nil {
+                action.responseData = gqlResult.data?.locationsDynamicQuery
+                let serialized = try! JSONSerialization.data(withJSONObject: gqlResult.data?.jsonObject as Any, options: .prettyPrinted)
 //                let deserialized = try! JSONSerialization.jsonObject(with: serialized, options: []) as! [String: Any]
                 do {
                     action.dynamicQueryData =

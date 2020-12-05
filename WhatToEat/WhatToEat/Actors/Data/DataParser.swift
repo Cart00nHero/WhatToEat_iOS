@@ -8,6 +8,7 @@
 
 import UIKit
 
+var foodieId: String = ""
 func combineAddressCompleteInfo(input: GQInputObject) -> String {
     let mutabletext = NSMutableString(string: (input.address.administrativeArea ?? "") ?? "")
     mutabletext.append((input.address.subAdministrativeArea ?? "") ?? "")

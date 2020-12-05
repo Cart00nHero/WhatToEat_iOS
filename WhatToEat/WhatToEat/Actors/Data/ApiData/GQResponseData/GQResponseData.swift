@@ -8,15 +8,16 @@
 
 import UIKit
 import Foundation
-
+/*
+ field :unique_id, :string
+     field :email, :string
+     field :name, :string
+     field :gender, :integer
+ */
 struct Foodie: MapConvertable {
-    let uniqueId: String?
-    let title: String?
-    let style: String?
-    let type: String?
-    let status: Int = 0
-    let underPrice: Float64 = 0.0
-    let branches: [ShopBranch]?
+    let uniqueId: String
+    let email: String
+    let name: String
 }
 
 struct Address: MapConvertable {
@@ -73,8 +74,8 @@ struct Shop: MapConvertable {
     let title: String?
     let style: String?
     let type: String?
-    let status: Int = 0
-    let underPrice: Float64 = 0.0
+    var status: Int = 0
+    var underPrice: Float64 = 0.0
     let branches: [Branch]?
 }
 

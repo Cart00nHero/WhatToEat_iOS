@@ -30,39 +30,23 @@ class SignViewController: UIViewController {
 
     // MARK: - actions
     @IBAction func loginButtonClickAction(_ sender: UIButton) {
-//        let service = ApolloService.shared.apollo
-//        let createFoodie = CreateFoodieMutation(email: "abc@gmail.com", name: "Morris", token: InputTo)
-//        service.perform(mutation: createFoodie) { result in
-//            switch result {
-//            case .success(let graphQLResult):
-//                if (graphQLResult.data?.createFoodie) != nil {
-//                    print("成功")
-//                }
-//                if graphQLResult.errors != nil {
-//                    print("幹咧")
-//                    print(graphQLResult.errors?.description ?? "")
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-        
-        appStore.dispatch(SignAppAction())
+        let signData = SignData(email: "morrislin@gmail.com", name: "Morris",
+                                token: InputToken(token: "lhuiaskdjslhaskx", type: "Facebook"))
+        appStore.dispatch(signFoodieAction(signData: signData))
     }
 }
 
 extension SignViewController: DefaultTemplateDelegate {
     func receiveNewState(state: DefaultTemplateState) {
         switch state.currentAction {
-        case _ as SignAppAction:
-            let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
-            defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-//        case _ as FacebookLoginAction:
-//            let action = state.currentAction as! FacebookLoginAction
-//            if action.status == .Success {
-//                let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
-//                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
-//            }
+        case let action as SignFoodieAction:
+            switch action.status {
+            case .Success:
+                foodieId = action.responseData?.uniqueId ?? ""
+                let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
+                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+            default: break
+            }
         default: break
         }
     }
