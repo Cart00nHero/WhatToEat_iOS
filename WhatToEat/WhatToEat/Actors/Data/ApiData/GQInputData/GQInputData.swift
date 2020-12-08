@@ -25,7 +25,7 @@ struct GQInputObject {
 
 func initGQInputObject() -> GQInputObject {
 //    shop: InputShop(title: "", underPrice: 0.00)
-    return GQInputObject(address: InputAddress(completeInfo: "", fullInfo: "", latitude: "0.0", longitude: "0.0"),
+    return GQInputObject(address: InputAddress(completeInfo: "", latitude: "0.0", longitude: "0.0"),
                      shopBranch: InputBranch(name: ""), shop: InputShop(title: "", underPrice: 0.00))
 }
 

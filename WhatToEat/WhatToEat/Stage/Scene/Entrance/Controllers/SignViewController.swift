@@ -42,7 +42,7 @@ extension SignViewController: DefaultTemplateDelegate {
         case let action as SignFoodieAction:
             switch action.status {
             case .Success:
-                foodieId = action.responseData?.uniqueId ?? ""
+                globalFoodieId = action.responseData?.uniqueId ?? ""
                 let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
                 defaultTemplate?.basePushToViewController(toVC!, Animated: true)
             default: break

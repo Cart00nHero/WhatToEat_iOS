@@ -36,7 +36,6 @@ mutation CreateGourmet(
     address{
       ownerType
       completeInfo
-      fullInfo
       postalCode
       nation
       isoNationCode
@@ -53,7 +52,7 @@ mutation CreateGourmet(
     }
   }
 }
-mutation UpdateGroumet($foodieId: String,$branchId: String!,$branch: InputBranch!,$shop: InputShop,$address: InputAddress){
+mutation UpdateGroumet($foodieId: String!,$branchId: String!,$branch: InputBranch!,$shop: InputShop,$address: InputAddress){
   updateGroumet(foodieId:$foodieId,branchId: $branchId,branch: $branch,shop :$shop, address: $address){
     uniqueId
     orderId
@@ -72,7 +71,6 @@ mutation UpdateGroumet($foodieId: String,$branchId: String!,$branch: InputBranch
     address{
       ownerType
       completeInfo
-      fullInfo
       postalCode
       nation
       isoNationCode
@@ -108,7 +106,6 @@ mutation DislikeGourmet($foodieId: String!,$branchId: String!){
     address{
       ownerType
       completeInfo
-      fullInfo
       postalCode
       nation
       isoNationCode
@@ -129,7 +126,6 @@ query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
   locationsDynamicQuery(foodieId:$foodieId,whereAnd: $whereAnd) {
     ownerType
     completeInfo
-    fullInfo
     postalCode
     nation
     isoNationCode
@@ -165,7 +161,6 @@ query SearchForRange($foodieId: String,$minCoordinate: InputCoordinate!,$maxCoor
   searchForRange(foodieId:$foodieId,minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate){
     ownerType
     completeInfo
-    fullInfo
     postalCode
     nation
     isoNationCode

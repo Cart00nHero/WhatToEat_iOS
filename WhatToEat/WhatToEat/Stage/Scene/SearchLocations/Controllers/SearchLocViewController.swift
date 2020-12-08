@@ -188,15 +188,13 @@ extension SearchLocViewController: DefaultTemplateDelegate {
                 presenter.locationParcel.parcelType = String(describing: type(of: action))
                 presenter.locationParcel.parcel = action
             }
-        case is CreateMapAnnotationsAction:
-            let action = state.currentAction as! CreateMapAnnotationsAction
+        case let action as CreateMapAnnotationsAction:
             presenter.locationParcel.parcelType = String(describing: type(of: action))
             presenter.locationParcel.parcel = action
             if action.status == GeoActionStatus.Completed {
                 mapView.showAnnotations(action.annotations , animated: true)
             }
-        case is LocatePositionAction:
-            let action = state.currentAction as! LocatePositionAction
+        case let action as LocatePositionAction:
             switch action.status {
             case .DidUpdateLocation:
                 if action.locations?.count ?? 0 > 0 {

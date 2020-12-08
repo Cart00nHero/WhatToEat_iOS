@@ -25,7 +25,6 @@ struct Address: MapConvertable {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     var completeInfo: String?
-    var fullInfo: String?
     var nation: String?
     // ex: TW
     var isoNationCode: String?

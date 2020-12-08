@@ -8,7 +8,8 @@
 
 import UIKit
 
-var foodieId: String = ""
+var globalFoodieId: String = ""
+
 func combineAddressCompleteInfo(input: GQInputObject) -> String {
     let mutabletext = NSMutableString(string: (input.address.administrativeArea ?? "") ?? "")
     mutabletext.append((input.address.subAdministrativeArea ?? "") ?? "")
@@ -17,15 +18,6 @@ func combineAddressCompleteInfo(input: GQInputObject) -> String {
     mutabletext.append(" ")
     mutabletext.append((input.address.subThoroughfare ?? "") ?? "")
     return mutabletext as String
-}
-
-func combineFullInfo(input: GQInputObject) -> String {
-    let fullInfoText = NSMutableString(string: input.shopId)
-    fullInfoText.append("，")
-    fullInfoText.append(input.branchId)
-    fullInfoText.append("，")
-    fullInfoText.append(input.address.completeInfo)
-    return fullInfoText as String
 }
 
 func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> GQInputObject {
