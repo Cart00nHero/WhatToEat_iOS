@@ -22,8 +22,6 @@ mutation CreateGourmet(
     uniqueId
     orderId
     name
-    openTime
-    closedTime
     tel
     shop{
       uniqueId
@@ -57,8 +55,6 @@ mutation UpdateGroumet($foodieId: String!,$branchId: String!,$branch: InputBranc
     uniqueId
     orderId
     name
-    openTime
-    closedTime
     tel
     shop{
       uniqueId
@@ -92,8 +88,6 @@ mutation DislikeGourmet($foodieId: String!,$branchId: String!){
     uniqueId
     orderId
     name
-    openTime
-    closedTime
     tel
     shop{
       uniqueId
@@ -143,8 +137,6 @@ query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
       uniqueId
       orderId
       name
-      openTime
-      closedTime
       tel
       shop{
         uniqueId
@@ -178,8 +170,6 @@ query SearchForRange($foodieId: String,$minCoordinate: InputCoordinate!,$maxCoor
       uniqueId
       orderId
       name
-      openTime
-      closedTime
       tel
       shop{
         uniqueId

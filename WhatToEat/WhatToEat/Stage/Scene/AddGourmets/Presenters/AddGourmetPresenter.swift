@@ -72,9 +72,6 @@ struct GourmetsTableData {
             ],
             [
                 LRCellTemplate(leftProtocol: LabelCell(text: "Name"), rightProtocol: TextFieldCell(text: self.inputObj.shopBranch.name)),
-                LRCellTemplate(leftProtocol: LabelCell(text: "Business\nHours"),
-                           rightProtocol: RangeCell(starDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.openTime ?? "") ?? ""),
-                                                              endDate: convertStringToUTC_ISO8601Date(dateString: (inputObj.shopBranch.closedTime ?? "") ?? ""))),
                 LRCellTemplate(leftProtocol: LabelCell(text: "Tel"),
                            rightProtocol: TextFieldCell(keyboardType: .phonePad, text: (inputObj.shopBranch.tel ?? "") ?? ""))
             ],

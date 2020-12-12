@@ -235,22 +235,11 @@ public struct InputBranch: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   /// - Parameters:
-  ///   - closedTime
   ///   - name
-  ///   - openTime
   ///   - orderId
   ///   - tel
-  public init(closedTime: Swift.Optional<String?> = nil, name: String, openTime: Swift.Optional<String?> = nil, orderId: Swift.Optional<Int?> = nil, tel: Swift.Optional<String?> = nil) {
-    graphQLMap = ["closedTime": closedTime, "name": name, "openTime": openTime, "orderId": orderId, "tel": tel]
-  }
-
-  public var closedTime: Swift.Optional<String?> {
-    get {
-      return graphQLMap["closedTime"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "closedTime")
-    }
+  public init(name: String, orderId: Swift.Optional<Int?> = nil, tel: Swift.Optional<String?> = nil) {
+    graphQLMap = ["name": name, "orderId": orderId, "tel": tel]
   }
 
   public var name: String {
@@ -259,15 +248,6 @@ public struct InputBranch: GraphQLMapConvertible {
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "name")
-    }
-  }
-
-  public var openTime: Swift.Optional<String?> {
-    get {
-      return graphQLMap["openTime"] as? Swift.Optional<String?> ?? Swift.Optional<String?>.none
-    }
-    set {
-      graphQLMap.updateValue(newValue, forKey: "openTime")
     }
   }
 
@@ -738,8 +718,6 @@ public final class CreateGourmetMutation: GraphQLMutation {
         uniqueId
         orderId
         name
-        openTime
-        closedTime
         tel
         shop {
           __typename
@@ -828,8 +806,6 @@ public final class CreateGourmetMutation: GraphQLMutation {
           GraphQLField("uniqueId", type: .scalar(String.self)),
           GraphQLField("orderId", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
-          GraphQLField("openTime", type: .scalar(String.self)),
-          GraphQLField("closedTime", type: .scalar(String.self)),
           GraphQLField("tel", type: .scalar(String.self)),
           GraphQLField("shop", type: .object(Shop.selections)),
           GraphQLField("address", type: .object(Address.selections)),
@@ -842,8 +818,8 @@ public final class CreateGourmetMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
+      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -879,24 +855,6 @@ public final class CreateGourmetMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var openTime: String? {
-        get {
-          return resultMap["openTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "openTime")
-        }
-      }
-
-      public var closedTime: String? {
-        get {
-          return resultMap["closedTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "closedTime")
         }
       }
 
@@ -1208,8 +1166,6 @@ public final class UpdateGroumetMutation: GraphQLMutation {
         uniqueId
         orderId
         name
-        openTime
-        closedTime
         tel
         shop {
           __typename
@@ -1300,8 +1256,6 @@ public final class UpdateGroumetMutation: GraphQLMutation {
           GraphQLField("uniqueId", type: .scalar(String.self)),
           GraphQLField("orderId", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
-          GraphQLField("openTime", type: .scalar(String.self)),
-          GraphQLField("closedTime", type: .scalar(String.self)),
           GraphQLField("tel", type: .scalar(String.self)),
           GraphQLField("shop", type: .object(Shop.selections)),
           GraphQLField("address", type: .object(Address.selections)),
@@ -1314,8 +1268,8 @@ public final class UpdateGroumetMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
+      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -1351,24 +1305,6 @@ public final class UpdateGroumetMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var openTime: String? {
-        get {
-          return resultMap["openTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "openTime")
-        }
-      }
-
-      public var closedTime: String? {
-        get {
-          return resultMap["closedTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "closedTime")
         }
       }
 
@@ -1680,8 +1616,6 @@ public final class DislikeGourmetMutation: GraphQLMutation {
         uniqueId
         orderId
         name
-        openTime
-        closedTime
         tel
         shop {
           __typename
@@ -1766,8 +1700,6 @@ public final class DislikeGourmetMutation: GraphQLMutation {
           GraphQLField("uniqueId", type: .scalar(String.self)),
           GraphQLField("orderId", type: .scalar(Int.self)),
           GraphQLField("name", type: .scalar(String.self)),
-          GraphQLField("openTime", type: .scalar(String.self)),
-          GraphQLField("closedTime", type: .scalar(String.self)),
           GraphQLField("tel", type: .scalar(String.self)),
           GraphQLField("shop", type: .object(Shop.selections)),
           GraphQLField("address", type: .object(Address.selections)),
@@ -1780,8 +1712,8 @@ public final class DislikeGourmetMutation: GraphQLMutation {
         self.resultMap = unsafeResultMap
       }
 
-      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
-        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
+      public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, tel: String? = nil, shop: Shop? = nil, address: Address? = nil) {
+        self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }, "address": address.flatMap { (value: Address) -> ResultMap in value.resultMap }])
       }
 
       public var __typename: String {
@@ -1817,24 +1749,6 @@ public final class DislikeGourmetMutation: GraphQLMutation {
         }
         set {
           resultMap.updateValue(newValue, forKey: "name")
-        }
-      }
-
-      public var openTime: String? {
-        get {
-          return resultMap["openTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "openTime")
-        }
-      }
-
-      public var closedTime: String? {
-        get {
-          return resultMap["closedTime"] as? String
-        }
-        set {
-          resultMap.updateValue(newValue, forKey: "closedTime")
         }
       }
 
@@ -2163,8 +2077,6 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
           uniqueId
           orderId
           name
-          openTime
-          closedTime
           tel
           shop {
             __typename
@@ -2420,8 +2332,6 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
             GraphQLField("uniqueId", type: .scalar(String.self)),
             GraphQLField("orderId", type: .scalar(Int.self)),
             GraphQLField("name", type: .scalar(String.self)),
-            GraphQLField("openTime", type: .scalar(String.self)),
-            GraphQLField("closedTime", type: .scalar(String.self)),
             GraphQLField("tel", type: .scalar(String.self)),
             GraphQLField("shop", type: .object(Shop.selections)),
           ]
@@ -2433,8 +2343,8 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil) {
-          self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }])
+        public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, tel: String? = nil, shop: Shop? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -2470,24 +2380,6 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        public var openTime: String? {
-          get {
-            return resultMap["openTime"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "openTime")
-          }
-        }
-
-        public var closedTime: String? {
-          get {
-            return resultMap["closedTime"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "closedTime")
           }
         }
 
@@ -2629,8 +2521,6 @@ public final class SearchForRangeQuery: GraphQLQuery {
           uniqueId
           orderId
           name
-          openTime
-          closedTime
           tel
           shop {
             __typename
@@ -2888,8 +2778,6 @@ public final class SearchForRangeQuery: GraphQLQuery {
             GraphQLField("uniqueId", type: .scalar(String.self)),
             GraphQLField("orderId", type: .scalar(Int.self)),
             GraphQLField("name", type: .scalar(String.self)),
-            GraphQLField("openTime", type: .scalar(String.self)),
-            GraphQLField("closedTime", type: .scalar(String.self)),
             GraphQLField("tel", type: .scalar(String.self)),
             GraphQLField("shop", type: .object(Shop.selections)),
           ]
@@ -2901,8 +2789,8 @@ public final class SearchForRangeQuery: GraphQLQuery {
           self.resultMap = unsafeResultMap
         }
 
-        public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, openTime: String? = nil, closedTime: String? = nil, tel: String? = nil, shop: Shop? = nil) {
-          self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "openTime": openTime, "closedTime": closedTime, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }])
+        public init(uniqueId: String? = nil, orderId: Int? = nil, name: String? = nil, tel: String? = nil, shop: Shop? = nil) {
+          self.init(unsafeResultMap: ["__typename": "ShopBranch", "uniqueId": uniqueId, "orderId": orderId, "name": name, "tel": tel, "shop": shop.flatMap { (value: Shop) -> ResultMap in value.resultMap }])
         }
 
         public var __typename: String {
@@ -2938,24 +2826,6 @@ public final class SearchForRangeQuery: GraphQLQuery {
           }
           set {
             resultMap.updateValue(newValue, forKey: "name")
-          }
-        }
-
-        public var openTime: String? {
-          get {
-            return resultMap["openTime"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "openTime")
-          }
-        }
-
-        public var closedTime: String? {
-          get {
-            return resultMap["closedTime"] as? String
-          }
-          set {
-            resultMap.updateValue(newValue, forKey: "closedTime")
           }
         }
 

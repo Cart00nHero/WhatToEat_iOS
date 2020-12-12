@@ -97,6 +97,9 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
                 let gqAddress = parcelAction.selectedLoc
                 presenter.newLoc = gqAddress!
+                print("********")
+                print(presenter.newLoc.address.completeInfo)
+                print("********")
                 if presenter.newLoc.address.completeInfo.isEmpty {
                     // To-Do: Here Upload to Insert
                     presenter.saveToUpload = false
@@ -143,22 +146,6 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 cellData?.rightProtocol = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
-        case let action as RangeDatePickerSelectedAction:
-            var branch = presenter.newLoc.shopBranch
-            branch.openTime = convertDateToUTC_ISO8601DateString(date: action.startDate )
-            branch.closedTime = convertDateToUTC_ISO8601DateString(date: action.endDate )
-            presenter.newLoc.shopBranch = branch
-            
-            let cell = action.rangeView.superTableViewCell as? LRTableViewCell
-            let indexPath = tableView.indexPath(for: cell!)
-            var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellTemplate
-            var data = cellData?.rightProtocol as? RangeCell
-            data?.starDate =
-                convertStringToUTC_ISO8601Date(dateString: branch.openTime! ?? "")
-            data?.endDate =
-                convertStringToUTC_ISO8601Date(dateString: branch.closedTime! ?? "")
-            cellData?.rightProtocol = data!
-            tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             
         case let action as CellTextFieldDidChangedAction:
             let cell = action.cell as? LRTableViewCell
@@ -172,7 +159,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 appStore.dispatch(updateGroumetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
             } else {
                 presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: presenter.newLoc)
-                appStore.dispatch(createGourmetAction(foodieId: nil, inputObj: presenter.newLoc))
+                appStore.dispatch(createGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
             }
         case let action as CreateGourmetAction:
             switch action.status {
