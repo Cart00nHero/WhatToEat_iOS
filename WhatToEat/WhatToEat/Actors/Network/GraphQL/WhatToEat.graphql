@@ -32,18 +32,25 @@ mutation CreateGourmet(
       status
     }
     address{
-      ownerType
+      ownerId
       completeInfo
+      name
       postalCode
       nation
       isoNationCode
       locality
       subLocality
+      ward
       administrativeArea
       subAdministrativeArea
       thoroughfare
       subThoroughfare
+      premise
+      subpremise
       floor
+      zone
+      room
+      place
       latitude
       longitude
       annotation
@@ -65,18 +72,25 @@ mutation UpdateGroumet($foodieId: String!,$branchId: String!,$branch: InputBranc
       status
     }
     address{
-      ownerType
+      ownerId
       completeInfo
+      name
       postalCode
       nation
       isoNationCode
       locality
       subLocality
+      ward
       administrativeArea
       subAdministrativeArea
       thoroughfare
       subThoroughfare
+      premise
+      subpremise
       floor
+      zone
+      room
+      place
       latitude
       longitude
       annotation
@@ -98,18 +112,25 @@ mutation DislikeGourmet($foodieId: String!,$branchId: String!){
       status
     }
     address{
-      ownerType
+      ownerId
       completeInfo
+      name
       postalCode
       nation
       isoNationCode
       locality
       subLocality
+      ward
       administrativeArea
       subAdministrativeArea
       thoroughfare
       subThoroughfare
+      premise
+      subpremise
       floor
+      zone
+      room
+      place
       latitude
       longitude
       annotation
@@ -118,18 +139,25 @@ mutation DislikeGourmet($foodieId: String!,$branchId: String!){
 }
 query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
   locationsDynamicQuery(foodieId:$foodieId,whereAnd: $whereAnd) {
-    ownerType
+    ownerId
     completeInfo
+    name
     postalCode
     nation
     isoNationCode
     locality
     subLocality
+    ward
     administrativeArea
     subAdministrativeArea
     thoroughfare
     subThoroughfare
+    premise
+    subpremise
     floor
+    zone
+    room
+    place
     latitude
     longitude
     annotation
@@ -151,18 +179,25 @@ query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
 }
 query SearchForRange($foodieId: String,$minCoordinate: InputCoordinate!,$maxCoordinate: InputCoordinate!) {
   searchForRange(foodieId:$foodieId,minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate){
-    ownerType
+    ownerId
     completeInfo
+    name
     postalCode
     nation
     isoNationCode
     locality
     subLocality
+    ward
     administrativeArea
     subAdministrativeArea
     thoroughfare
     subThoroughfare
+    premise
+    subpremise
     floor
+    zone
+    room
+    place
     latitude
     longitude
     annotation
