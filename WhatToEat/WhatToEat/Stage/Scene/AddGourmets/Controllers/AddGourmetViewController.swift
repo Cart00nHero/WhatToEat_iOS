@@ -97,10 +97,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
                 let gqAddress = parcelAction.selectedLoc
                 presenter.newLoc = gqAddress!
-                print("********")
-                print(presenter.newLoc.address.completeInfo)
-                print("********")
-                if presenter.newLoc.address.completeInfo.isEmpty {
+                if gqAddress?.branchId.isEmpty == true {
                     // To-Do: Here Upload to Insert
                     presenter.saveToUpload = false
                     presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: gqAddress!)

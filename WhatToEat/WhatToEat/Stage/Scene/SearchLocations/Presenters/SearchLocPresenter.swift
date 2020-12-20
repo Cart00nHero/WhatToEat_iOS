@@ -17,6 +17,8 @@ class SearchLocPresenter: NSObject {
     
     var searchMode: SearchMode = .MapLocation
     var isWebViewCreated = false
+    var foundBranchId = ""
+    
     lazy var locationParcel = DeliveryMan.ParcelObject()
     
     func googleSearchUrl(queryText: String) -> String {

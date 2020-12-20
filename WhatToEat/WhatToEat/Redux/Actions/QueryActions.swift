@@ -12,7 +12,7 @@ import ReSwift
 struct LocationsDynamicQueryAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
     var responseData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]?
-    var dynamicQueryData: DynamicQueryData<LocDynamicQueryData>?
+    var queryData: DynamicQueryData<LocDynamicQueryData>?
     
 }
 func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQueryAction {
@@ -29,9 +29,8 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
             if (gqlResult.data?.locationsDynamicQuery) != nil {
                 action.responseData = gqlResult.data?.locationsDynamicQuery
                 let serialized = try! JSONSerialization.data(withJSONObject: gqlResult.data?.jsonObject as Any, options: .prettyPrinted)
-//                let deserialized = try! JSONSerialization.jsonObject(with: serialized, options: []) as! [String: Any]
                 do {
-                    action.dynamicQueryData =
+                    action.queryData =
                         try JSONDecoder().decode(DynamicQueryData<LocDynamicQueryData>.self, from: serialized)
                 } catch {
                     print(error)

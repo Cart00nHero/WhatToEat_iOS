@@ -22,7 +22,8 @@ func combineAddressCompleteInfo(input: GQInputObject) -> String {
 
 func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> GQInputObject {
     var inputObj = initGQInputObject()
-    
+    inputObj.shopId = result.shopBranch?.shop?.uniqueId ?? ""
+    inputObj.branchId = result.shopBranch?.uniqueId ?? ""
     var address = inputObj.address
     for key in address.graphQLMap.keys {
         let value = result.resultMap[key]
