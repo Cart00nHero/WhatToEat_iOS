@@ -28,6 +28,9 @@ func initGQInputObject() -> GQInputObject {
     return GQInputObject(address: InputAddress(completeInfo: "", latitude: "0.0", longitude: "0.0"),
                      shopBranch: InputBranch(name: ""), shop: InputShop(title: "", underPrice: 0.00))
 }
+func newInputAddress() -> InputAddress {
+    return InputAddress(administrativeArea: "", annotation: "", completeInfo: "", floor: "", isoNationCode: "", latitude: "", locality: "", longitude: "", name: "", nation: "", place: "", postalCode: "", premise: "", room: "", subAdministrativeArea: "", subLocality: "", subThoroughfare: "", subpremise: "", thoroughfare: "", ward: "", zone: "")
+}
 
 struct GQSearchRange {
     let max: InputCoordinate

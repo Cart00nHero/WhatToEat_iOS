@@ -142,6 +142,6 @@ struct SearchNearbyAction: Action {
         self.center = center
         self.range = range
         let rangePoint = calculateRange(coordinate: center, range: range)
-        appStore.dispatch(searchForRangeAction(foodieId: nil, min: rangePoint.min, max: rangePoint.max))
+        appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePoint.min, max: rangePoint.max))
     }
 }

@@ -1146,8 +1146,8 @@ public final class CreateGourmetMutation: GraphQLMutation {
             GraphQLField("zone", type: .scalar(String.self)),
             GraphQLField("room", type: .scalar(String.self)),
             GraphQLField("place", type: .scalar(String.self)),
-            GraphQLField("latitude", type: .scalar(String.self)),
-            GraphQLField("longitude", type: .scalar(String.self)),
+            GraphQLField("latitude", type: .scalar(Double.self)),
+            GraphQLField("longitude", type: .scalar(Double.self)),
             GraphQLField("annotation", type: .scalar(String.self)),
           ]
         }
@@ -1158,7 +1158,7 @@ public final class CreateGourmetMutation: GraphQLMutation {
           self.resultMap = unsafeResultMap
         }
 
-        public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil) {
+        public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: Double? = nil, longitude: Double? = nil, annotation: String? = nil) {
           self.init(unsafeResultMap: ["__typename": "Address", "ownerId": ownerId, "completeInfo": completeInfo, "name": name, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "ward": ward, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "premise": premise, "subpremise": subpremise, "floor": floor, "zone": zone, "room": room, "place": place, "latitude": latitude, "longitude": longitude, "annotation": annotation])
         }
 
@@ -1342,18 +1342,18 @@ public final class CreateGourmetMutation: GraphQLMutation {
           }
         }
 
-        public var latitude: String? {
+        public var latitude: Double? {
           get {
-            return resultMap["latitude"] as? String
+            return resultMap["latitude"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "latitude")
           }
         }
 
-        public var longitude: String? {
+        public var longitude: Double? {
           get {
-            return resultMap["longitude"] as? String
+            return resultMap["longitude"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "longitude")
@@ -1673,8 +1673,8 @@ public final class UpdateGroumetMutation: GraphQLMutation {
             GraphQLField("zone", type: .scalar(String.self)),
             GraphQLField("room", type: .scalar(String.self)),
             GraphQLField("place", type: .scalar(String.self)),
-            GraphQLField("latitude", type: .scalar(String.self)),
-            GraphQLField("longitude", type: .scalar(String.self)),
+            GraphQLField("latitude", type: .scalar(Double.self)),
+            GraphQLField("longitude", type: .scalar(Double.self)),
             GraphQLField("annotation", type: .scalar(String.self)),
           ]
         }
@@ -1685,7 +1685,7 @@ public final class UpdateGroumetMutation: GraphQLMutation {
           self.resultMap = unsafeResultMap
         }
 
-        public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil) {
+        public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: Double? = nil, longitude: Double? = nil, annotation: String? = nil) {
           self.init(unsafeResultMap: ["__typename": "Address", "ownerId": ownerId, "completeInfo": completeInfo, "name": name, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "ward": ward, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "premise": premise, "subpremise": subpremise, "floor": floor, "zone": zone, "room": room, "place": place, "latitude": latitude, "longitude": longitude, "annotation": annotation])
         }
 
@@ -1869,18 +1869,18 @@ public final class UpdateGroumetMutation: GraphQLMutation {
           }
         }
 
-        public var latitude: String? {
+        public var latitude: Double? {
           get {
-            return resultMap["latitude"] as? String
+            return resultMap["latitude"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "latitude")
           }
         }
 
-        public var longitude: String? {
+        public var longitude: Double? {
           get {
-            return resultMap["longitude"] as? String
+            return resultMap["longitude"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "longitude")
@@ -2194,8 +2194,8 @@ public final class DislikeGourmetMutation: GraphQLMutation {
             GraphQLField("zone", type: .scalar(String.self)),
             GraphQLField("room", type: .scalar(String.self)),
             GraphQLField("place", type: .scalar(String.self)),
-            GraphQLField("latitude", type: .scalar(String.self)),
-            GraphQLField("longitude", type: .scalar(String.self)),
+            GraphQLField("latitude", type: .scalar(Double.self)),
+            GraphQLField("longitude", type: .scalar(Double.self)),
             GraphQLField("annotation", type: .scalar(String.self)),
           ]
         }
@@ -2206,7 +2206,7 @@ public final class DislikeGourmetMutation: GraphQLMutation {
           self.resultMap = unsafeResultMap
         }
 
-        public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil) {
+        public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: Double? = nil, longitude: Double? = nil, annotation: String? = nil) {
           self.init(unsafeResultMap: ["__typename": "Address", "ownerId": ownerId, "completeInfo": completeInfo, "name": name, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "ward": ward, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "premise": premise, "subpremise": subpremise, "floor": floor, "zone": zone, "room": room, "place": place, "latitude": latitude, "longitude": longitude, "annotation": annotation])
         }
 
@@ -2390,18 +2390,18 @@ public final class DislikeGourmetMutation: GraphQLMutation {
           }
         }
 
-        public var latitude: String? {
+        public var latitude: Double? {
           get {
-            return resultMap["latitude"] as? String
+            return resultMap["latitude"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "latitude")
           }
         }
 
-        public var longitude: String? {
+        public var longitude: Double? {
           get {
-            return resultMap["longitude"] as? String
+            return resultMap["longitude"] as? Double
           }
           set {
             resultMap.updateValue(newValue, forKey: "longitude")
@@ -2538,8 +2538,8 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
           GraphQLField("zone", type: .scalar(String.self)),
           GraphQLField("room", type: .scalar(String.self)),
           GraphQLField("place", type: .scalar(String.self)),
-          GraphQLField("latitude", type: .scalar(String.self)),
-          GraphQLField("longitude", type: .scalar(String.self)),
+          GraphQLField("latitude", type: .scalar(Double.self)),
+          GraphQLField("longitude", type: .scalar(Double.self)),
           GraphQLField("annotation", type: .scalar(String.self)),
           GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
         ]
@@ -2551,7 +2551,7 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil, shopBranch: ShopBranch? = nil) {
+      public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: Double? = nil, longitude: Double? = nil, annotation: String? = nil, shopBranch: ShopBranch? = nil) {
         self.init(unsafeResultMap: ["__typename": "Address", "ownerId": ownerId, "completeInfo": completeInfo, "name": name, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "ward": ward, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "premise": premise, "subpremise": subpremise, "floor": floor, "zone": zone, "room": room, "place": place, "latitude": latitude, "longitude": longitude, "annotation": annotation, "shopBranch": shopBranch.flatMap { (value: ShopBranch) -> ResultMap in value.resultMap }])
       }
 
@@ -2735,18 +2735,18 @@ public final class LocationsDynamicQueryQuery: GraphQLQuery {
         }
       }
 
-      public var latitude: String? {
+      public var latitude: Double? {
         get {
-          return resultMap["latitude"] as? String
+          return resultMap["latitude"] as? Double
         }
         set {
           resultMap.updateValue(newValue, forKey: "latitude")
         }
       }
 
-      public var longitude: String? {
+      public var longitude: Double? {
         get {
-          return resultMap["longitude"] as? String
+          return resultMap["longitude"] as? Double
         }
         set {
           resultMap.updateValue(newValue, forKey: "longitude")
@@ -3061,8 +3061,8 @@ public final class SearchForRangeQuery: GraphQLQuery {
           GraphQLField("zone", type: .scalar(String.self)),
           GraphQLField("room", type: .scalar(String.self)),
           GraphQLField("place", type: .scalar(String.self)),
-          GraphQLField("latitude", type: .scalar(String.self)),
-          GraphQLField("longitude", type: .scalar(String.self)),
+          GraphQLField("latitude", type: .scalar(Double.self)),
+          GraphQLField("longitude", type: .scalar(Double.self)),
           GraphQLField("annotation", type: .scalar(String.self)),
           GraphQLField("shopBranch", type: .object(ShopBranch.selections)),
         ]
@@ -3074,7 +3074,7 @@ public final class SearchForRangeQuery: GraphQLQuery {
         self.resultMap = unsafeResultMap
       }
 
-      public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: String? = nil, longitude: String? = nil, annotation: String? = nil, shopBranch: ShopBranch? = nil) {
+      public init(ownerId: String? = nil, completeInfo: String? = nil, name: String? = nil, postalCode: String? = nil, nation: String? = nil, isoNationCode: String? = nil, locality: String? = nil, subLocality: String? = nil, ward: String? = nil, administrativeArea: String? = nil, subAdministrativeArea: String? = nil, thoroughfare: String? = nil, subThoroughfare: String? = nil, premise: String? = nil, subpremise: String? = nil, floor: String? = nil, zone: String? = nil, room: String? = nil, place: String? = nil, latitude: Double? = nil, longitude: Double? = nil, annotation: String? = nil, shopBranch: ShopBranch? = nil) {
         self.init(unsafeResultMap: ["__typename": "Address", "ownerId": ownerId, "completeInfo": completeInfo, "name": name, "postalCode": postalCode, "nation": nation, "isoNationCode": isoNationCode, "locality": locality, "subLocality": subLocality, "ward": ward, "administrativeArea": administrativeArea, "subAdministrativeArea": subAdministrativeArea, "thoroughfare": thoroughfare, "subThoroughfare": subThoroughfare, "premise": premise, "subpremise": subpremise, "floor": floor, "zone": zone, "room": room, "place": place, "latitude": latitude, "longitude": longitude, "annotation": annotation, "shopBranch": shopBranch.flatMap { (value: ShopBranch) -> ResultMap in value.resultMap }])
       }
 
@@ -3258,18 +3258,18 @@ public final class SearchForRangeQuery: GraphQLQuery {
         }
       }
 
-      public var latitude: String? {
+      public var latitude: Double? {
         get {
-          return resultMap["latitude"] as? String
+          return resultMap["latitude"] as? Double
         }
         set {
           resultMap.updateValue(newValue, forKey: "latitude")
         }
       }
 
-      public var longitude: String? {
+      public var longitude: Double? {
         get {
-          return resultMap["longitude"] as? String
+          return resultMap["longitude"] as? Double
         }
         set {
           resultMap.updateValue(newValue, forKey: "longitude")

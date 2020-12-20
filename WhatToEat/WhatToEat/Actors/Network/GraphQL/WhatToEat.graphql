@@ -1,4 +1,3 @@
-
 mutation SignFoodie($signData: SignData!) {
   signFoodie(signData: $signData) {
     uniqueId
