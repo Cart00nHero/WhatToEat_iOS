@@ -77,9 +77,11 @@ struct GourmetsTableData {
             ],
             [
                 LRCellTemplate(leftProtocol: LabelCell(text: "Address"),
-                           rightProtocol: LabelCell(numberOfLines: 0, text: inputObj.address.completeInfo),
-                           cellHeight: 64.0
+                           rightProtocol: LabelCell(numberOfLines: 2, text: inputObj.address.completeInfo),
+                           cellHeight: 84.0
                 ),
+                LRCellTemplate(leftProtocol: LabelCell(text: "Floor"), rightProtocol: TextFieldCell(text: (self.inputObj.address.floor ?? "") ?? "")),
+                LRCellTemplate(leftProtocol: LabelCell(text: "Room"), rightProtocol: TextFieldCell(text: (self.inputObj.address.room ?? "") ?? "")),
                 BtnCellTemplate(cornerRadius: 2.0, titleText: "Save")
             ]
         ]
@@ -88,7 +90,12 @@ struct GourmetsTableData {
 
 struct DropDownMenuData
 {
-    let typeSource = ["Breakfast","Boxed meal","Cafeteria","Prix fixe",
-                      "Buffet","Diner","Cafe","Fast food","Pizzeria"]
-    let styleSource = ["TW","JPN","USA","Thai"]
+    let typeSource = ["Unclassified",
+                      "Breakfast","Boxed meal",
+                      "Buffet","Cafe","Cafeteria","Diner","Fast food",
+                      "Prix fixe","Pizzeria"]
+    let styleSource = ["Unclassified","AFR","EURO","LAME",
+                       "CHN","DEU","ESP","GBR","FRA","HKG",
+                       "IND","JPN","KOR","MEX","THA",
+                       "TWN","USA","VNM"]
 }
