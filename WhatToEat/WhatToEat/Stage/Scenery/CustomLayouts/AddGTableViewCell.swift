@@ -28,13 +28,13 @@ class AddGTableViewCell: LRTableViewCell {
     // MARK: - build content
     private func createLeft() {
         let type = cellTemplate?.leftViewItem.viewType
-        if type != .TextLabel {
+        if type != .Label {
             for subView in cellLeftView.subviews {
                 subView.removeFromSuperview()
             }
         }
         switch type {
-        case .TextLabel:
+        case .Label:
             putLeftTitleTextOnLabel(cellProtocol: cellTemplate!.leftViewItem)
         case .DropDown:
             let dropDownView = DropDownCellView()
@@ -67,7 +67,7 @@ class AddGTableViewCell: LRTableViewCell {
                 textField.placeholder = data?.placeHolder
             }
             textField.addTarget(self, action: #selector(textFieldDidChanged(sender:)), for: .editingChanged)
-        case .TextLabel:
+        case .Label:
             let textLabel = UILabel()
             buildConstraints(content: textLabel, side: .Right)
             let data = cellTemplate!.rightViewItem as? LabelItem

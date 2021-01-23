@@ -13,10 +13,6 @@ enum TemplateStyle : Int {
     case LeftRight,Button,RadarMap
 }
 
-enum ViewType : Int {
-    case TextLabel,TextField, DropDown, Range, AddressInput
-}
-
 protocol TemplateProtocol {
     var templateStyle: TemplateStyle { get }
     var itemHeight: CGFloat { get set }
@@ -37,7 +33,10 @@ struct ButtonTemplate: TemplateProtocol {
     var isHidden = false
     var itemHeight: CGFloat = 48.0
 }
-
+enum ViewType : Int {
+    case Label,TextField, DropDown, Range,
+         Button,AddressInput
+}
 protocol ViewItemProtocol {
     var viewType: ViewType { get }
 }
@@ -59,7 +58,7 @@ struct AddressInputItem: ViewItemProtocol {
     
 }
 struct LabelItem: ViewItemProtocol {
-    let viewType: ViewType = .TextLabel
+    let viewType: ViewType = .Label
     var numberOfLines = 1
     var text = ""
 }
@@ -69,4 +68,11 @@ struct TextFieldItem: ViewItemProtocol {
     var keyboardType: UIKeyboardType = .default
     var placeHolder = ""
     var text = ""
+}
+
+struct ButtonItem: ViewItemProtocol {
+    var viewType: ViewType = .Button
+    var cornerRadius: CGFloat = 0.0
+    var titleText = ""
+    var isHidden = false
 }
