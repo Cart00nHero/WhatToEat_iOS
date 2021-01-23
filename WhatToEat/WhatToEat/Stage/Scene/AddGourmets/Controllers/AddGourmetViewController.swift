@@ -68,7 +68,7 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "AddGTableViewCell" {
-            let contentCell = cell as? AddGTableViewCell
+            let contentCell = cell as? AddGmtTableViewCell
             contentCell?.cellTemplate = data as? LRTemplate
         }
         if cellIdentifier == "AddBtnTableViewCell" {

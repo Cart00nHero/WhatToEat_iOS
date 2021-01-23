@@ -1,5 +1,5 @@
 //
-//  AddGLRTableViewCell.swift
+//  AddGmtTableViewCell.swift
 //  WhatToEat
 //
 //  Created by YuCheng on 2020/5/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddGTableViewCell: LRTableViewCell {
+class AddGmtTableViewCell: LRTableViewCell {
 
     @IBOutlet weak var cellLeftLabel: UILabel!
     private var leftContent: UIView? = nil
@@ -114,7 +114,7 @@ class AddGTableViewCell: LRTableViewCell {
     }
 
 }
-extension AddGTableViewCell: UITextFieldDelegate {
+extension AddGmtTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
