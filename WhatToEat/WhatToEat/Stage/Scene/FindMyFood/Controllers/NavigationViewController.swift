@@ -14,7 +14,7 @@ class NavigationViewController: UIViewController {
 
     @IBOutlet weak var mkMapView: MKMapView!
     @IBOutlet var modeTabButtons: [UIButton]!
-    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var defaultTemplate: SceneViewController? = nil
     private lazy var presenter: NavigationPresenter = NavigationPresenter()
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class NavigationViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate = self.parent as? SceneViewController
         self.defaultTemplate?.stateDelegate = self
         defaultTemplate?.title = "Lead Me To My Food"
     }
@@ -47,8 +47,8 @@ class NavigationViewController: UIViewController {
 
 }
 
-extension NavigationViewController: DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState) {
+extension NavigationViewController: SceneStateDelegate {
+    func receiveNewState(state: SceneState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             switch state.receivedParcel?.parcelType {
             case "MKAnnotationDidSelectAction":

@@ -10,7 +10,7 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
-    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var defaultTemplate: SceneViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class MainMenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate = self.parent as? SceneViewController
         self.defaultTemplate?.stateDelegate = self
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -44,7 +44,7 @@ class MainMenuViewController: UIViewController {
 
 }
 
-extension MainMenuViewController: DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState) {
+extension MainMenuViewController: SceneStateDelegate {
+    func receiveNewState(state: SceneState) {
     }
 }

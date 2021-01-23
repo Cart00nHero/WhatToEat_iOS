@@ -9,12 +9,12 @@
 import UIKit
 import ReSwift
 
-protocol DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState)
+protocol SceneStateDelegate {
+    func receiveNewState(state: SceneState)
 }
-class DefaultVCTemplate: UIBaseViewController {
+class SceneViewController: UIBaseViewController {
 
-    var stateDelegate: DefaultTemplateDelegate?
+    var stateDelegate: SceneStateDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class DefaultVCTemplate: UIBaseViewController {
         super.viewWillAppear(animated)
         appStore.subscribe(self) {
             $0.select {
-                $0.defaultTemplateState
+                $0.sceneState
             }
         }
     }
@@ -61,8 +61,8 @@ class DefaultVCTemplate: UIBaseViewController {
 
 }
 
-extension DefaultVCTemplate: StoreSubscriber{
-    func newState(state: DefaultTemplateState) {
+extension SceneViewController: StoreSubscriber{
+    func newState(state: SceneState) {
         self.stateDelegate?.receiveNewState(state: state)
     }
 }

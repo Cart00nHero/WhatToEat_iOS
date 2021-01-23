@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         let toStoryBoard = UIStoryboard(name: "Entrance", bundle: nil)
-        let toVC = toStoryBoard.instantiateViewController(withIdentifier: "DefaultTemplate") as? DefaultVCTemplate
+        let toVC = toStoryBoard.instantiateViewController(withIdentifier: "DefaultTemplate") as? SceneViewController
         toVC?.childVC = toStoryBoard.instantiateViewController(withIdentifier: "SignViewController")
         self.navigationController?.show(toVC!, sender: nil)
     }

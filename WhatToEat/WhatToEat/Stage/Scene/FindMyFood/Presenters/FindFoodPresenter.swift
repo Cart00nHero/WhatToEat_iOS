@@ -89,22 +89,22 @@ struct FindFoodTableData {
     }
     private func createDataSource() -> Array<TemplateProtocol> {
         return [
-            LRCellTemplate(leftViewItem: LabelItem(text: "Title"),
+            LRTemplate(leftViewItem: LabelItem(text: "Title"),
                            rightViewItem: LabelItem(text: self.dataObj.shopBranch?.shop?.title ?? "")),
-            LRCellTemplate(leftViewItem: LabelItem(text: "Style"),
+            LRTemplate(leftViewItem: LabelItem(text: "Style"),
                            rightViewItem: LabelItem(text: (self.dataObj.shopBranch?.shop?.style ?? "") )),
-            LRCellTemplate(leftViewItem: LabelItem(text: "Type"),
+            LRTemplate(leftViewItem: LabelItem(text: "Type"),
                            rightViewItem: LabelItem(text: (self.dataObj.shopBranch?.shop?.type ?? "") )),
-            LRCellTemplate(leftViewItem: LabelItem(text: "Under\nPrice"),
+            LRTemplate(leftViewItem: LabelItem(text: "Under\nPrice"),
                            rightViewItem: LabelItem(text:
                                                             String(format: "%.2f", (self.dataObj.shopBranch?.shop?.underPrice ?? 0.0)!))),
-            LRCellTemplate(leftViewItem: LabelItem(text: "Name"),
+            LRTemplate(leftViewItem: LabelItem(text: "Name"),
                            rightViewItem: LabelItem(text: "")),
-            LRCellTemplate(leftViewItem: LabelItem(text: "Tel"),
+            LRTemplate(leftViewItem: LabelItem(text: "Tel"),
                            rightViewItem: LabelItem(text: (dataObj.shopBranch?.tel ?? "") )),
-            LRCellTemplate(leftViewItem: LabelItem(text: "Address"),
+            LRTemplate(leftViewItem: LabelItem(text: "Address"),
                            rightViewItem: LabelItem(text: dataObj.completeInfo ?? "")),
-            BtnCellTemplate(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
+            ButtonTemplate(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
         ]
     }
 }

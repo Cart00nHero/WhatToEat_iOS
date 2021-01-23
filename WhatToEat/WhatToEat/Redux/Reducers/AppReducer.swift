@@ -11,13 +11,13 @@ import ReSwift
 func appReducer(action: Action, state: AppState?) -> AppState {
     return AppState(
         deliveryState: deliveryReducer(action: action, state: state?.deliveryState),
-        defaultTemplateState: defaultTemplateReducer(action: action, state: state?.defaultTemplateState)
+        sceneState: sceneStateReducer(action: action, state: state?.sceneState)
     )
 }
 
 // MARK: - SubReducers
-func defaultTemplateReducer(action: Action, state: DefaultTemplateState?) -> DefaultTemplateState {
-    var newState = DefaultTemplateState(currentAction: action, receivedParcel: state?.receivedParcel)
+func sceneStateReducer(action: Action, state: SceneState?) -> SceneState {
+    var newState = SceneState(currentAction: action, receivedParcel: state?.receivedParcel)
     switch newState.currentAction {
     case is SendParcelAction:
         let action = newState.currentAction as? SendParcelAction

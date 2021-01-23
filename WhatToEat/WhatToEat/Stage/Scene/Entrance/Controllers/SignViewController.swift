@@ -12,7 +12,7 @@ import FacebookLogin
 
 class SignViewController: UIViewController {
 
-    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var defaultTemplate: SceneViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class SignViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate = self.parent as? SceneViewController
         self.defaultTemplate?.stateDelegate = self
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -36,8 +36,8 @@ class SignViewController: UIViewController {
     }
 }
 
-extension SignViewController: DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState) {
+extension SignViewController: SceneStateDelegate {
+    func receiveNewState(state: SceneState) {
         switch state.currentAction {
         case let action as SignFoodieAction:
             switch action.status {

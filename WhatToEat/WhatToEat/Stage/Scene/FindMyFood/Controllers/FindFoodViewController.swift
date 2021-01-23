@@ -18,7 +18,7 @@ class FindFoodViewController: UIViewController {
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
     private var annotationViewTag: Int = -1
-    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var defaultTemplate: SceneViewController? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
     override func viewDidLoad() {
@@ -27,7 +27,7 @@ class FindFoodViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate = self.parent as? SceneViewController
         self.defaultTemplate?.stateDelegate = self
         defaultTemplate?.title = "Find My Food"
     }
@@ -97,18 +97,18 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
             tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "FindFoodTableViewCell" {
             let contentCell = cell as! FindFoodTableViewCell
-            contentCell.cellTemplate = data as? LRCellTemplate
+            contentCell.cellTemplate = data as? LRTemplate
         }else {
             let contentCell = cell as! FFBtnTableViewCell
-            contentCell.cellData = data as? BtnCellTemplate
+            contentCell.cellData = data as? ButtonTemplate
         }
         return cell
     }
     
 }
 
-extension FindFoodViewController: DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState) {
+extension FindFoodViewController: SceneStateDelegate {
+    func receiveNewState(state: SceneState) {
         switch state.currentAction {
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction

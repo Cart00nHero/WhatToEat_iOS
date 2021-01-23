@@ -24,20 +24,7 @@ class AddGTableViewCell: LRTableViewCell {
         createLeft()
         createRight()
     }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        if leftContent != nil {
-            leftContent?.removeFromSuperview()
-        }
-        for subView in cellRightView.subviews {
-            subView.removeFromSuperview()
-        }
-    }
+    
     // MARK: - build content
     private func createLeft() {
         let type = cellTemplate?.leftViewItem.viewType

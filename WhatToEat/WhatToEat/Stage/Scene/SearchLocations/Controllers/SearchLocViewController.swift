@@ -21,7 +21,7 @@ class SearchLocViewController: UIViewController {
     private lazy var coverView: UIView = UIView()
     private lazy var presenter: SearchLocPresenter = SearchLocPresenter()
     
-    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var defaultTemplate: SceneViewController? = nil
     let webView = WKWebView()
     
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class SearchLocViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate = self.parent as? SceneViewController
         self.defaultTemplate?.stateDelegate = self
         defaultTemplate?.title = "Search"
     }
@@ -122,8 +122,8 @@ extension SearchLocViewController: MKMapViewDelegate {
 extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
 }
 // MARK: - DefaultTemplateDelegate
-extension SearchLocViewController: DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState) {
+extension SearchLocViewController: SceneStateDelegate {
+    func receiveNewState(state: SceneState) {
         switch state.currentAction {
         case is ReceivedTapAction:
             let action = state.currentAction as? ReceivedTapAction

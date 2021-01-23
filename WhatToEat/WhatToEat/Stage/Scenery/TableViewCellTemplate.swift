@@ -18,7 +18,7 @@ class LRTableViewCell: UITableViewCell {
     @IBOutlet weak var leftWidthConstraint: NSLayoutConstraint!
     
     var indexPath : IndexPath? = nil
-    var cellTemplate: LRCellTemplate?
+    var cellTemplate: LRTemplate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +30,12 @@ class LRTableViewCell: UITableViewCell {
     }
     override func prepareForReuse() {
         super.prepareForReuse()
+        for subView in cellLeftView.subviews {
+            subView.removeFromSuperview()
+        }
+        for subView in cellRightView.subviews {
+            subView.removeFromSuperview()
+        }
     }
     func buildConstraints(content: UIView, side: ContentSide) {
         content.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +55,7 @@ class LRTableViewCell: UITableViewCell {
 class ButtonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellButton: UIButton!
-    var cellData: BtnCellTemplate?
+    var cellData: ButtonTemplate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

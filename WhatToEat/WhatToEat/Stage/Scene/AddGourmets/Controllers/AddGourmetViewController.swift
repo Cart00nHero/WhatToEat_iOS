@@ -10,7 +10,7 @@ import UIKit
 
 class AddGourmetViewController: UIViewController {
 
-    private var defaultTemplate: DefaultVCTemplate? = nil
+    private var defaultTemplate: SceneViewController? = nil
     private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
@@ -24,7 +24,7 @@ class AddGourmetViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? DefaultVCTemplate
+        self.defaultTemplate = self.parent as? SceneViewController
         self.defaultTemplate?.stateDelegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -69,11 +69,11 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "AddGTableViewCell" {
             let contentCell = cell as? AddGTableViewCell
-            contentCell?.cellTemplate = data as? LRCellTemplate
+            contentCell?.cellTemplate = data as? LRTemplate
         }
         if cellIdentifier == "AddBtnTableViewCell" {
             let contentCell = cell as? AddBtnTableViewCell
-            contentCell?.cellData = data as? BtnCellTemplate
+            contentCell?.cellData = data as? ButtonTemplate
         }
         return cell
     }
@@ -90,8 +90,8 @@ extension AddGourmetViewController: UIScrollViewDelegate {
         }
     }
 }
-extension AddGourmetViewController: DefaultTemplateDelegate {
-    func receiveNewState(state: DefaultTemplateState) {
+extension AddGourmetViewController: SceneStateDelegate {
+    func receiveNewState(state: SceneState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
@@ -126,7 +126,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
         case let action as CellDropDownMenuSelectedAction:
             let cell = action.dropdownView.superTableViewCell as? LRTableViewCell
             let indexPath = tableView.indexPath(for: cell!)
-            var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRCellTemplate
+            var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRTemplate
             let superTag = action.dropdownView.superview?.tag ?? 0
             var newShop = presenter.newLoc.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
