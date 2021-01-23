@@ -50,38 +50,38 @@ class AddGourmetPresenter: NSObject {
 }
 struct GourmetsTableData {
     var inputObj: GQInputObject
-    var dataSource: Array<Array<CellTemplateProtocol>> = []
+    var dataSource: Array<Array<TemplateProtocol>> = []
     init(address: GQInputObject) {
         self.inputObj = address
         dataSource = createDataSource()
     }
     let sectionTitles : Array<String> = ["Shop","Branch","Location"]
-    private func createDataSource() -> Array<Array<CellTemplateProtocol>> {
+    private func createDataSource() -> Array<Array<TemplateProtocol>> {
         return [
             [
-                LRCellTemplate(leftProtocol: LabelCell(text: "Title"),
-                           rightProtocol: TextFieldCell(text: self.inputObj.shop.title)),
-                LRCellTemplate(leftProtocol: DropDownCell(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
+                LRCellTemplate(leftViewItem: LabelItem(text: "Title"),
+                               rightViewItem: TextFieldItem(text: self.inputObj.shop.title)),
+                LRCellTemplate(leftViewItem: DropDownItem(placeHolder:"Style", optionArray: DropDownMenuData().styleSource,
                                                                 selectedText: (self.inputObj.shop.style ?? "") ?? ""),
-                           rightProtocol: DropDownCell(placeHolder:"Type",
+                               rightViewItem: DropDownItem(placeHolder:"Type",
                                                                  optionArray: DropDownMenuData().typeSource,
                                                                  selectedText: (self.inputObj.shop.type ?? "") ?? "")),
-                LRCellTemplate(leftProtocol: LabelCell(text: "Under\nPrice"),
-                           rightProtocol: TextFieldCell(keyboardType: .decimalPad,
+                LRCellTemplate(leftViewItem: LabelItem(text: "Under\nPrice"),
+                               rightViewItem: TextFieldItem(keyboardType: .decimalPad,
                                                                   text: String(format: "%.2f", self.inputObj.shop.underPrice)))
             ],
             [
-                LRCellTemplate(leftProtocol: LabelCell(text: "Name"), rightProtocol: TextFieldCell(text: self.inputObj.shopBranch.name)),
-                LRCellTemplate(leftProtocol: LabelCell(text: "Tel"),
-                           rightProtocol: TextFieldCell(keyboardType: .phonePad, text: (inputObj.shopBranch.tel ?? "") ?? ""))
+                LRCellTemplate(leftViewItem: LabelItem(text: "Name"), rightViewItem: TextFieldItem(text: self.inputObj.shopBranch.name)),
+                LRCellTemplate(leftViewItem: LabelItem(text: "Tel"),
+                               rightViewItem: TextFieldItem(keyboardType: .phonePad, text: (inputObj.shopBranch.tel ?? "") ?? ""))
             ],
             [
-                LRCellTemplate(leftProtocol: LabelCell(text: "Address"),
-                           rightProtocol: LabelCell(numberOfLines: 2, text: inputObj.address.completeInfo),
-                           cellHeight: 84.0
+                LRCellTemplate(leftViewItem: LabelItem(text: "Address"),
+                               rightViewItem: LabelItem(numberOfLines: 2, text: inputObj.address.completeInfo),
+                           itemHeight: 84.0
                 ),
-                LRCellTemplate(leftProtocol: LabelCell(text: "Floor"), rightProtocol: TextFieldCell(text: (self.inputObj.address.floor ?? "") ?? "")),
-                LRCellTemplate(leftProtocol: LabelCell(text: "Room"), rightProtocol: TextFieldCell(text: (self.inputObj.address.room ?? "") ?? "")),
+                LRCellTemplate(leftViewItem: LabelItem(text: "Floor"), rightViewItem: TextFieldItem(text: (self.inputObj.address.floor ?? "") ?? "")),
+                LRCellTemplate(leftViewItem: LabelItem(text: "Room"), rightViewItem: TextFieldItem(text: (self.inputObj.address.room ?? "") ?? "")),
                 BtnCellTemplate(cornerRadius: 2.0, titleText: "Save")
             ]
         ]

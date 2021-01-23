@@ -40,7 +40,7 @@ class AddGTableViewCell: LRTableViewCell {
     }
     // MARK: - build content
     private func createLeft() {
-        let type = cellTemplate?.leftProtocol.contentType
+        let type = cellTemplate?.leftViewItem.viewType
         if type != .TextLabel {
             for subView in cellLeftView.subviews {
                 subView.removeFromSuperview()
@@ -48,11 +48,11 @@ class AddGTableViewCell: LRTableViewCell {
         }
         switch type {
         case .TextLabel:
-            putLeftTitleTextOnLabel(cellProtocol: cellTemplate!.leftProtocol)
+            putLeftTitleTextOnLabel(cellProtocol: cellTemplate!.leftViewItem)
         case .DropDown:
             let dropDownView = DropDownCellView()
             buildConstraints(content: dropDownView, side: .Left)
-            let data = cellTemplate!.leftProtocol as? DropDownCell
+            let data = cellTemplate!.leftViewItem as? DropDownItem
             dropDownView.superTableViewCell = self
             dropDownView.dropDownField.placeholder = data?.placeHolder
             dropDownView.dropDownField.optionArray = data?.optionArray ?? []
@@ -62,11 +62,11 @@ class AddGTableViewCell: LRTableViewCell {
         }
     }
     private func createRight() {
-        switch cellTemplate?.rightProtocol.contentType {
+        switch cellTemplate?.rightViewItem.viewType {
         case .TextField:
             let textField = UITextField()
             buildConstraints(content: textField, side: .Right)
-            let data = cellTemplate!.rightProtocol as? TextFieldCell
+            let data = cellTemplate!.rightViewItem as? TextFieldItem
             textField.borderStyle = .roundedRect
             textField.backgroundColor = UIColor(red: 240.0/255.0, green: 248.0/255.0, blue: 255.0/255.0, alpha: 1.0)
             textField.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
@@ -83,7 +83,7 @@ class AddGTableViewCell: LRTableViewCell {
         case .TextLabel:
             let textLabel = UILabel()
             buildConstraints(content: textLabel, side: .Right)
-            let data = cellTemplate!.rightProtocol as? LabelCell
+            let data = cellTemplate!.rightViewItem as? LabelItem
             textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
             textLabel.font = UIFont.systemFont(ofSize: 14.0)
             textLabel.text = data?.text
@@ -92,7 +92,7 @@ class AddGTableViewCell: LRTableViewCell {
         case .DropDown:
             let dropDownView = DropDownCellView()
             buildConstraints(content: dropDownView, side: .Right)
-            let data = cellTemplate!.rightProtocol as? DropDownCell
+            let data = cellTemplate!.rightViewItem as? DropDownItem
             dropDownView.superTableViewCell = self
             dropDownView.dropDownField.placeholder = data?.placeHolder
             dropDownView.dropDownField.optionArray = data?.optionArray ?? []
@@ -106,8 +106,8 @@ class AddGTableViewCell: LRTableViewCell {
         }
     }
     
-    private func putLeftTitleTextOnLabel(cellProtocol: CellProtocol) {
-        let data = cellProtocol as? LabelCell
+    private func putLeftTitleTextOnLabel(cellProtocol: ViewItemProtocol) {
+        let data = cellProtocol as? LabelItem
         cellLeftLabel.text = data?.text
     }
     
@@ -115,13 +115,13 @@ class AddGTableViewCell: LRTableViewCell {
     @objc private func textFieldDidChanged(sender: UITextField) {
         let superViewTag = ContentSide(rawValue: sender.superview?.tag ?? 0)
         if superViewTag == ContentSide.Right {
-            var data = cellTemplate?.rightProtocol as? TextFieldCell
+            var data = cellTemplate?.rightViewItem as? TextFieldItem
             data?.text = sender.text ?? ""
-            cellTemplate?.rightProtocol = data ?? TextFieldCell()
+            cellTemplate?.rightViewItem = data ?? TextFieldItem()
         } else {
-            var data = cellTemplate?.leftProtocol as? TextFieldCell
+            var data = cellTemplate?.leftViewItem as? TextFieldItem
             data?.text = sender.text ?? ""
-            cellTemplate?.leftProtocol = data ?? TextFieldCell()
+            cellTemplate?.leftViewItem = data ?? TextFieldItem()
         }
         appStore.dispatch(CellTextFieldDidChangedAction(cell: self, textField: sender))
     }

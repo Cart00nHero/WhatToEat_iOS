@@ -75,7 +75,7 @@ class FindFoodPresenter: NSObject {
 
 struct FindFoodTableData {
     var dataObj: SearchForRangeQuery.Data.SearchForRange
-    var dataSource: Array<CellTemplateProtocol> = []
+    var dataSource: Array<TemplateProtocol> = []
     var hideNavButton = true
     
     init(dataObj: SearchForRangeQuery.Data.SearchForRange) {
@@ -87,23 +87,23 @@ struct FindFoodTableData {
         self.dataObj = data
         dataSource = createDataSource()
     }
-    private func createDataSource() -> Array<CellTemplateProtocol> {
+    private func createDataSource() -> Array<TemplateProtocol> {
         return [
-            LRCellTemplate(leftProtocol: LabelCell(text: "Title"),
-                       rightProtocol: LabelCell(text: self.dataObj.shopBranch?.shop?.title ?? "")),
-            LRCellTemplate(leftProtocol: LabelCell(text: "Style"),
-                       rightProtocol: LabelCell(text: (self.dataObj.shopBranch?.shop?.style ?? "") )),
-            LRCellTemplate(leftProtocol: LabelCell(text: "Type"),
-                       rightProtocol: LabelCell(text: (self.dataObj.shopBranch?.shop?.type ?? "") )),
-            LRCellTemplate(leftProtocol: LabelCell(text: "Under\nPrice"),
-                       rightProtocol: LabelCell(text:
+            LRCellTemplate(leftViewItem: LabelItem(text: "Title"),
+                           rightViewItem: LabelItem(text: self.dataObj.shopBranch?.shop?.title ?? "")),
+            LRCellTemplate(leftViewItem: LabelItem(text: "Style"),
+                           rightViewItem: LabelItem(text: (self.dataObj.shopBranch?.shop?.style ?? "") )),
+            LRCellTemplate(leftViewItem: LabelItem(text: "Type"),
+                           rightViewItem: LabelItem(text: (self.dataObj.shopBranch?.shop?.type ?? "") )),
+            LRCellTemplate(leftViewItem: LabelItem(text: "Under\nPrice"),
+                           rightViewItem: LabelItem(text:
                                                             String(format: "%.2f", (self.dataObj.shopBranch?.shop?.underPrice ?? 0.0)!))),
-            LRCellTemplate(leftProtocol: LabelCell(text: "Name"),
-                       rightProtocol: LabelCell(text: "")),
-            LRCellTemplate(leftProtocol: LabelCell(text: "Tel"),
-                       rightProtocol: LabelCell(text: (dataObj.shopBranch?.tel ?? "") )),
-            LRCellTemplate(leftProtocol: LabelCell(text: "Address"),
-                       rightProtocol: LabelCell(text: dataObj.completeInfo ?? "")),
+            LRCellTemplate(leftViewItem: LabelItem(text: "Name"),
+                           rightViewItem: LabelItem(text: "")),
+            LRCellTemplate(leftViewItem: LabelItem(text: "Tel"),
+                           rightViewItem: LabelItem(text: (dataObj.shopBranch?.tel ?? "") )),
+            LRCellTemplate(leftViewItem: LabelItem(text: "Address"),
+                           rightViewItem: LabelItem(text: dataObj.completeInfo ?? "")),
             BtnCellTemplate(cornerRadius: 2.0, titleText: "Navigation",isHidden: hideNavButton)
         ]
     }

@@ -131,16 +131,16 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             var newShop = presenter.newLoc.shop
             if LRTableViewCell.ContentSide(rawValue: superTag) ==
                 LRTableViewCell.ContentSide.Left {
-                var data = cellData?.leftProtocol as? DropDownCell
+                var data = cellData?.leftViewItem as? DropDownItem
                 data?.selectedText = action.selectedText
                 newShop.style = data?.selectedText
-                cellData?.leftProtocol = data!
+                cellData?.leftViewItem = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             } else {
-                var data = cellData?.rightProtocol as? DropDownCell
+                var data = cellData?.rightViewItem as? DropDownItem
                 data?.selectedText = action.selectedText
                 newShop.type = data?.selectedText
-                cellData?.rightProtocol = data!
+                cellData?.rightViewItem = data!
                 tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
             }
             
@@ -149,7 +149,7 @@ extension AddGourmetViewController: DefaultTemplateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
                 = (cell?.cellTemplate)!
-            let data = cell?.cellTemplate?.rightProtocol as? TextFieldCell
+            let data = cell?.cellTemplate?.rightViewItem as? TextFieldItem
             presenter.updateTextFieldInputData(newText: data?.text ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             if presenter.saveToUpload {

@@ -8,54 +8,54 @@
 
 import UIKit
 
-enum CellTemplateStyle : Int {
+enum TemplateStyle : Int {
     case LeftRight,Button,RadarMap
 }
 
-enum CellContentType : Int {
+enum ViewType : Int {
     case TextLabel,TextField, DropDown, Range, AddressInput
 }
 
-protocol CellTemplateProtocol {
-    var templateStyle: CellTemplateStyle { get }
-    var cellHeight: CGFloat { get set }
+protocol TemplateProtocol {
+    var templateStyle: TemplateStyle { get }
+    var itemHeight: CGFloat { get set }
 }
 
-struct LRCellTemplate: CellTemplateProtocol {
-    let templateStyle: CellTemplateStyle = .LeftRight
-    var leftProtocol: CellProtocol
-    var rightProtocol: CellProtocol
-    var cellHeight: CGFloat = 48.0
+struct LRCellTemplate: TemplateProtocol {
+    let templateStyle: TemplateStyle = .LeftRight
+    var leftViewItem: ViewItemProtocol
+    var rightViewItem: ViewItemProtocol
+    var itemHeight: CGFloat = 48.0
 }
 
-protocol CellProtocol {
-    var contentType: CellContentType { get }
+protocol ViewItemProtocol {
+    var viewType: ViewType { get }
 }
-struct RangeCell: CellProtocol {
-    let contentType: CellContentType = .Range
+struct DateRangeItem: ViewItemProtocol {
+    let viewType: ViewType = .Range
     var starDate: Date = Date()
     var endDate: Date = Date()
 }
-struct DropDownCell: CellProtocol {
-    let contentType: CellContentType = .DropDown
+struct DropDownItem: ViewItemProtocol {
+    let viewType: ViewType = .DropDown
     var placeHolder = ""
     var optionArray: Array<String>?
     var optionImages: Array<UIImage>?
     var selectedText = ""
 }
-struct AddressInputCell: CellProtocol {
-    var contentType: CellContentType = .AddressInput
+struct AddressInputItem: ViewItemProtocol {
+    var viewType: ViewType = .AddressInput
     var address: GQInputObject
     
 }
-struct LabelCell: CellProtocol {
-    let contentType: CellContentType = .TextLabel
+struct LabelItem: ViewItemProtocol {
+    let viewType: ViewType = .TextLabel
     var numberOfLines = 1
     var text = ""
 }
 
-struct TextFieldCell: CellProtocol {
-    let contentType: CellContentType = .TextField
+struct TextFieldItem: ViewItemProtocol {
+    let viewType: ViewType = .TextField
     var keyboardType: UIKeyboardType = .default
     var placeHolder = ""
     var text = ""

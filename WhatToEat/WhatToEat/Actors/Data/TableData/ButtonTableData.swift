@@ -8,10 +8,10 @@
 
 import UIKit
 
-struct BtnCellTemplate: CellTemplateProtocol {
-    let templateStyle: CellTemplateStyle = .Button
+struct BtnCellTemplate: TemplateProtocol {
+    let templateStyle: TemplateStyle = .Button
     var cornerRadius: CGFloat = 0.0
     var titleText = ""
     var isHidden = false
-    var cellHeight: CGFloat = 48.0
+    var itemHeight: CGFloat = 48.0
 }
