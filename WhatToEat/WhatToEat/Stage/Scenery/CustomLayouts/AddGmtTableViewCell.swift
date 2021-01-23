@@ -9,7 +9,7 @@
 import UIKit
 
 class AddGmtTableViewCell: LRTableViewCell {
-
+    
     @IBOutlet weak var cellLeftLabel: UILabel!
     private var leftContent: UIView? = nil
     private var rightContent: UIView? = nil
@@ -18,7 +18,17 @@ class AddGmtTableViewCell: LRTableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if leftContent != nil {
+            leftContent?.removeFromSuperview()
+        }
+        for subView in cellRightView.subviews {
+            subView.removeFromSuperview()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         createLeft()
@@ -112,7 +122,7 @@ class AddGmtTableViewCell: LRTableViewCell {
         }
         appStore.dispatch(CellTextFieldDidChangedAction(cell: self, textField: sender))
     }
-
+    
 }
 extension AddGmtTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -121,8 +131,8 @@ extension AddGmtTableViewCell: UITextFieldDelegate {
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let textFieldText = textField.text,
-            let rangeOfTextToReplace = Range(range, in: textFieldText) else {
-                return false
+              let rangeOfTextToReplace = Range(range, in: textFieldText) else {
+            return false
         }
         let substringToReplace = textFieldText[rangeOfTextToReplace]
         let count = textFieldText.count - substringToReplace.count + string.count

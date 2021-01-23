@@ -28,15 +28,7 @@ class LRTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        for subView in cellLeftView.subviews {
-            subView.removeFromSuperview()
-        }
-        for subView in cellRightView.subviews {
-            subView.removeFromSuperview()
-        }
-    }
+    
     func buildConstraints(content: UIView, side: ContentSide) {
         content.translatesAutoresizingMaskIntoConstraints = false
         var parentView : UIView? = nil
