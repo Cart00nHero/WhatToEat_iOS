@@ -48,7 +48,7 @@ class NavigationViewController: UIViewController {
 }
 
 extension NavigationViewController: SceneStateDelegate {
-    func receiveNewState(state: SceneState) {
+    func onNewState(state: SceneState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             switch state.receivedParcel?.parcelType {
             case "MKAnnotationDidSelectAction":

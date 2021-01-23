@@ -123,7 +123,7 @@ extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
 }
 // MARK: - DefaultTemplateDelegate
 extension SearchLocViewController: SceneStateDelegate {
-    func receiveNewState(state: SceneState) {
+    func onNewState(state: SceneState) {
         switch state.currentAction {
         case is ReceivedTapAction:
             let action = state.currentAction as? ReceivedTapAction

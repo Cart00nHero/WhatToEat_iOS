@@ -15,7 +15,6 @@ class AddGourmetViewController: UIViewController {
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
     
-    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -91,7 +90,7 @@ extension AddGourmetViewController: UIScrollViewDelegate {
     }
 }
 extension AddGourmetViewController: SceneStateDelegate {
-    func receiveNewState(state: SceneState) {
+    func onNewState(state: SceneState) {
         if state.receivedParcel?.recipient == String(describing: type(of: self)) {
             if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
                 let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction

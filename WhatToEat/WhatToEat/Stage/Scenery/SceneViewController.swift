@@ -10,7 +10,7 @@ import UIKit
 import ReSwift
 
 protocol SceneStateDelegate {
-    func receiveNewState(state: SceneState)
+    func onNewState(state: SceneState)
 }
 class SceneViewController: UIBaseViewController {
 
@@ -63,6 +63,6 @@ class SceneViewController: UIBaseViewController {
 
 extension SceneViewController: StoreSubscriber{
     func newState(state: SceneState) {
-        self.stateDelegate?.receiveNewState(state: state)
+        self.stateDelegate?.onNewState(state: state)
     }
 }

@@ -37,7 +37,7 @@ class SignViewController: UIViewController {
 }
 
 extension SignViewController: SceneStateDelegate {
-    func receiveNewState(state: SceneState) {
+    func onNewState(state: SceneState) {
         switch state.currentAction {
         case let action as SignFoodieAction:
             switch action.status {

@@ -45,6 +45,6 @@ class MainMenuViewController: UIViewController {
 }
 
 extension MainMenuViewController: SceneStateDelegate {
-    func receiveNewState(state: SceneState) {
+    func onNewState(state: SceneState) {
     }
 }

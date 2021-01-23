@@ -108,7 +108,7 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
 }
 
 extension FindFoodViewController: SceneStateDelegate {
-    func receiveNewState(state: SceneState) {
+    func onNewState(state: SceneState) {
         switch state.currentAction {
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
