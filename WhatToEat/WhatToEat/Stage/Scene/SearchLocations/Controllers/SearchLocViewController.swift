@@ -21,7 +21,7 @@ class SearchLocViewController: UIViewController {
     private lazy var coverView: UIView = UIView()
     private lazy var presenter: SearchLocPresenter = SearchLocPresenter()
     
-    private var defaultTemplate: SceneViewController? = nil
+    private var sceneVC: SceneViewController? = nil
     let webView = WKWebView()
     
     override func viewDidLoad() {
@@ -29,9 +29,9 @@ class SearchLocViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? SceneViewController
-        self.defaultTemplate?.stateDelegate = self
-        defaultTemplate?.title = "Search"
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
+        sceneVC?.title = "Search"
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -42,7 +42,7 @@ class SearchLocViewController: UIViewController {
         super.viewDidAppear(animated)
         let rightBarButtonItem = UIBarButtonItem(title: "Locate", style: .plain, target: self,
                                                  action: #selector(rigtBarButtonClickAction(sender:)))
-        defaultTemplate?.navigationItem.rightBarButtonItem = rightBarButtonItem
+        sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
         searchTextField.inputAccessoryView = createInputAccessoryView()
         coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
     }
@@ -212,7 +212,7 @@ extension SearchLocViewController: SceneStateDelegate {
             presenter.locationParcel = deliveryMan.packageParcel(
                 sender: self, to: AddGourmetViewController(), content: action)
             deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
-            defaultTemplate?.basePushToViewController(toVC, Animated: true)
+            sceneVC?.basePushToViewController(toVC, Animated: true)
             presenter.locationParcel.sender = String(describing: type(of: self))
         default: break
         }

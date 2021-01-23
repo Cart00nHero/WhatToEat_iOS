@@ -12,7 +12,7 @@ import FacebookLogin
 
 class SignViewController: UIViewController {
 
-    private var defaultTemplate: SceneViewController? = nil
+    private var sceneVC: SceneViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +20,12 @@ class SignViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? SceneViewController
-        self.defaultTemplate?.stateDelegate = self
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.defaultTemplate?.stateDelegate = nil
+        self.sceneVC?.stateDelegate = nil
     }
 
     // MARK: - actions
@@ -44,7 +44,7 @@ extension SignViewController: SceneStateDelegate {
             case .Success:
                 globalFoodieId = action.responseData?.uniqueId ?? ""
                 let toVC = self.storyboard?.instantiateViewController(identifier: "MainMenuViewController")
-                defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+                sceneVC?.basePushToViewController(toVC!, Animated: true)
             default: break
             }
         default: break

@@ -10,7 +10,7 @@ import UIKit
 
 class AddGourmetViewController: UIViewController {
 
-    private var defaultTemplate: SceneViewController? = nil
+    private var sceneVC: SceneViewController? = nil
     private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
     let presenter = AddGourmetPresenter()
@@ -24,18 +24,18 @@ class AddGourmetViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? SceneViewController
-        self.defaultTemplate?.stateDelegate = self
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        defaultTemplate?.registerKeyBoardNotification()
+        sceneVC?.registerKeyBoardNotification()
         originTableFooter = tableView.tableFooterView ?? UIView()
         appStore.dispatch(ReceivedParcelAction())
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.defaultTemplate?.stateDelegate = nil
+        self.sceneVC?.stateDelegate = nil
     }
 }
 

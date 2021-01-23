@@ -10,7 +10,7 @@ import UIKit
 
 class MainMenuViewController: UIViewController {
 
-    private var defaultTemplate: SceneViewController? = nil
+    private var sceneVC: SceneViewController? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,8 @@ class MainMenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.defaultTemplate = self.parent as? SceneViewController
-        self.defaultTemplate?.stateDelegate = self
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,12 +33,12 @@ class MainMenuViewController: UIViewController {
         // AddGourmets
         let addGourmetsSB = UIStoryboard.init(name: "SearchLocations", bundle: nil)
         let toVC = addGourmetsSB.instantiateViewController(withIdentifier: "SearchLocViewController")
-        defaultTemplate?.basePushToViewController(toVC, Animated: true)
+        sceneVC?.basePushToViewController(toVC, Animated: true)
     }
     @IBAction func toFindFoodButtonClickAction(sender: UIButton) {
         let findMyFoodSB = UIStoryboard.init(name: "FindMyFood", bundle: nil)
         let toVC = findMyFoodSB.instantiateViewController(identifier: "FindFoodViewController")
-        defaultTemplate?.basePushToViewController(toVC, Animated: true)
+        sceneVC?.basePushToViewController(toVC, Animated: true)
         
     }
 

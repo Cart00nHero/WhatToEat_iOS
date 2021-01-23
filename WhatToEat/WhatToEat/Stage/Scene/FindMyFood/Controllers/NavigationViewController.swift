@@ -14,7 +14,7 @@ class NavigationViewController: UIViewController {
 
     @IBOutlet weak var mkMapView: MKMapView!
     @IBOutlet var modeTabButtons: [UIButton]!
-    private var defaultTemplate: SceneViewController? = nil
+    private var sceneVC: SceneViewController? = nil
     private lazy var presenter: NavigationPresenter = NavigationPresenter()
     
     override func viewDidLoad() {
@@ -24,9 +24,9 @@ class NavigationViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? SceneViewController
-        self.defaultTemplate?.stateDelegate = self
-        defaultTemplate?.title = "Lead Me To My Food"
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
+        sceneVC?.title = "Lead Me To My Food"
     }
     
     private func initialViewContorller() {

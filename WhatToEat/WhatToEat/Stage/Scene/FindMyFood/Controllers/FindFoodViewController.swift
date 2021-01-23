@@ -18,7 +18,7 @@ class FindFoodViewController: UIViewController {
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
     private var annotationViewTag: Int = -1
-    private var defaultTemplate: SceneViewController? = nil
+    private var sceneVC: SceneViewController? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
     
     override func viewDidLoad() {
@@ -27,9 +27,9 @@ class FindFoodViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.defaultTemplate = self.parent as? SceneViewController
-        self.defaultTemplate?.stateDelegate = self
-        defaultTemplate?.title = "Find My Food"
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
+        sceneVC?.title = "Find My Food"
     }
     
     private func initialViewContorller() {
@@ -184,7 +184,7 @@ extension FindFoodViewController: SceneStateDelegate {
             presenter.mapZoomLevel = action.mapView.zoomLevel
         case is TableCellButtonClickAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
-            defaultTemplate?.basePushToViewController(toVC!, Animated: true)
+            sceneVC?.basePushToViewController(toVC!, Animated: true)
         default: break
         }
     }
