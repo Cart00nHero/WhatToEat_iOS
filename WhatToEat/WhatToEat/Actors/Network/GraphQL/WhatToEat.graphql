@@ -56,8 +56,8 @@ mutation CreateGourmet(
     }
   }
 }
-mutation UpdateGroumet($foodieId: String!,$branchId: String!,$branch: InputBranch!,$shop: InputShop,$address: InputAddress){
-  updateGroumet(foodieId:$foodieId,branchId: $branchId,branch: $branch,shop :$shop, address: $address){
+mutation UpdateGourmet($foodieId: String!,$branchId: String!,$branch: InputBranch!,$shop: InputShop,$address: InputAddress){
+  updateGourmet(foodieId:$foodieId,branchId: $branchId,branch: $branch,shop :$shop, address: $address){
     uniqueId
     orderId
     name

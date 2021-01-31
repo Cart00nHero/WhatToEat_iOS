@@ -1373,12 +1373,12 @@ public final class CreateGourmetMutation: GraphQLMutation {
   }
 }
 
-public final class UpdateGroumetMutation: GraphQLMutation {
+public final class UpdateGourmetMutation: GraphQLMutation {
   /// The raw GraphQL definition of this operation.
   public let operationDefinition: String =
     """
-    mutation UpdateGroumet($foodieId: String!, $branchId: String!, $branch: InputBranch!, $shop: InputShop, $address: InputAddress) {
-      updateGroumet(foodieId: $foodieId, branchId: $branchId, branch: $branch, shop: $shop, address: $address) {
+    mutation UpdateGourmet($foodieId: String!, $branchId: String!, $branch: InputBranch!, $shop: InputShop, $address: InputAddress) {
+      updateGourmet(foodieId: $foodieId, branchId: $branchId, branch: $branch, shop: $shop, address: $address) {
         __typename
         uniqueId
         orderId
@@ -1422,7 +1422,7 @@ public final class UpdateGroumetMutation: GraphQLMutation {
     }
     """
 
-  public let operationName: String = "UpdateGroumet"
+  public let operationName: String = "UpdateGourmet"
 
   public var foodieId: String
   public var branchId: String
@@ -1447,7 +1447,7 @@ public final class UpdateGroumetMutation: GraphQLMutation {
 
     public static var selections: [GraphQLSelection] {
       return [
-        GraphQLField("updateGroumet", arguments: ["foodieId": GraphQLVariable("foodieId"), "branchId": GraphQLVariable("branchId"), "branch": GraphQLVariable("branch"), "shop": GraphQLVariable("shop"), "address": GraphQLVariable("address")], type: .object(UpdateGroumet.selections)),
+        GraphQLField("updateGourmet", arguments: ["foodieId": GraphQLVariable("foodieId"), "branchId": GraphQLVariable("branchId"), "branch": GraphQLVariable("branch"), "shop": GraphQLVariable("shop"), "address": GraphQLVariable("address")], type: .object(UpdateGourmet.selections)),
       ]
     }
 
@@ -1457,21 +1457,21 @@ public final class UpdateGroumetMutation: GraphQLMutation {
       self.resultMap = unsafeResultMap
     }
 
-    public init(updateGroumet: UpdateGroumet? = nil) {
-      self.init(unsafeResultMap: ["__typename": "RootMutationType", "updateGroumet": updateGroumet.flatMap { (value: UpdateGroumet) -> ResultMap in value.resultMap }])
+    public init(updateGourmet: UpdateGourmet? = nil) {
+      self.init(unsafeResultMap: ["__typename": "RootMutationType", "updateGourmet": updateGourmet.flatMap { (value: UpdateGourmet) -> ResultMap in value.resultMap }])
     }
 
     /// update groumet
-    public var updateGroumet: UpdateGroumet? {
+    public var updateGourmet: UpdateGourmet? {
       get {
-        return (resultMap["updateGroumet"] as? ResultMap).flatMap { UpdateGroumet(unsafeResultMap: $0) }
+        return (resultMap["updateGourmet"] as? ResultMap).flatMap { UpdateGourmet(unsafeResultMap: $0) }
       }
       set {
-        resultMap.updateValue(newValue?.resultMap, forKey: "updateGroumet")
+        resultMap.updateValue(newValue?.resultMap, forKey: "updateGourmet")
       }
     }
 
-    public struct UpdateGroumet: GraphQLSelectionSet {
+    public struct UpdateGourmet: GraphQLSelectionSet {
       public static let possibleTypes: [String] = ["ShopBranch"]
 
       public static var selections: [GraphQLSelection] {

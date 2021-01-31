@@ -14,14 +14,14 @@ enum GeoActionStatus: Int {
     case Started, Completed, NotFound, Failed
 }
 struct GeoCodeAddressAction: Action {
-    var codedAdress: String
+    var codedAddress: String
     var status: GeoActionStatus = .Started
     var location: CLLocation? = nil
     var error: Error? = nil
 }
 
 func geoCodeAddressAction(address: String) -> GeoCodeAddressAction {
-    var action = GeoCodeAddressAction(codedAdress: address)
+    var action = GeoCodeAddressAction(codedAddress: address)
     let geoCoder = CLGeocoder()
     geoCoder.geocodeAddressString(address) { (placemarks, error) in
         if error == nil {
@@ -43,13 +43,13 @@ func geoCodeAddressAction(address: String) -> GeoCodeAddressAction {
 }
 
 struct ReverseLocationAction: Action {
-    var reversedLocation: CLLocation
+    var reversedLoc: CLLocation
     var status: GeoActionStatus = .Started
     var place: CLPlacemark? = nil
     var error: Error? = nil
 }
 func reverseLocationAction(location: CLLocation) -> ReverseLocationAction {
-    var action = ReverseLocationAction(reversedLocation: location)
+    var action = ReverseLocationAction(reversedLoc: location)
     let geoCoder = CLGeocoder()
     geoCoder.reverseGeocodeLocation(location) { (placemarks, error) in
         if error == nil {

@@ -80,7 +80,7 @@ func searchForRangeAction(foodieId: String?,min: InputCoordinate, max: InputCoor
     service.clearCache()
     return action
 }
-struct ApolloServiceClearCacheAction: Action {
+struct ApolloClearCacheAction: Action {
     init() {
         clearCacheAction()
     }

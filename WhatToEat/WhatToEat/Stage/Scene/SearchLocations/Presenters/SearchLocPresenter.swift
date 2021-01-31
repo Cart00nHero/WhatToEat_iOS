@@ -12,10 +12,10 @@ import MapKit
 
 class SearchLocPresenter: NSObject {
     enum SearchMode {
-        case MapLocation, Google
+        case Map, Google
     }
     
-    var searchMode: SearchMode = .MapLocation
+    var searchMode: SearchMode = .Map
     var isWebViewCreated = false
     var foundBranchId = ""
     

@@ -65,13 +65,13 @@ func createGourmetAction(foodieId: String,inputObj: GQInputObject) -> CreateGour
     }
     return action
 }
-struct UpdateGroumetAction: Action, ApiActionProtocol {
+struct UpdateGourmetAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
 }
-func updateGroumetAction(foodieId: String,inputObj: GQInputObject) -> UpdateGroumetAction {
-    var action = UpdateGroumetAction()
+func updateGourmetAction(foodieId: String,inputObj: GQInputObject) -> UpdateGourmetAction {
+    var action = UpdateGourmetAction()
     let service = ApolloService.shared.apollo
-    let mutation = UpdateGroumetMutation(
+    let mutation = UpdateGourmetMutation(
         foodieId: foodieId,branchId: inputObj.branchId, branch: inputObj.shopBranch,shop: inputObj.shop,address: inputObj.address)
     service.perform(mutation: mutation) { result in
         switch result {

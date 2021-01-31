@@ -152,7 +152,7 @@ extension AddGourmetViewController: SceneStateDelegate {
             presenter.updateTextFieldInputData(newText: data?.text ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
             if presenter.saveToUpload {
-                appStore.dispatch(updateGroumetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
+                appStore.dispatch(updateGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
             } else {
                 presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: presenter.newLoc)
                 appStore.dispatch(createGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
@@ -164,7 +164,7 @@ extension AddGourmetViewController: SceneStateDelegate {
                 self.navigationController?.popToViewController((stackVCs?[2])!, animated: true)
             default: break
             }
-        case let action as UpdateGroumetAction:
+        case let action as UpdateGourmetAction:
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers

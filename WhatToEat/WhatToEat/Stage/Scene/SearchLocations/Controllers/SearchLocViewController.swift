@@ -35,8 +35,8 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let screenHeight = UIScreen.main.bounds.height
-        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
+//        let screenHeight = UIScreen.main.bounds.height
+//        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -79,7 +79,7 @@ class SearchLocViewController: UIViewController {
     @IBAction func searchButtonClickAction(sender: UIButton) {
         searchTextField.resignFirstResponder()
         switch presenter.searchMode {
-        case .MapLocation:
+        case .Map:
             print("Map")
             appStore.dispatch(geoCodeAddressAction(address: searchTextField.text ?? ""))
         case .Google:
@@ -126,29 +126,29 @@ extension SearchLocViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
         switch state.currentAction {
         case is ReceivedTapAction:
-            let action = state.currentAction as? ReceivedTapAction
+            let action = state.currentAction as! ReceivedTapAction
             if coverView.superview == topSelectedView {
                 topSelectedView.backgroundColor = presenter.selectedBgColor()
                 presenter.setViewDefaultStyle(selectView: bottomSelectedView)
-                coverView.removeGestureRecognizer(action!.tapGesture)
+                coverView.removeGestureRecognizer(action.tapGesture)
                 coverView.removeFromSuperview()
                 coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
-                presenter.searchMode = .MapLocation
+                presenter.searchMode = .Map
             } else {
                 topSelectedView.backgroundColor = presenter.normalBgColor()
                 presenter.setViewSelectedStyle(selectView: bottomSelectedView)
-                coverView.removeGestureRecognizer(action!.tapGesture)
+                coverView.removeGestureRecognizer(action.tapGesture)
                 coverView.removeFromSuperview()
                 coverView = presenter.createCoverView(coverSuperView: topSelectedView)
                 presenter.searchMode = .Google
             }
         case is GeoCodeAddressAction:
-            let action = state.currentAction as? GeoCodeAddressAction
-            switch action?.status {
+            let action = state.currentAction as! GeoCodeAddressAction
+            switch action.status {
             case .Started:
                 mapView.removeAnnotations(mapView.annotations)
             case .Completed:
-                appStore.dispatch(reverseLocationAction(location: (action?.location)!))
+                appStore.dispatch(reverseLocationAction(location: (action.location)!))
             default: break
             }
         case is ReverseLocationAction:
