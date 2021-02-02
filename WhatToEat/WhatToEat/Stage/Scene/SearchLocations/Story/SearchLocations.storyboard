@@ -12,7 +12,7 @@
         <!--Scene View Controller-->
         <scene sceneID="dY9-Pp-j7o">
             <objects>
-                <viewController storyboardIdentifier="DefaultVCTemplate" useStoryboardIdentifierAsRestorationIdentifier="YES" id="11R-HU-uXt" customClass="SceneViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SceneViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="11R-HU-uXt" customClass="SceneViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="edX-oE-Q3Y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

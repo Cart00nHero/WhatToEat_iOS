@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -10,13 +12,13 @@
         <!--Scene View Controller-->
         <scene sceneID="vxA-Xs-6am">
             <objects>
-                <viewController storyboardIdentifier="DefaultTemplate" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VoD-M3-kHr" customClass="SceneViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SceneViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VoD-M3-kHr" customClass="SceneViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OCC-oV-uoS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qdk-IW-GKk">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <connections>
                                     <segue destination="92u-bM-Mag" kind="embed" id="N1M-dm-Pvb"/>
                                 </connections>
@@ -46,7 +48,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cPG-NA-hp2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nU6-an-buu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -63,31 +65,31 @@
             <objects>
                 <viewController storyboardIdentifier="FindFoodViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="92u-bM-Mag" customClass="FindFoodViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rpz-ed-u5K">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-ZX-Oao">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="764"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4Z-gv-ZZZ" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="662"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vtW-az-G7k" userLabel="Search Map View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                 <subviews>
                                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TTS-eq-LR8">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                         <gestureRecognizers/>
                                                         <connections>
                                                             <outletCollection property="gestureRecognizers" destination="JYo-Kh-Bfb" appends="YES" id="XrF-H6-8wo"/>
                                                         </connections>
                                                     </mapView>
                                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LuD-wx-Sqw" customClass="RadarScanView" customModule="WhatToEat" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBL-Sq-zoA">
-                                                        <rect key="frame" x="321" y="10" width="44" height="44"/>
+                                                        <rect key="frame" x="360" y="10" width="44" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="0Bz-l0-bAQ"/>
                                                             <constraint firstAttribute="width" constant="44" id="2N3-hS-Zlf"/>
@@ -98,7 +100,7 @@
                                                         </state>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGL-db-xjU">
-                                                        <rect key="frame" x="10" y="321" width="44" height="44"/>
+                                                        <rect key="frame" x="10" y="360" width="44" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="5Ab-we-xmh"/>
                                                             <constraint firstAttribute="width" constant="44" id="RXP-BD-1Ao"/>
@@ -131,7 +133,7 @@
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Hx5-ga-qUs">
-                                                <rect key="frame" x="0.0" y="375" width="375" height="248"/>
+                                                <rect key="frame" x="0.0" y="414" width="414" height="248"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="248" id="jwT-C1-2Qh"/>
@@ -139,10 +141,10 @@
                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FindFoodTableViewCell" rowHeight="80" id="fia-un-xDk" customClass="FindFoodTableViewCell" customModule="WhatToEat" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="375" height="80"/>
+                                                        <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fia-un-xDk" id="o88-lR-0Md">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqW-3A-Ryz" userLabel="Left View">
@@ -164,7 +166,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tzl-ux-8GX" userLabel="Right View">
-                                                                    <rect key="frame" x="100" y="0.0" width="275" height="80"/>
+                                                                    <rect key="frame" x="100" y="0.0" width="314" height="80"/>
                                                                     <color key="backgroundColor" red="0.96078431369999995" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </view>
                                                             </subviews>
@@ -186,14 +188,14 @@
                                                         </connections>
                                                     </tableViewCell>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FFBtnTableViewCell" rowHeight="109" id="0dg-Lt-zFu" customClass="FFBtnTableViewCell" customModule="WhatToEat" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="108" width="375" height="109"/>
+                                                        <rect key="frame" x="0.0" y="108" width="414" height="109"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0dg-Lt-zFu" id="nD6-ZV-TkZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="109"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCV-JL-kRa">
-                                                                    <rect key="frame" x="10" y="66" width="355" height="33"/>
+                                                                    <rect key="frame" x="10" y="62" width="394" height="37"/>
                                                                     <color key="backgroundColor" red="0.1333333333" green="0.5450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="pCV-JL-kRa" secondAttribute="height" multiplier="375:35" id="bgp-Ip-3zf"/>
@@ -280,33 +282,33 @@
             <objects>
                 <viewController storyboardIdentifier="NavigationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QPo-he-W0z" customClass="NavigationViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cEZ-e0-9Vh">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gma-Y5-kIf">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="497.5"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="747.5"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vef-GC-Rz1">
-                                <rect key="frame" x="0.0" y="497.5" width="600" height="102.5"/>
+                                <rect key="frame" x="0.0" y="791.5" width="414" height="70.5"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Td-fB-g4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="102.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="70.5"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" image="icon_people_walk"/>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU2-eC-nPC">
-                                        <rect key="frame" x="150" y="0.0" width="150" height="102.5"/>
+                                        <rect key="frame" x="103.5" y="0.0" width="103.5" height="70.5"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" image="icon_public_transportation"/>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNp-Nl-yra">
-                                        <rect key="frame" x="300" y="0.0" width="150" height="102.5"/>
+                                        <rect key="frame" x="207" y="0.0" width="103.5" height="70.5"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <size key="titleShadowOffset" width="2" height="0.0"/>
                                         <state key="normal" image="icon_vehicle"/>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBq-58-RhY">
-                                        <rect key="frame" x="450" y="0.0" width="150" height="102.5"/>
+                                        <rect key="frame" x="310.5" y="0.0" width="103.5" height="70.5"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" image="icon_taxi_operator"/>
                                     </button>
@@ -358,6 +360,9 @@
             <point key="canvasLocation" x="1688.8" y="-24.7376311844078"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="LuD-wx-Sqw"/>
+    </designables>
     <resources>
         <image name="Icon_Locate_Off" width="41" height="41"/>
         <image name="Icon_Locate_On" width="41" height="41"/>

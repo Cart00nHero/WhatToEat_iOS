@@ -13,7 +13,7 @@ class AddGourmetViewController: UIViewController {
     private var sceneVC: SceneViewController? = nil
     private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
-    let presenter = AddGourmetPresenter()
+    private let presenter = AddGourmetPresenter()
     
     @IBOutlet weak var tableView: UITableView!
     

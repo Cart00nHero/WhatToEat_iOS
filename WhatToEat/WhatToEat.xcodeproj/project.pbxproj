@@ -59,6 +59,7 @@
 		AF8224832472F4160034C928 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247D2472F4160034C928 /* AppState.swift */; };
 		AF8224842472F4160034C928 /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247F2472F4160034C928 /* CommonActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
+		AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */; };
 		AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */; };
 		AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB1256012ED00A92E21 /* StructObserver.swift */; };
 		AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB2256012ED00A92E21 /* DateUtil.swift */; };
@@ -152,6 +153,7 @@
 		AF82247D2472F4160034C928 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		AF82247F2472F4160034C928 /* CommonActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonActions.swift; sourceTree = "<group>"; };
 		AF8224822472F4160034C928 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEmptyRepresentable.swift; sourceTree = "<group>"; };
 		AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AFBB6DB1256012ED00A92E21 /* StructObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
 		AFBB6DB2256012ED00A92E21 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 			children = (
 				AFF884342496586A00646088 /* GQResponseData */,
 				AF007A22248C0FE500DF61DB /* GQInputData */,
+				AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */,
 			);
 			path = ApiData;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AF0BA72D25BCB3DE00358046 /* AddGourmetPresenter.swift in Sources */,
 				AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */,
+				AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
