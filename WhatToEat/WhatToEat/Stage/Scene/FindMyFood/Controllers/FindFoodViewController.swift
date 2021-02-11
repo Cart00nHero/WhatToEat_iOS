@@ -35,17 +35,15 @@ class FindFoodViewController: UIViewController {
     
     private func initialViewContorller() {
         mkMapView.delegate = self
-        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
-        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
         startRadarAnimating()
-        LocationMaster.shared.requestCurrentLocation()
+        scenario.beRequestCurrentLocation()
         tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
     }
-    func startRadarAnimating() {
+    private func startRadarAnimating() {
         mkMapView.isUserInteractionEnabled = false
         radarView.startRadarAnimation()
     }
-    func stopRadarAnimating() {
+    private func stopRadarAnimating() {
         mkMapView.isUserInteractionEnabled = true
         radarView.stopRadarAnimation()
     }
@@ -70,7 +68,7 @@ class FindFoodViewController: UIViewController {
     // MARK: - UI Actions
     @IBAction func locateButtonClickAction(_ sender: UIButton) {
         startRadarAnimating()
-        LocationMaster.shared.requestCurrentLocation()
+        scenario.beRequestCurrentLocation()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
         
@@ -113,22 +111,12 @@ extension FindFoodViewController: SceneStateDelegate {
         switch state.currentAction {
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
-            startRadarAnimating()
             switch action.status {
             case .DidUpdateLocation:
-                if action.locations?.count ?? 0 > 0 {
-                    presenter.currentLoc = action.locations?.first
-                    presenter.centerCoordinate = presenter.currentLoc?.coordinate
-                    appStore.dispatch(SearchNearbyAction(center: presenter.centerCoordinate!,
-                                                         range: presenter.searchRange(zoomLevel: 17)))
-                }
+                stopRadarAnimating()
             default: break
             }
         case is SearchForRangeAction:
-            if presenter.isFirsTimeEntrance {
-                presenter.isFirsTimeEntrance = false
-                return
-            }
             let action = state.currentAction as! SearchForRangeAction
             switch action.status {
             case .Success:
@@ -162,13 +150,13 @@ extension FindFoodViewController: SceneStateDelegate {
                 clearApolloServiceCache()
                 startRadarAnimating()
                 let level = mkMapView.zoomLevel
-                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
+//                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
             }
             presenter.centerCoordinate = mkMapView.camera.centerCoordinate
         case is GestureRecognizerEndedAction:
             if presenter.isSearchRangeChanged() {
-                appStore.dispatch(
-                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
+//                appStore.dispatch(
+//                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
                 presenter.preZoomLevel = presenter.mapZoomLevel
                 presenter.centerCoordinate = mkMapView.camera.centerCoordinate
             }

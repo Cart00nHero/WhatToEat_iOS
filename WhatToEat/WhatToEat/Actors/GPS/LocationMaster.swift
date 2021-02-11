@@ -9,12 +9,17 @@
 import CoreLocation
 import UIKit
 
+protocol LocationServiceDelegate {
+    func locationManager(didUpdateLocations locations: [CLLocation])
+    func locationManager(didFailWithError error: Error)
+    func locationManager(didChangeAuthorization status: CLAuthorizationStatus)
+}
+
 class LocationMaster: NSObject {
     
     static let shared = LocationMaster()
     private var locationManager: CLLocationManager?
     var delegate: LocationServiceDelegate?
-
     private var isStartUpdatingLocation = false
 
     override init() {
@@ -82,12 +87,9 @@ class LocationMaster: NSObject {
 
 extension LocationMaster : CLLocationManagerDelegate {
     internal func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        appStore.dispatch(LocatePositionAction(status: .DidUpdateLocation,locations: locations))
     }
     internal func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        appStore.dispatch(LocatePositionAction(status: .DidFailWithError,error: error))
     }
     internal func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        appStore.dispatch(LocatePositionAction(status: .DidUpdateLocation))
     }
 }

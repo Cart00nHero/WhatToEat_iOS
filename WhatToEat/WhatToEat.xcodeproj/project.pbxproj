@@ -21,7 +21,6 @@
 		AF0BA73025BCB3DE00358046 /* FindFoodPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71925BCB3DE00358046 /* FindFoodPresenter.swift */; };
 		AF0BA73125BCB3DE00358046 /* NavigationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71A25BCB3DE00358046 /* NavigationPresenter.swift */; };
 		AF0BA73225BCB3DE00358046 /* FindFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */; };
-		AF0BA73325BCB3DE00358046 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71D25BCB3DE00358046 /* NavigationViewController.swift */; };
 		AF0BA73425BCB3DE00358046 /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */; };
 		AF0BA73525BCB3DE00358046 /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */; };
 		AF0BA73625BCB3DE00358046 /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */; };
@@ -112,7 +111,6 @@
 		AF0BA71925BCB3DE00358046 /* FindFoodPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodPresenter.swift; sourceTree = "<group>"; };
 		AF0BA71A25BCB3DE00358046 /* NavigationPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationPresenter.swift; sourceTree = "<group>"; };
 		AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodViewController.swift; sourceTree = "<group>"; };
-		AF0BA71D25BCB3DE00358046 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
 		AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */,
-				AF0BA71D25BCB3DE00358046 /* NavigationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -953,7 +950,6 @@
 				AF0BA73125BCB3DE00358046 /* NavigationPresenter.swift in Sources */,
 				AF0EDF5E247A5012003D84C0 /* SetRangeCellView.swift in Sources */,
 				AF0EDF5C247A5012003D84C0 /* DropDownCellView.swift in Sources */,
-				AF0BA73325BCB3DE00358046 /* NavigationViewController.swift in Sources */,
 				AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */,
 				AFBB6E27256017CF00A92E21 /* FindFoodTableViewCell.swift in Sources */,
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,

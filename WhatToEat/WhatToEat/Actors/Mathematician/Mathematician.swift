@@ -12,8 +12,15 @@ import MapKit
 
 class Mathematician: Actor {
     
-    private func _beCalculateRange(coordinate: CLLocationCoordinate2D, range: Float64) {
-//        let aaa = calculateRange(coordinate: coordinate, range: range)
+    private func _beCalculateRange(_ sender: Actor,
+                                   _ coordinate: CLLocationCoordinate2D,
+                                   _ range: Float64,
+                                   _ complete: @escaping (GQSearchRange) -> Void) {
+        sender.unsafeSend {
+            complete(
+                Haversin().calculateRange(
+                    coordinate: coordinate, range: range))
+        }
     }
 }
 
@@ -23,8 +30,8 @@ class Mathematician: Actor {
 extension Mathematician {
 
     @discardableResult
-    public func beCalculateRange(coordinate: CLLocationCoordinate2D, range: Float64) -> Self {
-        unsafeSend { self._beCalculateRange(coordinate: coordinate, range: range) }
+    public func beCalculateRange(_ sender: Actor, _ coordinate: CLLocationCoordinate2D, _ range: Float64, _ complete: @escaping (GQSearchRange) -> Void) -> Self {
+        unsafeSend { self._beCalculateRange(sender, coordinate, range, complete) }
         return self
     }
 

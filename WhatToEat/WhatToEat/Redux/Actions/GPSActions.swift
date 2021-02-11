@@ -130,18 +130,4 @@ struct MKAnnotationDidSelectAction: Action {
 }
 struct LocatePositionAction: Action {
     var status: LocatePositionStatus
-    var locations: [CLLocation]?
-    var error: Error?
-}
-
-struct SearchNearbyAction: Action {
-    let center: CLLocationCoordinate2D
-    let range: Float64
-    
-    init(center: CLLocationCoordinate2D, range: Float64) {
-        self.center = center
-        self.range = range
-        let rangePoint = calculateRange(coordinate: center, range: range)
-        appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePoint.min, max: rangePoint.max))
-    }
 }
