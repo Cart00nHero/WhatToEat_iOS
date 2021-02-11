@@ -9,28 +9,6 @@
 import CoreLocation
 import UIKit
 
-enum AccuracyType : Int {
-    case ACCURACY_DEFAULT,ACCURACY_BEST_FOR_NAVIGATION,ACCURACY_BEST,
-    ACCURACY_NEAREST_TENMETERS,ACCURACY_HUNDRED_METERS,
-    ACCURACY_KIIOMETER,ACCURACY_THREE_KILOMETERS
-}
-enum RequestAuthorization : Int {
-    case REQUEST_AUTHORIZATION_ALWAYS,
-    REQUEST_AUTHORIZATION_WHENINUSE
-}
-enum LocatePositionStatus {
-    case DidStarted
-    case DidUpdateLocation
-    case DidFailWithError
-    case DidChangeAuthorization
-}
-
-protocol LocationServiceDelegate {
-    func locationManager(didUpdateLocations locations: [CLLocation])
-    func locationManager(didFailWithError error: Error)
-    func locationManager(didChangeAuthorization status: CLAuthorizationStatus)
-}
-
 class LocationMaster: NSObject {
     
     static let shared = LocationMaster()

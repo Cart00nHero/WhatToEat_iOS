@@ -20,6 +20,7 @@ class FindFoodViewController: UIViewController {
     private var annotationViewTag: Int = -1
     private var sceneVC: SceneViewController? = nil
     private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
+    private lazy var scenario: FindFoodScenario = FindFoodScenario()
     
     override func viewDidLoad() {
         super.viewDidLoad()
