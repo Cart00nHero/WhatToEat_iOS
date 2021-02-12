@@ -13,13 +13,14 @@ import SafariServices
 
 class SearchLocViewController: UIViewController {
     
-//    private var scenario: FindFoodScenario = FindFoodScenario()
+    private var scenario: SearchLocScenario = SearchLocScenario()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var topSelectedView: UIView!
     @IBOutlet weak var bottomSelectedView: UIView!
     @IBOutlet weak var barCenterVConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchTextField: UITextField!
     private lazy var coverView: UIView = UIView()
+    var isWebViewCreated = false
     private lazy var presenter: SearchLocPresenter = SearchLocPresenter()
     
     private var sceneVC: SceneViewController? = nil
@@ -55,7 +56,7 @@ class SearchLocViewController: UIViewController {
 
     // MARK: - Private methods
     private func createWebViewOnBottom() {
-        presenter.isWebViewCreated = true
+        isWebViewCreated = true
         webView.backgroundColor = UIColor.clear
         webView.translatesAutoresizingMaskIntoConstraints = false
         bottomSelectedView.addSubview(webView)
@@ -85,7 +86,7 @@ class SearchLocViewController: UIViewController {
             appStore.dispatch(geoCodeAddressAction(address: searchTextField.text ?? ""))
         case .Google:
             print("Google")
-            if presenter.isWebViewCreated == false {
+            if isWebViewCreated == false {
                 createWebViewOnBottom()
             }
             let urlString = presenter.googleSearchUrl(queryText: searchTextField.text ?? "")
@@ -98,9 +99,7 @@ class SearchLocViewController: UIViewController {
         searchTextField.resignFirstResponder()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
-        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
-        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
-        LocationMaster.shared.requestCurrentLocation()
+        scenario.beRequestCurrentLocation()
     }
 }
 // MARK: - MKMapViewDelegate
@@ -195,15 +194,7 @@ extension SearchLocViewController: SceneStateDelegate {
             if action.status == GeoActionStatus.Completed {
                 mapView.showAnnotations(action.annotations , animated: true)
             }
-//        case let action as LocatePositionAction:
-//            switch action.status {
-//            case .DidUpdateLocation:
-//                if action.locations?.count ?? 0 > 0 {
-//                    presenter.locationParcel.parcelType = String(describing: type(of: action))
-//                    appStore.dispatch(reverseLocationAction(location: (action.locations?[0])!))
-//                }
-//            default: break
-//            }
+        case _ as FoundLocationsAddressAction: break
         case let action as MKAnnotationDidSelectAction:
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC =

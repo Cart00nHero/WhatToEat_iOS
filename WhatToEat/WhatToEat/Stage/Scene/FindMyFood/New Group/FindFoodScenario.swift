@@ -182,7 +182,7 @@ class FindFoodScenario: Actor,PilotProtocol {
         }
         return 1000.0
     }
-    // MARK: - Pilot protocol
+    // MARK: - Pilot protocols
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
             centerPt.coordinate = locations.first?.coordinate

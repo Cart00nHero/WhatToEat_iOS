@@ -61,6 +61,10 @@
 		AFA89FAF25D5B0770057FA75 /* Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FAE25D5B0770057FA75 /* Pilot.swift */; };
 		AFA89FEC25D6DD200057FA75 /* ScenarioNotifyActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FEB25D6DD200057FA75 /* ScenarioNotifyActions.swift */; };
 		AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */; };
+		AFA8A10D25D717B30057FA75 /* GeoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A10C25D717B30057FA75 /* GeoCoder.swift */; };
+		AFA8A12425D722AE0057FA75 /* LogisticsCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A12225D722AE0057FA75 /* LogisticsCenter.swift */; };
+		AFA8A12525D722AE0057FA75 /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A12325D722AE0057FA75 /* Courier.swift */; };
+		AFA8A13B25D728C90057FA75 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A13A25D728C90057FA75 /* DataManager.swift */; };
 		AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */; };
 		AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */; };
 		AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB1256012ED00A92E21 /* StructObserver.swift */; };
@@ -154,6 +158,10 @@
 		AFA89FAE25D5B0770057FA75 /* Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pilot.swift; sourceTree = "<group>"; };
 		AFA89FEB25D6DD200057FA75 /* ScenarioNotifyActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioNotifyActions.swift; sourceTree = "<group>"; };
 		AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocScenario.swift; sourceTree = "<group>"; };
+		AFA8A10C25D717B30057FA75 /* GeoCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCoder.swift; sourceTree = "<group>"; };
+		AFA8A12225D722AE0057FA75 /* LogisticsCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogisticsCenter.swift; sourceTree = "<group>"; };
+		AFA8A12325D722AE0057FA75 /* Courier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courier.swift; sourceTree = "<group>"; };
+		AFA8A13A25D728C90057FA75 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEmptyRepresentable.swift; sourceTree = "<group>"; };
 		AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AFBB6DB1256012ED00A92E21 /* StructObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
@@ -378,6 +386,7 @@
 				AF550D59247AA7BA00A8625D /* ApiData */,
 				AFF8843724965F4A00646088 /* CodableExtension.swift */,
 				AF501ECB249712B700628DB0 /* DataParser.swift */,
+				AFA8A13A25D728C90057FA75 /* DataManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -545,6 +554,7 @@
 			children = (
 				AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */,
 				AFA89FAE25D5B0770057FA75 /* Pilot.swift */,
+				AFA8A10C25D717B30057FA75 /* GeoCoder.swift */,
 			);
 			path = Pilot;
 			sourceTree = "<group>";
@@ -579,6 +589,8 @@
 		AFBB6DAB2560129000A92E21 /* Express */ = {
 			isa = PBXGroup;
 			children = (
+				AFA8A12325D722AE0057FA75 /* Courier.swift */,
+				AFA8A12225D722AE0057FA75 /* LogisticsCenter.swift */,
 				AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */,
 			);
 			path = Express;
@@ -928,12 +940,14 @@
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AF0BA72D25BCB3DE00358046 /* AddGourmetPresenter.swift in Sources */,
 				AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */,
+				AFA8A10D25D717B30057FA75 /* GeoCoder.swift in Sources */,
 				AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */,
 				AFA89FEC25D6DD200057FA75 /* ScenarioNotifyActions.swift in Sources */,
 				AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
+				AFA8A12425D722AE0057FA75 /* LogisticsCenter.swift in Sources */,
 				AFA89FAF25D5B0770057FA75 /* Pilot.swift in Sources */,
 				AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
@@ -950,7 +964,9 @@
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AF0BA73525BCB3DE00358046 /* SearchLocPresenter.swift in Sources */,
 				AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */,
+				AFA8A12525D722AE0057FA75 /* Courier.swift in Sources */,
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,
+				AFA8A13B25D728C90057FA75 /* DataManager.swift in Sources */,
 				AF0BA73825BCB3DE00358046 /* MainMenuViewController.swift in Sources */,
 				AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */,
 				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
