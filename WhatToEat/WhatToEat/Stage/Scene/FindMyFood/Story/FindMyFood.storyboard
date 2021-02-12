@@ -20,7 +20,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qdk-IW-GKk">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <connections>
-                                    <segue destination="92u-bM-Mag" kind="embed" id="N1M-dm-Pvb"/>
+                                    <segue destination="92u-bM-Mag" kind="embed" identifier="toFindFoodVC" id="N1M-dm-Pvb"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -36,6 +36,7 @@
                     <navigationItem key="navigationItem" id="r2G-RA-4IK"/>
                     <connections>
                         <outlet property="containerView" destination="Qdk-IW-GKk" id="2FT-p1-cuT"/>
+                        <segue destination="3kn-Ia-2ur" kind="show" identifier="toSearchLocVC" id="0JZ-gM-CKp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGb-eu-8Th" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -275,7 +276,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="980" y="-43"/>
+            <point key="canvasLocation" x="1051" y="326"/>
         </scene>
         <!--Navigation View Controller-->
         <scene sceneID="0jj-wK-aai">
@@ -359,6 +360,106 @@
             </objects>
             <point key="canvasLocation" x="1688.8" y="-24.7376311844078"/>
         </scene>
+        <!--Search Loc View Controller-->
+        <scene sceneID="shB-Ft-Zh8">
+            <objects>
+                <viewController storyboardIdentifier="SearchLocViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3kn-Ia-2ur" customClass="SearchLocViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tII-UE-aa9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o81-HH-0ow" userLabel="Search Bar View">
+                                <rect key="frame" x="0.0" y="379" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElX-1C-wrB">
+                                        <rect key="frame" x="350" y="0.0" width="64" height="64"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ElX-1C-wrB" secondAttribute="height" multiplier="1:1" id="9YQ-om-xt5"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="Search"/>
+                                        <connections>
+                                            <action selector="searchButtonClickActionWithSender:" destination="3kn-Ia-2ur" eventType="touchUpInside" id="1WW-bn-Uri"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bX7-Ul-xzm">
+                                        <rect key="frame" x="8" y="15" width="334" height="34"/>
+                                        <color key="backgroundColor" red="0.96078431369999995" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1333333333" green="0.5450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="bX7-Ul-xzm" firstAttribute="centerY" secondItem="ElX-1C-wrB" secondAttribute="centerY" id="32w-lC-faH"/>
+                                    <constraint firstItem="bX7-Ul-xzm" firstAttribute="leading" secondItem="o81-HH-0ow" secondAttribute="leading" constant="8" id="5Xc-gY-gUd"/>
+                                    <constraint firstItem="ElX-1C-wrB" firstAttribute="top" secondItem="o81-HH-0ow" secondAttribute="top" id="DGz-GD-EBz"/>
+                                    <constraint firstAttribute="trailing" secondItem="ElX-1C-wrB" secondAttribute="trailing" id="FWT-Mg-XO0"/>
+                                    <constraint firstAttribute="width" secondItem="o81-HH-0ow" secondAttribute="height" multiplier="414:64" id="a6a-RP-ahh"/>
+                                    <constraint firstItem="ElX-1C-wrB" firstAttribute="leading" secondItem="bX7-Ul-xzm" secondAttribute="trailing" constant="8" id="avX-Qu-7fx"/>
+                                    <constraint firstAttribute="bottom" secondItem="ElX-1C-wrB" secondAttribute="bottom" id="elD-Ov-McJ"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcS-Np-9KU" userLabel="Bottom Selected View">
+                                <rect key="frame" x="0.0" y="443" width="414" height="419"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap me search in Google" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEl-B7-ROr">
+                                        <rect key="frame" x="113.5" y="165" width="198" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="textColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96078431369999995" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7G-Am-e8f" userLabel="Top Selected View">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="379"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uav-Bb-NLA">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="379"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="3kn-Ia-2ur" id="rdO-Al-LnC"/>
+                                        </connections>
+                                    </mapView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstItem="Uav-Bb-NLA" firstAttribute="top" secondItem="O7G-Am-e8f" secondAttribute="top" id="9A5-BH-ztx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uav-Bb-NLA" secondAttribute="trailing" id="AM4-fh-m2O"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uav-Bb-NLA" secondAttribute="bottom" id="qhD-be-QSV"/>
+                                    <constraint firstItem="Uav-Bb-NLA" firstAttribute="leading" secondItem="O7G-Am-e8f" secondAttribute="leading" id="vPo-VX-LuT"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W88-E1-300"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="o81-HH-0ow" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="0uv-Ki-y74"/>
+                            <constraint firstItem="o81-HH-0ow" firstAttribute="centerY" secondItem="W88-E1-300" secondAttribute="centerY" constant="-64" id="7ob-8j-ZXZ"/>
+                            <constraint firstItem="o81-HH-0ow" firstAttribute="trailing" secondItem="W88-E1-300" secondAttribute="trailing" id="D55-4e-jYU"/>
+                            <constraint firstItem="W88-E1-300" firstAttribute="bottom" secondItem="XcS-Np-9KU" secondAttribute="bottom" id="L3O-vR-j9X"/>
+                            <constraint firstItem="O7G-Am-e8f" firstAttribute="top" secondItem="tII-UE-aa9" secondAttribute="top" id="ZRg-FL-Bqc"/>
+                            <constraint firstItem="XcS-Np-9KU" firstAttribute="trailing" secondItem="W88-E1-300" secondAttribute="trailing" id="aIE-9t-eae"/>
+                            <constraint firstItem="O7G-Am-e8f" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="bYx-vU-WqF"/>
+                            <constraint firstItem="o81-HH-0ow" firstAttribute="top" secondItem="O7G-Am-e8f" secondAttribute="bottom" id="jfx-5A-JCG"/>
+                            <constraint firstItem="O7G-Am-e8f" firstAttribute="trailing" secondItem="W88-E1-300" secondAttribute="trailing" id="nnI-Lv-lWB"/>
+                            <constraint firstItem="XcS-Np-9KU" firstAttribute="top" secondItem="o81-HH-0ow" secondAttribute="bottom" id="ufK-sk-Hva"/>
+                            <constraint firstItem="XcS-Np-9KU" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="vgZ-6i-HLI"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="TGy-HL-SuA"/>
+                    <connections>
+                        <outlet property="bottomSelectedView" destination="XcS-Np-9KU" id="BTF-Uq-r1L"/>
+                        <outlet property="mapView" destination="Uav-Bb-NLA" id="wzg-fw-N7A"/>
+                        <outlet property="searchTextField" destination="bX7-Ul-xzm" id="qe2-qG-8SL"/>
+                        <outlet property="topSelectedView" destination="O7G-Am-e8f" id="epf-pW-uJq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xWs-5x-bt9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="965" y="-357"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="LuD-wx-Sqw"/>
@@ -376,6 +477,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

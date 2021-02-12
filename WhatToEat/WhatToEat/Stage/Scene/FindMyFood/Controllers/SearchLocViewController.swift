@@ -13,6 +13,7 @@ import SafariServices
 
 class SearchLocViewController: UIViewController {
     
+//    private var scenario: FindFoodScenario = FindFoodScenario()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var topSelectedView: UIView!
     @IBOutlet weak var bottomSelectedView: UIView!

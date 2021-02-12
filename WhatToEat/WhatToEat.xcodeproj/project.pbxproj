@@ -22,7 +22,6 @@
 		AF0BA73425BCB3DE00358046 /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */; };
 		AF0BA73525BCB3DE00358046 /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */; };
 		AF0BA73625BCB3DE00358046 /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */; };
-		AF0BA73725BCB3DE00358046 /* SearchLocations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA72625BCB3DE00358046 /* SearchLocations.storyboard */; };
 		AF0BA73825BCB3DE00358046 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72925BCB3DE00358046 /* MainMenuViewController.swift */; };
 		AF0BA73925BCB3DE00358046 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72A25BCB3DE00358046 /* SignViewController.swift */; };
 		AF0BA73A25BCB3DE00358046 /* Entrance.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA72C25BCB3DE00358046 /* Entrance.storyboard */; };
@@ -61,6 +60,7 @@
 		AFA89FA925D5ADFA0057FA75 /* FindFoodScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */; };
 		AFA89FAF25D5B0770057FA75 /* Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FAE25D5B0770057FA75 /* Pilot.swift */; };
 		AFA89FEC25D6DD200057FA75 /* ScenarioNotifyActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FEB25D6DD200057FA75 /* ScenarioNotifyActions.swift */; };
+		AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */; };
 		AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */; };
 		AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */; };
 		AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB1256012ED00A92E21 /* StructObserver.swift */; };
@@ -110,7 +110,6 @@
 		AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
 		AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
-		AF0BA72625BCB3DE00358046 /* SearchLocations.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchLocations.storyboard; sourceTree = "<group>"; };
 		AF0BA72925BCB3DE00358046 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		AF0BA72A25BCB3DE00358046 /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
 		AF0BA72C25BCB3DE00358046 /* Entrance.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Entrance.storyboard; sourceTree = "<group>"; };
@@ -154,6 +153,7 @@
 		AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindFoodScenario.swift; path = "../New Group/FindFoodScenario.swift"; sourceTree = "<group>"; };
 		AFA89FAE25D5B0770057FA75 /* Pilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pilot.swift; sourceTree = "<group>"; };
 		AFA89FEB25D6DD200057FA75 /* ScenarioNotifyActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScenarioNotifyActions.swift; sourceTree = "<group>"; };
+		AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocScenario.swift; sourceTree = "<group>"; };
 		AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEmptyRepresentable.swift; sourceTree = "<group>"; };
 		AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AFBB6DB1256012ED00A92E21 /* StructObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
@@ -273,6 +273,7 @@
 		AF0BA71B25BCB3DE00358046 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */,
 				AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */,
 			);
 			path = Controllers;
@@ -307,7 +308,6 @@
 		AF0BA72325BCB3DE00358046 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -315,7 +315,6 @@
 		AF0BA72525BCB3DE00358046 /* Story */ = {
 			isa = PBXGroup;
 			children = (
-				AF0BA72625BCB3DE00358046 /* SearchLocations.storyboard */,
 			);
 			path = Story;
 			sourceTree = "<group>";
@@ -554,6 +553,7 @@
 			isa = PBXGroup;
 			children = (
 				AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */,
+				AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */,
 			);
 			path = Scenarios;
 			sourceTree = "<group>";
@@ -753,7 +753,6 @@
 				AF13AF5B245E90DB0026A5C8 /* Main.storyboard in Resources */,
 				AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */,
 				AF0BA73A25BCB3DE00358046 /* Entrance.storyboard in Resources */,
-				AF0BA73725BCB3DE00358046 /* SearchLocations.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +927,7 @@
 				AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AF0BA72D25BCB3DE00358046 /* AddGourmetPresenter.swift in Sources */,
+				AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */,
 				AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */,
 				AFA89FEC25D6DD200057FA75 /* ScenarioNotifyActions.swift in Sources */,
 				AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */,
