@@ -1,5 +1,5 @@
 //
-//  FindFoodScenario.swift
+//  ScenarioNotifyActions.swift
 //  WhatToEat
 //
 //  Created by YuCheng on 2021/2/12.
@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Flynn
+import ReSwift
 
-class FindFoodScenario: Actor {
-    
-}
+struct SearchInNewRangeAction: Action {}

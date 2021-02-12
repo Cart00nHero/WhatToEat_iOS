@@ -194,15 +194,15 @@ extension SearchLocViewController: SceneStateDelegate {
             if action.status == GeoActionStatus.Completed {
                 mapView.showAnnotations(action.annotations , animated: true)
             }
-        case let action as LocatePositionAction:
-            switch action.status {
-            case .DidUpdateLocation:
-                if action.locations?.count ?? 0 > 0 {
-                    presenter.locationParcel.parcelType = String(describing: type(of: action))
-                    appStore.dispatch(reverseLocationAction(location: (action.locations?[0])!))
-                }
-            default: break
-            }
+//        case let action as LocatePositionAction:
+//            switch action.status {
+//            case .DidUpdateLocation:
+//                if action.locations?.count ?? 0 > 0 {
+//                    presenter.locationParcel.parcelType = String(describing: type(of: action))
+//                    appStore.dispatch(reverseLocationAction(location: (action.locations?[0])!))
+//                }
+//            default: break
+//            }
         case let action as MKAnnotationDidSelectAction:
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC =

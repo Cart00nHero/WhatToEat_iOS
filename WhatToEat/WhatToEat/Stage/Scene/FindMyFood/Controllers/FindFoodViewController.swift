@@ -11,6 +11,7 @@ import MapKit
 
 class FindFoodViewController: UIViewController {
     
+    private var scenario: FindFoodScenario = FindFoodScenario()
     @IBOutlet fileprivate weak var tableView: UITableView!
     @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak private var mkMapView: MKMapView!
@@ -18,9 +19,11 @@ class FindFoodViewController: UIViewController {
     @IBOutlet weak private var rangeButton: UIButton!
     @IBOutlet weak private var locateButton: UIButton!
     private var annotationViewTag: Int = -1
+    private var queryCount: Int = 0
     private var sceneVC: SceneViewController? = nil
-    private lazy var presenter: FindFoodPresenter = FindFoodPresenter()
-    private lazy var scenario: FindFoodScenario = FindFoodScenario()
+    var tableData =
+        FindFoodTableData(dataObj: SearchForRangeQuery.Data.SearchForRange())
+    private var willMarkAnnotations = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,17 +38,16 @@ class FindFoodViewController: UIViewController {
     
     private func initialViewContorller() {
         mkMapView.delegate = self
-        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
-        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
+        scenario.beSetScenarioMap(map: mkMapView)
         startRadarAnimating()
-        LocationMaster.shared.requestCurrentLocation()
-        tableHeightConstraint.constant = 48.0 * CGFloat(presenter.tableData.dataSource.count)
+        scenario.beRequestCurrentLocation()
+        tableHeightConstraint.constant = 48.0 * CGFloat(tableData.dataSource.count)
     }
-    func startRadarAnimating() {
+    private func startRadarAnimating() {
         mkMapView.isUserInteractionEnabled = false
         radarView.startRadarAnimation()
     }
-    func stopRadarAnimating() {
+    private func stopRadarAnimating() {
         mkMapView.isUserInteractionEnabled = true
         radarView.stopRadarAnimation()
     }
@@ -70,7 +72,7 @@ class FindFoodViewController: UIViewController {
     // MARK: - UI Actions
     @IBAction func locateButtonClickAction(_ sender: UIButton) {
         startRadarAnimating()
-        LocationMaster.shared.requestCurrentLocation()
+        scenario.beRequestCurrentLocation()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
         
@@ -83,11 +85,11 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.tableData.dataSource.count
+        return tableData.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = presenter.tableData.dataSource[indexPath.row]
+        let data = tableData.dataSource[indexPath.row]
         var cellIdentifier = "FindFoodTableViewCell"
         switch data.templateStyle {
         case .Button:
@@ -113,76 +115,38 @@ extension FindFoodViewController: SceneStateDelegate {
         switch state.currentAction {
         case is LocatePositionAction:
             let action = state.currentAction as! LocatePositionAction
-            startRadarAnimating()
             switch action.status {
             case .DidUpdateLocation:
-                if action.locations?.count ?? 0 > 0 {
-                    presenter.currentLoc = action.locations?.first
-                    presenter.centerCoordinate = presenter.currentLoc?.coordinate
-                    appStore.dispatch(SearchNearbyAction(center: presenter.centerCoordinate!,
-                                                         range: presenter.searchRange(zoomLevel: 17)))
-                }
+                stopRadarAnimating()
             default: break
             }
         case is SearchForRangeAction:
-            if presenter.isFirsTimeEntrance {
-                presenter.isFirsTimeEntrance = false
-                return
-            }
             let action = state.currentAction as! SearchForRangeAction
             switch action.status {
             case .Success:
                 stopRadarAnimating()
                 if action.responseData?.count ?? 0 > 0 {
-                    presenter.searchCounts = action.responseData?.count ?? 0
-                    presenter.searchResults = action.responseData!
-                    appStore.dispatch(markRangeSearchDataActions(queryData: action.responseData!))
+                    queryCount = action.responseData?.count ?? 0
+                    scenario.beStoreQueryData(queryData: action.responseData!)
+                    willMarkAnnotations = true
+                    scenario.beMarkFoundPlacesOnMap(queryData: action.responseData!)
                 } else {
-                    presenter.setMapZoomLevel(mapView: mkMapView,
-                                              level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
+                    scenario.beGetCenterPoint { [self] (centerPt) in
+                        if centerPt.zoomLevel == mkMapView.zoomLevel {
+                            if centerPt.coordinate != nil {
+                                scenario.beUpdateMapRegion(
+                                    zoomLevel: centerPt.zoomLevel, center: centerPt.coordinate!)
+                            }
+                        }
+                    }
                 }
             case .Failed:
                 stopRadarAnimating()
             default: break
             }
-        case is MarkRangeSearchDataAction:
-            let action = state.currentAction as! MarkRangeSearchDataAction
-            stopRadarAnimating()
-            if action.status == .Completed {
-                MapNavigator.removeAllMapAnnotations(mapView: mkMapView)
-                presenter.annotations.removeAll()
-                presenter.annotations = action.annotations
-                MapNavigator.displayAnnotations(mapView: mkMapView, annotations: presenter.annotations, animated: false)
-            }
-        case is UIPanGestureRecognizerAction:
-            let distance =
-                calculateCoordinateDistance(from: presenter.centerCoordinate!, to: mkMapView.camera.centerCoordinate)
-            let searchingDistance = (presenter.searchRange(zoomLevel: mkMapView.zoomLevel)*1000)*2
-            if distance > searchingDistance {
-                clearApolloServiceCache()
-                startRadarAnimating()
-                let level = mkMapView.zoomLevel
-                appStore.dispatch(SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: level)))
-            }
-            presenter.centerCoordinate = mkMapView.camera.centerCoordinate
-        case is GestureRecognizerEndedAction:
-            if presenter.isSearchRangeChanged() {
-                appStore.dispatch(
-                    SearchNearbyAction(center: mkMapView.camera.centerCoordinate, range: presenter.searchRange(zoomLevel: presenter.mapZoomLevel)))
-                presenter.preZoomLevel = presenter.mapZoomLevel
-                presenter.centerCoordinate = mkMapView.camera.centerCoordinate
-            }
-        case is MapRegionWillChangeAction:
-            let action = state.currentAction as! MapRegionWillChangeAction
-            if presenter.preZoomLevel == presenter.mapZoomLevel {
-                presenter.setMapZoomLevel(mapView: action.mapView,
-                                          level: presenter.mapZoomLevel, center: presenter.centerCoordinate!)
-            }
-            presenter.preZoomLevel = action.mapView.zoomLevel
-        case is MapDidChangeVisibleRegionAction:
-            let action = state.currentAction as! MapDidChangeVisibleRegionAction
-            updateRangeValue()
-            presenter.mapZoomLevel = action.mapView.zoomLevel
+        case is SearchInNewRangeAction:
+            startRadarAnimating()
+            scenario.beSearchNearby()
         case is TableCellButtonClickAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
             sceneVC?.basePushToViewController(toVC!, Animated: true)
@@ -194,13 +158,20 @@ extension FindFoodViewController: SceneStateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        appStore.dispatch(MapRegionWillChangeAction(mapView: mapView))
+        scenario.beGetCenterPoint { [self] (centerPt) in
+            if centerPt.zoomLevel == mkMapView.zoomLevel {
+                if centerPt.coordinate != nil {
+                    scenario.beUpdateMapRegion(
+                        zoomLevel: centerPt.zoomLevel, center: centerPt.coordinate!)
+                }
+            }
+        }
     }
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        appStore.dispatch(MapRegionDidChangeAction(mapView: mapView))
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-        appStore.dispatch(MapDidChangeVisibleRegionAction(mapView: mapView))
+        updateRangeValue()
+        scenario.beUpdateCenterPointZoomLevel()
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.
@@ -220,8 +191,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotationViewTag == -1 {
-            annotationViewTag = presenter.searchCounts-1
-            presenter.willMarkAnnotations = true
+            annotationViewTag = queryCount-1
         }
         let identifier = "MyPin"
         if annotation.isKind(of: MKUserLocation.self) {
@@ -230,7 +200,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         // 重複使用地圖標註
         var annotationView:MKPinAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
         if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView =
+                MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
         }
         /*
@@ -246,15 +217,17 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         annotationViewTag = -1
-        if presenter.willMarkAnnotations {
-            MapNavigator.setCenterCoordinate(mapView: mkMapView, coordinate: presenter.centerCoordinate!)
-            presenter.willMarkAnnotations = false
+        if willMarkAnnotations {
+            scenario.beMoveMapCenterToCenterPoint()
+            willMarkAnnotations = false
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if presenter.searchResults.count > 0 {
-            presenter.tableData.reloadData(data: presenter.searchResults[view.tag]!)
-            tableView.reloadData()
+        scenario.beGetQueryData { [self] (queryData) in
+            tableData.reloadData(data: queryData[view.tag]!)
+            DispatchQueue.main.async {
+                tableView.reloadData()
+            }
         }
     }
     
@@ -262,9 +235,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer is UIPanGestureRecognizer {
             let gesture = gestureRecognizer as! UIPanGestureRecognizer
-            appStore.dispatch(UIPanGestureRecognizerAction(sender: gesture))
-            if gestureRecognizer.state == .ended {
-                appStore.dispatch(GestureRecognizerEndedAction(sender: gestureRecognizer))
+            if gesture.state == .ended {
+                scenario.beSearchInNewRange()
             }
         }
         return true
