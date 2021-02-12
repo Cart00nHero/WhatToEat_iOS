@@ -39,14 +39,6 @@ class AddGourmetPresenter: NSObject {
             return
         }
     }
-    func combineAddressFullInfo() -> String {
-        let newShop = newLoc.shop
-        let mutableText = NSMutableString(string: newShop.title )
-        let branch = newLoc.shopBranch
-        mutableText.append(branch.name)
-        mutableText.append(newLoc.address.completeInfo)
-        return mutableText as String
-    }
 }
 struct GourmetsTableData {
     var inputObj: GQInputObject
