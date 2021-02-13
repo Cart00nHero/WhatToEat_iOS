@@ -96,7 +96,7 @@
                                                             <constraint firstAttribute="width" constant="44" id="2N3-hS-Zlf"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <state key="normal" title="1.0km" backgroundImage="Icon_Range_Bg">
+                                                        <state key="normal" title="1.0km" backgroundImage="icon_range_bg">
                                                             <color key="titleColor" systemColor="darkTextColor"/>
                                                         </state>
                                                     </button>
@@ -107,10 +107,10 @@
                                                             <constraint firstAttribute="width" constant="44" id="RXP-BD-1Ao"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <state key="normal" image="Icon_Locate_Off">
+                                                        <state key="normal" image="icon_locate_off">
                                                             <color key="titleColor" systemColor="darkTextColor"/>
                                                         </state>
-                                                        <state key="selected" image="Icon_Locate_On"/>
+                                                        <state key="selected" image="icon_locate_on"/>
                                                         <connections>
                                                             <action selector="locateButtonClickAction:" destination="92u-bM-Mag" eventType="touchUpInside" id="Us4-u7-SCa"/>
                                                         </connections>
@@ -458,18 +458,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWs-5x-bt9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="-357"/>
+            <point key="canvasLocation" x="1030" y="-358"/>
         </scene>
     </scenes>
     <designables>
         <designable name="LuD-wx-Sqw"/>
     </designables>
     <resources>
-        <image name="Icon_Locate_Off" width="41" height="41"/>
-        <image name="Icon_Locate_On" width="41" height="41"/>
-        <image name="Icon_Range_Bg" width="41" height="41"/>
+        <image name="icon_locate_off" width="41" height="41"/>
+        <image name="icon_locate_on" width="41" height="41"/>
         <image name="icon_people_walk" width="384" height="384"/>
         <image name="icon_public_transportation" width="384" height="384"/>
+        <image name="icon_range_bg" width="41" height="41"/>
         <image name="icon_taxi_operator" width="512" height="512"/>
         <image name="icon_vehicle" width="384" height="384"/>
         <systemColor name="darkTextColor">

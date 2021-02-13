@@ -20,7 +20,6 @@
 		AF0BA72F25BCB3DE00358046 /* AddGourmets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA71625BCB3DE00358046 /* AddGourmets.storyboard */; };
 		AF0BA73225BCB3DE00358046 /* FindFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */; };
 		AF0BA73425BCB3DE00358046 /* FindMyFood.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */; };
-		AF0BA73525BCB3DE00358046 /* SearchLocPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */; };
 		AF0BA73625BCB3DE00358046 /* SearchLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */; };
 		AF0BA73825BCB3DE00358046 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72925BCB3DE00358046 /* MainMenuViewController.swift */; };
 		AF0BA73925BCB3DE00358046 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA72A25BCB3DE00358046 /* SignViewController.swift */; };
@@ -47,7 +46,6 @@
 		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
 		AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */; };
-		AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FA247D73300023F3FC /* LocationMaster.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
 		AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801504248E8DCE009E6214 /* MutationActions.swift */; };
 		AF801507248E8E20009E6214 /* QueryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801506248E8E20009E6214 /* QueryActions.swift */; };
@@ -112,7 +110,6 @@
 		AF0BA71625BCB3DE00358046 /* AddGourmets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddGourmets.storyboard; sourceTree = "<group>"; };
 		AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodViewController.swift; sourceTree = "<group>"; };
 		AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FindMyFood.storyboard; sourceTree = "<group>"; };
-		AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocPresenter.swift; sourceTree = "<group>"; };
 		AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchLocViewController.swift; sourceTree = "<group>"; };
 		AF0BA72925BCB3DE00358046 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		AF0BA72A25BCB3DE00358046 /* SignViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +142,6 @@
 		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
 		AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigator.swift; sourceTree = "<group>"; };
-		AF5F16FA247D73300023F3FC /* LocationMaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMaster.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
 		AF801504248E8DCE009E6214 /* MutationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationActions.swift; sourceTree = "<group>"; };
 		AF801506248E8E20009E6214 /* QueryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryActions.swift; sourceTree = "<group>"; };
@@ -228,7 +224,6 @@
 			children = (
 				AF0BA71025BCB3DE00358046 /* AddGourmets */,
 				AF0BA71725BCB3DE00358046 /* FindMyFood */,
-				AF0BA72025BCB3DE00358046 /* SearchLocations */,
 				AF0BA72725BCB3DE00358046 /* Entrance */,
 			);
 			path = Scene;
@@ -291,38 +286,6 @@
 			isa = PBXGroup;
 			children = (
 				AF0BA71F25BCB3DE00358046 /* FindMyFood.storyboard */,
-			);
-			path = Story;
-			sourceTree = "<group>";
-		};
-		AF0BA72025BCB3DE00358046 /* SearchLocations */ = {
-			isa = PBXGroup;
-			children = (
-				AF0BA72125BCB3DE00358046 /* Presenters */,
-				AF0BA72325BCB3DE00358046 /* Controllers */,
-				AF0BA72525BCB3DE00358046 /* Story */,
-			);
-			path = SearchLocations;
-			sourceTree = "<group>";
-		};
-		AF0BA72125BCB3DE00358046 /* Presenters */ = {
-			isa = PBXGroup;
-			children = (
-				AF0BA72225BCB3DE00358046 /* SearchLocPresenter.swift */,
-			);
-			path = Presenters;
-			sourceTree = "<group>";
-		};
-		AF0BA72325BCB3DE00358046 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controllers;
-			sourceTree = "<group>";
-		};
-		AF0BA72525BCB3DE00358046 /* Story */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = Story;
 			sourceTree = "<group>";
@@ -460,14 +423,6 @@
 			path = ApiData;
 			sourceTree = "<group>";
 		};
-		AF5F16F9247D73180023F3FC /* GPS */ = {
-			isa = PBXGroup;
-			children = (
-				AF5F16FA247D73300023F3FC /* LocationMaster.swift */,
-			);
-			path = GPS;
-			sourceTree = "<group>";
-		};
 		AF8224392472F2110034C928 /* Actors */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,7 +430,6 @@
 				AFBB6DAB2560129000A92E21 /* Express */,
 				AFBB6DAA2560127300A92E21 /* ToolMan */,
 				AFAF8BBC24B06F6300CD5539 /* Mathematician */,
-				AF5F16F9247D73180023F3FC /* GPS */,
 				AF0EDF65247A9C9C003D84C0 /* Data */,
 				AF8224752472F27D0034C928 /* Network */,
 			);
@@ -930,7 +884,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */,
-				AF5F16FB247D73300023F3FC /* LocationMaster.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
 				AF0BA6D325BCA88000358046 /* UIItemData.swift in Sources */,
@@ -962,7 +915,6 @@
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
 				AF501ECC249712B700628DB0 /* DataParser.swift in Sources */,
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
-				AF0BA73525BCB3DE00358046 /* SearchLocPresenter.swift in Sources */,
 				AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */,
 				AFA8A12525D722AE0057FA75 /* Courier.swift in Sources */,
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,

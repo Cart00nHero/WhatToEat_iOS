@@ -98,8 +98,8 @@ extension AddGourmetViewController: SceneStateDelegate {
                 presenter.newLoc = gqAddress!
                 if gqAddress?.branchId.isEmpty == true {
                     // To-Do: Here Upload to Insert
-                    presenter.saveToUpload = false
-                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: gqAddress!)
+//                    presenter.saveToUpload = false
+//                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: gqAddress!)
                 }else {
                     presenter.saveToUpload = true
                 }
@@ -154,8 +154,8 @@ extension AddGourmetViewController: SceneStateDelegate {
             if presenter.saveToUpload {
                 appStore.dispatch(updateGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
             } else {
-                presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: presenter.newLoc)
-                appStore.dispatch(createGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
+//                presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: presenter.newLoc)
+//                appStore.dispatch(createGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
             }
         case let action as CreateGourmetAction:
             switch action.status {

@@ -11,5 +11,5 @@ import ReSwift
 
 struct SearchInNewRangeAction: Action {}
 struct FoundLocationsAddressAction: Action {
-    var inputObjects = [GQInputObject]()
+    var inputObj: GQInputObject = initGQInputObject()
 }
