@@ -107,7 +107,9 @@ class FindFoodScenario: Actor,PilotProtocol {
             let math = Mathematician()
             math.beCalculateRange(
                 self, mapView!.camera.centerCoordinate, range) { (rangePt) in
-                appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
+                DispatchQueue.main.async {
+                    appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
+                }
             }
         }
     }
@@ -138,8 +140,10 @@ class FindFoodScenario: Actor,PilotProtocol {
             if !isNotified && centerPt.zoomLevel != mapView?.zoomLevel {
                 isNotified = true
                 clearApolloServiceCache()
-                appStore.dispatch(SearchInNewRangeAction())
                 centerPt.zoomLevel = mapView?.zoomLevel ?? 17
+                DispatchQueue.main.async {
+                    appStore.dispatch(SearchInNewRangeAction())
+                }
                 return
             }
             let math = Mathematician()
@@ -148,8 +152,10 @@ class FindFoodScenario: Actor,PilotProtocol {
                 if !isNotified && distance > searchingDistance {
                     isNotified = true
                     clearApolloServiceCache()
-                    appStore.dispatch(SearchInNewRangeAction())
                     centerPt.coordinate = mapView?.centerCoordinate
+                    DispatchQueue.main.async {
+                        appStore.dispatch(SearchInNewRangeAction())
+                    }
                 }
             }
         }

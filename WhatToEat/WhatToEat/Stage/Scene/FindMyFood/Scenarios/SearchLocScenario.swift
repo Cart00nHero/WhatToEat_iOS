@@ -8,6 +8,7 @@
 
 import Foundation
 import Flynn
+import ReSwift
 import CoreLocation
 import MapKit
 
@@ -20,11 +21,11 @@ class SearchLocScenario: Actor,PilotProtocol {
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
     private var locParcel = Parcel(content: "")
     private var mapView: MKMapView? = nil
-    private var foundGQInputs = [GQInputObject]()
+    private var markedGQinput = initGQInputObject()
     
     override init() {
         super.init()
-//        pilot.beRegisterSender(self)
+        pilot.beRegisterSender(self)
         pilot.beRequestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
     }
     
@@ -43,6 +44,7 @@ class SearchLocScenario: Actor,PilotProtocol {
     }
     private func _beInquireIntoAddressesLocation(address: String) {
         GeoCoder().beCodeAddress(self, address) { (placemarks, error) in
+            
         }
     }
     private func _beInquireIntoLocationsAddress(location: CLLocation) {
@@ -53,13 +55,18 @@ class SearchLocScenario: Actor,PilotProtocol {
                     DataManager().beParsePlaceMarktoGQInput(self, placemarks!) {
                         [self] (inputObjs) in
                         if inputObjs.count > 0 {
-                            action.inputObj = inputObjs.first!
-                            foundGQInputs = inputObjs
+                            markedGQinput = inputObjs.first!
+                            action.inputObj = markedGQinput
+                            DispatchQueue.main.async {
+                                appStore.dispatch(action)
+                            }
                         }
                     }
                     DataManager().beParsePlaceMarkToAddressDqCmd(self, placemarks![0]) { (addressDqCmd) in
-                        appStore.dispatch(
-                            locationsDynamicQueryAction(whereCMD: addressDqCmd))
+                        DispatchQueue.main.async {
+                            appStore.dispatch(
+                                locationsDynamicQueryAction(whereCMD: addressDqCmd))
+                        }
                     }
                 }
             }
@@ -70,38 +77,38 @@ class SearchLocScenario: Actor,PilotProtocol {
         DataManager().beParseLocDynamicQueryDataToGQInput(self, queryData) { [self]
             (inputObjs) in
             if mapView != nil && inputObjs.count > 0 {
-                foundGQInputs = inputObjs
+                markedGQinput = inputObjs.first!
                 var annotations = [MKPointAnnotation]()
-                for address in inputObjs {
-                    let latitude = Double(address.address.latitude) ?? 0.0
-                    let longitude = Double(address.address.longitude) ?? 0.0
-                    let location = CLLocation(latitude: latitude, longitude: longitude)
-                    let annotation = MKPointAnnotation()
-                    annotation.title = address.shop.title
-                    annotation.subtitle = address.shopBranch.name
-                    annotation.coordinate = location.coordinate
-                    annotations.append(annotation)
+                let latitude = Double(markedGQinput.address.latitude) ?? 0.0
+                let longitude = Double(markedGQinput.address.longitude) ?? 0.0
+                let location = CLLocation(latitude: latitude, longitude: longitude)
+                let annotation = MKPointAnnotation()
+                annotation.title = markedGQinput.shop.title
+                annotation.subtitle = markedGQinput.shopBranch.name
+                annotation.coordinate = location.coordinate
+                annotations.append(annotation)
+                let mapNab = MapNavigator(mapView: mapView!)
+                mapNab.beRemoveAnnotations(sender: self, mapView!.annotations) {
+                    mapNab.beShowAnnotations(annotations: annotations, animated: true)
                 }
-                MapNavigator(mapView: mapView!).beShowAnnotations(
-                    annotations: annotations, animated: true)
             }
         }
     }
     private func _beMarkFoundPlacesOnMap() {
-        if mapView != nil && foundGQInputs.count > 0 {
+        if mapView != nil {
             var annotations = [MKPointAnnotation]()
-            for address in foundGQInputs {
-                let latitude = Double(address.address.latitude) ?? 0.0
-                let longitude = Double(address.address.longitude) ?? 0.0
-                let location = CLLocation(latitude: latitude, longitude: longitude)
-                let annotation = MKPointAnnotation()
-                annotation.title = address.shop.title
-                annotation.subtitle = address.shopBranch.name
-                annotation.coordinate = location.coordinate
-                annotations.append(annotation)
+            let latitude = Double(markedGQinput.address.latitude) ?? 0.0
+            let longitude = Double(markedGQinput.address.longitude) ?? 0.0
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            let annotation = MKPointAnnotation()
+            annotation.title = markedGQinput.shop.title
+            annotation.subtitle = markedGQinput.shopBranch.name
+            annotation.coordinate = location.coordinate
+            annotations.append(annotation)
+            let mapNab = MapNavigator(mapView: mapView!)
+            mapNab.beRemoveAnnotations(sender: self, mapView!.annotations) {
+                mapNab.beShowAnnotations(annotations: annotations, animated: true)
             }
-            MapNavigator(mapView: mapView!).beShowAnnotations(
-                annotations: annotations, animated: true)
         }
     }
     

@@ -110,7 +110,8 @@ class SearchLocViewController: UIViewController {
         switch searchMode {
         case .Map:
             print("Map")
-            appStore.dispatch(geoCodeAddressAction(address: searchTextField.text ?? ""))
+            scenario.beInquireIntoAddressesLocation(
+                address: searchTextField.text ?? "")
         case .Google:
             print("Google")
             if isWebViewCreated == false {
@@ -180,15 +181,6 @@ extension SearchLocViewController: SceneStateDelegate {
                 coverView = createCoverView(coverSuperView: topSelectedView)
                 searchMode = .Google
             }
-        case is GeoCodeAddressAction:
-            let action = state.currentAction as! GeoCodeAddressAction
-            switch action.status {
-            case .Started:
-                mapView.removeAnnotations(mapView.annotations)
-            case .Completed:
-                appStore.dispatch(reverseLocationAction(location: (action.location)!))
-            default: break
-            }
         case let action as LocationsDynamicQueryAction:
             switch action.status {
             case .Success:
@@ -199,17 +191,18 @@ extension SearchLocViewController: SceneStateDelegate {
                 }
             default: break
             }
-        case _ as FoundLocationsAddressAction: break
-        case let action as MKAnnotationDidSelectAction: break
-//            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-//            let toVC =
-//                storyboard.instantiateViewController(
-//                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+        case let action as FoundLocationsAddressAction:
+            searchTextField.text = action.inputObj.address.completeInfo
+        case is MKAnnotationDidSelectAction:
+            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+            let toVC =
+                storyboard.instantiateViewController(
+                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
 //            let deliveryMan = DeliveryMan()
 //            presenter.locationParcel = deliveryMan.packageParcel(
 //                sender: self, to: AddGourmetViewController(), content: action)
 //            deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
-//            sceneVC?.basePushToViewController(toVC, Animated: true)
+            sceneVC?.basePushToViewController(toVC, Animated: true)
 //            presenter.locationParcel.sender = String(describing: type(of: self))
         default: break
         }

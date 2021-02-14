@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController storyboardIdentifier="SceneViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="VoD-M3-kHr" customClass="SceneViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="OCC-oV-uoS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qdk-IW-GKk">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                                 <connections>
                                     <segue destination="92u-bM-Mag" kind="embed" identifier="toFindFoodVC" id="N1M-dm-Pvb"/>
                                 </connections>
@@ -49,7 +49,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cPG-NA-hp2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nU6-an-buu">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -66,11 +66,11 @@
             <objects>
                 <viewController storyboardIdentifier="FindFoodViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="92u-bM-Mag" customClass="FindFoodViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rpz-ed-u5K">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Afb-ZX-Oao">
-                                <rect key="frame" x="0.0" y="44" width="414" height="764"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="692"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4Z-gv-ZZZ" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="662"/>
@@ -152,7 +152,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOD-Wh-86w">
-                                                                            <rect key="frame" x="10" y="31.5" width="80" height="17"/>
+                                                                            <rect key="frame" x="10" y="31.666666666666671" width="80" height="17"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <color key="textColor" red="0.1333333333" green="0.5450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                             <nil key="highlightedColor"/>
@@ -196,7 +196,7 @@
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCV-JL-kRa">
-                                                                    <rect key="frame" x="10" y="62" width="394" height="37"/>
+                                                                    <rect key="frame" x="10" y="62.333333333333343" width="394" height="36.666666666666657"/>
                                                                     <color key="backgroundColor" red="0.1333333333" green="0.5450980392" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="pCV-JL-kRa" secondAttribute="height" multiplier="375:35" id="bgp-Ip-3zf"/>
@@ -283,33 +283,33 @@
             <objects>
                 <viewController storyboardIdentifier="NavigationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QPo-he-W0z" customClass="NavigationViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cEZ-e0-9Vh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gma-Y5-kIf">
-                                <rect key="frame" x="0.0" y="44" width="414" height="747.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="665.33333333333337"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vef-GC-Rz1">
-                                <rect key="frame" x="0.0" y="791.5" width="414" height="70.5"/>
+                                <rect key="frame" x="0.0" y="665.33333333333337" width="414" height="70.666666666666629"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Td-fB-g4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="103.5" height="70.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="103.66666666666667" height="70.666666666666671"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" image="icon_people_walk"/>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sU2-eC-nPC">
-                                        <rect key="frame" x="103.5" y="0.0" width="103.5" height="70.5"/>
+                                        <rect key="frame" x="103.66666666666669" y="0.0" width="103.33333333333331" height="70.666666666666671"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" image="icon_public_transportation"/>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eNp-Nl-yra">
-                                        <rect key="frame" x="207" y="0.0" width="103.5" height="70.5"/>
+                                        <rect key="frame" x="206.99999999999997" y="0.0" width="103.66666666666666" height="70.666666666666671"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <size key="titleShadowOffset" width="2" height="0.0"/>
                                         <state key="normal" image="icon_vehicle"/>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBq-58-RhY">
-                                        <rect key="frame" x="310.5" y="0.0" width="103.5" height="70.5"/>
+                                        <rect key="frame" x="310.66666666666669" y="0.0" width="103.33333333333331" height="70.666666666666671"/>
                                         <inset key="imageEdgeInsets" minX="16" minY="16" maxX="16" maxY="16"/>
                                         <state key="normal" image="icon_taxi_operator"/>
                                     </button>
@@ -365,11 +365,11 @@
             <objects>
                 <viewController storyboardIdentifier="SearchLocViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3kn-Ia-2ur" customClass="SearchLocViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tII-UE-aa9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o81-HH-0ow" userLabel="Search Bar View">
-                                <rect key="frame" x="0.0" y="379" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="294" width="414" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElX-1C-wrB">
                                         <rect key="frame" x="350" y="0.0" width="64" height="64"/>
@@ -401,7 +401,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XcS-Np-9KU" userLabel="Bottom Selected View">
-                                <rect key="frame" x="0.0" y="443" width="414" height="419"/>
+                                <rect key="frame" x="0.0" y="358" width="414" height="378"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tap me search in Google" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEl-B7-ROr">
                                         <rect key="frame" x="113.5" y="165" width="198" height="22"/>
@@ -414,10 +414,10 @@
                                 <color key="backgroundColor" red="0.96078431369999995" green="1" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7G-Am-e8f" userLabel="Top Selected View">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="379"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="250"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Uav-Bb-NLA">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="379"/>
+                                        <rect key="frame" x="2" y="2" width="410" height="246"/>
                                         <connections>
                                             <outlet property="delegate" destination="3kn-Ia-2ur" id="rdO-Al-LnC"/>
                                         </connections>
@@ -425,10 +425,10 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemRedColor"/>
                                 <constraints>
-                                    <constraint firstItem="Uav-Bb-NLA" firstAttribute="top" secondItem="O7G-Am-e8f" secondAttribute="top" id="9A5-BH-ztx"/>
-                                    <constraint firstAttribute="trailing" secondItem="Uav-Bb-NLA" secondAttribute="trailing" id="AM4-fh-m2O"/>
-                                    <constraint firstAttribute="bottom" secondItem="Uav-Bb-NLA" secondAttribute="bottom" id="qhD-be-QSV"/>
-                                    <constraint firstItem="Uav-Bb-NLA" firstAttribute="leading" secondItem="O7G-Am-e8f" secondAttribute="leading" id="vPo-VX-LuT"/>
+                                    <constraint firstAttribute="bottom" secondItem="Uav-Bb-NLA" secondAttribute="bottom" constant="2" id="bT6-dV-LUk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Uav-Bb-NLA" secondAttribute="trailing" constant="2" id="cLj-0c-nkG"/>
+                                    <constraint firstItem="Uav-Bb-NLA" firstAttribute="leading" secondItem="O7G-Am-e8f" secondAttribute="leading" constant="2" id="nxG-8p-Yd5"/>
+                                    <constraint firstItem="Uav-Bb-NLA" firstAttribute="top" secondItem="O7G-Am-e8f" secondAttribute="top" constant="2" id="x8i-pc-cn0"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -438,12 +438,12 @@
                             <constraint firstItem="o81-HH-0ow" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="0uv-Ki-y74"/>
                             <constraint firstItem="o81-HH-0ow" firstAttribute="centerY" secondItem="W88-E1-300" secondAttribute="centerY" constant="-64" id="7ob-8j-ZXZ"/>
                             <constraint firstItem="o81-HH-0ow" firstAttribute="trailing" secondItem="W88-E1-300" secondAttribute="trailing" id="D55-4e-jYU"/>
+                            <constraint firstItem="W88-E1-300" firstAttribute="trailing" secondItem="O7G-Am-e8f" secondAttribute="trailing" id="F8i-nP-xn8"/>
                             <constraint firstItem="W88-E1-300" firstAttribute="bottom" secondItem="XcS-Np-9KU" secondAttribute="bottom" id="L3O-vR-j9X"/>
-                            <constraint firstItem="O7G-Am-e8f" firstAttribute="top" secondItem="tII-UE-aa9" secondAttribute="top" id="ZRg-FL-Bqc"/>
                             <constraint firstItem="XcS-Np-9KU" firstAttribute="trailing" secondItem="W88-E1-300" secondAttribute="trailing" id="aIE-9t-eae"/>
-                            <constraint firstItem="O7G-Am-e8f" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="bYx-vU-WqF"/>
-                            <constraint firstItem="o81-HH-0ow" firstAttribute="top" secondItem="O7G-Am-e8f" secondAttribute="bottom" id="jfx-5A-JCG"/>
-                            <constraint firstItem="O7G-Am-e8f" firstAttribute="trailing" secondItem="W88-E1-300" secondAttribute="trailing" id="nnI-Lv-lWB"/>
+                            <constraint firstItem="O7G-Am-e8f" firstAttribute="top" secondItem="W88-E1-300" secondAttribute="top" id="c9C-3Y-1D8"/>
+                            <constraint firstItem="O7G-Am-e8f" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="gw0-dp-OGI"/>
+                            <constraint firstItem="o81-HH-0ow" firstAttribute="top" secondItem="O7G-Am-e8f" secondAttribute="bottom" id="k1s-wh-bPx"/>
                             <constraint firstItem="XcS-Np-9KU" firstAttribute="top" secondItem="o81-HH-0ow" secondAttribute="bottom" id="ufK-sk-Hva"/>
                             <constraint firstItem="XcS-Np-9KU" firstAttribute="leading" secondItem="W88-E1-300" secondAttribute="leading" id="vgZ-6i-HLI"/>
                         </constraints>
@@ -458,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xWs-5x-bt9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1030" y="-358"/>
+            <point key="canvasLocation" x="1028.985507246377" y="-358.69565217391306"/>
         </scene>
     </scenes>
     <designables>
