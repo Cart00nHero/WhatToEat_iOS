@@ -233,18 +233,10 @@
 			isa = PBXGroup;
 			children = (
 				AFA8A1F825D9788B0057FA75 /* Scenarios */,
-				AF0BA71125BCB3DE00358046 /* Presenters */,
 				AF0BA71325BCB3DE00358046 /* Controllers */,
 				AF0BA71525BCB3DE00358046 /* Story */,
 			);
 			path = AddGourmets;
-			sourceTree = "<group>";
-		};
-		AF0BA71125BCB3DE00358046 /* Presenters */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenters;
 			sourceTree = "<group>";
 		};
 		AF0BA71325BCB3DE00358046 /* Controllers */ = {
