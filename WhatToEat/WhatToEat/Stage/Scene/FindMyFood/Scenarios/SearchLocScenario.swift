@@ -19,7 +19,6 @@ class SearchLocScenario: Actor,PilotProtocol {
     }
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
-    private var locParcel = Parcel(content: "")
     private var mapView: MKMapView? = nil
     private var markedGQinput = initGQInputObject()
     
@@ -43,8 +42,15 @@ class SearchLocScenario: Actor,PilotProtocol {
         pilot.beRequestCurrentLocation()
     }
     private func _beInquireIntoAddressesLocation(address: String) {
-        GeoCoder().beCodeAddress(self, address) { (placemarks, error) in
-            
+        GeoCoder().beCodeAddress(self, address) { [self] (placemarks, error) in
+            if placemarks?.count ?? 0 > 0 {
+                if mapView != nil {
+                    MapNavigator(mapView: mapView!).beRemoveAnnotations(sender: self, mapView!.annotations) {
+                        let location = placemarks?.first?.location
+                        beInquireIntoLocationsAddress(location: location!)
+                    }
+                }
+            }
         }
     }
     private func _beInquireIntoLocationsAddress(location: CLLocation) {
@@ -112,6 +118,12 @@ class SearchLocScenario: Actor,PilotProtocol {
         }
     }
     
+    private func _beSendParcel() {
+        LogisticsCenter.shared.applyExpressService(
+            sender: self, recipient: "AddGourmetScenario",
+            content: markedGQinput)
+    }
+    
     // MARK: - Pilot protocols
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
@@ -171,6 +183,11 @@ extension SearchLocScenario {
     @discardableResult
     public func beMarkFoundPlacesOnMap() -> Self {
         unsafeSend(_beMarkFoundPlacesOnMap)
+        return self
+    }
+    @discardableResult
+    public func beSendParcel() -> Self {
+        unsafeSend(_beSendParcel)
         return self
     }
     @discardableResult

@@ -9,17 +9,25 @@
 import Foundation
 import Flynn
 
+struct Parcel {
+    let parcelType: String
+    var sender = ""
+    var content: Any
+}
 class LogisticsCenter: NSObject {
-    static let shareInstance = LogisticsCenter()
+    static let shared = LogisticsCenter()
     private let courier = Courier()
     
-    func applyExpressService(sender: Actor, recipient: String,
-                             content: Any) {
-        courier.bePackageParcel(
-            sender: sender, recipient: recipient, content: content)
+    func applyExpressService<T>(
+        sender: Actor, recipient: String,content: T) {
+        let typeName = String(describing: type(of: T.self))
+        let senderName = String(describing: type(of: sender))
+        let parcel =
+            Parcel(parcelType: typeName, sender: senderName, content: content)
+        courier.beClaimParcel(recipient, parcel)
     }
-    func collectPacels(_ recipient: Actor) {
-        courier.beCollect(recipient) { (parcels) in
-        }
+    func collectPacels(_ recipient: Actor,
+                       _ complete: @escaping (NSSet?) -> Void) {
+        courier.beCollect(recipient, complete)
     }
 }

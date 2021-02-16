@@ -83,7 +83,9 @@ class FindFoodScenario: Actor,PilotProtocol {
     }
     private func _beUpdateCenterPointZoomLevel() {
         if mapView != nil {
-            centerPt.zoomLevel = mapView?.zoomLevel ?? 17
+            DispatchQueue.main.async { [self] in
+                centerPt.zoomLevel = mapView?.zoomLevel ?? 17
+            }
         }
     }
     private func _beRequestCurrentLocation() {
@@ -140,8 +142,8 @@ class FindFoodScenario: Actor,PilotProtocol {
             if !isNotified && centerPt.zoomLevel != mapView?.zoomLevel {
                 isNotified = true
                 clearApolloServiceCache()
-                centerPt.zoomLevel = mapView?.zoomLevel ?? 17
-                DispatchQueue.main.async {
+                DispatchQueue.main.async { [self] in
+                    centerPt.zoomLevel = mapView?.zoomLevel ?? 17
                     appStore.dispatch(SearchInNewRangeAction())
                 }
                 return

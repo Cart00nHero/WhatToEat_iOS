@@ -13,12 +13,15 @@ class AddGourmetViewController: UIViewController {
     private var sceneVC: SceneViewController? = nil
     private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
-    private let presenter = AddGourmetPresenter()
+    private let scenario = AddGourmetScenario()
+    var saveToCreate = false
+    
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scenario.beCollectGQInputPacel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,11 +33,52 @@ class AddGourmetViewController: UIViewController {
         super.viewDidAppear(animated)
         sceneVC?.registerKeyBoardNotification()
         originTableFooter = tableView.tableFooterView ?? UIView()
-        appStore.dispatch(ReceivedParcelAction())
+        scenario.beGetInputData { [self] (gqData) in
+            tableData = GourmetsTableData(address: gqData)
+            DispatchQueue.main.async { [self] in
+                tableView.reloadData()
+                saveToCreate = gqData.branchId.isEmpty
+            }
+        }
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.sceneVC?.stateDelegate = nil
+    }
+    
+    private func updateTextFieldInputData(newText: String, indexPath: IndexPath) {
+        scenario.beGetInputData { (inputObj) in
+            var newInput = inputObj
+            var newShop = newInput.shop
+            DispatchQueue.main.async { [self] in
+                if indexPath.section == 0 {
+                    switch indexPath.row {
+                    case 0:
+                        newShop.title = newText
+                    case 2:
+                        newShop.underPrice = Float64(newText) ?? 0.0
+                    default: break
+                    }
+                    newInput.shop = newShop
+                    scenario.beUpdateInputData(newInput: newInput)
+                    return
+                }
+                if indexPath.section == 1 {
+                    var branch = inputObj.shopBranch
+                    switch indexPath.row {
+                    case 0:
+                        branch.name = newText
+                    case 2:
+                        branch.tel = newText
+                    default: break
+                    }
+                    newInput.shopBranch = branch
+                    scenario.beUpdateInputData(newInput: newInput)
+                    return
+                }
+            }
+        }
     }
 }
 
@@ -91,23 +135,6 @@ extension AddGourmetViewController: UIScrollViewDelegate {
 }
 extension AddGourmetViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
-        if state.receivedParcel?.recipient == String(describing: type(of: self)) {
-            if state.receivedParcel?.parcelType == "MKAnnotationDidSelectAction" {
-                let parcelAction = state.receivedParcel?.parcel as! MKAnnotationDidSelectAction
-                let gqAddress = parcelAction.selectedLoc
-                presenter.newLoc = gqAddress!
-                if gqAddress?.branchId.isEmpty == true {
-                    // To-Do: Here Upload to Insert
-//                    presenter.saveToUpload = false
-//                    presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: gqAddress!)
-                }else {
-                    presenter.saveToUpload = true
-                }
-                tableData = GourmetsTableData(address: presenter.newLoc)
-                tableView.reloadData()
-                appStore.dispatch(SignParcelReceiptAction(recipient: String(describing: type(of: self))))
-            }
-        }
         switch state.currentAction {
         case let action as AdjustForKeyboardAction:
             let notification = action.notification
@@ -127,20 +154,27 @@ extension AddGourmetViewController: SceneStateDelegate {
             let indexPath = tableView.indexPath(for: cell!)
             var cellData = tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] as? LRTemplate
             let superTag = action.dropdownView.superview?.tag ?? 0
-            var newShop = presenter.newLoc.shop
-            if LRTableViewCell.ContentSide(rawValue: superTag) ==
-                LRTableViewCell.ContentSide.Left {
-                var data = cellData?.leftViewItem as? DropDownItem
-                data?.selectedText = action.selectedText
-                newShop.style = data?.selectedText
-                cellData?.leftViewItem = data!
-                tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
-            } else {
-                var data = cellData?.rightViewItem as? DropDownItem
-                data?.selectedText = action.selectedText
-                newShop.type = data?.selectedText
-                cellData?.rightViewItem = data!
-                tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
+            scenario.beGetInputData { (inputObj) in
+                var newInput = inputObj
+                var newShop = newInput.shop
+                DispatchQueue.main.async { [self] in
+                    if LRTableViewCell.ContentSide(rawValue: superTag) ==
+                        LRTableViewCell.ContentSide.Left {
+                        var data = cellData?.leftViewItem as? DropDownItem
+                        data?.selectedText = action.selectedText
+                        newShop.style = data?.selectedText
+                        cellData?.leftViewItem = data!
+                        tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
+                    } else {
+                        var data = cellData?.rightViewItem as? DropDownItem
+                        data?.selectedText = action.selectedText
+                        newShop.type = data?.selectedText
+                        cellData?.rightViewItem = data!
+                        tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0] = cellData!
+                    }
+                    newInput.shop = newShop
+                    scenario.beUpdateInputData(newInput: newInput)
+                }
             }
             
         case let action as CellTextFieldDidChangedAction:
@@ -149,13 +183,15 @@ extension AddGourmetViewController: SceneStateDelegate {
             tableData.dataSource[indexPath?.section ?? 0][indexPath?.row ?? 0]
                 = (cell?.cellTemplate)!
             let data = cell?.cellTemplate?.rightViewItem as? TextFieldItem
-            presenter.updateTextFieldInputData(newText: data?.text ?? "", indexPath: indexPath!)
+            updateTextFieldInputData(
+                newText: data?.text ?? "", indexPath: indexPath!)
         case is TableCellButtonClickAction:
-            if presenter.saveToUpload {
-                appStore.dispatch(updateGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
-            } else {
-//                presenter.newLoc.address.completeInfo = combineAddressCompleteInfo(input: presenter.newLoc)
-//                appStore.dispatch(createGourmetAction(foodieId: globalFoodieId, inputObj: presenter.newLoc))
+            scenario.beGetInputData { [self] (inputObj) in
+                if saveToCreate {
+                    appStore.dispatch(createGourmetAction(foodieId: globalFoodieId, inputObj: inputObj))
+                } else {
+                    appStore.dispatch(updateGourmetAction(foodieId: globalFoodieId, inputObj: inputObj))
+                }
             }
         case let action as CreateGourmetAction:
             switch action.status {

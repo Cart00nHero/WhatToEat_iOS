@@ -9,24 +9,15 @@
 import Foundation
 import Flynn
 
-struct Parcel {
-    var parcelType: String = ""
-    var sender = ""
-    var content: Any
-}
-
 class Courier: Actor {
-    private var courierBag: [String: Any] = [:]
+    private var courierBag: [String: NSSet] = [:]
     
-    private func _bePackageParcel(sender: Actor, recipient: String,
-                               content: Any) {
-        var parcel = Parcel(content: content)
-        parcel.sender = String(describing: type(of: sender))
+    private func _beClaimParcel(_ recipient: String,_ parcel: Parcel) {
         var parcelSet: NSMutableSet
         if courierBag[recipient] == nil {
             parcelSet = NSMutableSet()
         } else {
-            parcelSet = courierBag[recipient] as! NSMutableSet
+            parcelSet = courierBag[recipient]?.mutableCopy() as! NSMutableSet
         }
         if !parcelSet.contains(parcel) {
             parcelSet.add(parcel)
@@ -34,11 +25,10 @@ class Courier: Actor {
         }
     }
     
-    
     private func _beCollect(_ recipient: Actor,
                             _ complete: @escaping (NSSet?) -> Void) {
         let key = String(describing: type(of: recipient))
-        let parcelSet = NSSet.init(set: (courierBag[key] as! NSMutableSet))
+        let parcelSet = courierBag[key] ?? NSSet()
         courierBag.removeValue(forKey: key)
         recipient.unsafeSend {
             complete(parcelSet)
@@ -52,8 +42,8 @@ class Courier: Actor {
 extension Courier {
 
     @discardableResult
-    public func bePackageParcel(sender: Actor, recipient: String, content: Any) -> Self {
-        unsafeSend { self._bePackageParcel(sender: sender, recipient: recipient, content: content) }
+    public func beClaimParcel(_ recipient: String, _ parcel: Parcel) -> Self {
+        unsafeSend { self._beClaimParcel(recipient, parcel) }
         return self
     }
     @discardableResult

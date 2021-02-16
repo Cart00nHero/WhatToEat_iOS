@@ -15,7 +15,6 @@
 		AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF007A25248C12F700DF61DB /* GQInputData.swift */; };
 		AF0BA27224B570F9007F382E /* Haversin.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA27124B570F9007F382E /* Haversin.swift */; };
 		AF0BA6D325BCA88000358046 /* UIItemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA6D225BCA88000358046 /* UIItemData.swift */; };
-		AF0BA72D25BCB3DE00358046 /* AddGourmetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71225BCB3DE00358046 /* AddGourmetPresenter.swift */; };
 		AF0BA72E25BCB3DE00358046 /* AddGourmetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71425BCB3DE00358046 /* AddGourmetViewController.swift */; };
 		AF0BA72F25BCB3DE00358046 /* AddGourmets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF0BA71625BCB3DE00358046 /* AddGourmets.storyboard */; };
 		AF0BA73225BCB3DE00358046 /* FindFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */; };
@@ -63,6 +62,7 @@
 		AFA8A12425D722AE0057FA75 /* LogisticsCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A12225D722AE0057FA75 /* LogisticsCenter.swift */; };
 		AFA8A12525D722AE0057FA75 /* Courier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A12325D722AE0057FA75 /* Courier.swift */; };
 		AFA8A13B25D728C90057FA75 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A13A25D728C90057FA75 /* DataManager.swift */; };
+		AFA8A1FA25D9792D0057FA75 /* AddGourmetScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A1F925D9792D0057FA75 /* AddGourmetScenario.swift */; };
 		AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */; };
 		AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */; };
 		AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB1256012ED00A92E21 /* StructObserver.swift */; };
@@ -105,7 +105,6 @@
 		AF007A25248C12F700DF61DB /* GQInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQInputData.swift; sourceTree = "<group>"; };
 		AF0BA27124B570F9007F382E /* Haversin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haversin.swift; sourceTree = "<group>"; };
 		AF0BA6D225BCA88000358046 /* UIItemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIItemData.swift; sourceTree = "<group>"; };
-		AF0BA71225BCB3DE00358046 /* AddGourmetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetPresenter.swift; sourceTree = "<group>"; };
 		AF0BA71425BCB3DE00358046 /* AddGourmetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGourmetViewController.swift; sourceTree = "<group>"; };
 		AF0BA71625BCB3DE00358046 /* AddGourmets.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddGourmets.storyboard; sourceTree = "<group>"; };
 		AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +157,7 @@
 		AFA8A12225D722AE0057FA75 /* LogisticsCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogisticsCenter.swift; sourceTree = "<group>"; };
 		AFA8A12325D722AE0057FA75 /* Courier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courier.swift; sourceTree = "<group>"; };
 		AFA8A13A25D728C90057FA75 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		AFA8A1F925D9792D0057FA75 /* AddGourmetScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGourmetScenario.swift; sourceTree = "<group>"; };
 		AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEmptyRepresentable.swift; sourceTree = "<group>"; };
 		AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AFBB6DB1256012ED00A92E21 /* StructObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
@@ -232,6 +232,7 @@
 		AF0BA71025BCB3DE00358046 /* AddGourmets */ = {
 			isa = PBXGroup;
 			children = (
+				AFA8A1F825D9788B0057FA75 /* Scenarios */,
 				AF0BA71125BCB3DE00358046 /* Presenters */,
 				AF0BA71325BCB3DE00358046 /* Controllers */,
 				AF0BA71525BCB3DE00358046 /* Story */,
@@ -242,7 +243,6 @@
 		AF0BA71125BCB3DE00358046 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
-				AF0BA71225BCB3DE00358046 /* AddGourmetPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -518,6 +518,14 @@
 			children = (
 				AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */,
 				AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */,
+			);
+			path = Scenarios;
+			sourceTree = "<group>";
+		};
+		AFA8A1F825D9788B0057FA75 /* Scenarios */ = {
+			isa = PBXGroup;
+			children = (
+				AFA8A1F925D9792D0057FA75 /* AddGourmetScenario.swift */,
 			);
 			path = Scenarios;
 			sourceTree = "<group>";
@@ -885,13 +893,13 @@
 			files = (
 				AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
+				AFA8A1FA25D9792D0057FA75 /* AddGourmetScenario.swift in Sources */,
 				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
 				AF0BA6D325BCA88000358046 /* UIItemData.swift in Sources */,
 				AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* SceneViewController.swift in Sources */,
 				AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
-				AF0BA72D25BCB3DE00358046 /* AddGourmetPresenter.swift in Sources */,
 				AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */,
 				AFA8A10D25D717B30057FA75 /* GeoCoder.swift in Sources */,
 				AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */,

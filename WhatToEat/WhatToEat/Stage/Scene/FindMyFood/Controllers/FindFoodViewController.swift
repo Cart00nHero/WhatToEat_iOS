@@ -44,12 +44,16 @@ class FindFoodViewController: UIViewController {
         tableHeightConstraint.constant = 48.0 * CGFloat(tableData.dataSource.count)
     }
     private func startRadarAnimating() {
-        mkMapView.isUserInteractionEnabled = false
-        radarView.startRadarAnimation()
+        DispatchQueue.main.async { [self] in
+            mkMapView.isUserInteractionEnabled = false
+            radarView.startRadarAnimation()
+        }
     }
     private func stopRadarAnimating() {
-        mkMapView.isUserInteractionEnabled = true
-        radarView.stopRadarAnimation()
+        DispatchQueue.main.async { [self] in
+            mkMapView.isUserInteractionEnabled = true
+            radarView.stopRadarAnimation()
+        }
     }
     
     private func updateRangeValue() {

@@ -144,10 +144,12 @@ class SearchLocViewController: UIViewController {
 // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-//        if presenter.locationParcel.parcelType == "CreateMapAnnotationsAction" {
-//            let parcelAction = presenter.locationParcel.parcel as! CreateMapAnnotationsAction
-//            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: parcelAction.addresses[view.tag]))
-//        }
+        scenario.beSendParcel()
+        let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+        let toVC =
+            storyboard.instantiateViewController(
+                withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+        sceneVC?.basePushToViewController(toVC, Animated: true)
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         var viewTag = 0
@@ -193,17 +195,6 @@ extension SearchLocViewController: SceneStateDelegate {
             }
         case let action as FoundLocationsAddressAction:
             searchTextField.text = action.inputObj.address.completeInfo
-        case is MKAnnotationDidSelectAction:
-            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-            let toVC =
-                storyboard.instantiateViewController(
-                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
-//            let deliveryMan = DeliveryMan()
-//            presenter.locationParcel = deliveryMan.packageParcel(
-//                sender: self, to: AddGourmetViewController(), content: action)
-//            deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
-            sceneVC?.basePushToViewController(toVC, Animated: true)
-//            presenter.locationParcel.sender = String(describing: type(of: self))
         default: break
         }
     }
