@@ -31,7 +31,7 @@ class MainMenuViewController: UIViewController {
     // MARK: - actions
     @IBAction func toAddGourmetsButtonClickAction(sender: UIButton) {
         // AddGourmets
-        let addGourmetsSB = UIStoryboard.init(name: "SearchLocations", bundle: nil)
+        let addGourmetsSB = UIStoryboard.init(name: "FindMyFood", bundle: nil)
         let toVC = addGourmetsSB.instantiateViewController(withIdentifier: "SearchLocViewController")
         sceneVC?.basePushToViewController(toVC, Animated: true)
     }

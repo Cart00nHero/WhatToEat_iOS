@@ -75,7 +75,9 @@ class MapNavigator: Actor {
     private func _beRemoveAnnotations(
         sender: Actor,
         _ annotations: [MKAnnotation],_ complete: @escaping () -> Void) {
-        mkMapView.removeAnnotations(annotations)
+        DispatchQueue.main.async { [self] in
+            mkMapView.removeAnnotations(annotations)
+        }
         sender.unsafeSend {
             complete()
         }

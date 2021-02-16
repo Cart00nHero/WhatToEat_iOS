@@ -10,3 +10,6 @@ import Foundation
 import ReSwift
 
 struct SearchInNewRangeAction: Action {}
+struct FoundLocationsAddressAction: Action {
+    var inputObj: GQInputObject = initGQInputObject()
+}

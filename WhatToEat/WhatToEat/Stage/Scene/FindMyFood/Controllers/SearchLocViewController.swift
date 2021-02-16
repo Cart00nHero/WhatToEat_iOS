@@ -13,14 +13,19 @@ import SafariServices
 
 class SearchLocViewController: UIViewController {
     
-//    private var scenario: FindFoodScenario = FindFoodScenario()
+    enum SearchMode {
+        case Map, Google
+    }
+    
+    private var scenario: SearchLocScenario = SearchLocScenario()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var topSelectedView: UIView!
     @IBOutlet weak var bottomSelectedView: UIView!
     @IBOutlet weak var barCenterVConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchTextField: UITextField!
     private lazy var coverView: UIView = UIView()
-    private lazy var presenter: SearchLocPresenter = SearchLocPresenter()
+    private var isWebViewCreated = false
+    private var searchMode: SearchMode = .Map
     
     private var sceneVC: SceneViewController? = nil
     let webView = WKWebView()
@@ -41,11 +46,13 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let rightBarButtonItem = UIBarButtonItem(title: "Locate", style: .plain, target: self,
-                                                 action: #selector(rigtBarButtonClickAction(sender:)))
+        scenario.beSetScenarioMap(map: mapView)
+        let rightBarButtonItem = UIBarButtonItem(
+            title: "Locate", style: .plain, target: self,
+            action: #selector(rigtBarButtonClickAction(sender:)))
         sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
         searchTextField.inputAccessoryView = createInputAccessoryView()
-        coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
+        coverView = createCoverView(coverSuperView: bottomSelectedView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -55,7 +62,7 @@ class SearchLocViewController: UIViewController {
 
     // MARK: - Private methods
     private func createWebViewOnBottom() {
-        presenter.isWebViewCreated = true
+        isWebViewCreated = true
         webView.backgroundColor = UIColor.clear
         webView.translatesAutoresizingMaskIntoConstraints = false
         bottomSelectedView.addSubview(webView)
@@ -76,40 +83,73 @@ class SearchLocViewController: UIViewController {
         toolBar.setItems([flexible, barButton], animated: false)
         return toolBar
     }
+    private func createCoverView(coverSuperView: UIView) -> UIView {
+        let coverView = UIView()
+        coverView.translatesAutoresizingMaskIntoConstraints = false
+        coverView.backgroundColor = UIColor.clear
+        coverSuperView.addSubview(coverView)
+        coverSuperView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[coverView]-|", options: [], metrics: nil, views: ["coverView": coverView]))
+        coverSuperView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-[coverView]-|", options: [], metrics: nil, views: ["coverView": coverView]))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(coverViewTapGesture(sender:)))
+        coverView.addGestureRecognizer(tapGesture)
+        return coverView
+    }
+    private func setViewSelectedStyle(selectView: UIView) {
+        selectView.layer.borderWidth = 2.0
+        selectView.layer.borderColor = selectedBgColor().cgColor
+    }
+    private func normalBgColor() -> UIColor {
+        return UIColor(red: 245/255.0, green: 255/255.0, blue: 250/255.0, alpha: 1.0)
+    }
+    private func selectedBgColor() -> UIColor {
+        return UIColor.red
+    }
     // MARK: - UI Actions
     @IBAction func searchButtonClickAction(sender: UIButton) {
         searchTextField.resignFirstResponder()
-        switch presenter.searchMode {
+        switch searchMode {
         case .Map:
             print("Map")
-            appStore.dispatch(geoCodeAddressAction(address: searchTextField.text ?? ""))
+            scenario.beInquireIntoAddressesLocation(
+                address: searchTextField.text ?? "")
         case .Google:
             print("Google")
-            if presenter.isWebViewCreated == false {
+            if isWebViewCreated == false {
                 createWebViewOnBottom()
             }
-            let urlString = presenter.googleSearchUrl(queryText: searchTextField.text ?? "")
-            let ecodeUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            let request = NSURLRequest(url: URL(string: ecodeUrl)!)
-            webView.load(request as URLRequest)
+            scenario.beGoogleSearchUrl(searchTextField.text ?? "") { (urlString) in
+                DispatchQueue.main.async { [self] in
+                    let ecodeUrl =
+                        urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let request = NSURLRequest(url: URL(string: ecodeUrl)!)
+                    webView.load(request as URLRequest)
+                }
+            }
         }
     }
     @objc private func barDoneButtonClickAction(sender: UIBarButtonItem) {
         searchTextField.resignFirstResponder()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
-        LocationMaster.shared.requestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
-        LocationMaster.shared.setAccuracyAndDistanceFilter(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
-        LocationMaster.shared.requestCurrentLocation()
+        scenario.beRequestCurrentLocation()
+    }
+    @objc private func coverViewTapGesture(sender: UITapGestureRecognizer) {
+        appStore.dispatch(ReceivedTapAction(tapGesture: sender))
+    }
+    @objc func setViewDefaultStyle(selectView: UIView) {
+        selectView.layer.borderWidth = 0.0
+        selectView.layer.borderColor = normalBgColor().cgColor
     }
 }
 // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        if presenter.locationParcel.parcelType == "CreateMapAnnotationsAction" {
-            let parcelAction = presenter.locationParcel.parcel as! CreateMapAnnotationsAction
-            appStore.dispatch(MKAnnotationDidSelectAction(selectedIndex: view.tag, selectedLoc: parcelAction.addresses[view.tag]))
-        }
+        scenario.beSendParcel()
+        let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+        let toVC =
+            storyboard.instantiateViewController(
+                withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+        sceneVC?.basePushToViewController(toVC, Animated: true)
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         var viewTag = 0
@@ -129,92 +169,32 @@ extension SearchLocViewController: SceneStateDelegate {
         case is ReceivedTapAction:
             let action = state.currentAction as! ReceivedTapAction
             if coverView.superview == topSelectedView {
-                topSelectedView.backgroundColor = presenter.selectedBgColor()
-                presenter.setViewDefaultStyle(selectView: bottomSelectedView)
+                topSelectedView.backgroundColor = selectedBgColor()
+                setViewDefaultStyle(selectView: bottomSelectedView)
                 coverView.removeGestureRecognizer(action.tapGesture)
                 coverView.removeFromSuperview()
-                coverView = presenter.createCoverView(coverSuperView: bottomSelectedView)
-                presenter.searchMode = .Map
+                coverView = createCoverView(coverSuperView: bottomSelectedView)
+                searchMode = .Map
             } else {
-                topSelectedView.backgroundColor = presenter.normalBgColor()
-                presenter.setViewSelectedStyle(selectView: bottomSelectedView)
+                topSelectedView.backgroundColor = normalBgColor()
+                setViewSelectedStyle(selectView: bottomSelectedView)
                 coverView.removeGestureRecognizer(action.tapGesture)
                 coverView.removeFromSuperview()
-                coverView = presenter.createCoverView(coverSuperView: topSelectedView)
-                presenter.searchMode = .Google
-            }
-        case is GeoCodeAddressAction:
-            let action = state.currentAction as! GeoCodeAddressAction
-            switch action.status {
-            case .Started:
-                mapView.removeAnnotations(mapView.annotations)
-            case .Completed:
-                appStore.dispatch(reverseLocationAction(location: (action.location)!))
-            default: break
-            }
-        case is ReverseLocationAction:
-            let action = state.currentAction as? ReverseLocationAction
-            if action?.place != nil {
-                appStore.dispatch(ParsePlaceMarkToAddressAction(
-                                    queryLoc: true, placeMark: (action?.place)!,
-                                    address: initGQInputObject())
-                )
+                coverView = createCoverView(coverSuperView: topSelectedView)
+                searchMode = .Google
             }
         case let action as LocationsDynamicQueryAction:
             switch action.status {
             case .Success:
-                var markAddress = [GQInputObject]()
                 if action.responseData?.count ?? 0 > 0 {
-                    presenter.locationParcel.parcelType = String(describing: type(of: action))
-                    for queryData in action.responseData! {
-                        let address = locationsDynamicQueryToGQInputObj(result: queryData!)
-                        markAddress.append(address)
-                    }
-                    appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
+                    scenario.beMarkQueryDataOnMap(queryData: action.responseData!)
                 } else {
-                    let parcelAction = presenter.locationParcel.parcel as? ParsePlaceMarkToAddressAction
-                    guard let address = parcelAction?.inputObj else { return }
-                    markAddress.append(address)
-                    appStore.dispatch(createMapAnnotationsAction(inputObj: markAddress))
+                    scenario.beMarkFoundPlacesOnMap()
                 }
             default: break
             }
-        case is ParsePlaceMarkToAddressAction:
-            var action = state.currentAction as! ParsePlaceMarkToAddressAction
-            if presenter.locationParcel.parcelType == "LocatePositionAction" {
-                action.inputObj.address.completeInfo = combineAddressCompleteInfo(input: action.inputObj)
-                searchTextField.text = action.inputObj.address.completeInfo
-            }
-            if presenter.locationParcel.parcelType != "LocationsDynamicQueryAction" {
-                presenter.locationParcel.parcelType = String(describing: type(of: action))
-                presenter.locationParcel.parcel = action
-            }
-        case let action as CreateMapAnnotationsAction:
-            presenter.locationParcel.parcelType = String(describing: type(of: action))
-            presenter.locationParcel.parcel = action
-            if action.status == GeoActionStatus.Completed {
-                mapView.showAnnotations(action.annotations , animated: true)
-            }
-//        case let action as LocatePositionAction:
-//            switch action.status {
-//            case .DidUpdateLocation:
-//                if action.locations?.count ?? 0 > 0 {
-//                    presenter.locationParcel.parcelType = String(describing: type(of: action))
-//                    appStore.dispatch(reverseLocationAction(location: (action.locations?[0])!))
-//                }
-//            default: break
-//            }
-        case let action as MKAnnotationDidSelectAction:
-            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-            let toVC =
-                storyboard.instantiateViewController(
-                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
-            let deliveryMan = DeliveryMan()
-            presenter.locationParcel = deliveryMan.packageParcel(
-                sender: self, to: AddGourmetViewController(), content: action)
-            deliveryMan.applyDeliverService(parcel: presenter.locationParcel)
-            sceneVC?.basePushToViewController(toVC, Animated: true)
-            presenter.locationParcel.sender = String(describing: type(of: self))
+        case let action as FoundLocationsAddressAction:
+            searchTextField.text = action.inputObj.address.completeInfo
         default: break
         }
     }

@@ -10,16 +10,6 @@ import UIKit
 
 var globalFoodieId: String = ""
 
-func combineAddressCompleteInfo(input: GQInputObject) -> String {
-    let mutabletext = NSMutableString(string: (input.address.administrativeArea ?? "") ?? "")
-    mutabletext.append((input.address.subAdministrativeArea ?? "") ?? "")
-    mutabletext.append((input.address.locality ?? "") ?? "")
-    mutabletext.append((input.address.thoroughfare ?? "") ?? "")
-    mutabletext.append(" ")
-    mutabletext.append((input.address.subThoroughfare ?? "") ?? "")
-    return mutabletext as String
-}
-
 func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> GQInputObject {
     var inputObj = initGQInputObject()
     inputObj.shopId = result.shopBranch?.shop?.uniqueId ?? ""
