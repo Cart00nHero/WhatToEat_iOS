@@ -59,6 +59,10 @@ class SearchLocViewController: UIViewController {
         super.viewWillDisappear(animated)
         coverView.removeFromSuperview()
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scenario.beCancelFoundLocParcel()
+    }
 
     // MARK: - Private methods
     private func createWebViewOnBottom() {
@@ -144,12 +148,20 @@ class SearchLocViewController: UIViewController {
 // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        scenario.beSendParcel()
-        let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-        let toVC =
-            storyboard.instantiateViewController(
-                withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
-        sceneVC?.basePushToViewController(toVC, Animated: true)
+        scenario.bePrepareGoFoundLocScenario { [self] (isPrepared) in
+            if isPrepared {
+                let presentVC =
+                    self.storyboard?.instantiateViewController(identifier: "FoundLocViewController")
+                sceneVC?.basePresentViewController(presentVC!, Animated: true)
+                
+            } else {
+                let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+                let toVC =
+                    storyboard.instantiateViewController(
+                        withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+                sceneVC?.basePushToViewController(toVC, Animated: true)
+            }
+        }
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         var viewTag = 0
@@ -166,8 +178,7 @@ extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
 extension SearchLocViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
         switch state.currentAction {
-        case is ReceivedTapAction:
-            let action = state.currentAction as! ReceivedTapAction
+        case let action as ReceivedTapAction:
             if coverView.superview == topSelectedView {
                 topSelectedView.backgroundColor = selectedBgColor()
                 setViewDefaultStyle(selectView: bottomSelectedView)

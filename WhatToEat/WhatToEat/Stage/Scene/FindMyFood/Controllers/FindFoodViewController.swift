@@ -41,7 +41,8 @@ class FindFoodViewController: UIViewController {
         scenario.beSetScenarioMap(map: mkMapView)
         startRadarAnimating()
         scenario.beRequestCurrentLocation()
-        tableHeightConstraint.constant = 48.0 * CGFloat(tableData.dataSource.count)
+        tableHeightConstraint.constant =
+            48.0 * CGFloat(tableData.dataSource.count)
     }
     private func startRadarAnimating() {
         DispatchQueue.main.async { [self] in
@@ -117,15 +118,16 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
 extension FindFoodViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
         switch state.currentAction {
-        case is LocatePositionAction:
-            let action = state.currentAction as! LocatePositionAction
+        case let action as LocatePositionAction:
             switch action.status {
             case .DidUpdateLocation:
                 stopRadarAnimating()
             default: break
             }
-        case is SearchForRangeAction:
-            let action = state.currentAction as! SearchForRangeAction
+        case is SearchInNewRangeAction:
+            startRadarAnimating()
+            scenario.beSearchNearby()
+        case let action as SearchForRangeAction:
             switch action.status {
             case .Success:
                 stopRadarAnimating()
@@ -148,9 +150,6 @@ extension FindFoodViewController: SceneStateDelegate {
                 stopRadarAnimating()
             default: break
             }
-        case is SearchInNewRangeAction:
-            startRadarAnimating()
-            scenario.beSearchNearby()
         case is TableCellButtonClickAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
             sceneVC?.basePushToViewController(toVC!, Animated: true)

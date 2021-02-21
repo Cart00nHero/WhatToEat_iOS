@@ -11,7 +11,8 @@ import ReSwift
 
 struct LocationsDynamicQueryAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
-    var responseData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]?
+    var responseData:
+        [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]?
     var queryData: DynamicQueryData<LocDynamicQueryData>?
     
 }
@@ -44,6 +45,7 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
             appStore.dispatch(action)
         }
     }
+    service.clearCache()
     return action
 }
 struct SearchForRangeAction: Action, ApiActionProtocol {

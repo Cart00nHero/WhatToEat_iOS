@@ -62,7 +62,14 @@ class FindFoodScenario: Actor,PilotProtocol {
         pilot.beRequestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
     }
     // MARK: - scenario actions
-    private func _beStoreQueryData(queryData: [SearchForRangeQuery.Data.SearchForRange?]) {
+    private func _beSetScenarioMap(map: MKMapView) {
+        mapView = map
+    }
+    private func _beRequestCurrentLocation() {
+        pilot.beRequestCurrentLocation()
+    }
+    private func _beStoreQueryData(
+        queryData: [SearchForRangeQuery.Data.SearchForRange?]) {
         lastQueryData = queryData
     }
     private func _beGetQueryData(_ complete: @escaping ([SearchForRangeQuery.Data.SearchForRange?]) -> Void) {
@@ -72,9 +79,6 @@ class FindFoodScenario: Actor,PilotProtocol {
         DispatchQueue.main.async { [self] in
             complete(lastQueryData.count)
         }
-    }
-    private func _beSetScenarioMap(map: MKMapView) {
-        mapView = map
     }
     private func _beGetCenterPoint(_ complete: @escaping (CenterPoint) -> Void) {
         DispatchQueue.main.async { [self] in
@@ -87,9 +91,6 @@ class FindFoodScenario: Actor,PilotProtocol {
                 centerPt.zoomLevel = mapView?.zoomLevel ?? 17
             }
         }
-    }
-    private func _beRequestCurrentLocation() {
-        pilot.beRequestCurrentLocation()
     }
     private func _beUpdateMapRegion(zoomLevel: Int, center: CLLocationCoordinate2D) {
         if mapView != nil {
@@ -141,16 +142,14 @@ class FindFoodScenario: Actor,PilotProtocol {
             var isNotified = false
             if !isNotified && centerPt.zoomLevel != mapView?.zoomLevel {
                 isNotified = true
-                clearApolloServiceCache()
                 DispatchQueue.main.async { [self] in
                     centerPt.zoomLevel = mapView?.zoomLevel ?? 17
                     appStore.dispatch(SearchInNewRangeAction())
                 }
                 return
             }
-            let math = Mathematician()
             let searchingDistance = 1000*2*searchRange(zoomLevel: mapView!.zoomLevel)
-            math.beCalculateCoordinateDistance(self, from: centerPt.coordinate!, to: mapView!.camera.centerCoordinate) { [self] (distance) in
+            pilot.beCalculateDistance(sender: self, from: centerPt.coordinate!, to: mapView!.camera.centerCoordinate) { [self] (distance) in
                 if !isNotified && distance > searchingDistance {
                     isNotified = true
                     clearApolloServiceCache()
@@ -219,6 +218,16 @@ class FindFoodScenario: Actor,PilotProtocol {
 extension FindFoodScenario {
 
     @discardableResult
+    public func beSetScenarioMap(map: MKMapView) -> Self {
+        unsafeSend { self._beSetScenarioMap(map: map) }
+        return self
+    }
+    @discardableResult
+    public func beRequestCurrentLocation() -> Self {
+        unsafeSend(_beRequestCurrentLocation)
+        return self
+    }
+    @discardableResult
     public func beStoreQueryData(queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
         unsafeSend { self._beStoreQueryData(queryData: queryData) }
         return self
@@ -234,11 +243,6 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
-    public func beSetScenarioMap(map: MKMapView) -> Self {
-        unsafeSend { self._beSetScenarioMap(map: map) }
-        return self
-    }
-    @discardableResult
     public func beGetCenterPoint(_ complete: @escaping (CenterPoint) -> Void) -> Self {
         unsafeSend { self._beGetCenterPoint(complete) }
         return self
@@ -246,11 +250,6 @@ extension FindFoodScenario {
     @discardableResult
     public func beUpdateCenterPointZoomLevel() -> Self {
         unsafeSend(_beUpdateCenterPointZoomLevel)
-        return self
-    }
-    @discardableResult
-    public func beRequestCurrentLocation() -> Self {
-        unsafeSend(_beRequestCurrentLocation)
         return self
     }
     @discardableResult
