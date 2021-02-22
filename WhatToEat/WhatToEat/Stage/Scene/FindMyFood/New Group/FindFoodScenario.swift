@@ -53,7 +53,7 @@ class FindFoodScenario: Actor,PilotProtocol {
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
     private var centerPt = CenterPoint()
-    private var mapView: MKMapView? = nil
+//    private var mapView: MKMapView? = nil
     private var lastQueryData = [SearchForRangeQuery.Data.SearchForRange?]()
     
     override init() {
@@ -62,7 +62,11 @@ class FindFoodScenario: Actor,PilotProtocol {
         pilot.beRequestAuthorization(.REQUEST_AUTHORIZATION_WHENINUSE)
     }
     // MARK: - scenario actions
-    private func _beStoreQueryData(queryData: [SearchForRangeQuery.Data.SearchForRange?]) {
+    private func _beRequestCurrentLocation() {
+        pilot.beRequestCurrentLocation()
+    }
+    private func _beStoreQueryData(
+        queryData: [SearchForRangeQuery.Data.SearchForRange?]) {
         lastQueryData = queryData
     }
     private func _beGetQueryData(_ complete: @escaping ([SearchForRangeQuery.Data.SearchForRange?]) -> Void) {
@@ -73,91 +77,89 @@ class FindFoodScenario: Actor,PilotProtocol {
             complete(lastQueryData.count)
         }
     }
-    private func _beSetScenarioMap(map: MKMapView) {
-        mapView = map
-    }
     private func _beGetCenterPoint(_ complete: @escaping (CenterPoint) -> Void) {
         DispatchQueue.main.async { [self] in
             complete(centerPt)
         }
     }
-    private func _beUpdateCenterPointZoomLevel() {
-        if mapView != nil {
-            DispatchQueue.main.async { [self] in
-                centerPt.zoomLevel = mapView?.zoomLevel ?? 17
+    private func _beUpdateCenterPoint(
+        zoomLevel: Int,coordinate: CLLocationCoordinate2D?) {
+        if zoomLevel > -1 {
+            centerPt.zoomLevel = zoomLevel
+        }
+        if coordinate != nil {
+            centerPt.coordinate = coordinate
+        }
+    }
+    private func _beGetNewRegion(
+        _ complete: @escaping (MKCoordinateRegion) -> Void) {
+        if centerPt.coordinate != nil {
+            let distance = regionDistance(zoomLevel: centerPt.zoomLevel)
+            let region = MKCoordinateRegion(
+                center: centerPt.coordinate!,
+                latitudinalMeters: CLLocationDistance(distance),
+                longitudinalMeters: CLLocationDistance(distance)
+            )
+            DispatchQueue.main.async {
+                complete(region)
             }
         }
     }
-    private func _beRequestCurrentLocation() {
-        pilot.beRequestCurrentLocation()
+
+    private func _beMoveMapCenterToCenterPoint(mapView: MKMapView) {
+        MapNavigator(mapView: mapView)
+            .beSetCenterCoordinate(coordinate: centerPt.coordinate!)
     }
-    private func _beUpdateMapRegion(zoomLevel: Int, center: CLLocationCoordinate2D) {
-        if mapView != nil {
-            let distance = regionDistance(zoomLevel: zoomLevel)
-            MapNavigator(mapView: mapView!).beSetRegion(center, distance)
-        }
-    }
-    private func _beMoveMapCenterToCenterPoint() {
-        if mapView != nil && centerPt.coordinate != nil {
-                MapNavigator(mapView: mapView!)
-                    .beSetCenterCoordinate(coordinate: centerPt.coordinate!)
-        }
-    }
-    private func _beSearchNearby() {
-        if mapView != nil {
-            let range = searchRange(zoomLevel: mapView!.zoomLevel)
-            let math = Mathematician()
-            math.beCalculateRange(
-                self, mapView!.camera.centerCoordinate, range) { (rangePt) in
-                DispatchQueue.main.async {
-                    appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
-                }
+    private func _beSearchNearby(mapCenter: CenterPoint) {
+        let range = searchRange(zoomLevel: mapCenter.zoomLevel)
+        let math = Mathematician()
+        math.beCalculateRange(
+            self, mapCenter.coordinate!, range) { (rangePt) in
+            DispatchQueue.main.async {
+                appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
             }
         }
     }
     private func _beMarkFoundPlacesOnMap(
+        mapView:MKMapView,
         queryData:[SearchForRangeQuery.Data.SearchForRange?]) {
-        if mapView != nil {
-            let annotations = NSMutableArray()
-            for place in queryData {
-                let latitude = Double(place!.latitude!) ?? 0.0
-                let longitude = Double(place!.longitude!) ?? 0.0
-                let location = CLLocation(latitude: latitude, longitude: longitude)
-                let annotation = MKPointAnnotation()
-                annotation.title = place?.shopBranch?.shop?.title
-                annotation.subtitle = place?.shopBranch?.name
-                annotation.coordinate = location.coordinate
-                annotations.add(annotation)
-            }
-            let markAnnotations = annotations as? [MKPointAnnotation] ?? []
-            let mapNav = MapNavigator(mapView: mapView!)
-            mapNav.beRemoveAnnotations(sender: self, mapView!.annotations) {
-                mapNav.beShowAnnotations(annotations: markAnnotations, animated: true)
-            }
+        let annotations = NSMutableArray()
+        for place in queryData {
+            let latitude = Double(place!.latitude!) ?? 0.0
+            let longitude = Double(place!.longitude!) ?? 0.0
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            let annotation = MKPointAnnotation()
+            annotation.title = place?.shopBranch?.shop?.title
+            annotation.subtitle = place?.shopBranch?.name
+            annotation.coordinate = location.coordinate
+            annotations.add(annotation)
+        }
+        let markAnnotations = annotations as? [MKPointAnnotation] ?? []
+        let mapNav = MapNavigator(mapView: mapView)
+        mapNav.beRemoveAnnotations(sender: self, mapView.annotations) {
+            mapNav.beShowAnnotations(annotations: markAnnotations, animated: true)
         }
     }
-    private func _beSearchInNewRange() {
-        if mapView != nil {
-            var isNotified = false
-            if !isNotified && centerPt.zoomLevel != mapView?.zoomLevel {
-                isNotified = true
-                clearApolloServiceCache()
-                DispatchQueue.main.async { [self] in
-                    centerPt.zoomLevel = mapView?.zoomLevel ?? 17
-                    appStore.dispatch(SearchInNewRangeAction())
-                }
-                return
+    private func _beSearchInNewRange(mapCenter: CenterPoint) {
+        var isNotified = false
+        if !isNotified && centerPt.zoomLevel != mapCenter.zoomLevel {
+            isNotified = true
+            centerPt.zoomLevel = mapCenter.zoomLevel
+            DispatchQueue.main.async {
+                appStore.dispatch(SearchInNewRangeAction())
             }
-            let math = Mathematician()
-            let searchingDistance = 1000*2*searchRange(zoomLevel: mapView!.zoomLevel)
-            math.beCalculateCoordinateDistance(self, from: centerPt.coordinate!, to: mapView!.camera.centerCoordinate) { [self] (distance) in
-                if !isNotified && distance > searchingDistance {
-                    isNotified = true
-                    clearApolloServiceCache()
-                    centerPt.coordinate = mapView?.centerCoordinate
-                    DispatchQueue.main.async {
-                        appStore.dispatch(SearchInNewRangeAction())
-                    }
+            return
+        }
+        let searchingDistance = 1000*2*searchRange(zoomLevel: mapCenter.zoomLevel)
+        pilot.beCalculateDistance(
+            sender: self,
+            from:centerPt.coordinate!,
+            to: mapCenter.coordinate!) { [self] (distance) in
+            if !isNotified && distance > searchingDistance {
+                isNotified = true
+                centerPt.coordinate = mapCenter.coordinate
+                DispatchQueue.main.async {
+                    appStore.dispatch(SearchInNewRangeAction())
                 }
             }
         }
@@ -198,10 +200,11 @@ class FindFoodScenario: Actor,PilotProtocol {
             math.beCalculateRange(
                 self, centerPt.coordinate!,
                 searchRange(zoomLevel: centerPt.zoomLevel)) { (rangePt) in
-                appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
+                DispatchQueue.main.async {
+                    appStore.dispatch(
+                        searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
+                }
             }
-            appStore.dispatch(LocatePositionAction(status: .DidUpdateLocation))
-            
         }
     }
     
@@ -219,6 +222,11 @@ class FindFoodScenario: Actor,PilotProtocol {
 extension FindFoodScenario {
 
     @discardableResult
+    public func beRequestCurrentLocation() -> Self {
+        unsafeSend(_beRequestCurrentLocation)
+        return self
+    }
+    @discardableResult
     public func beStoreQueryData(queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
         unsafeSend { self._beStoreQueryData(queryData: queryData) }
         return self
@@ -234,48 +242,38 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
-    public func beSetScenarioMap(map: MKMapView) -> Self {
-        unsafeSend { self._beSetScenarioMap(map: map) }
-        return self
-    }
-    @discardableResult
     public func beGetCenterPoint(_ complete: @escaping (CenterPoint) -> Void) -> Self {
         unsafeSend { self._beGetCenterPoint(complete) }
         return self
     }
     @discardableResult
-    public func beUpdateCenterPointZoomLevel() -> Self {
-        unsafeSend(_beUpdateCenterPointZoomLevel)
+    public func beUpdateCenterPoint(zoomLevel: Int, coordinate: CLLocationCoordinate2D?) -> Self {
+        unsafeSend { self._beUpdateCenterPoint(zoomLevel: zoomLevel, coordinate: coordinate) }
         return self
     }
     @discardableResult
-    public func beRequestCurrentLocation() -> Self {
-        unsafeSend(_beRequestCurrentLocation)
+    public func beGetNewRegion(_ complete: @escaping (MKCoordinateRegion) -> Void) -> Self {
+        unsafeSend { self._beGetNewRegion(complete) }
         return self
     }
     @discardableResult
-    public func beUpdateMapRegion(zoomLevel: Int, center: CLLocationCoordinate2D) -> Self {
-        unsafeSend { self._beUpdateMapRegion(zoomLevel: zoomLevel, center: center) }
+    public func beMoveMapCenterToCenterPoint(mapView: MKMapView) -> Self {
+        unsafeSend { self._beMoveMapCenterToCenterPoint(mapView: mapView) }
         return self
     }
     @discardableResult
-    public func beMoveMapCenterToCenterPoint() -> Self {
-        unsafeSend(_beMoveMapCenterToCenterPoint)
+    public func beSearchNearby(mapCenter: CenterPoint) -> Self {
+        unsafeSend { self._beSearchNearby(mapCenter: mapCenter) }
         return self
     }
     @discardableResult
-    public func beSearchNearby() -> Self {
-        unsafeSend(_beSearchNearby)
+    public func beMarkFoundPlacesOnMap(mapView: MKMapView, queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
+        unsafeSend { self._beMarkFoundPlacesOnMap(mapView: mapView, queryData: queryData) }
         return self
     }
     @discardableResult
-    public func beMarkFoundPlacesOnMap(queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
-        unsafeSend { self._beMarkFoundPlacesOnMap(queryData: queryData) }
-        return self
-    }
-    @discardableResult
-    public func beSearchInNewRange() -> Self {
-        unsafeSend(_beSearchInNewRange)
+    public func beSearchInNewRange(mapCenter: CenterPoint) -> Self {
+        unsafeSend { self._beSearchInNewRange(mapCenter: mapCenter) }
         return self
     }
     @discardableResult

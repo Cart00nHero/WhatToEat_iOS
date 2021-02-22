@@ -19,15 +19,18 @@ class LogisticsCenter: NSObject {
     private let courier = Courier()
     
     func applyExpressService<T>(
-        sender: Actor, recipient: String,content: T) {
+        sender: Actor, recipient: String,content: T) -> Parcel {
         let typeName = String(describing: type(of: T.self))
         let senderName = String(describing: type(of: sender))
         let parcel =
             Parcel(parcelType: typeName, sender: senderName, content: content)
         courier.beClaimParcel(recipient, parcel)
+        return parcel
     }
-    func collectPacels(_ recipient: Actor,
-                       _ complete: @escaping (NSSet?) -> Void) {
+    func cancelService(recipient:String, parcel: Parcel) {
+        courier.beCancel(recipient, parcel)
+    }
+    func collectPacels(recipient: Actor,complete: @escaping (NSSet?) -> Void) {
         courier.beCollect(recipient, complete)
     }
 }

@@ -38,64 +38,63 @@ protocol PilotProtocol {
 
 fileprivate class GPSService: NSObject,CLLocationManagerDelegate {
     static let shared = GPSService()
-    private var locationManager: CLLocationManager?
+    private let locationManager: CLLocationManager = CLLocationManager()
     private var isStartUpdatingLocation = false
     var delegate: PilotProtocol?
     
     override init() {
         super.init()
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
+        locationManager.delegate = self
     }
     
     func setAccuracyAndDistanceFilter(_ meters: Double, accuracy accuracyType: AccuracyType) {
-        locationManager?.distanceFilter = CLLocationDistance(meters)
+        locationManager.distanceFilter = CLLocationDistance(meters)
         switch accuracyType {
         case .ACCURACY_DEFAULT:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         case .ACCURACY_BEST_FOR_NAVIGATION:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+            locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         case .ACCURACY_BEST:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
         case .ACCURACY_NEAREST_TENMETERS:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         case .ACCURACY_HUNDRED_METERS:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
+            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         case .ACCURACY_KIIOMETER:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyKilometer
+            locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
         case .ACCURACY_THREE_KILOMETERS:
-            locationManager?.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+            locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         }
     }
     func requestAuthorization(_ authorization: RequestAuthorization) {
         switch authorization {
         case .REQUEST_AUTHORIZATION_ALWAYS:
             if UIDevice.current.systemVersion.compare("8.0", options: .numeric) == .orderedDescending {
-              locationManager?.requestAlwaysAuthorization()
+                locationManager.requestAlwaysAuthorization()
             }
             if UIDevice.current.systemVersion.compare("9.0", options: .numeric) == .orderedDescending {
-              locationManager?.allowsBackgroundLocationUpdates = true
+                locationManager.allowsBackgroundLocationUpdates = true
           }
         case .REQUEST_AUTHORIZATION_WHENINUSE:
           if UIDevice.current.systemVersion.compare("8.0", options: .numeric) == .orderedDescending {
-            locationManager?.requestWhenInUseAuthorization()
+            locationManager.requestWhenInUseAuthorization()
           }
           if UIDevice.current.systemVersion.compare("9.0", options: .numeric) == .orderedDescending {
-            locationManager?.allowsBackgroundLocationUpdates = false
+            locationManager.allowsBackgroundLocationUpdates = false
           }
         }
     }
     func startUpdatingLocation() {
-        locationManager?.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         isStartUpdatingLocation = true
     }
     func requestCurrentLocation() {
         //request onece and accuracy select automatic
         //can't use together with startUpdatingLocation
-        locationManager?.requestLocation()
+        locationManager.requestLocation()
     }
     func stopUpdatingLocation() {
-        locationManager?.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
         isStartUpdatingLocation = false
     }
     
@@ -122,15 +121,21 @@ class Pilot: Actor {
     private func _beRequestAuthorization(_ authorization: RequestAuthorization) {
         gpsService.requestAuthorization(authorization)
     }
-    
     private func _beStart() {
+        gpsService.startUpdatingLocation()
+    }
+    private func _beStop() {
         gpsService.stopUpdatingLocation()
     }
     private func _beRequestCurrentLocation() {
         gpsService.requestCurrentLocation()
     }
-    private func _beStop() {
-        gpsService.stopUpdatingLocation()
+    private func _beCalculateDistance(
+        sender: Actor,from: CLLocationCoordinate2D,
+        to: CLLocationCoordinate2D,
+        _ complete: @escaping (CLLocationDistance) -> Void) {
+        Mathematician().beCalculateCoordinateDistance(
+            sender, from: from, to: to, complete)
     }
 }
 
@@ -155,13 +160,18 @@ extension Pilot {
         return self
     }
     @discardableResult
+    public func beStop() -> Self {
+        unsafeSend(_beStop)
+        return self
+    }
+    @discardableResult
     public func beRequestCurrentLocation() -> Self {
         unsafeSend(_beRequestCurrentLocation)
         return self
     }
     @discardableResult
-    public func beStop() -> Self {
-        unsafeSend(_beStop)
+    public func beCalculateDistance(sender: Actor, from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, _ complete: @escaping (CLLocationDistance) -> Void) -> Self {
+        unsafeSend { self._beCalculateDistance(sender: sender, from: from, to: to, complete) }
         return self
     }
 

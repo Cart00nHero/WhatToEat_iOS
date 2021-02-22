@@ -17,16 +17,7 @@ func appReducer(action: Action, state: AppState?) -> AppState {
 
 // MARK: - SubReducers
 func sceneStateReducer(action: Action, state: SceneState?) -> SceneState {
-    var newState = SceneState(currentAction: action, receivedParcel: state?.receivedParcel)
-    switch newState.currentAction {
-    case is SendParcelAction:
-        let action = newState.currentAction as? SendParcelAction
-        newState.receivedParcel = action?.parcel
-    case is SignParcelReceiptAction:
-        newState.receivedParcel = nil
-    default:break;
-    }
-    return newState
+    return SceneState(currentAction: action)
 }
 
 func deliveryReducer(action: Action, state: DeliveryState?) -> DeliveryState {

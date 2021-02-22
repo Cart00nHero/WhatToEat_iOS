@@ -41,8 +41,8 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        let screenHeight = UIScreen.main.bounds.height
-//        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
+        //        let screenHeight = UIScreen.main.bounds.height
+        //        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -59,7 +59,11 @@ class SearchLocViewController: UIViewController {
         super.viewWillDisappear(animated)
         coverView.removeFromSuperview()
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scenario.beCancelFoundLocParcel()
+    }
+    
     // MARK: - Private methods
     private func createWebViewOnBottom() {
         isWebViewCreated = true
@@ -144,12 +148,20 @@ class SearchLocViewController: UIViewController {
 // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        scenario.beSendParcel()
-        let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-        let toVC =
-            storyboard.instantiateViewController(
-                withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
-        sceneVC?.basePushToViewController(toVC, Animated: true)
+        scenario.bePrepareGoFoundLocScenario { [self] (isPrepared) in
+            if isPrepared {
+                let presentVC =
+                    self.storyboard?.instantiateViewController(identifier: "FoundLocViewController")
+                sceneVC?.basePresentViewController(presentVC!, Animated: true)
+                
+            } else {
+                let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+                let toVC =
+                    storyboard.instantiateViewController(
+                        withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+                sceneVC?.basePushToViewController(toVC, Animated: true)
+            }
+        }
     }
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         var viewTag = 0
@@ -166,8 +178,7 @@ extension SearchLocViewController: WKNavigationDelegate,WKUIDelegate {
 extension SearchLocViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
         switch state.currentAction {
-        case is ReceivedTapAction:
-            let action = state.currentAction as! ReceivedTapAction
+        case let action as ReceivedTapAction:
             if coverView.superview == topSelectedView {
                 topSelectedView.backgroundColor = selectedBgColor()
                 setViewDefaultStyle(selectView: bottomSelectedView)
@@ -195,6 +206,12 @@ extension SearchLocViewController: SceneStateDelegate {
             }
         case let action as FoundLocationsAddressAction:
             searchTextField.text = action.inputObj.address.completeInfo
+        case is GoAddGourmetScenarioAction:
+            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+            let toVC =
+                storyboard.instantiateViewController(
+                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+            sceneVC?.basePushToViewController(toVC, Animated: true)
         default: break
         }
     }

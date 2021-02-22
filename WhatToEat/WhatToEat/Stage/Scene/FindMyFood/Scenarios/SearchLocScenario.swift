@@ -20,6 +20,7 @@ class SearchLocScenario: Actor,PilotProtocol {
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
     private var mapView: MKMapView? = nil
+    private var queryDataParcel: Parcel?
     private var markedGQinput = initGQInputObject()
     
     override init() {
@@ -82,15 +83,14 @@ class SearchLocScenario: Actor,PilotProtocol {
         queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]) {
         DataManager().beParseLocDynamicQueryDataToGQInput(self, queryData) { [self]
             (inputObjs) in
+            queryDataParcel = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
             if mapView != nil && inputObjs.count > 0 {
-                markedGQinput = inputObjs.first!
+                let data = inputObjs.first!
                 var annotations = [MKPointAnnotation]()
-                let latitude = Double(markedGQinput.address.latitude) ?? 0.0
-                let longitude = Double(markedGQinput.address.longitude) ?? 0.0
+                let latitude = Double(data.address.latitude) ?? 0.0
+                let longitude = Double(data.address.longitude) ?? 0.0
                 let location = CLLocation(latitude: latitude, longitude: longitude)
                 let annotation = MKPointAnnotation()
-                annotation.title = markedGQinput.shop.title
-                annotation.subtitle = markedGQinput.shopBranch.name
                 annotation.coordinate = location.coordinate
                 annotations.append(annotation)
                 let mapNab = MapNavigator(mapView: mapView!)
@@ -107,8 +107,6 @@ class SearchLocScenario: Actor,PilotProtocol {
             let longitude = Double(markedGQinput.address.longitude) ?? 0.0
             let location = CLLocation(latitude: latitude, longitude: longitude)
             let annotation = MKPointAnnotation()
-            annotation.title = markedGQinput.shop.title
-            annotation.subtitle = markedGQinput.shopBranch.name
             annotation.coordinate = location.coordinate
             annotations.append(annotation)
             let mapNab = MapNavigator(mapView: mapView!)
@@ -118,10 +116,26 @@ class SearchLocScenario: Actor,PilotProtocol {
         }
     }
     
-    private func _beSendParcel() {
-        LogisticsCenter.shared.applyExpressService(
-            sender: self, recipient: "AddGourmetScenario",
-            content: markedGQinput)
+    private func _bePrepareGoFoundLocScenario(_ complete: @escaping (Bool) -> Void) {
+        var isPreapared = false
+        if queryDataParcel != nil {
+            queryDataParcel = nil
+            isPreapared = true
+        } else {
+            _ = LogisticsCenter.shared.applyExpressService(
+                sender: self, recipient: "AddGourmetScenario",
+                content: markedGQinput)
+        }
+        DispatchQueue.main.async {
+            complete(isPreapared)
+        }
+    }
+    private func _beCancelFoundLocParcel() {
+        if queryDataParcel != nil {
+            LogisticsCenter.shared.cancelService(
+                recipient: "FoundLocScenario", parcel: queryDataParcel!)
+            queryDataParcel = nil
+        }
     }
     
     // MARK: - Pilot protocols
@@ -186,8 +200,13 @@ extension SearchLocScenario {
         return self
     }
     @discardableResult
-    public func beSendParcel() -> Self {
-        unsafeSend(_beSendParcel)
+    public func bePrepareGoFoundLocScenario(_ complete: @escaping (Bool) -> Void) -> Self {
+        unsafeSend { self._bePrepareGoFoundLocScenario(complete) }
+        return self
+    }
+    @discardableResult
+    public func beCancelFoundLocParcel() -> Self {
+        unsafeSend(_beCancelFoundLocParcel)
         return self
     }
     @discardableResult

@@ -42,7 +42,6 @@
 		AF13AF6B245E90DC0026A5C8 /* WhatToEatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF6A245E90DC0026A5C8 /* WhatToEatTests.swift */; };
 		AF13AF76245E90DC0026A5C8 /* WhatToEatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */; };
 		AF3C6EA52482FDD40052719A /* WhatToEat.graphql in Resources */ = {isa = PBXBuildFile; fileRef = AF3C6EA42482FDD40052719A /* WhatToEat.graphql */; };
-		AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */; };
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
 		AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
@@ -64,14 +63,15 @@
 		AFA8A13B25D728C90057FA75 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A13A25D728C90057FA75 /* DataManager.swift */; };
 		AFA8A1FA25D9792D0057FA75 /* AddGourmetScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA8A1F925D9792D0057FA75 /* AddGourmetScenario.swift */; };
 		AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */; };
-		AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */; };
 		AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB1256012ED00A92E21 /* StructObserver.swift */; };
 		AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DB2256012ED00A92E21 /* DateUtil.swift */; };
 		AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6DBA256012FE00A92E21 /* XibView.swift */; };
 		AFBB6E132560163600A92E21 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */; };
 		AFBB6E27256017CF00A92E21 /* FindFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */; };
 		AFBB6E82256058EB00A92E21 /* AddGmtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E81256058EB00A92E21 /* AddGmtTableViewCell.swift */; };
-		AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB490724D6AB3200D28A79 /* MapActions.swift */; };
+		AFD30C0625E0AB7700B12B63 /* FoundLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD30C0525E0AB7700B12B63 /* FoundLocViewController.swift */; };
+		AFD30C0B25E0ABC600B12B63 /* FoundLocScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD30C0A25E0ABC600B12B63 /* FoundLocScenario.swift */; };
+		AFD30C1525E0F8BE00B12B63 /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD30C1425E0F8BE00B12B63 /* CollectionViewCells.swift */; };
 		AFF884362496588300646088 /* GQResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF884352496588300646088 /* GQResponseData.swift */; };
 		AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF8843724965F4A00646088 /* CodableExtension.swift */; };
 /* End PBXBuildFile section */
@@ -138,7 +138,6 @@
 		AF13AF75245E90DC0026A5C8 /* WhatToEatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatToEatUITests.swift; sourceTree = "<group>"; };
 		AF13AF77245E90DC0026A5C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF3C6EA42482FDD40052719A /* WhatToEat.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatToEat.graphql; sourceTree = "<group>"; };
-		AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryActions.swift; sourceTree = "<group>"; };
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
 		AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigator.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
@@ -159,14 +158,15 @@
 		AFA8A13A25D728C90057FA75 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		AFA8A1F925D9792D0057FA75 /* AddGourmetScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGourmetScenario.swift; sourceTree = "<group>"; };
 		AFB7DF1E25C97D1A004B1715 /* JSONEmptyRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEmptyRepresentable.swift; sourceTree = "<group>"; };
-		AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeliveryMan.swift; sourceTree = "<group>"; };
 		AFBB6DB1256012ED00A92E21 /* StructObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StructObserver.swift; sourceTree = "<group>"; };
 		AFBB6DB2256012ED00A92E21 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtil.swift; sourceTree = "<group>"; };
 		AFBB6DBA256012FE00A92E21 /* XibView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XibView.swift; sourceTree = "<group>"; };
 		AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBtnTableViewCell.swift; sourceTree = "<group>"; };
 		AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindFoodTableViewCell.swift; sourceTree = "<group>"; };
 		AFBB6E81256058EB00A92E21 /* AddGmtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGmtTableViewCell.swift; sourceTree = "<group>"; };
-		AFCB490724D6AB3200D28A79 /* MapActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapActions.swift; sourceTree = "<group>"; };
+		AFD30C0525E0AB7700B12B63 /* FoundLocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundLocViewController.swift; sourceTree = "<group>"; };
+		AFD30C0A25E0ABC600B12B63 /* FoundLocScenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundLocScenario.swift; sourceTree = "<group>"; };
+		AFD30C1425E0F8BE00B12B63 /* CollectionViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCells.swift; sourceTree = "<group>"; };
 		AFF884352496588300646088 /* GQResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQResponseData.swift; sourceTree = "<group>"; };
 		AFF8843724965F4A00646088 /* CodableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtension.swift; sourceTree = "<group>"; };
 		B094A1456F89E4C27A08F93E /* Pods-WhatToEat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhatToEat.release.xcconfig"; path = "Target Support Files/Pods-WhatToEat/Pods-WhatToEat.release.xcconfig"; sourceTree = "<group>"; };
@@ -270,6 +270,7 @@
 			children = (
 				AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */,
 				AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */,
+				AFD30C0525E0AB7700B12B63 /* FoundLocViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -478,10 +479,8 @@
 				AF82247F2472F4160034C928 /* CommonActions.swift */,
 				AF0EDF63247A7E3B003D84C0 /* SceneryActions.swift */,
 				AF5F16FE247D7CB60023F3FC /* GPSActions.swift */,
-				AF40DC0C24800D0200ED4BB1 /* DeliveryActions.swift */,
 				AF801504248E8DCE009E6214 /* MutationActions.swift */,
 				AF801506248E8E20009E6214 /* QueryActions.swift */,
-				AFCB490724D6AB3200D28A79 /* MapActions.swift */,
 				AFA89FEB25D6DD200057FA75 /* ScenarioNotifyActions.swift */,
 			);
 			path = Actions;
@@ -510,6 +509,7 @@
 			children = (
 				AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */,
 				AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */,
+				AFD30C0A25E0ABC600B12B63 /* FoundLocScenario.swift */,
 			);
 			path = Scenarios;
 			sourceTree = "<group>";
@@ -545,7 +545,6 @@
 			children = (
 				AFA8A12325D722AE0057FA75 /* Courier.swift */,
 				AFA8A12225D722AE0057FA75 /* LogisticsCenter.swift */,
-				AFBB6DAC2560129000A92E21 /* DeliveryMan.swift */,
 			);
 			path = Express;
 			sourceTree = "<group>";
@@ -556,6 +555,7 @@
 				AFBB6E81256058EB00A92E21 /* AddGmtTableViewCell.swift */,
 				AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */,
 				AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */,
+				AFD30C1425E0F8BE00B12B63 /* CollectionViewCells.swift */,
 			);
 			path = CustomLayouts;
 			sourceTree = "<group>";
@@ -886,7 +886,7 @@
 				AFBB6DB4256012ED00A92E21 /* StructObserver.swift in Sources */,
 				AF13AF58245E90DB0026A5C8 /* ViewController.swift in Sources */,
 				AFA8A1FA25D9792D0057FA75 /* AddGourmetScenario.swift in Sources */,
-				AF40DC0D24800D0200ED4BB1 /* DeliveryActions.swift in Sources */,
+				AFD30C0B25E0ABC600B12B63 /* FoundLocScenario.swift in Sources */,
 				AF0BA6D325BCA88000358046 /* UIItemData.swift in Sources */,
 				AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */,
 				AF0EDF62247A5012003D84C0 /* SceneViewController.swift in Sources */,
@@ -894,10 +894,10 @@
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */,
 				AFA8A10D25D717B30057FA75 /* GeoCoder.swift in Sources */,
-				AFBB6DAD2560129000A92E21 /* DeliveryMan.swift in Sources */,
 				AFA89FEC25D6DD200057FA75 /* ScenarioNotifyActions.swift in Sources */,
 				AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */,
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
+				AFD30C1525E0F8BE00B12B63 /* CollectionViewCells.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AFA8A12425D722AE0057FA75 /* LogisticsCenter.swift in Sources */,
@@ -913,6 +913,7 @@
 				AFBB6E27256017CF00A92E21 /* FindFoodTableViewCell.swift in Sources */,
 				AF0EDF64247A7E3B003D84C0 /* SceneryActions.swift in Sources */,
 				AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */,
+				AFD30C0625E0AB7700B12B63 /* FoundLocViewController.swift in Sources */,
 				AF501ECC249712B700628DB0 /* DataParser.swift in Sources */,
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */,
@@ -920,7 +921,6 @@
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,
 				AFA8A13B25D728C90057FA75 /* DataManager.swift in Sources */,
 				AF0BA73825BCB3DE00358046 /* MainMenuViewController.swift in Sources */,
-				AFCB490824D6AB3200D28A79 /* MapActions.swift in Sources */,
 				AF0EDF61247A5012003D84C0 /* UIBaseViewController.swift in Sources */,
 				AF0BA72E25BCB3DE00358046 /* AddGourmetViewController.swift in Sources */,
 				AF13AF56245E90DB0026A5C8 /* SceneDelegate.swift in Sources */,
