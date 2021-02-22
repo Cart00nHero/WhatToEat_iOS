@@ -130,6 +130,7 @@ extension FindFoodViewController: SceneStateDelegate {
             case .Success:
                 if action.responseData?.count ?? 0 > 0 {
                     dataSource = action.responseData!
+                    collectionView.reloadData()
                 }
             default: break
             }
@@ -255,6 +256,10 @@ extension FindFoodViewController: UICollectionViewDelegate,
         case is ShopCollectCell :
             let data = dataSource[indexPath.row]
             scenario.beSendGourmetDetailParcel(content: data!)
+            let presentVC =
+                self.storyboard?.instantiateViewController(identifier: "GourmetDetailViewController")
+            sceneVC?.basePresentViewController(presentVC!, Animated: true)
+            
         default: break
         }
     }

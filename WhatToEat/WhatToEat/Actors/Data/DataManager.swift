@@ -91,15 +91,15 @@ class DataManager: Actor {
         searchData: SearchForRangeQuery.Data.SearchForRange,
         _ complete: @escaping (AddressDqCmd) -> Void) {
         var addressCmd = AddressDqCmd()
-        for key in searchData.resultMap.keys {
-            if key == "__typename" || key == "shopBranch" {
-                return
-            }
-            let value = searchData.resultMap[key]
-            if value != nil {
-                addressCmd.graphQLMap.updateValue(value, forKey: key)
-            }
-        }
+        addressCmd.nation = searchData.nation
+        addressCmd.isoNationCode = searchData.isoNationCode
+        addressCmd.locality = searchData.locality
+        addressCmd.subLocality = searchData.subLocality
+        addressCmd.administrativeArea = searchData.administrativeArea
+        addressCmd.subAdministrativeArea = searchData.subAdministrativeArea
+        addressCmd.postalCode = searchData.postalCode
+        addressCmd.thoroughfare = searchData.thoroughfare
+        addressCmd.subThoroughfare = searchData.subThoroughfare
         sender.unsafeSend {
             complete(addressCmd)
         }

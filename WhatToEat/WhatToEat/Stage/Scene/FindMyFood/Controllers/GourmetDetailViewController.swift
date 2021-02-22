@@ -1,15 +1,16 @@
 //
-//  GourmetDetailViewConteoller.swift
+//  GourmetDetailViewController.swift
 //  WhatToEat
 //
-//  Created by YuCheng on 2021/2/22.
+//  Created by YuCheng on 2021/2/23.
 //  Copyright © 2021 YuCheng. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class GourmetDetailViewConteoller: UIViewController {
+class GourmetDetailViewController: UIViewController {
+    
     private var scenario = GourmetDetailScenario()
     private var tableData = DetailTableData(dataObj: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery())
     @IBOutlet weak var tableView: UITableView!
@@ -22,14 +23,14 @@ class GourmetDetailViewConteoller: UIViewController {
         scenario.beCollectParcel { [self] (data) in
             tableData.reloadData(data: data)
             DispatchQueue.main.async {
-                tableView.reloadData()
+//                tableView.reloadData()
             }
         }
     }
     
 }
 
-extension GourmetDetailViewConteoller: UITableViewDataSource,UITableViewDelegate {
+extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -56,5 +57,4 @@ extension GourmetDetailViewConteoller: UITableViewDataSource,UITableViewDelegate
         }
         return cell
     }
-    
 }

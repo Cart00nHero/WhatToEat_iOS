@@ -45,8 +45,8 @@
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
 		AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
-		AF6CE86E25E40AED001ED540 /* GourmetDetailViewConteoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE86D25E40AED001ED540 /* GourmetDetailViewConteoller.swift */; };
 		AF6CE87F25E40B38001ED540 /* GourmetDetailScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */; };
+		AF6CE8CE25E424F6001ED540 /* GourmetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */; };
 		AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801504248E8DCE009E6214 /* MutationActions.swift */; };
 		AF801507248E8E20009E6214 /* QueryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801506248E8E20009E6214 /* QueryActions.swift */; };
 		AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224792472F2FE0034C928 /* ApolloService.swift */; };
@@ -143,8 +143,8 @@
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
 		AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigator.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
-		AF6CE86D25E40AED001ED540 /* GourmetDetailViewConteoller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GourmetDetailViewConteoller.swift; sourceTree = "<group>"; };
 		AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GourmetDetailScenario.swift; sourceTree = "<group>"; };
+		AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GourmetDetailViewController.swift; sourceTree = "<group>"; };
 		AF801504248E8DCE009E6214 /* MutationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationActions.swift; sourceTree = "<group>"; };
 		AF801506248E8E20009E6214 /* QueryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryActions.swift; sourceTree = "<group>"; };
 		AF8224792472F2FE0034C928 /* ApolloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloService.swift; sourceTree = "<group>"; };
@@ -272,10 +272,10 @@
 		AF0BA71B25BCB3DE00358046 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AF6CE86D25E40AED001ED540 /* GourmetDetailViewConteoller.swift */,
 				AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */,
 				AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */,
 				AFD30C0525E0AB7700B12B63 /* FoundLocViewController.swift */,
+				AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -911,6 +911,7 @@
 				AFA89FAF25D5B0770057FA75 /* Pilot.swift in Sources */,
 				AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
+				AF6CE8CE25E424F6001ED540 /* GourmetDetailViewController.swift in Sources */,
 				AF0BA27224B570F9007F382E /* Haversin.swift in Sources */,
 				AFA89FA425D5AC230057FA75 /* Mathematician.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,
@@ -924,7 +925,6 @@
 				AF501ECC249712B700628DB0 /* DataParser.swift in Sources */,
 				AFF8843824965F4A00646088 /* CodableExtension.swift in Sources */,
 				AFBB6DB5256012ED00A92E21 /* DateUtil.swift in Sources */,
-				AF6CE86E25E40AED001ED540 /* GourmetDetailViewConteoller.swift in Sources */,
 				AFA8A12525D722AE0057FA75 /* Courier.swift in Sources */,
 				AF8224862472F4160034C928 /* AppReducer.swift in Sources */,
 				AFA8A13B25D728C90057FA75 /* DataManager.swift in Sources */,

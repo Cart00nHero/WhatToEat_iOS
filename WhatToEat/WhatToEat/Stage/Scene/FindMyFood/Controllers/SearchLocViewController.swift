@@ -153,7 +153,6 @@ extension SearchLocViewController: MKMapViewDelegate {
                 let presentVC =
                     self.storyboard?.instantiateViewController(identifier: "FoundLocViewController")
                 sceneVC?.basePresentViewController(presentVC!, Animated: true)
-                
             } else {
                 let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
                 let toVC =
