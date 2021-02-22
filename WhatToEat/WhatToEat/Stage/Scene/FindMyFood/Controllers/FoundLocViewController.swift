@@ -38,15 +38,15 @@ extension FoundLocViewController: UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        var cellIdentifier = "FoundLocCollectCell"
+        var cellIdentifier = "ShopCollectCell"
         if indexPath.row == dataSource.count {
             cellIdentifier = "AddShopCollectCell"
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        if cellIdentifier == "FoundLocCollectCell" {
+        if cellIdentifier == "ShopCollectCell" {
             let data = dataSource[indexPath.row]
-            (cell as! FoundLocCollectCell)
+            (cell as! ShopCollectCell)
                 .cellTitleLabel.text = data.shop.title
         }
         return cell
@@ -58,7 +58,7 @@ extension FoundLocViewController: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         switch cell {
-        case is FoundLocCollectCell :
+        case is ShopCollectCell :
             let data = dataSource[indexPath.row]
             scenario.bePackageParcel(inputObj: data)
         case is AddShopCollectCell :

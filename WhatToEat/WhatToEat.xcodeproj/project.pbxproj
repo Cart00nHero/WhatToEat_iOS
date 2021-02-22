@@ -45,6 +45,8 @@
 		AF501ECC249712B700628DB0 /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF501ECB249712B700628DB0 /* DataParser.swift */; };
 		AF5C46342514B6DC00BE0CAF /* MapNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */; };
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
+		AF6CE87F25E40B38001ED540 /* GourmetDetailScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */; };
+		AF6CE8CE25E424F6001ED540 /* GourmetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */; };
 		AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801504248E8DCE009E6214 /* MutationActions.swift */; };
 		AF801507248E8E20009E6214 /* QueryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801506248E8E20009E6214 /* QueryActions.swift */; };
 		AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224792472F2FE0034C928 /* ApolloService.swift */; };
@@ -141,6 +143,8 @@
 		AF501ECB249712B700628DB0 /* DataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataParser.swift; sourceTree = "<group>"; };
 		AF5C46332514B6DC00BE0CAF /* MapNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNavigator.swift; sourceTree = "<group>"; };
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
+		AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GourmetDetailScenario.swift; sourceTree = "<group>"; };
+		AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GourmetDetailViewController.swift; sourceTree = "<group>"; };
 		AF801504248E8DCE009E6214 /* MutationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationActions.swift; sourceTree = "<group>"; };
 		AF801506248E8E20009E6214 /* QueryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryActions.swift; sourceTree = "<group>"; };
 		AF8224792472F2FE0034C928 /* ApolloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloService.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 				AF0BA72425BCB3DE00358046 /* SearchLocViewController.swift */,
 				AF0BA71C25BCB3DE00358046 /* FindFoodViewController.swift */,
 				AFD30C0525E0AB7700B12B63 /* FoundLocViewController.swift */,
+				AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 		AFA8A06A25D70A1F0057FA75 /* Scenarios */ = {
 			isa = PBXGroup;
 			children = (
+				AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */,
 				AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */,
 				AFA8A0EE25D715CC0057FA75 /* SearchLocScenario.swift */,
 				AFD30C0A25E0ABC600B12B63 /* FoundLocScenario.swift */,
@@ -899,11 +905,13 @@
 				AFF884362496588300646088 /* GQResponseData.swift in Sources */,
 				AFD30C1525E0F8BE00B12B63 /* CollectionViewCells.swift in Sources */,
 				AF007A26248C12F700DF61DB /* GQInputData.swift in Sources */,
+				AF6CE87F25E40B38001ED540 /* GourmetDetailScenario.swift in Sources */,
 				AF8224842472F4160034C928 /* CommonActions.swift in Sources */,
 				AFA8A12425D722AE0057FA75 /* LogisticsCenter.swift in Sources */,
 				AFA89FAF25D5B0770057FA75 /* Pilot.swift in Sources */,
 				AFBB6DBB256012FE00A92E21 /* XibView.swift in Sources */,
 				AF8224832472F4160034C928 /* AppState.swift in Sources */,
+				AF6CE8CE25E424F6001ED540 /* GourmetDetailViewController.swift in Sources */,
 				AF0BA27224B570F9007F382E /* Haversin.swift in Sources */,
 				AFA89FA425D5AC230057FA75 /* Mathematician.swift in Sources */,
 				AF13AF54245E90DB0026A5C8 /* AppDelegate.swift in Sources */,

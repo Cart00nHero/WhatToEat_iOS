@@ -11,39 +11,6 @@ import Flynn
 import CoreLocation
 import MapKit
 
-struct FindFoodTableData {
-    var dataObj: SearchForRangeQuery.Data.SearchForRange
-    var dataSource: Array<TemplateProtocol> = []
-    init(dataObj: SearchForRangeQuery.Data.SearchForRange) {
-        self.dataObj = dataObj
-        dataSource = createDataSource()
-    }
-    //    let sectionTitles : Array<String> = ["Shop","Branch","Location"]
-    mutating func reloadData(data: SearchForRangeQuery.Data.SearchForRange) {
-        self.dataObj = data
-        dataSource = createDataSource()
-    }
-    private func createDataSource() -> Array<TemplateProtocol> {
-        return [
-            LRTemplate(leftViewItem: LabelItem(text: "Title"),
-                           rightViewItem: LabelItem(text: self.dataObj.shopBranch?.shop?.title ?? "")),
-            LRTemplate(leftViewItem: LabelItem(text: "Style"),
-                           rightViewItem: LabelItem(text: (self.dataObj.shopBranch?.shop?.style ?? "") )),
-            LRTemplate(leftViewItem: LabelItem(text: "Type"),
-                           rightViewItem: LabelItem(text: (self.dataObj.shopBranch?.shop?.type ?? "") )),
-            LRTemplate(leftViewItem: LabelItem(text: "Under\nPrice"),
-                           rightViewItem: LabelItem(text:
-                                                            String(format: "%.2f", (self.dataObj.shopBranch?.shop?.underPrice ?? 0.0)!))),
-            LRTemplate(leftViewItem: LabelItem(text: "Name"),
-                           rightViewItem: LabelItem(text: "")),
-            LRTemplate(leftViewItem: LabelItem(text: "Tel"),
-                           rightViewItem: LabelItem(text: (dataObj.shopBranch?.tel ?? "") )),
-            LRTemplate(leftViewItem: LabelItem(text: "Address"),
-                           rightViewItem: LabelItem(text: dataObj.completeInfo ?? "")),
-            ButtonTemplate(cornerRadius: 2.0, titleText: "Navigation")
-        ]
-    }
-}
 struct CenterPoint {
     var coordinate: CLLocationCoordinate2D? = nil
     var zoomLevel = 17
@@ -134,8 +101,7 @@ class FindFoodScenario: Actor,PilotProtocol {
             let longitude = Double(place!.longitude!) ?? 0.0
             let location = CLLocation(latitude: latitude, longitude: longitude)
             let annotation = MKPointAnnotation()
-            annotation.title = place?.shopBranch?.shop?.title
-            annotation.subtitle = place?.shopBranch?.name
+            annotation.title = place?.completeInfo
             annotation.coordinate = location.coordinate
             annotations.add(annotation)
         }
@@ -168,6 +134,24 @@ class FindFoodScenario: Actor,PilotProtocol {
                 }
             }
         }
+    }
+    private func _beDynamicQuerySelectedData(index: Int) {
+        let data = lastQueryData[index]
+        if data != nil {
+            DataManager().beSearchRangeDataToLocDqCmd(sender: self, searchData: data!) { (addressDqCmd) in
+                DispatchQueue.main.async {
+                    appStore.dispatch(
+                        locationsDynamicQueryAction(
+                            foodieId: globalFoodieId, whereCMD: addressDqCmd))
+                }
+            }
+        }
+    }
+    private func _beSendGourmetDetailParcel(
+        content: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery){
+        let recipientName = "GourmetDetailScenario"
+//            String(describing: type(of: GourmetDetailScenario.self))
+        _ = LogisticsCenter.shared.applyExpressService(sender: self, recipient: recipientName, content: content)
     }
 
     // MARK: - private
@@ -280,6 +264,16 @@ extension FindFoodScenario {
     @discardableResult
     public func beSearchInNewRange(mapCenter: CenterPoint) -> Self {
         unsafeSend { self._beSearchInNewRange(mapCenter: mapCenter) }
+        return self
+    }
+    @discardableResult
+    public func beDynamicQuerySelectedData(index: Int) -> Self {
+        unsafeSend { self._beDynamicQuerySelectedData(index: index) }
+        return self
+    }
+    @discardableResult
+    public func beSendGourmetDetailParcel(content: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> Self {
+        unsafeSend { self._beSendGourmetDetailParcel(content: content) }
         return self
     }
     @discardableResult

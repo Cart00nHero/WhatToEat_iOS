@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class FoundLocCollectCell: UICollectionViewCell {
+class ShopCollectCell: UICollectionViewCell {
     @IBOutlet weak var cellTitleLabel: UILabel!
 }
 class AddShopCollectCell: UICollectionViewCell {

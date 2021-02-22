@@ -86,6 +86,24 @@ class DataManager: Actor {
             }
         }
     }
+    private func _beSearchRangeDataToLocDqCmd(
+        sender: Actor,
+        searchData: SearchForRangeQuery.Data.SearchForRange,
+        _ complete: @escaping (AddressDqCmd) -> Void) {
+        var addressCmd = AddressDqCmd()
+        addressCmd.nation = searchData.nation
+        addressCmd.isoNationCode = searchData.isoNationCode
+        addressCmd.locality = searchData.locality
+        addressCmd.subLocality = searchData.subLocality
+        addressCmd.administrativeArea = searchData.administrativeArea
+        addressCmd.subAdministrativeArea = searchData.subAdministrativeArea
+        addressCmd.postalCode = searchData.postalCode
+        addressCmd.thoroughfare = searchData.thoroughfare
+        addressCmd.subThoroughfare = searchData.subThoroughfare
+        sender.unsafeSend {
+            complete(addressCmd)
+        }
+    }
     
     // MARK: - Private
     private func combineAddressCompleteInfo(input: GQInputObject) -> String {
@@ -117,6 +135,11 @@ extension DataManager {
     @discardableResult
     public func beParseLocDynamicQueryDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
         unsafeSend { self._beParseLocDynamicQueryDataToGQInput(sender, queryData, complete) }
+        return self
+    }
+    @discardableResult
+    public func beSearchRangeDataToLocDqCmd(sender: Actor, searchData: SearchForRangeQuery.Data.SearchForRange, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
+        unsafeSend { self._beSearchRangeDataToLocDqCmd(sender: sender, searchData: searchData, complete) }
         return self
     }
 
