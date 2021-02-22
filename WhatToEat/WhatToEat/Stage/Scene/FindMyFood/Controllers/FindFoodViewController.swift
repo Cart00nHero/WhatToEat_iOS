@@ -10,10 +10,10 @@ import UIKit
 import MapKit
 
 class FindFoodViewController: UIViewController {
-    
-    private var scenario: FindFoodScenario = FindFoodScenario()
-    @IBOutlet fileprivate weak var tableView: UITableView!
-    @IBOutlet weak var tableHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionView: UICollectionView!
+    private var scenario = FindFoodScenario()
+    private var dataSource =
+        [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]()
     @IBOutlet weak private var mkMapView: MKMapView!
     @IBOutlet weak private var radarView: RadarScanView!
     @IBOutlet weak private var rangeButton: UIButton!
@@ -21,8 +21,6 @@ class FindFoodViewController: UIViewController {
     private var annotationViewTag: Int = -1
     private var queryCount: Int = 0
     private var sceneVC: SceneViewController? = nil
-    var tableData =
-        FindFoodTableData(dataObj: SearchForRangeQuery.Data.SearchForRange())
     private var willMarkAnnotations = false
     
     override func viewDidLoad() {
@@ -40,8 +38,6 @@ class FindFoodViewController: UIViewController {
         mkMapView.delegate = self
         startRadarAnimating()
         scenario.beRequestCurrentLocation()
-        tableHeightConstraint.constant =
-            48.0 * CGFloat(tableData.dataSource.count)
     }
     private func startRadarAnimating() {
         DispatchQueue.main.async { [self] in
@@ -80,36 +76,6 @@ class FindFoodViewController: UIViewController {
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
         
-    }
-    
-}
-
-extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableData.dataSource.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = tableData.dataSource[indexPath.row]
-        var cellIdentifier = "FindFoodTableViewCell"
-        switch data.templateStyle {
-        case .Button:
-            cellIdentifier = "FFBtnTableViewCell"
-        default: break
-        }
-        let cell =
-            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        if cellIdentifier == "FindFoodTableViewCell" {
-            let contentCell = cell as! FindFoodTableViewCell
-            contentCell.cellTemplate = data as? LRTemplate
-        }else {
-            let contentCell = cell as! FFBtnTableViewCell
-            contentCell.cellData = data as? ButtonTemplate
-        }
-        return cell
     }
     
 }
@@ -158,6 +124,14 @@ extension FindFoodViewController: SceneStateDelegate {
                 scenario.beGetCenterPoint {(centerPT) in
                     mkMapView.zoomLevel = centerPT.zoomLevel
                 }
+            }
+        case let action as LocationsDynamicQueryAction:
+            switch action.status {
+            case .Success:
+                if action.responseData?.count ?? 0 > 0 {
+                    dataSource = action.responseData!
+                }
+            default: break
             }
         default: break
         }
@@ -223,12 +197,9 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        scenario.beGetQueryData { [self] (queryData) in
-            DispatchQueue.main.async {
-                tableData.reloadData(data: queryData[view.tag]!)
-                tableView.reloadData()
-            }
-        }
+        dataSource =
+            [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]()
+        scenario.beDynamicQuerySelectedData(index: view.tag)
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
@@ -242,4 +213,50 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         }
         return true
     }
+}
+
+extension FindFoodViewController: UICollectionViewDelegate,
+                                  UICollectionViewDataSource,
+                                  UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if dataSource.count == 0 {
+            return 1
+        }
+        return dataSource.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        var cellIdentifier = "ShopCollectCell"
+        if dataSource.count == 0 {
+            cellIdentifier = "EmptyDataCell"
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        if cellIdentifier == "ShopCollectCell" {
+            let data = dataSource[indexPath.row]
+            (cell as! ShopCollectCell).cellTitleLabel.text =
+                data?.shopBranch?.shop?.title
+        }
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var cellSize = CGSize()
+        if dataSource.count == 0 {
+            cellSize.width = collectionView.bounds.size.width
+            cellSize.height = collectionView.bounds.size.height
+        } else {
+            cellSize.width = collectionView.bounds.size.width/4.0
+            cellSize.height = collectionView.bounds.size.height/2.0
+        }
+        return cellSize
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        switch cell {
+        case is ShopCollectCell :
+            let data = dataSource[indexPath.row]
+            scenario.beSendGourmetDetailParcel(content: data!)
+        default: break
+        }
+    }
+    
 }

@@ -36,6 +36,23 @@ class DataManager: Actor {
             complete(result)
         }
     }
+    private func _beSearchRangeDataToAddressDqCmd(
+        sender: Actor,
+        searchData: SearchForRangeQuery.Data.SearchForRange?,
+        _ complete: @escaping (AddressDqCmd) -> Void) {
+        if searchData != nil {
+            var addressCmd = AddressDqCmd()
+            for key in searchData!.resultMap.keys {
+                let value = searchData!.resultMap[key]
+                if value != nil {
+                    addressCmd.graphQLMap.updateValue(value, forKey: key)
+                }
+            }
+            sender.unsafeSend {
+                complete(addressCmd)
+            }
+        }
+    }
     private func _beParsePlaceMarkToAddressDqCmd(
         _ sender: Actor,_ placeMark: CLPlacemark,
         _ complete: @escaping (AddressDqCmd) -> Void) {
@@ -107,6 +124,11 @@ extension DataManager {
     @discardableResult
     public func beParsePlaceMarktoGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
         unsafeSend { self._beParsePlaceMarktoGQInput(sender, placeMarks, complete) }
+        return self
+    }
+    @discardableResult
+    public func beSearchRangeDataToAddressDqCmd(sender: Actor, searchData: SearchForRangeQuery.Data.SearchForRange?, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
+        unsafeSend { self._beSearchRangeDataToAddressDqCmd(sender: sender, searchData: searchData, complete) }
         return self
     }
     @discardableResult
