@@ -117,6 +117,10 @@ extension FindFoodViewController: UITableViewDataSource,UITableViewDelegate {
 extension FindFoodViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
         switch state.currentAction {
+        case let action as LocatePositionAction:
+            if action.status == .DidUpdateLocation {
+                mkMapView.zoomLevel = 17
+            }
         case is SearchInNewRangeAction:
             startRadarAnimating()
             scenario.beSearchNearby(
@@ -131,15 +135,14 @@ extension FindFoodViewController: SceneStateDelegate {
                     queryCount = action.responseData?.count ?? 0
                     scenario.beStoreQueryData(queryData: action.responseData!)
                     willMarkAnnotations = true
-                    scenario.beMarkFoundPlacesOnMap(mapView: mkMapView, queryData: action.responseData!)
+                    scenario.beMarkFoundPlacesOnMap(queryData: action.responseData!)
                 } else {
-                    scenario.beGetNewRegion { [self] (region) in
-                        mkMapView.setRegion(region, animated: true)
+                    scenario.beUpdateCenterPoint(zoomLevel: mkMapView.zoomLevel, coordinate: mkMapView.camera.centerCoordinate) { [self](_) in
+                        scenario.beGetNewRegion { [self] (region) in
+                            mkMapView.setRegion(region, animated: true)
+                        }
                     }
                 }
-                scenario.beUpdateCenterPoint(
-                    zoomLevel: mkMapView.zoomLevel,
-                    coordinate: mkMapView.camera.centerCoordinate)
             case .Failed:
                 stopRadarAnimating()
             default: break
@@ -147,6 +150,15 @@ extension FindFoodViewController: SceneStateDelegate {
         case is TableCellButtonClickAction:
             let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
             sceneVC?.basePushToViewController(toVC!, Animated: true)
+        case let action as MarkFoundPlacesOnMapAction:
+            mkMapView.removeAnnotations(mkMapView.annotations)
+            mkMapView.addAnnotations(action.annotions)
+            scenario.beGetNewRegion { [self] (region) in
+                mkMapView.setRegion(region, animated: true)
+                scenario.beGetCenterPoint {(centerPT) in
+                    mkMapView.zoomLevel = centerPT.zoomLevel
+                }
+            }
         default: break
         }
     }
@@ -155,17 +167,11 @@ extension FindFoodViewController: SceneStateDelegate {
 
 extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate {
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-//        scenario.beUpdateCenterPoint(
-//            zoomLevel: mapView.zoomLevel,
-//            coordinate: mapView.camera.centerCoordinate)
     }
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         updateRangeValue()
-//        scenario.beUpdateCenterPoint(
-//            zoomLevel: mkMapView.zoomLevel,
-//            coordinate: mapView.camera.centerCoordinate)
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.
@@ -218,8 +224,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         scenario.beGetQueryData { [self] (queryData) in
-            tableData.reloadData(data: queryData[view.tag]!)
             DispatchQueue.main.async {
+                tableData.reloadData(data: queryData[view.tag]!)
                 tableView.reloadData()
             }
         }

@@ -373,8 +373,8 @@
 			isa = PBXGroup;
 			children = (
 				AF82243F2472F21D0034C928 /* Stage */,
-				AF82247B2472F4160034C928 /* Redux */,
 				AF8224392472F2110034C928 /* Actors */,
+				AF82247B2472F4160034C928 /* Redux */,
 				20A5F1EF2469445900DD3AFD /* API.swift */,
 				AF007A142489F12200DF61DB /* schema.json */,
 				AF13AF53245E90DB0026A5C8 /* AppDelegate.swift */,

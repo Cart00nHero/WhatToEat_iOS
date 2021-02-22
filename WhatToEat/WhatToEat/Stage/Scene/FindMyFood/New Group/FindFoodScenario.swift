@@ -83,13 +83,19 @@ class FindFoodScenario: Actor,PilotProtocol {
         }
     }
     private func _beUpdateCenterPoint(
-        zoomLevel: Int,coordinate: CLLocationCoordinate2D?) {
+        zoomLevel: Int,
+        coordinate: CLLocationCoordinate2D?,
+        _ complete: @escaping (CenterPoint) -> Void) {
         if zoomLevel > -1 {
             centerPt.zoomLevel = zoomLevel
         }
         if coordinate != nil {
             centerPt.coordinate = coordinate
         }
+        complete(
+            CenterPoint(
+                coordinate: centerPt.coordinate,
+                zoomLevel: centerPt.zoomLevel))
     }
     private func _beGetNewRegion(
         _ complete: @escaping (MKCoordinateRegion) -> Void) {
@@ -121,7 +127,6 @@ class FindFoodScenario: Actor,PilotProtocol {
         }
     }
     private func _beMarkFoundPlacesOnMap(
-        mapView:MKMapView,
         queryData:[SearchForRangeQuery.Data.SearchForRange?]) {
         let annotations = NSMutableArray()
         for place in queryData {
@@ -135,9 +140,9 @@ class FindFoodScenario: Actor,PilotProtocol {
             annotations.add(annotation)
         }
         let markAnnotations = annotations as? [MKPointAnnotation] ?? []
-        let mapNav = MapNavigator(mapView: mapView)
-        mapNav.beRemoveAnnotations(sender: self, mapView.annotations) {
-            mapNav.beShowAnnotations(annotations: markAnnotations, animated: true)
+        DispatchQueue.main.async {
+            appStore.dispatch(
+                MarkFoundPlacesOnMapAction(annotions: markAnnotations))
         }
     }
     private func _beSearchInNewRange(mapCenter: CenterPoint) {
@@ -196,6 +201,7 @@ class FindFoodScenario: Actor,PilotProtocol {
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
             centerPt.coordinate = locations.first?.coordinate
+            centerPt.zoomLevel = 16
             let math = Mathematician()
             math.beCalculateRange(
                 self, centerPt.coordinate!,
@@ -247,8 +253,8 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
-    public func beUpdateCenterPoint(zoomLevel: Int, coordinate: CLLocationCoordinate2D?) -> Self {
-        unsafeSend { self._beUpdateCenterPoint(zoomLevel: zoomLevel, coordinate: coordinate) }
+    public func beUpdateCenterPoint(zoomLevel: Int, coordinate: CLLocationCoordinate2D?, _ complete: @escaping (CenterPoint) -> Void) -> Self {
+        unsafeSend { self._beUpdateCenterPoint(zoomLevel: zoomLevel, coordinate: coordinate, complete) }
         return self
     }
     @discardableResult
@@ -267,8 +273,8 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
-    public func beMarkFoundPlacesOnMap(mapView: MKMapView, queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
-        unsafeSend { self._beMarkFoundPlacesOnMap(mapView: mapView, queryData: queryData) }
+    public func beMarkFoundPlacesOnMap(queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
+        unsafeSend { self._beMarkFoundPlacesOnMap(queryData: queryData) }
         return self
     }
     @discardableResult
