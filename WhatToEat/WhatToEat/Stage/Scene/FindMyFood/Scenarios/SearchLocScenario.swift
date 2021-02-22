@@ -72,7 +72,8 @@ class SearchLocScenario: Actor,PilotProtocol {
                     DataManager().beParsePlaceMarkToAddressDqCmd(self, placemarks![0]) { (addressDqCmd) in
                         DispatchQueue.main.async {
                             appStore.dispatch(
-                                locationsDynamicQueryAction(whereCMD: addressDqCmd))
+                                locationsDynamicQueryAction(
+                                    foodieId: nil, whereCMD: addressDqCmd))
                         }
                     }
                 }

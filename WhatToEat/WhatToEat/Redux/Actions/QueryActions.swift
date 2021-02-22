@@ -16,10 +16,15 @@ struct LocationsDynamicQueryAction: Action, ApiActionProtocol {
     var queryData: DynamicQueryData<LocDynamicQueryData>?
     
 }
-func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQueryAction {
+func locationsDynamicQueryAction(foodieId: String?,whereCMD: AddressDqCmd) -> LocationsDynamicQueryAction {
     var action = LocationsDynamicQueryAction()
     let service = ApolloService.shared.apollo
-    let query = LocationsDynamicQueryQuery(whereAnd: whereCMD)
+    var query: LocationsDynamicQueryQuery
+    if foodieId == nil {
+        query = LocationsDynamicQueryQuery(whereAnd: whereCMD)
+    } else {
+        query = LocationsDynamicQueryQuery(foodieId: foodieId, whereAnd: whereCMD)
+    }
     service.fetch(query: query) { result in
         switch result {
         case .success(let gqlResult):
