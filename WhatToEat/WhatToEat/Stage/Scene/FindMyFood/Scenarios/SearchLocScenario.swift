@@ -85,14 +85,12 @@ class SearchLocScenario: Actor,PilotProtocol {
             (inputObjs) in
             queryDataParcel = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
             if mapView != nil && inputObjs.count > 0 {
-                markedGQinput = inputObjs.first!
+                let data = inputObjs.first!
                 var annotations = [MKPointAnnotation]()
-                let latitude = Double(markedGQinput.address.latitude) ?? 0.0
-                let longitude = Double(markedGQinput.address.longitude) ?? 0.0
+                let latitude = Double(data.address.latitude) ?? 0.0
+                let longitude = Double(data.address.longitude) ?? 0.0
                 let location = CLLocation(latitude: latitude, longitude: longitude)
                 let annotation = MKPointAnnotation()
-                annotation.title = markedGQinput.shop.title
-                annotation.subtitle = markedGQinput.shopBranch.name
                 annotation.coordinate = location.coordinate
                 annotations.append(annotation)
                 let mapNab = MapNavigator(mapView: mapView!)
@@ -109,8 +107,6 @@ class SearchLocScenario: Actor,PilotProtocol {
             let longitude = Double(markedGQinput.address.longitude) ?? 0.0
             let location = CLLocation(latitude: latitude, longitude: longitude)
             let annotation = MKPointAnnotation()
-            annotation.title = markedGQinput.shop.title
-            annotation.subtitle = markedGQinput.shopBranch.name
             annotation.coordinate = location.coordinate
             annotations.append(annotation)
             let mapNab = MapNavigator(mapView: mapView!)

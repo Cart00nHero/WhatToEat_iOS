@@ -77,9 +77,9 @@ class MapNavigator: Actor {
         _ annotations: [MKAnnotation],_ complete: @escaping () -> Void) {
         DispatchQueue.main.async { [self] in
             mkMapView.removeAnnotations(annotations)
-        }
-        sender.unsafeSend {
-            complete()
+            sender.unsafeSend {
+                complete()
+            }
         }
     }
     private func _beShowAnnotations(
@@ -88,28 +88,13 @@ class MapNavigator: Actor {
             mkMapView.showAnnotations(annotations, animated: animated)
         }
     }
-    
-    // MARK: - Will Remove
-    class func setCenterCoordinate(mapView: MKMapView, coordinate: CLLocationCoordinate2D) {
-        mapView.centerCoordinate = coordinate
-    }
-    class func showCircleOverlay(mapView: MKMapView, radius: CLLocationDistance) {
-        showCircle(mapView: mapView, coordinate: mapView.camera.centerCoordinate, radius: radius)
-    }
-    class func displayAnnotations(mapView: MKMapView, annotations: [MKPointAnnotation], animated: Bool) {
-        mapView.showAnnotations(annotations, animated: animated)
-    }
-    
-    class func removeAllMapAnnotations(mapView: MKMapView) {
-        mapView.removeAnnotations(mapView.annotations)
-    }
-    class func showCircle(mapView: MKMapView, coordinate: CLLocationCoordinate2D,radius: CLLocationDistance) {
-        // Radius is measured in meters
-        if mapView.overlays.count > 0 {
-            mapView.removeOverlays(mapView.overlays)
+    private func _beGetZoomLevel(sender: Actor,complete: @escaping (Int) -> Void) {
+        DispatchQueue.main.async { [self] in
+            let zoomLevel = mkMapView.zoomLevel
+            sender.unsafeSend {
+                complete(zoomLevel)
+            }
         }
-        let circle = MKCircle(center: coordinate,radius: radius)
-        mapView.addOverlay(circle)
     }
 }
 
@@ -141,6 +126,11 @@ extension MapNavigator {
     @discardableResult
     public func beShowAnnotations(annotations: [MKPointAnnotation], animated: Bool) -> Self {
         unsafeSend { self._beShowAnnotations(annotations: annotations, animated: animated) }
+        return self
+    }
+    @discardableResult
+    public func beGetZoomLevel(sender: Actor, complete: @escaping (Int) -> Void) -> Self {
+        unsafeSend { self._beGetZoomLevel(sender: sender, complete: complete) }
         return self
     }
 

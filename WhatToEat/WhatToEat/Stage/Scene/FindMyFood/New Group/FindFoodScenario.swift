@@ -85,17 +85,18 @@ class FindFoodScenario: Actor,PilotProtocol {
             complete(centerPt)
         }
     }
-    private func _beUpdateCenterPointZoomLevel() {
-        if mapView != nil {
-            DispatchQueue.main.async { [self] in
-                centerPt.zoomLevel = mapView?.zoomLevel ?? 17
-            }
-        }
+    private func _beUpdateCenterPointZoomLevel(zoomLevel: Int) {
+        centerPt.zoomLevel = zoomLevel
     }
-    private func _beUpdateMapRegion(zoomLevel: Int, center: CLLocationCoordinate2D) {
+    private func _beUpdateMapRegion(
+        zoomLevel: Int, center: CLLocationCoordinate2D,
+        _ complete: @escaping () -> Void) {
         if mapView != nil {
             let distance = regionDistance(zoomLevel: zoomLevel)
             MapNavigator(mapView: mapView!).beSetRegion(center, distance)
+            DispatchQueue.main.async {
+                complete()
+            }
         }
     }
     private func _beMoveMapCenterToCenterPoint() {
@@ -106,12 +107,15 @@ class FindFoodScenario: Actor,PilotProtocol {
     }
     private func _beSearchNearby() {
         if mapView != nil {
-            let range = searchRange(zoomLevel: mapView!.zoomLevel)
-            let math = Mathematician()
-            math.beCalculateRange(
-                self, mapView!.camera.centerCoordinate, range) { (rangePt) in
-                DispatchQueue.main.async {
-                    appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
+            MapNavigator(mapView: mapView!).beGetZoomLevel(sender: self) {
+                [self] (zoomLevel) in
+                let range = searchRange(zoomLevel: zoomLevel)
+                let math = Mathematician()
+                math.beCalculateRange(
+                    self, mapView!.camera.centerCoordinate, range) { (rangePt) in
+                    DispatchQueue.main.async {
+                        appStore.dispatch(searchForRangeAction(foodieId: globalFoodieId, min: rangePt.min, max: rangePt.max))
+                    }
                 }
             }
         }
@@ -138,17 +142,20 @@ class FindFoodScenario: Actor,PilotProtocol {
         }
     }
     private func _beSearchInNewRange() {
-        if mapView != nil {
+        if mapView == nil {
+            return
+        }
+        MapNavigator(mapView: mapView!).beGetZoomLevel(sender: self) { [self] (zoomLevel) in
             var isNotified = false
-            if !isNotified && centerPt.zoomLevel != mapView?.zoomLevel {
+            if !isNotified && centerPt.zoomLevel != zoomLevel {
                 isNotified = true
-                DispatchQueue.main.async { [self] in
-                    centerPt.zoomLevel = mapView?.zoomLevel ?? 17
+                centerPt.zoomLevel = zoomLevel
+                DispatchQueue.main.async {
                     appStore.dispatch(SearchInNewRangeAction())
                 }
                 return
             }
-            let searchingDistance = 1000*2*searchRange(zoomLevel: mapView!.zoomLevel)
+            let searchingDistance = 1000*2*searchRange(zoomLevel: zoomLevel)
             pilot.beCalculateDistance(sender: self, from: centerPt.coordinate!, to: mapView!.camera.centerCoordinate) { [self] (distance) in
                 if !isNotified && distance > searchingDistance {
                     isNotified = true
@@ -248,13 +255,13 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
-    public func beUpdateCenterPointZoomLevel() -> Self {
-        unsafeSend(_beUpdateCenterPointZoomLevel)
+    public func beUpdateCenterPointZoomLevel(zoomLevel: Int) -> Self {
+        unsafeSend { self._beUpdateCenterPointZoomLevel(zoomLevel: zoomLevel) }
         return self
     }
     @discardableResult
-    public func beUpdateMapRegion(zoomLevel: Int, center: CLLocationCoordinate2D) -> Self {
-        unsafeSend { self._beUpdateMapRegion(zoomLevel: zoomLevel, center: center) }
+    public func beUpdateMapRegion(zoomLevel: Int, center: CLLocationCoordinate2D, _ complete: @escaping () -> Void) -> Self {
+        unsafeSend { self._beUpdateMapRegion(zoomLevel: zoomLevel, center: center, complete) }
         return self
     }
     @discardableResult

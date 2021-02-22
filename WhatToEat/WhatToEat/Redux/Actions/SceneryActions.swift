@@ -41,3 +41,6 @@ struct RangeDatePickerSelectedAction: Action {
     let startDate: Date
     let endDate: Date
 }
+
+struct GoAddGourmetScenarioAction: Action {
+}

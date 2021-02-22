@@ -39,7 +39,11 @@ class Courier: Actor {
         let newSet = NSMutableSet.init(set: parcelSet)
         if newSet.contains(parcel) {
             newSet.remove(parcel)
-            courierBag[recipient] = newSet
+            if newSet.count == 0 {
+                courierBag.removeValue(forKey: recipient)
+            } else {
+                courierBag[recipient] = newSet
+            }
         }
     }
 }

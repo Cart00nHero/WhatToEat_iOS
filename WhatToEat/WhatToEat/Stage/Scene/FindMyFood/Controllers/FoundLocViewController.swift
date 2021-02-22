@@ -12,6 +12,8 @@ import UIKit
 class FoundLocViewController: UIViewController {
     private var scenario: FoundLocScenario = FoundLocScenario()
     private var sceneVC: SceneViewController? = nil
+    
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource = [GQInputObject]()
     
@@ -23,6 +25,8 @@ class FoundLocViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        let inputData = dataSource.last
+        addressLabel.text = inputData?.address.completeInfo
         collectionView.reloadData()
     }
 }
@@ -30,21 +34,40 @@ extension FoundLocViewController: UICollectionViewDelegate,
                                   UICollectionViewDataSource,
                                   UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        dataSource.count
+        return dataSource.count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FoundLocCollectCell", for: indexPath) as! FoundLocCollectCell
-        let data = dataSource[indexPath.row]
-        cell.cellMiddleLabel.text = data.shop.title
-        cell.cellBottomLabel.text = data.shopBranch.name
+        var cellIdentifier = "FoundLocCollectCell"
+        if indexPath.row == dataSource.count {
+            cellIdentifier = "AddShopCollectCell"
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        if cellIdentifier == "FoundLocCollectCell" {
+            let data = dataSource[indexPath.row]
+            (cell as! FoundLocCollectCell)
+                .cellTitleLabel.text = data.shop.title
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = collectionView.bounds.size.width/3.0
-        return CGSize(width: cellSize, height: cellSize)
+        let cellSize = (collectionView.bounds.size.width - 8.0)/3.0
+        return CGSize(width: cellSize, height: cellSize+30)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        let cell = collectionView.cellForItem(at: indexPath)
+        switch cell {
+        case is FoundLocCollectCell :
+            let data = dataSource[indexPath.row]
+            scenario.bePackageParcel(inputObj: data)
+        case is AddShopCollectCell :
+            let data = dataSource.last ?? initGQInputObject()
+            scenario.bePrepareNewParcel(inputObj: data)
+        default: break
+        }
+        self.dismiss(animated: true) {
+            appStore.dispatch(GoAddGourmetScenarioAction())
+        }
     }
 }

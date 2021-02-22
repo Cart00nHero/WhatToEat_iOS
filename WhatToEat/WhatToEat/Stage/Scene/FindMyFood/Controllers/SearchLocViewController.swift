@@ -41,8 +41,8 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        let screenHeight = UIScreen.main.bounds.height
-//        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
+        //        let screenHeight = UIScreen.main.bounds.height
+        //        barCenterVConstraint.constant = (screenHeight/3.0 - screenHeight/2.0) + 44.0
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -63,7 +63,7 @@ class SearchLocViewController: UIViewController {
         super.viewDidDisappear(animated)
         scenario.beCancelFoundLocParcel()
     }
-
+    
     // MARK: - Private methods
     private func createWebViewOnBottom() {
         isWebViewCreated = true
@@ -206,6 +206,12 @@ extension SearchLocViewController: SceneStateDelegate {
             }
         case let action as FoundLocationsAddressAction:
             searchTextField.text = action.inputObj.address.completeInfo
+        case is GoAddGourmetScenarioAction:
+            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
+            let toVC =
+                storyboard.instantiateViewController(
+                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+            sceneVC?.basePushToViewController(toVC, Animated: true)
         default: break
         }
     }

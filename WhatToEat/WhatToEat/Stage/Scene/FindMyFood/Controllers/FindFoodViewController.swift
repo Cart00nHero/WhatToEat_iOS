@@ -140,8 +140,9 @@ extension FindFoodViewController: SceneStateDelegate {
                     scenario.beGetCenterPoint { [self] (centerPt) in
                         if centerPt.zoomLevel == mkMapView.zoomLevel {
                             if centerPt.coordinate != nil {
-                                scenario.beUpdateMapRegion(
-                                    zoomLevel: centerPt.zoomLevel, center: centerPt.coordinate!)
+                                scenario.beUpdateMapRegion(zoomLevel: centerPt.zoomLevel, center: centerPt.coordinate!) {
+                                    print("beUpdateMapRegion")
+                                }
                             }
                         }
                     }
@@ -164,8 +165,9 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
         scenario.beGetCenterPoint { [self] (centerPt) in
             if centerPt.zoomLevel == mkMapView.zoomLevel {
                 if centerPt.coordinate != nil {
-                    scenario.beUpdateMapRegion(
-                        zoomLevel: centerPt.zoomLevel, center: centerPt.coordinate!)
+                    scenario.beUpdateMapRegion(zoomLevel: centerPt.zoomLevel, center: centerPt.coordinate!) {
+                        print("UpdateMapRegion")
+                    }
                 }
             }
         }
@@ -174,7 +176,9 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     }
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         updateRangeValue()
-        scenario.beUpdateCenterPointZoomLevel()
+        scenario.beUpdateCenterPointZoomLevel(
+            zoomLevel: mkMapView.zoomLevel)
+//        scenario.beUpdateCenterPointZoomLevel()
     }
     func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.

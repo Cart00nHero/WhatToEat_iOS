@@ -26,6 +26,11 @@ class FoundLocScenario: Actor {
             }
         }
     }
+    private func _bePrepareNewParcel(inputObj: GQInputObject) {
+        var newData = initGQInputObject()
+        newData.address = inputObj.address
+        _bePackageParcel(inputObj: newData)
+    }
     private func _bePackageParcel(inputObj: GQInputObject) {
         _ = LogisticsCenter.shared.applyExpressService(
             sender: self, recipient: "AddGourmetScenario",
@@ -42,6 +47,11 @@ extension FoundLocScenario {
     public func beCollectParcel(_ complete: @escaping (
             [GQInputObject]) -> Void) -> Self {
         unsafeSend { self._beCollectParcel(complete) }
+        return self
+    }
+    @discardableResult
+    public func bePrepareNewParcel(inputObj: GQInputObject) -> Self {
+        unsafeSend { self._bePrepareNewParcel(inputObj: inputObj) }
         return self
     }
     @discardableResult

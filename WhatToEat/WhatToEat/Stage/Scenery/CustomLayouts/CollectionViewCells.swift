@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 class FoundLocCollectCell: UICollectionViewCell {
+    @IBOutlet weak var cellTitleLabel: UILabel!
+}
+class AddShopCollectCell: UICollectionViewCell {
     
-    @IBOutlet weak var cellMiddleLabel: UILabel!
-    @IBOutlet weak var cellBottomLabel: UILabel!
 }
