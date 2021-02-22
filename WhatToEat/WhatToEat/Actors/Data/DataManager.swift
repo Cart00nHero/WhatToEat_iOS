@@ -36,23 +36,6 @@ class DataManager: Actor {
             complete(result)
         }
     }
-    private func _beSearchRangeDataToAddressDqCmd(
-        sender: Actor,
-        searchData: SearchForRangeQuery.Data.SearchForRange?,
-        _ complete: @escaping (AddressDqCmd) -> Void) {
-        if searchData != nil {
-            var addressCmd = AddressDqCmd()
-            for key in searchData!.resultMap.keys {
-                let value = searchData!.resultMap[key]
-                if value != nil {
-                    addressCmd.graphQLMap.updateValue(value, forKey: key)
-                }
-            }
-            sender.unsafeSend {
-                complete(addressCmd)
-            }
-        }
-    }
     private func _beParsePlaceMarkToAddressDqCmd(
         _ sender: Actor,_ placeMark: CLPlacemark,
         _ complete: @escaping (AddressDqCmd) -> Void) {
@@ -103,6 +86,24 @@ class DataManager: Actor {
             }
         }
     }
+    private func _beSearchRangeDataToLocDqCmd(
+        sender: Actor,
+        searchData: SearchForRangeQuery.Data.SearchForRange,
+        _ complete: @escaping (AddressDqCmd) -> Void) {
+        var addressCmd = AddressDqCmd()
+        for key in searchData.resultMap.keys {
+            if key == "__typename" || key == "shopBranch" {
+                return
+            }
+            let value = searchData.resultMap[key]
+            if value != nil {
+                addressCmd.graphQLMap.updateValue(value, forKey: key)
+            }
+        }
+        sender.unsafeSend {
+            complete(addressCmd)
+        }
+    }
     
     // MARK: - Private
     private func combineAddressCompleteInfo(input: GQInputObject) -> String {
@@ -127,11 +128,6 @@ extension DataManager {
         return self
     }
     @discardableResult
-    public func beSearchRangeDataToAddressDqCmd(sender: Actor, searchData: SearchForRangeQuery.Data.SearchForRange?, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
-        unsafeSend { self._beSearchRangeDataToAddressDqCmd(sender: sender, searchData: searchData, complete) }
-        return self
-    }
-    @discardableResult
     public func beParsePlaceMarkToAddressDqCmd(_ sender: Actor, _ placeMark: CLPlacemark, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
         unsafeSend { self._beParsePlaceMarkToAddressDqCmd(sender, placeMark, complete) }
         return self
@@ -139,6 +135,11 @@ extension DataManager {
     @discardableResult
     public func beParseLocDynamicQueryDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
         unsafeSend { self._beParseLocDynamicQueryDataToGQInput(sender, queryData, complete) }
+        return self
+    }
+    @discardableResult
+    public func beSearchRangeDataToLocDqCmd(sender: Actor, searchData: SearchForRangeQuery.Data.SearchForRange, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
+        unsafeSend { self._beSearchRangeDataToLocDqCmd(sender: sender, searchData: searchData, complete) }
         return self
     }
 

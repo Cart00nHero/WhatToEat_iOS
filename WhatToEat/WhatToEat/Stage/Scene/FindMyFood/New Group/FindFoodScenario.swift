@@ -137,14 +137,24 @@ class FindFoodScenario: Actor,PilotProtocol {
     }
     private func _beDynamicQuerySelectedData(index: Int) {
         let data = lastQueryData[index]
-        DataManager().beSearchRangeDataToAddressDqCmd(
-            sender: self, searchData: data) { (addressDqCmd) in
-            DispatchQueue.main.async {
-                appStore.dispatch(
-                    locationsDynamicQueryAction(
-                        foodieId: globalFoodieId, whereCMD: addressDqCmd))
+        if data != nil {
+            DataManager().beSearchRangeDataToLocDqCmd(sender: self, searchData: data!) { (addressDqCmd) in
+                print("Fuuuuuuuuck")
+                DispatchQueue.main.async {
+                    appStore.dispatch(
+                        locationsDynamicQueryAction(
+                            foodieId: globalFoodieId, whereCMD: addressDqCmd))
+                }
             }
         }
+//        DataManager().beSearchRangeDataToAddressDqCmd(
+//            sender: self, searchData: data!) { (addressDqCmd) in
+//            DispatchQueue.main.async {
+//                appStore.dispatch(
+//                    locationsDynamicQueryAction(
+//                        foodieId: globalFoodieId, whereCMD: addressDqCmd))
+//            }
+//        }
     }
     private func _beSendGourmetDetailParcel(
         content: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery){

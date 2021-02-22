@@ -44,7 +44,7 @@ extension FoundLocViewController: UICollectionViewDelegate,
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        if cellIdentifier == "FoundLocCollectCell" {
+        if cellIdentifier == "ShopCollectCell" {
             let data = dataSource[indexPath.row]
             (cell as! ShopCollectCell)
                 .cellTitleLabel.text = data.shop.title
