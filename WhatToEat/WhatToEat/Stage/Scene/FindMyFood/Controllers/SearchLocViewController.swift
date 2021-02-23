@@ -47,12 +47,16 @@ class SearchLocViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scenario.beSetScenarioMap(map: mapView)
-        let rightBarButtonItem = UIBarButtonItem(
-            title: "Locate", style: .plain, target: self,
-            action: #selector(rigtBarButtonClickAction(sender:)))
-        sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
-        searchTextField.inputAccessoryView = createInputAccessoryView()
-        coverView = createCoverView(coverSuperView: bottomSelectedView)
+        if let image = UIImage(named: "icon_gps") {
+            let smallImage = resizeImage(image: image, width: 44)
+            let rightBarButtonItem = UIBarButtonItem(
+                image: smallImage.withRenderingMode(.alwaysOriginal),
+                style: .plain, target: self,
+                action: #selector(rigtBarButtonClickAction(sender:)))
+            sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
+            searchTextField.inputAccessoryView = createInputAccessoryView()
+            coverView = createCoverView(coverSuperView: bottomSelectedView)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {

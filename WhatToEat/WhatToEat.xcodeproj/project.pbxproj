@@ -47,6 +47,7 @@
 		AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5F16FE247D7CB60023F3FC /* GPSActions.swift */; };
 		AF6CE87F25E40B38001ED540 /* GourmetDetailScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */; };
 		AF6CE8CE25E424F6001ED540 /* GourmetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */; };
+		AF6CE8D925E49D48001ED540 /* AppTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6CE8D825E49D48001ED540 /* AppTools.swift */; };
 		AF801505248E8DCE009E6214 /* MutationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801504248E8DCE009E6214 /* MutationActions.swift */; };
 		AF801507248E8E20009E6214 /* QueryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF801506248E8E20009E6214 /* QueryActions.swift */; };
 		AF82247A2472F2FE0034C928 /* ApolloService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224792472F2FE0034C928 /* ApolloService.swift */; };
@@ -145,6 +146,7 @@
 		AF5F16FE247D7CB60023F3FC /* GPSActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSActions.swift; sourceTree = "<group>"; };
 		AF6CE87E25E40B38001ED540 /* GourmetDetailScenario.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GourmetDetailScenario.swift; sourceTree = "<group>"; };
 		AF6CE8CD25E424F6001ED540 /* GourmetDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GourmetDetailViewController.swift; sourceTree = "<group>"; };
+		AF6CE8D825E49D48001ED540 /* AppTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTools.swift; sourceTree = "<group>"; };
 		AF801504248E8DCE009E6214 /* MutationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutationActions.swift; sourceTree = "<group>"; };
 		AF801506248E8E20009E6214 /* QueryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryActions.swift; sourceTree = "<group>"; };
 		AF8224792472F2FE0034C928 /* ApolloService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApolloService.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 			children = (
 				AFBB6DB2256012ED00A92E21 /* DateUtil.swift */,
 				AFBB6DB1256012ED00A92E21 /* StructObserver.swift */,
+				AF6CE8D825E49D48001ED540 /* AppTools.swift */,
 			);
 			path = ToolMan;
 			sourceTree = "<group>";
@@ -899,6 +902,7 @@
 				AF0EB13424C2F0E40022C36E /* RadarScanView.swift in Sources */,
 				AF5F16FF247D7CB60023F3FC /* GPSActions.swift in Sources */,
 				AFA8A0EF25D715CC0057FA75 /* SearchLocScenario.swift in Sources */,
+				AF6CE8D925E49D48001ED540 /* AppTools.swift in Sources */,
 				AFA8A10D25D717B30057FA75 /* GeoCoder.swift in Sources */,
 				AFA89FEC25D6DD200057FA75 /* ScenarioNotifyActions.swift in Sources */,
 				AFB7DF1F25C97D1A004B1715 /* JSONEmptyRepresentable.swift in Sources */,

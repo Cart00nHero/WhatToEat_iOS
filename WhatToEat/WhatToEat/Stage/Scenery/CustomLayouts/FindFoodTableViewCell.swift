@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class FindFoodTableViewCell: LRTableViewCell {
+class DetailLRTableViewCell: LRTableViewCell {
     
     @IBOutlet weak var cellLeftLabel: UILabel!
     private var leftContentView: UIView? = nil
@@ -42,8 +42,10 @@ class FindFoodTableViewCell: LRTableViewCell {
     }
     
     private func createLeftView() {
-        let data = cellTemplate!.leftViewItem as? LabelItem
-        cellLeftLabel.text = data?.text
+        if cellTemplate?.leftViewItem != nil {
+            let data = cellTemplate!.leftViewItem as? LabelItem
+            cellLeftLabel.text = data?.text
+        }
     }
     
     private func createRightView() {
@@ -61,7 +63,7 @@ class FindFoodTableViewCell: LRTableViewCell {
 
 // MARK: - FindFoodBtnTableViewCell
 
-class FFBtnTableViewCell: ButtonTableViewCell {
+class DetailBtnTableViewCell: ButtonTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
