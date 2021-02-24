@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "find-my-gadget-app.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

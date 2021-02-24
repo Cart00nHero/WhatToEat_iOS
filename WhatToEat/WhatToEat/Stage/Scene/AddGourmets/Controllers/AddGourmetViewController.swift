@@ -28,6 +28,7 @@ class AddGourmetViewController: UIViewController {
         super.viewWillAppear(animated)
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
+        sceneVC?.title = "Add"
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -94,7 +95,8 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 44))
         let textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
-        textLabel.textColor = UIColor(red: 255.0/255.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        textLabel.textColor =
+            UIColor(red: 255.0/255.0, green: 77.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         textLabel.font = UIFont.boldSystemFont(ofSize: 18.0)
         textLabel.text = tableData.sectionTitles[section]
         headerView.addSubview(textLabel)

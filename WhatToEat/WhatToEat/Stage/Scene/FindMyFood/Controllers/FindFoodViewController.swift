@@ -33,6 +33,12 @@ class FindFoodViewController: UIViewController {
         self.sceneVC?.stateDelegate = self
         sceneVC?.title = "Find My Food"
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        collectionView.layer.borderWidth = 2.0
+        collectionView.layer.borderColor =
+            UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 240.0/255.0, alpha: 1.0).cgColor
+    }
     
     private func initialViewContorller() {
         mkMapView.delegate = self
@@ -243,7 +249,7 @@ extension FindFoodViewController: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var cellSize = CGSize()
         if dataSource.count == 0 {
-            cellSize.width = collectionView.bounds.size.width
+            cellSize.width = collectionView.bounds.size.width-16
             cellSize.height = collectionView.bounds.size.height
         } else {
             cellSize.width = collectionView.bounds.size.width/4.0
