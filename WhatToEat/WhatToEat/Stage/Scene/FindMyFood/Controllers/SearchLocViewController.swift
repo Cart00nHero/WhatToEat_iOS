@@ -54,9 +54,9 @@ class SearchLocViewController: UIViewController {
                 style: .plain, target: self,
                 action: #selector(rigtBarButtonClickAction(sender:)))
             sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
-            searchTextField.inputAccessoryView = createInputAccessoryView()
-            coverView = createCoverView(coverSuperView: bottomSelectedView)
         }
+        searchTextField.inputAccessoryView = createInputAccessoryView()
+        coverView = createCoverView(coverSuperView: bottomSelectedView)
     }
     
     override func viewWillDisappear(_ animated: Bool) {

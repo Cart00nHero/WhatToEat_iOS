@@ -80,9 +80,6 @@ class FindFoodViewController: UIViewController {
         startRadarAnimating()
         scenario.beRequestCurrentLocation()
     }
-    @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
-        
-    }
     
 }
 
@@ -186,7 +183,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
                 MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
         }
-        /*
+        /* 放置圖片
         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
         leftIconView.image = UIImage(named: restaurant.image)
         annotationView?.leftCalloutAccessoryView = leftIconView

@@ -135,7 +135,7 @@
                                                         <constraint firstAttribute="width" secondItem="ybl-ko-IOb" secondAttribute="height" multiplier="375:35" id="hU2-6j-3wS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                    <state key="normal" title="上傳儲存"/>
+                                                    <state key="normal" title="Save"/>
                                                     <connections>
                                                         <action selector="cellButtonClickActionWithSender:" destination="pP4-7g-wow" eventType="touchUpInside" id="wbc-kr-fca"/>
                                                     </connections>
