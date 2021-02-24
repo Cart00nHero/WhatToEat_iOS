@@ -65,8 +65,8 @@ class AddGmtTableViewCell: LRTableViewCell {
             buildConstraints(content: textField, side: .Right)
             let data = cellTemplate!.rightViewItem as? TextFieldItem
             textField.borderStyle = .roundedRect
-            textField.backgroundColor = UIColor(red: 240.0/255.0, green: 248.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-            textField.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            textField.backgroundColor = UIColor(red: 245.0/255.0, green: 255.0/255.0, blue: 2550.0/255.0, alpha: 1.0)
+            textField.textColor = UIColor(red: 112.0/255.0, green: 60.0/255.0, blue: 20.0/255.0, alpha: 1.0)
             textField.keyboardType = data?.keyboardType ?? UIKeyboardType.default
             textField.returnKeyType = .done
             textField.clearButtonMode = .whileEditing
@@ -81,7 +81,7 @@ class AddGmtTableViewCell: LRTableViewCell {
             let textLabel = UILabel()
             buildConstraints(content: textLabel, side: .Right)
             let data = cellTemplate!.rightViewItem as? LabelItem
-            textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            textLabel.textColor = UIColor(red: 112.0/255.0, green: 60.0/255.0, blue: 20.0/255.0, alpha: 1.0)
             textLabel.font = UIFont.systemFont(ofSize: 14.0)
             textLabel.text = data?.text
             textLabel.numberOfLines = 0
