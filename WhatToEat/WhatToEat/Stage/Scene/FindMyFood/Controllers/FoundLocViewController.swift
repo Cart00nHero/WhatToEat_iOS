@@ -54,7 +54,7 @@ extension FoundLocViewController: UICollectionViewDelegate,
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellSize = (collectionView.bounds.size.width - 8.0)/3.0
+        let cellSize = (collectionView.bounds.size.width)/3.0
         return CGSize(width: cellSize, height: cellSize+30)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

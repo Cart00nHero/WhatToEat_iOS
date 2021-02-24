@@ -65,8 +65,10 @@ class AddGmtTableViewCell: LRTableViewCell {
             buildConstraints(content: textField, side: .Right)
             let data = cellTemplate!.rightViewItem as? TextFieldItem
             textField.borderStyle = .roundedRect
-            textField.backgroundColor = UIColor(red: 245.0/255.0, green: 255.0/255.0, blue: 2550.0/255.0, alpha: 1.0)
-            textField.textColor = UIColor(red: 112.0/255.0, green: 60.0/255.0, blue: 20.0/255.0, alpha: 1.0)
+            textField.backgroundColor =
+                UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 240.0/255.0, alpha: 1.0)
+            textField.textColor =
+                UIColor(red: 112.0/255.0, green: 60.0/255.0, blue: 20.0/255.0, alpha: 1.0)
             textField.keyboardType = data?.keyboardType ?? UIKeyboardType.default
             textField.returnKeyType = .done
             textField.clearButtonMode = .whileEditing

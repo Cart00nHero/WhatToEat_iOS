@@ -108,10 +108,11 @@ class SearchLocViewController: UIViewController {
         selectView.layer.borderColor = selectedBgColor().cgColor
     }
     private func normalBgColor() -> UIColor {
-        return UIColor(red: 245/255.0, green: 255/255.0, blue: 250/255.0, alpha: 1.0)
+        return UIColor(red: 255.0/255.0, green: 248.0/255.0, blue: 220.0/255.0, alpha: 1.0)
     }
     private func selectedBgColor() -> UIColor {
-        return UIColor.red
+        return UIColor(
+            red: 71.0/255.0, green: 0.0/255.0, blue: 36.0/255.0, alpha: 1.0)
     }
     // MARK: - UI Actions
     @IBAction func searchButtonClickAction(sender: UIButton) {

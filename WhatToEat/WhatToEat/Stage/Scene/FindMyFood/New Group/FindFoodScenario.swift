@@ -13,7 +13,7 @@ import MapKit
 
 struct CenterPoint {
     var coordinate: CLLocationCoordinate2D? = nil
-    var zoomLevel = 16
+    var zoomLevel = 17
     
 }
 class FindFoodScenario: Actor,PilotProtocol {
@@ -21,7 +21,8 @@ class FindFoodScenario: Actor,PilotProtocol {
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
     private var centerPt = CenterPoint()
 //    private var mapView: MKMapView? = nil
-    private var lastQueryData = [SearchForRangeQuery.Data.SearchForRange?]()
+    private var lastQueryData =
+        [SearchForRangeQuery.Data.SearchForRange?]()
     
     override init() {
         super.init()
