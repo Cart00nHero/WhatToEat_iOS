@@ -13,7 +13,7 @@ import MapKit
 
 struct CenterPoint {
     var coordinate: CLLocationCoordinate2D? = nil
-    var zoomLevel = 17
+    var zoomLevel = 16
     
 }
 class FindFoodScenario: Actor,PilotProtocol {
@@ -83,6 +83,30 @@ class FindFoodScenario: Actor,PilotProtocol {
         MapNavigator(mapView: mapView)
             .beSetCenterCoordinate(coordinate: centerPt.coordinate!)
     }
+    private func _beSearchInNewRange(mapCenter: CenterPoint) {
+        var isNotified = false
+        if !isNotified && centerPt.zoomLevel != mapCenter.zoomLevel {
+            isNotified = true
+            centerPt.zoomLevel = mapCenter.zoomLevel
+            DispatchQueue.main.async {
+                appStore.dispatch(SearchInNewRangeAction())
+            }
+            return
+        }
+        let searchingDistance = 1000*2*searchRange(zoomLevel: mapCenter.zoomLevel)
+        pilot.beCalculateDistance(
+            sender: self,
+            from:centerPt.coordinate!,
+            to: mapCenter.coordinate!) { [self] (distance) in
+            if !isNotified && distance > searchingDistance {
+                isNotified = true
+                centerPt.coordinate = mapCenter.coordinate
+                DispatchQueue.main.async {
+                    appStore.dispatch(SearchInNewRangeAction())
+                }
+            }
+        }
+    }
     private func _beSearchNearby(mapCenter: CenterPoint) {
         let range = searchRange(zoomLevel: mapCenter.zoomLevel)
         let math = Mathematician()
@@ -109,30 +133,6 @@ class FindFoodScenario: Actor,PilotProtocol {
         DispatchQueue.main.async {
             appStore.dispatch(
                 MarkFoundPlacesOnMapAction(annotions: markAnnotations))
-        }
-    }
-    private func _beSearchInNewRange(mapCenter: CenterPoint) {
-        var isNotified = false
-        if !isNotified && centerPt.zoomLevel != mapCenter.zoomLevel {
-            isNotified = true
-            centerPt.zoomLevel = mapCenter.zoomLevel
-            DispatchQueue.main.async {
-                appStore.dispatch(SearchInNewRangeAction())
-            }
-            return
-        }
-        let searchingDistance = 1000*2*searchRange(zoomLevel: mapCenter.zoomLevel)
-        pilot.beCalculateDistance(
-            sender: self,
-            from:centerPt.coordinate!,
-            to: mapCenter.coordinate!) { [self] (distance) in
-            if !isNotified && distance > searchingDistance {
-                isNotified = true
-                centerPt.coordinate = mapCenter.coordinate
-                DispatchQueue.main.async {
-                    appStore.dispatch(SearchInNewRangeAction())
-                }
-            }
         }
     }
     private func _beDynamicQuerySelectedData(index: Int) {
@@ -185,7 +185,6 @@ class FindFoodScenario: Actor,PilotProtocol {
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
             centerPt.coordinate = locations.first?.coordinate
-            centerPt.zoomLevel = 16
             let math = Mathematician()
             math.beCalculateRange(
                 self, centerPt.coordinate!,
@@ -252,6 +251,11 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
+    public func beSearchInNewRange(mapCenter: CenterPoint) -> Self {
+        unsafeSend { self._beSearchInNewRange(mapCenter: mapCenter) }
+        return self
+    }
+    @discardableResult
     public func beSearchNearby(mapCenter: CenterPoint) -> Self {
         unsafeSend { self._beSearchNearby(mapCenter: mapCenter) }
         return self
@@ -259,11 +263,6 @@ extension FindFoodScenario {
     @discardableResult
     public func beMarkFoundPlacesOnMap(queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
         unsafeSend { self._beMarkFoundPlacesOnMap(queryData: queryData) }
-        return self
-    }
-    @discardableResult
-    public func beSearchInNewRange(mapCenter: CenterPoint) -> Self {
-        unsafeSend { self._beSearchInNewRange(mapCenter: mapCenter) }
         return self
     }
     @discardableResult
