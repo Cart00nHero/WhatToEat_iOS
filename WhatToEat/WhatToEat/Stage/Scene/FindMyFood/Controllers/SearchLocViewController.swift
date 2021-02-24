@@ -66,6 +66,7 @@ class SearchLocViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         scenario.beCancelFoundLocParcel()
+        mapView.removeAnnotations(mapView.annotations)
     }
     
     // MARK: - Private methods
@@ -213,7 +214,8 @@ extension SearchLocViewController: SceneStateDelegate {
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC =
                 storyboard.instantiateViewController(
-                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+                    withIdentifier: "AddGourmetViewController")
+                as! AddGourmetViewController
             sceneVC?.basePushToViewController(toVC, Animated: true)
         default: break
         }

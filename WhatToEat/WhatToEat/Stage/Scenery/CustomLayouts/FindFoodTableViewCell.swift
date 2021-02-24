@@ -49,14 +49,16 @@ class DetailLRTableViewCell: LRTableViewCell {
     }
     
     private func createRightView() {
-        let textLabel = UILabel()
-        buildConstraints(content: textLabel, side: .Right)
-        let data = cellTemplate!.rightViewItem as? LabelItem
-        textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-        textLabel.font = UIFont.systemFont(ofSize: 14.0)
-        textLabel.text = data?.text
-        textLabel.numberOfLines = 0
-        textLabel.lineBreakMode = .byWordWrapping
+        if cellTemplate?.rightViewItem != nil {
+            let textLabel = UILabel()
+            buildConstraints(content: textLabel, side: .Right)
+            let data = cellTemplate!.rightViewItem as? LabelItem
+            textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            textLabel.font = UIFont.systemFont(ofSize: 14.0)
+            textLabel.text = data?.text
+            textLabel.numberOfLines = 0
+            textLabel.lineBreakMode = .byWordWrapping
+        }
     }
     
 }
