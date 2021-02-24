@@ -43,7 +43,9 @@ extension FoundLocViewController: UICollectionViewDelegate,
             cellIdentifier = "AddShopCollectCell"
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        let cell =
+            collectionView.dequeueReusableCell(
+                withReuseIdentifier: cellIdentifier, for: indexPath)
         if cellIdentifier == "ShopCollectCell" {
             let data = dataSource[indexPath.row]
             (cell as! ShopCollectCell)

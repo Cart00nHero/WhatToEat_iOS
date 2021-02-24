@@ -47,12 +47,16 @@ class SearchLocViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scenario.beSetScenarioMap(map: mapView)
-        let rightBarButtonItem = UIBarButtonItem(
-            title: "Locate", style: .plain, target: self,
-            action: #selector(rigtBarButtonClickAction(sender:)))
-        sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
-        searchTextField.inputAccessoryView = createInputAccessoryView()
-        coverView = createCoverView(coverSuperView: bottomSelectedView)
+        if let image = UIImage(named: "icon_gps") {
+            let smallImage = resizeImage(image: image, width: 44)
+            let rightBarButtonItem = UIBarButtonItem(
+                image: smallImage.withRenderingMode(.alwaysOriginal),
+                style: .plain, target: self,
+                action: #selector(rigtBarButtonClickAction(sender:)))
+            sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
+            searchTextField.inputAccessoryView = createInputAccessoryView()
+            coverView = createCoverView(coverSuperView: bottomSelectedView)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,6 +66,7 @@ class SearchLocViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         scenario.beCancelFoundLocParcel()
+        mapView.removeAnnotations(mapView.annotations)
     }
     
     // MARK: - Private methods
@@ -153,6 +158,7 @@ extension SearchLocViewController: MKMapViewDelegate {
                 let presentVC =
                     self.storyboard?.instantiateViewController(identifier: "FoundLocViewController")
                 sceneVC?.basePresentViewController(presentVC!, Animated: true)
+                mapView.removeAnnotations(mapView.annotations)
             } else {
                 let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
                 let toVC =
@@ -209,7 +215,8 @@ extension SearchLocViewController: SceneStateDelegate {
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC =
                 storyboard.instantiateViewController(
-                    withIdentifier: "AddGourmetViewController") as! AddGourmetViewController
+                    withIdentifier: "AddGourmetViewController")
+                as! AddGourmetViewController
             sceneVC?.basePushToViewController(toVC, Animated: true)
         default: break
         }

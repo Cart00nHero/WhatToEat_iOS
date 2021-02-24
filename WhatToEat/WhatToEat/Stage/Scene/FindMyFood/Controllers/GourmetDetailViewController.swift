@@ -23,7 +23,7 @@ class GourmetDetailViewController: UIViewController {
         scenario.beCollectParcel { [self] (data) in
             tableData.reloadData(data: data)
             DispatchQueue.main.async {
-//                tableView.reloadData()
+                tableView.reloadData()
             }
         }
     }
@@ -40,21 +40,16 @@ extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableData.dataSource[indexPath.row]
-        var cellIdentifier = "FindFoodTableViewCell"
-        switch data.templateStyle {
-        case .Button:
-            cellIdentifier = "FFBtnTableViewCell"
-        default: break
-        }
+//        switch data.templateStyle {
+//        case .Button:
+//            cellIdentifier = "ButtonTableViewCell"
+//        default: break
+//        }
         let cell =
-            tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        if cellIdentifier == "FindFoodTableViewCell" {
-            let contentCell = cell as! FindFoodTableViewCell
-            contentCell.cellTemplate = data as? LRTemplate
-        }else {
-            let contentCell = cell as! FFBtnTableViewCell
-            contentCell.cellData = data as? ButtonTemplate
-        }
+            tableView.dequeueReusableCell(
+                withIdentifier: "DetailLRTableViewCell",
+                for: indexPath) as! DetailLRTableViewCell
+        cell.cellTemplate = data as? LRTemplate
         return cell
     }
 }

@@ -91,15 +91,33 @@ class DataManager: Actor {
         searchData: SearchForRangeQuery.Data.SearchForRange,
         _ complete: @escaping (AddressDqCmd) -> Void) {
         var addressCmd = AddressDqCmd()
-        addressCmd.nation = searchData.nation
-        addressCmd.isoNationCode = searchData.isoNationCode
-        addressCmd.locality = searchData.locality
-        addressCmd.subLocality = searchData.subLocality
-        addressCmd.administrativeArea = searchData.administrativeArea
-        addressCmd.subAdministrativeArea = searchData.subAdministrativeArea
-        addressCmd.postalCode = searchData.postalCode
-        addressCmd.thoroughfare = searchData.thoroughfare
-        addressCmd.subThoroughfare = searchData.subThoroughfare
+        if searchData.nation != nil {
+            addressCmd.nation = searchData.nation
+        }
+        if searchData.isoNationCode != nil {
+            addressCmd.isoNationCode = searchData.isoNationCode
+        }
+        if searchData.locality != nil {
+            addressCmd.locality = searchData.locality
+        }
+        if searchData.subLocality != nil {
+            addressCmd.subLocality = searchData.subLocality
+        }
+        if searchData.administrativeArea != nil {
+            addressCmd.administrativeArea = searchData.administrativeArea
+        }
+        if searchData.subAdministrativeArea != nil {
+            addressCmd.subAdministrativeArea = searchData.subAdministrativeArea
+        }
+        if searchData.postalCode != nil {
+            addressCmd.postalCode = searchData.postalCode
+        }
+        if searchData.thoroughfare != nil {
+            addressCmd.thoroughfare = searchData.thoroughfare
+        }
+        if searchData.subThoroughfare != nil {
+            addressCmd.subThoroughfare = searchData.subThoroughfare
+        }
         sender.unsafeSend {
             complete(addressCmd)
         }

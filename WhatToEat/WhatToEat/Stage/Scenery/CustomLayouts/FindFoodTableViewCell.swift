@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class FindFoodTableViewCell: LRTableViewCell {
+class DetailLRTableViewCell: LRTableViewCell {
     
     @IBOutlet weak var cellLeftLabel: UILabel!
     private var leftContentView: UIView? = nil
@@ -42,26 +42,30 @@ class FindFoodTableViewCell: LRTableViewCell {
     }
     
     private func createLeftView() {
-        let data = cellTemplate!.leftViewItem as? LabelItem
-        cellLeftLabel.text = data?.text
+        if cellTemplate?.leftViewItem != nil {
+            let data = cellTemplate!.leftViewItem as? LabelItem
+            cellLeftLabel.text = data?.text
+        }
     }
     
     private func createRightView() {
-        let textLabel = UILabel()
-        buildConstraints(content: textLabel, side: .Right)
-        let data = cellTemplate!.rightViewItem as? LabelItem
-        textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
-        textLabel.font = UIFont.systemFont(ofSize: 14.0)
-        textLabel.text = data?.text
-        textLabel.numberOfLines = 0
-        textLabel.lineBreakMode = .byWordWrapping
+        if cellTemplate?.rightViewItem != nil {
+            let textLabel = UILabel()
+            buildConstraints(content: textLabel, side: .Right)
+            let data = cellTemplate!.rightViewItem as? LabelItem
+            textLabel.textColor = UIColor(red: 74.0/255.0, green: 74.0/255.0, blue: 74.0/255.0, alpha: 1.0)
+            textLabel.font = UIFont.systemFont(ofSize: 14.0)
+            textLabel.text = data?.text
+            textLabel.numberOfLines = 0
+            textLabel.lineBreakMode = .byWordWrapping
+        }
     }
     
 }
 
 // MARK: - FindFoodBtnTableViewCell
 
-class FFBtnTableViewCell: ButtonTableViewCell {
+class DetailBtnTableViewCell: ButtonTableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -66,6 +66,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_shop_door" translatesAutoresizingMaskIntoConstraints="NO" id="Ect-Od-AaA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-6h-yEn">
                                 <rect key="frame" x="15" y="392" width="384" height="34"/>
                                 <color key="backgroundColor" red="0.13333333333333333" green="0.54509803921568623" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,7 +83,11 @@
                         <color key="backgroundColor" red="0.96078431372549022" green="1" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="centerY" secondItem="QCr-9N-KOu" secondAttribute="centerY" id="09B-5a-roP"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="top" secondItem="QCr-9N-KOu" secondAttribute="top" id="1ND-LQ-bu5"/>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="centerX" secondItem="QCr-9N-KOu" secondAttribute="centerX" id="71d-hb-l7T"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="bottom" secondItem="UEo-oH-cfN" secondAttribute="bottom" id="KPg-uh-DDd"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="leading" secondItem="UEo-oH-cfN" secondAttribute="leading" id="RGq-jW-C77"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="trailing" secondItem="UEo-oH-cfN" secondAttribute="trailing" id="qeJ-zF-v4c"/>
                             <constraint firstItem="KPx-6h-yEn" firstAttribute="leading" secondItem="QCr-9N-KOu" secondAttribute="leading" constant="15" id="qjK-oZ-wq0"/>
                         </constraints>
                     </view>
@@ -90,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIO-WV-D3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="522" y="81"/>
+            <point key="canvasLocation" x="521.73913043478262" y="80.357142857142847"/>
         </scene>
         <!--Main Menu View Controller-->
         <scene sceneID="iTB-Rb-N5G">
@@ -100,6 +107,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_shop_inner" translatesAutoresizingMaskIntoConstraints="NO" id="ENr-Zg-gUJ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="764"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2m-IC-U1J">
                                 <rect key="frame" x="15" y="305" width="384" height="34"/>
                                 <color key="backgroundColor" red="0.13333333333333333" green="0.54509803921568623" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -127,7 +137,11 @@
                             <constraint firstItem="N2m-IC-U1J" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="1TB-6c-ih9"/>
                             <constraint firstItem="Oh9-A0-j7T" firstAttribute="centerY" secondItem="g1g-59-mZd" secondAttribute="centerY" constant="60" id="3Rz-1F-yfu"/>
                             <constraint firstItem="N2m-IC-U1J" firstAttribute="centerY" secondItem="g1g-59-mZd" secondAttribute="centerY" constant="-60" id="71O-Zj-WrD"/>
+                            <constraint firstItem="ENr-Zg-gUJ" firstAttribute="top" secondItem="Sk0-i5-p1v" secondAttribute="top" id="EOw-lH-A9s"/>
                             <constraint firstItem="N2m-IC-U1J" firstAttribute="centerX" secondItem="g1g-59-mZd" secondAttribute="centerX" id="Nxo-h6-Swu"/>
+                            <constraint firstItem="Sk0-i5-p1v" firstAttribute="trailing" secondItem="ENr-Zg-gUJ" secondAttribute="trailing" id="W8U-yM-9j0"/>
+                            <constraint firstItem="Sk0-i5-p1v" firstAttribute="bottom" secondItem="ENr-Zg-gUJ" secondAttribute="bottom" id="c84-wM-J9z"/>
+                            <constraint firstItem="ENr-Zg-gUJ" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" id="l8v-Xq-2C3"/>
                             <constraint firstItem="Oh9-A0-j7T" firstAttribute="centerX" secondItem="g1g-59-mZd" secondAttribute="centerX" id="mf6-pa-yRh"/>
                             <constraint firstItem="Oh9-A0-j7T" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="pdX-eK-9PZ"/>
                         </constraints>
@@ -136,7 +150,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fXg-7B-qLj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1305" y="81"/>
+            <point key="canvasLocation" x="1304.3478260869567" y="80.357142857142847"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="image_shop_door" width="870" height="870"/>
+        <image name="image_shop_inner" width="919" height="917"/>
+    </resources>
 </document>
