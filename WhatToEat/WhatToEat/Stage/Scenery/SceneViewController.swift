@@ -48,7 +48,7 @@ class SceneViewController: UIBaseViewController {
     // MARK: - Private Methods
     private func initialNavigationBar() {
         self.navigationController?.navigationBar.barTintColor =
-            UIColor(red: 34.0/255.0, green: 139.0/255.0, blue: 34.0/255.0, alpha: 1.0)
+            UIColor(red: 255.0/255.0, green: 77.0/255.0, blue: 64.0/255.0, alpha: 1.0)
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

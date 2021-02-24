@@ -148,7 +148,8 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         updateRangeValue()
     }
-    func mapView(_ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(
+        _ mapView: MKMapView,rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         // If you want to include other shapes, then this check is needed.
         // If you only want circles, then remove it.
         if let circleOverlay = overlay as? MKCircle {
