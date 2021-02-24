@@ -10,7 +10,8 @@ import Foundation
 import Flynn
 
 struct DetailTableData {
-    var dataObj:LocationsDynamicQueryQuery.Data.LocationsDynamicQuery
+    var dataObj:
+        LocationsDynamicQueryQuery.Data.LocationsDynamicQuery
     var dataSource: Array<TemplateProtocol> = []
     init(dataObj: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) {
         self.dataObj = dataObj
