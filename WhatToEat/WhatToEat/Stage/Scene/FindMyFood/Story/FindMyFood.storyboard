@@ -300,7 +300,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sZW-2K-JbC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705.7971014492755" y="-358.69565217391306"/>
+            <point key="canvasLocation" x="1743" y="-359"/>
         </scene>
         <!--Find Food View Controller-->
         <scene sceneID="apb-X7-G15">
@@ -602,7 +602,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRP-7n-JE4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705.7971014492755" y="292.66304347826087"/>
+            <point key="canvasLocation" x="1742" y="293"/>
         </scene>
     </scenes>
     <resources>
