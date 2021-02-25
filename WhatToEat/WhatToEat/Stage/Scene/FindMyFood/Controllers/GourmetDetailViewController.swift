@@ -12,9 +12,10 @@ import UIKit
 class GourmetDetailViewController: UIViewController {
     
     private var scenario = GourmetDetailScenario()
+    private var sceneVC: SceneViewController? = nil
     private var tableData = DetailTableData(dataObj: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery())
     
-    @IBOutlet weak var dislikeButton: UIBarButtonItem!
+    //    @IBOutlet weak var dislikeButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -22,12 +23,14 @@ class GourmetDetailViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.sceneVC = self.parent as? SceneViewController
+        self.sceneVC?.stateDelegate = self
         /* 暫時沒有要用
-        if let image = UIImage(named: "image_throw_trash") {
-            let smallImage = resizeImage(image: image, width: 44)
-            dislikeButton.image = smallImage.withRenderingMode(.alwaysOriginal)
-
-        }*/
+         if let image = UIImage(named: "image_throw_trash") {
+         let smallImage = resizeImage(image: image, width: 44)
+         dislikeButton.image = smallImage.withRenderingMode(.alwaysOriginal)
+         
+         }*/
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -58,11 +61,38 @@ extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableData.dataSource[indexPath.row]
+        var cellIdentifier = "DetailLRTableViewCell"
+        if data.templateStyle == .Button {
+            cellIdentifier = "ButtonTableViewCell"
+        }
         let cell =
             tableView.dequeueReusableCell(
-                withIdentifier: "DetailLRTableViewCell",
-                for: indexPath) as! DetailLRTableViewCell
-        cell.cellTemplate = data as? LRTemplate
+                withIdentifier: cellIdentifier,
+                for: indexPath)
+        if cellIdentifier == "DetailLRTableViewCell" {
+            (cell as! DetailLRTableViewCell).cellTemplate
+                = data as? LRTemplate
+        } else {
+            let contentCell = cell as? ButtonTableViewCell
+            contentCell?.cellData = data as? ButtonTemplate
+        }
         return cell
     }
 }
+
+extension GourmetDetailViewController: SceneStateDelegate {
+    func onNewState(state: SceneState) {
+        switch state.currentAction {
+        case is TableCellButtonClickAction:
+            let latitude = Double(tableData.dataObj.latitude!) ?? 0.0
+            let longitude = Double(tableData.dataObj.longitude!) ?? 0.0
+            scenario.bePackageLocation(
+                latitude: latitude, longitude: longitude) {
+                appStore.dispatch(GoGoogleNavigationAction())
+                self.dismiss(animated: true, completion: nil)
+            }
+        default:break
+        }
+    }
+}
+

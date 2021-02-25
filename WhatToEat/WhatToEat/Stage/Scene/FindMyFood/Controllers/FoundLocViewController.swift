@@ -11,8 +11,6 @@ import UIKit
 
 class FoundLocViewController: UIViewController {
     private var scenario: FoundLocScenario = FoundLocScenario()
-    private var sceneVC: SceneViewController? = nil
-    
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     private var dataSource = [GQInputObject]()

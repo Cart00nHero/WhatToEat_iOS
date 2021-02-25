@@ -116,9 +116,19 @@ extension FindFoodViewController: SceneStateDelegate {
                 stopRadarAnimating()
             default: break
             }
-        case is TableCellButtonClickAction:
-            let toVC = self.storyboard?.instantiateViewController(identifier: "NavigationViewController")
-            sceneVC?.basePushToViewController(toVC!, Animated: true)
+        case is GoGoogleNavigationAction:
+            scenario.beCollectGoogleNavParcel { (place) in
+                let url =
+                    URL(string: "comgooglemaps://?saddr=&daddr=\(place.coordinate.latitude),\(place.coordinate.longitude)&directionsmode=driving")
+                if UIApplication.shared.canOpenURL(url!) {
+                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                } else {
+                    // 若手機沒安裝 Google Map App 則導到 App Store(id443904275 為 Google Map App 的 ID)
+                    let appStoreGoogleMapURL = URL(string: "itms-apps://itunes.apple.com/app/id585027354")!
+                    UIApplication.shared.open(appStoreGoogleMapURL, options: [:], completionHandler: nil)
+                }
+            }
+            
         case let action as MarkFoundPlacesOnMapAction:
             mkMapView.removeAnnotations(mkMapView.annotations)
             mkMapView.addAnnotations(action.annotions)
@@ -159,7 +169,7 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
             let circleRenderer = MKCircleRenderer(overlay: circleOverlay)
             circleRenderer.lineWidth = 5.0
             circleRenderer.strokeColor = .red
-//            circleRenderer.fillColor = .black
+            //            circleRenderer.fillColor = .black
             circleRenderer.alpha = 1.0
             return circleRenderer
         }
@@ -184,9 +194,9 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
             annotationView?.canShowCallout = true
         }
         /* 放置圖片
-        let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
-        leftIconView.image = UIImage(named: restaurant.image)
-        annotationView?.leftCalloutAccessoryView = leftIconView
+         let leftIconView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
+         leftIconView.image = UIImage(named: restaurant.image)
+         annotationView?.leftCalloutAccessoryView = leftIconView
          */
         annotationView?.tag = annotationViewTag
         if annotationViewTag > 0 {
@@ -267,5 +277,4 @@ extension FindFoodViewController: UICollectionViewDelegate,
         default: break
         }
     }
-    
 }
