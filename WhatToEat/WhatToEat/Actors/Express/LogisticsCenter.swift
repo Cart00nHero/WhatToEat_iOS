@@ -10,7 +10,7 @@ import Foundation
 import Flynn
 
 struct Parcel {
-    let parcelType: String
+    let contentType: String
     var sender = ""
     var content: Any
 }
@@ -23,7 +23,7 @@ class LogisticsCenter: NSObject {
         let typeName = String(describing: type(of: T.self))
         let senderName = String(describing: type(of: sender))
         let parcel =
-            Parcel(parcelType: typeName, sender: senderName, content: content)
+            Parcel(contentType: typeName, sender: senderName, content: content)
         courier.beClaimParcel(recipient, parcel)
         return parcel
     }
