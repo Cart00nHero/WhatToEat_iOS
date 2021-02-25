@@ -154,6 +154,21 @@ class FindFoodScenario: Actor,PilotProtocol {
 //            String(describing: type(of: GourmetDetailScenario.self))
         _ = LogisticsCenter.shared.applyExpressService(sender: self, recipient: recipientName, content: content)
     }
+    private func _beCollectGoogleNavParcel(
+        _ complete: @escaping (CLLocation) -> Void) {
+        LogisticsCenter.shared.collectPacels(recipient: self) { (parcelSet) in
+            guard parcelSet?.count ?? 0 > 0 else {
+                return}
+            for parcel in parcelSet! {
+                let parcelItem = parcel as! Parcel
+                guard let content =
+                        parcelItem.content as? CLLocation else { return }
+                DispatchQueue.main.async {
+                    complete(content)
+                }
+            }
+        }
+    }
 
     // MARK: - private
     private func searchRange(zoomLevel: Int) -> Float64 {
@@ -274,6 +289,11 @@ extension FindFoodScenario {
     @discardableResult
     public func beSendGourmetDetailParcel(content: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> Self {
         unsafeSend { self._beSendGourmetDetailParcel(content: content) }
+        return self
+    }
+    @discardableResult
+    public func beCollectGoogleNavParcel(_ complete: @escaping (CLLocation) -> Void) -> Self {
+        unsafeSend { self._beCollectGoogleNavParcel(complete) }
         return self
     }
     @discardableResult
