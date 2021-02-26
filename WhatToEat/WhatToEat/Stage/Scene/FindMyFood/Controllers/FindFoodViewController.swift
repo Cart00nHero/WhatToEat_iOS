@@ -86,10 +86,6 @@ class FindFoodViewController: UIViewController {
 extension FindFoodViewController: SceneStateDelegate {
     func onNewState(state: SceneState) {
         switch state.currentAction {
-        case let action as LocatePositionAction:
-            if action.status == .DidUpdateLocation {
-                mkMapView.zoomLevel = 17
-            }
         case is SearchInNewRangeAction:
             startRadarAnimating()
             scenario.beSearchNearby(
@@ -106,10 +102,8 @@ extension FindFoodViewController: SceneStateDelegate {
                     willMarkAnnotations = true
                     scenario.beMarkFoundPlacesOnMap(queryData: action.responseData!)
                 } else {
-                    scenario.beUpdateCenterPoint(zoomLevel: mkMapView.zoomLevel, coordinate: mkMapView.camera.centerCoordinate) { [self](_) in
-                        scenario.beGetNewRegion { [self] (region) in
-                            mkMapView.setRegion(region, animated: true)
-                        }
+                    scenario.beGetNewRegion { [self] (region) in
+                        mkMapView.setRegion(region, animated: true)
                     }
                 }
             case .Failed:

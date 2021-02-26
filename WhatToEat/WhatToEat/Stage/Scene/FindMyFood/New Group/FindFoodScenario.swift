@@ -13,7 +13,7 @@ import MapKit
 
 struct CenterPoint {
     var coordinate: CLLocationCoordinate2D? = nil
-    var zoomLevel = 17
+    var zoomLevel = 16
     
 }
 class FindFoodScenario: Actor,PilotProtocol {
