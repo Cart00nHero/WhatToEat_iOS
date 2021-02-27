@@ -54,7 +54,6 @@
 		AF8224832472F4160034C928 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247D2472F4160034C928 /* AppState.swift */; };
 		AF8224842472F4160034C928 /* CommonActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF82247F2472F4160034C928 /* CommonActions.swift */; };
 		AF8224862472F4160034C928 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF8224822472F4160034C928 /* AppReducer.swift */; };
-		AFA89F8725D5AAFC0057FA75 /* Flynn in Frameworks */ = {isa = PBXBuildFile; productRef = AFA89F8625D5AAFC0057FA75 /* Flynn */; };
 		AFA89FA425D5AC230057FA75 /* Mathematician.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FA325D5AC230057FA75 /* Mathematician.swift */; };
 		AFA89FA925D5ADFA0057FA75 /* FindFoodScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FA825D5ADFA0057FA75 /* FindFoodScenario.swift */; };
 		AFA89FAF25D5B0770057FA75 /* Pilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA89FAE25D5B0770057FA75 /* Pilot.swift */; };
@@ -72,6 +71,7 @@
 		AFBB6E132560163600A92E21 /* AddBtnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E112560163600A92E21 /* AddBtnTableViewCell.swift */; };
 		AFBB6E27256017CF00A92E21 /* FindFoodTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E26256017CF00A92E21 /* FindFoodTableViewCell.swift */; };
 		AFBB6E82256058EB00A92E21 /* AddGmtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBB6E81256058EB00A92E21 /* AddGmtTableViewCell.swift */; };
+		AFC014B725EA066B001C6E83 /* Flynn in Frameworks */ = {isa = PBXBuildFile; productRef = AFC014B625EA066B001C6E83 /* Flynn */; };
 		AFD30C0625E0AB7700B12B63 /* FoundLocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD30C0525E0AB7700B12B63 /* FoundLocViewController.swift */; };
 		AFD30C0B25E0ABC600B12B63 /* FoundLocScenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD30C0A25E0ABC600B12B63 /* FoundLocScenario.swift */; };
 		AFD30C1525E0F8BE00B12B63 /* CollectionViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD30C1425E0F8BE00B12B63 /* CollectionViewCells.swift */; };
@@ -185,7 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFA89F8725D5AAFC0057FA75 /* Flynn in Frameworks */,
+				AFC014B725EA066B001C6E83 /* Flynn in Frameworks */,
 				026DED75408948FF4B42558B /* Pods_WhatToEat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -621,7 +621,7 @@
 			);
 			name = WhatToEat;
 			packageProductDependencies = (
-				AFA89F8625D5AAFC0057FA75 /* Flynn */,
+				AFC014B625EA066B001C6E83 /* Flynn */,
 			);
 			productName = WhatToEat;
 			productReference = AF13AF50245E90DB0026A5C8 /* WhatToEat.app */;
@@ -699,7 +699,7 @@
 			);
 			mainGroup = AF13AF47245E90DB0026A5C8;
 			packageReferences = (
-				AFA89F8525D5AAFC0057FA75 /* XCRemoteSwiftPackageReference "Flynn" */,
+				AFC014B525EA066B001C6E83 /* XCRemoteSwiftPackageReference "Flynn" */,
 			);
 			productRefGroup = AF13AF51245E90DB0026A5C8 /* Products */;
 			projectDirPath = "";
@@ -1281,7 +1281,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AFA89F8525D5AAFC0057FA75 /* XCRemoteSwiftPackageReference "Flynn" */ = {
+		AFC014B525EA066B001C6E83 /* XCRemoteSwiftPackageReference "Flynn" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/KittyMac/Flynn.git";
 			requirement = {
@@ -1292,9 +1292,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AFA89F8625D5AAFC0057FA75 /* Flynn */ = {
+		AFC014B625EA066B001C6E83 /* Flynn */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFA89F8525D5AAFC0057FA75 /* XCRemoteSwiftPackageReference "Flynn" */;
+			package = AFC014B525EA066B001C6E83 /* XCRemoteSwiftPackageReference "Flynn" */;
 			productName = Flynn;
 		};
 /* End XCSwiftPackageProductDependency section */
