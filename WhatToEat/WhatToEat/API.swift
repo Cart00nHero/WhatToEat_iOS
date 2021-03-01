@@ -853,7 +853,12 @@ public final class CreateGourmetMutation: GraphQLMutation {
   public let operationDefinition: String =
     """
     mutation CreateGourmet($foodieId: String!, $address: InputAddress!, $shopBranch: InputBranch!, $shop: InputShop!) {
-      createGourmet(foodieId: $foodieId, address: $address, shopBranch: $shopBranch, shop: $shop) {
+      createGourmet(
+        foodieId: $foodieId
+        address: $address
+        shopBranch: $shopBranch
+        shop: $shop
+      ) {
         __typename
         uniqueId
         orderId
@@ -1378,7 +1383,13 @@ public final class UpdateGourmetMutation: GraphQLMutation {
   public let operationDefinition: String =
     """
     mutation UpdateGourmet($foodieId: String!, $branchId: String!, $branch: InputBranch!, $shop: InputShop, $address: InputAddress) {
-      updateGourmet(foodieId: $foodieId, branchId: $branchId, branch: $branch, shop: $shop, address: $address) {
+      updateGourmet(
+        foodieId: $foodieId
+        branchId: $branchId
+        branch: $branch
+        shop: $shop
+        address: $address
+      ) {
         __typename
         uniqueId
         orderId
@@ -2947,7 +2958,11 @@ public final class SearchForRangeQuery: GraphQLQuery {
   public let operationDefinition: String =
     """
     query SearchForRange($foodieId: String, $minCoordinate: InputCoordinate!, $maxCoordinate: InputCoordinate!) {
-      searchForRange(foodieId: $foodieId, minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate) {
+      searchForRange(
+        foodieId: $foodieId
+        minCoordinate: $minCoordinate
+        maxCoordinate: $maxCoordinate
+      ) {
         __typename
         ownerId
         completeInfo

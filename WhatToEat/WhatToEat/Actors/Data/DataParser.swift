@@ -32,7 +32,6 @@ func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.L
         }
     }
     inputObj.shopBranch = branch
-    
     inputObj.shopId = result.shopBranch?.shop?.uniqueId ?? ""
     var shop = inputObj.shop
     for key in shop.graphQLMap.keys {
@@ -77,4 +76,14 @@ func parseSearchForRangeGQInputObj(result: SearchForRangeQuery.Data.SearchForRan
     inputObj.shop = shop
     
     return inputObj
+}
+
+func isoNationCodeToLocaleId(isoCode: String) -> String {
+    switch isoCode {
+    case "CN": return "zh_Hans"
+    case "HK": return "zh_Hant_HK"
+    case "JP": return "ja_JP"
+    case "TW": return "zh_Hant_TW"
+    default: return "en_US"
+    }
 }

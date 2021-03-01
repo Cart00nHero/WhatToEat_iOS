@@ -12,7 +12,7 @@ import MapKit
 
 class GeoCoder: Actor {
     private func _beCodeAddress(
-        _ sender: Actor,_ address: String,
+        sender: Actor,address: String,
         _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) {
         let geoCoder = CLGeocoder()
         geoCoder.geocodeAddressString(address) { (placemarks, error) in
@@ -22,12 +22,40 @@ class GeoCoder: Actor {
         }
     }
     private func _beReverseLocation(
-        _ sender: Actor,location: CLLocation,
+        sender: Actor,location: CLLocation,
         _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location) { (placemarks, error) in
             sender.unsafeSend {
                 complete(placemarks, error)
+            }
+        }
+    }
+    
+    private func _beLocalizedReverseLocation(
+        sender: Actor,location: CLLocation, localeId: String,
+        _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) {
+        let locale = Locale(identifier: localeId)
+        let geoCoder = CLGeocoder()
+        if localeId.isEmpty {
+            _beReverseLocation(
+                sender: sender, location: location, complete)
+            return
+        }
+        if #available(iOS 11.0, *) {
+            geoCoder.reverseGeocodeLocation(
+                location, preferredLocale: locale) { (placemarks, error) in
+                sender.unsafeSend {
+                    complete(placemarks,error)
+                }
+            }
+        } else {
+            UserDefaults.standard.set([localeId], forKey: "AppleLanguages")
+            geoCoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+                sender.unsafeSend {
+                    complete(placemarks, error)
+                }
             }
         }
     }
@@ -39,13 +67,18 @@ class GeoCoder: Actor {
 extension GeoCoder {
 
     @discardableResult
-    public func beCodeAddress(_ sender: Actor, _ address: String, _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) -> Self {
-        unsafeSend { self._beCodeAddress(sender, address, complete) }
+    public func beCodeAddress(sender: Actor, address: String, _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) -> Self {
+        unsafeSend { self._beCodeAddress(sender: sender, address: address, complete) }
         return self
     }
     @discardableResult
-    public func beReverseLocation(_ sender: Actor, location: CLLocation, _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) -> Self {
-        unsafeSend { self._beReverseLocation(sender, location: location, complete) }
+    public func beReverseLocation(sender: Actor, location: CLLocation, _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) -> Self {
+        unsafeSend { self._beReverseLocation(sender: sender, location: location, complete) }
+        return self
+    }
+    @discardableResult
+    public func beLocalizedReverseLocation(sender: Actor, location: CLLocation, localeId: String, _ complete: @escaping ([CLPlacemark]?, Error?) -> Void) -> Self {
+        unsafeSend { self._beLocalizedReverseLocation(sender: sender, location: location, localeId: localeId, complete) }
         return self
     }
 

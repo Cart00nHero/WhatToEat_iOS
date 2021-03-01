@@ -52,8 +52,11 @@ struct GourmetsTableData {
                                rightViewItem: LabelItem(numberOfLines: 2, text: inputObj.address.completeInfo),
                            itemHeight: 84.0
                 ),
-                LRTemplate(leftViewItem: LabelItem(text: "Floor"), rightViewItem: TextFieldItem(text: (self.inputObj.address.floor ?? "") ?? "")),
-                LRTemplate(leftViewItem: LabelItem(text: "Room"), rightViewItem: TextFieldItem(text: (self.inputObj.address.room ?? "") ?? "")),
+                LRTemplate(
+                    leftViewItem: LabelItem(text: "Floor"),
+                    rightViewItem: TextFieldItem(keyboardType: .numberPad,
+                        text: (self.inputObj.address.floor ?? "") ?? "")),
+                LRTemplate(leftViewItem: LabelItem(text: "Room"), rightViewItem: TextFieldItem(keyboardType: .numberPad,text: (self.inputObj.address.room ?? "") ?? "")),
                 ButtonTemplate(cornerRadius: 2.0, titleText: "Save")
             ]
         ]

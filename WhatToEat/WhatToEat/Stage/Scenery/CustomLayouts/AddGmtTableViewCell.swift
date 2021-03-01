@@ -86,7 +86,7 @@ class AddGmtTableViewCell: LRTableViewCell {
             textLabel.textColor = UIColor(red: 112.0/255.0, green: 60.0/255.0, blue: 20.0/255.0, alpha: 1.0)
             textLabel.font = UIFont.systemFont(ofSize: 14.0)
             textLabel.text = data?.text
-            textLabel.numberOfLines = 0
+            textLabel.numberOfLines = data?.numberOfLines ?? 0
             textLabel.lineBreakMode = .byWordWrapping
         case .DropDown:
             let dropDownView = DropDownCellView()

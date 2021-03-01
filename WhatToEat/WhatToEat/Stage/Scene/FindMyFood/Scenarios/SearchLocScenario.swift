@@ -43,20 +43,27 @@ class SearchLocScenario: Actor,PilotProtocol {
         pilot.beRequestCurrentLocation()
     }
     private func _beInquireIntoAddressesLocation(address: String) {
-        GeoCoder().beCodeAddress(self, address) { [self] (placemarks, error) in
+        GeoCoder().beCodeAddress(sender: self, address: address) { [self]
+            (placemarks, error) in
             if placemarks?.count ?? 0 > 0 {
                 if mapView != nil {
                     MapNavigator(mapView: mapView!).beRemoveAnnotations(sender: self, mapView!.annotations) {
                         let location = placemarks?.first?.location
-                        beInquireIntoLocationsAddress(location: location!)
+                        let isoCode = placemarks?.first?.isoCountryCode ?? ""
+                        _beInquireIntoLocationsAddress(
+                            location: location!,
+                            localeId: isoNationCodeToLocaleId(isoCode: isoCode))
                     }
                 }
             }
         }
     }
-    private func _beInquireIntoLocationsAddress(location: CLLocation) {
+    private func _beInquireIntoLocationsAddress(
+        location: CLLocation,localeId: String) {
         var action = FoundLocationsAddressAction()
-        GeoCoder().beReverseLocation(self, location: location) { (placemarks, error) in
+        GeoCoder().beLocalizedReverseLocation(
+            sender: self, location: location,
+            localeId: localeId) { (placemarks, error) in
             if error == nil {
                 if placemarks?.count ?? 0 > 0 {
                     DataManager().beParsePlaceMarktoGQInput(self, placemarks!) {
@@ -142,7 +149,7 @@ class SearchLocScenario: Actor,PilotProtocol {
     // MARK: - Pilot protocols
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
-            beInquireIntoLocationsAddress(location: locations[0])
+            _beInquireIntoLocationsAddress(location: locations[0], localeId: "")
             if mapView != nil {
                 let markLoc = locations[0]
                 let annotation = MKPointAnnotation()
@@ -186,8 +193,8 @@ extension SearchLocScenario {
         return self
     }
     @discardableResult
-    public func beInquireIntoLocationsAddress(location: CLLocation) -> Self {
-        unsafeSend { self._beInquireIntoLocationsAddress(location: location) }
+    public func beInquireIntoLocationsAddress(location: CLLocation, localeId: String) -> Self {
+        unsafeSend { self._beInquireIntoLocationsAddress(location: location, localeId: localeId) }
         return self
     }
     @discardableResult

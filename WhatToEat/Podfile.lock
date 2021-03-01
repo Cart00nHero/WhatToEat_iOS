@@ -1,7 +1,7 @@
 PODS:
-  - Apollo (0.32.1):
-    - Apollo/Core (= 0.32.1)
-  - Apollo/Core (0.32.1)
+  - Apollo (0.41.0):
+    - Apollo/Core (= 0.41.0)
+  - Apollo/Core (0.41.0)
   - FacebookCore (0.9.0):
     - FBSDKCoreKit (~> 5.0)
   - FacebookLogin (0.9.0):
@@ -27,12 +27,11 @@ PODS:
   - FBSDKShareKit/Share (5.15.1):
     - FBSDKCoreKit (~> 5.0)
   - iOSDropDown (0.3.4)
-  - Realm (5.4.0):
-    - Realm/Headers (= 5.4.0)
-  - Realm/Headers (5.4.0)
-  - RealmSwift (5.4.0):
-    - Realm (= 5.4.0)
-  - ReSwift (5.0.0)
+  - Realm (10.7.0):
+    - Realm/Headers (= 10.7.0)
+  - Realm/Headers (10.7.0)
+  - RealmSwift (10.7.0):
+    - Realm (= 10.7.0)
 
 DEPENDENCIES:
   - Apollo
@@ -41,7 +40,6 @@ DEPENDENCIES:
   - FacebookShare
   - iOSDropDown
   - RealmSwift
-  - ReSwift
 
 SPEC REPOS:
   trunk:
@@ -55,10 +53,9 @@ SPEC REPOS:
     - iOSDropDown
     - Realm
     - RealmSwift
-    - ReSwift
 
 SPEC CHECKSUMS:
-  Apollo: 55d9a99774dd06dd6cc865d16a6c13d0d6804211
+  Apollo: abe51edae238da17570535e370ffe1bec276275b
   FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
   FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
   FacebookShare: 85968ad1b1606c4944fb154924e425fd29184ea5
@@ -66,10 +63,9 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   FBSDKShareKit: 259737eab3cc807087374553abdf588b3096ba55
   iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
-  Realm: 8949757d76e2451a53d727954c607e49c2542b77
-  RealmSwift: 0b7d7121e842724188123c6086831ae6d2952050
-  ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
+  Realm: a03c41a3afbda6c197ba4dfba5428b8b54cc2df4
+  RealmSwift: 5e7abc842276d7fabd386e67afbf3efde54eb1c6
 
-PODFILE CHECKSUM: 200197857e2a32ac001c94a8bb5fa2d7de0dc95e
+PODFILE CHECKSUM: 0dd273d5e3804ff92794053e8ad601c0893b8938
 
 COCOAPODS: 1.10.1

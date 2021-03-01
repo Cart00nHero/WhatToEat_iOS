@@ -122,6 +122,10 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
         }
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let data = tableData.dataSource[indexPath.section][indexPath.row]
+        return data.itemHeight
+    }
     
 }
 extension AddGourmetViewController: UIScrollViewDelegate {

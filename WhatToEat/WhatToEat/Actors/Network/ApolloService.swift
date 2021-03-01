@@ -11,7 +11,7 @@ import Apollo
 
 class ApolloService: NSObject {
     static let shared = ApolloService()
-    private(set) lazy var apollo = ApolloClient(url: URL(string: "http://18.176.55.99:8080/gql/api")!)
+    private(set) lazy var apollo = ApolloClient(url: URL(string: "http://3.113.12.196:8080/gql/api")!)
 }
 
 func clearApolloServiceCache() {

@@ -6,7 +6,6 @@ target 'WhatToEat' do
   use_frameworks!
 
   # Pods for WhatToEat
-  pod 'ReSwift'
   pod 'RealmSwift'
   pod 'Apollo'
   pod 'iOSDropDown'
