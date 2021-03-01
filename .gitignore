@@ -4,6 +4,7 @@
 
 ### macOS ###
 # General
+WhatToEat/.DS_Store
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -141,6 +142,3 @@ xcuserdata
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 # End of https://www.toptal.com/developers/gitignore/api/swiftpackagemanager,swift,xcode,macos
-WhatToEat/.DS_Store
-WhatToEat/WhatToEatTests/
-WhatToEat/WhatToEatUITests/
