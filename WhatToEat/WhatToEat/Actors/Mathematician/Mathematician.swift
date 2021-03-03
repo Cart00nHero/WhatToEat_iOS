@@ -15,7 +15,7 @@ class Mathematician: Actor {
         _ sender: Actor,_ coordinate: CLLocationCoordinate2D,
         _ range: Float64,_ complete: @escaping (GQSearchRange) -> Void) {
         let result =
-            Haversin().calculateRange(coordinate: coordinate, range: range)
+            Haversine().calculateRange(coordinate: coordinate, range: range)
         sender.unsafeSend {
             complete(result)
         }

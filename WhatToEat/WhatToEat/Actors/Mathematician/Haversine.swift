@@ -9,13 +9,13 @@
 import UIKit
 import MapKit
 
-struct Haversin {
+struct Haversine {
     private let EARTH_RADIUS = 6371.0
 
     func calculateRange(coordinate: CLLocationCoordinate2D, range: Float64) -> GQSearchRange {
         // range is km
-        let dLng = dlng(coordinate: coordinate, range: range)
-        let dLat = dlat(coordinate: coordinate, range: range)
+        let dLng = dLongitude(coordinate: coordinate, range: range)
+        let dLat = dLatitude(coordinate: coordinate, range: range)
     //    let left_top = (coordinate.latitude+dLat, coordinate.longitude-dLng)
     //    let right_top = (coordinate.latitude + dLat, coordinate.longitude + dLng)
     //    let left_bottom = (coordinate.latitude - dLat, coordinate.longitude-dLng)
@@ -35,22 +35,23 @@ struct Haversin {
         return GQSearchRange(max: maxCoordinate, min: minCoordinate)
     }
 
-    private func dlng(coordinate: CLLocationCoordinate2D, range: Float64) -> Double {
-        let dLng = 2*asin(sin(range/(2*EARTH_RADIUS)/cos(deg2rad(coordinate.latitude))))
+    private func dLongitude(coordinate: CLLocationCoordinate2D, range: Float64) -> Double {
+        let dLng =
+            2*asin(sin(range/(2*EARTH_RADIUS)/cos(deg2rad(coordinate.latitude))))
         return rad2deg(dLng)
     }
 
-    private func dlat(coordinate: CLLocationCoordinate2D, range: Float64) -> Double {
-        let dlLat = range / EARTH_RADIUS
-        return rad2deg(dlLat)
+    private func dLatitude(coordinate: CLLocationCoordinate2D, range: Float64) -> Double {
+        let dLat = range / EARTH_RADIUS
+        return rad2deg(dLat)
     }
 
     private func deg2rad(_ number: Double) -> Double {
-        return number * .pi / 180
+        return number * .pi / 180.0
     }
 
     private func rad2deg(_ number: Double) -> Double {
-        return number * 180 / .pi
+        return number * 180.0 / .pi
     }
 
 }

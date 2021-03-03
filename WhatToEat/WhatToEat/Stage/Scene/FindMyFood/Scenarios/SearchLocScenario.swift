@@ -145,6 +145,15 @@ class SearchLocScenario: Actor,PilotProtocol {
             queryDataParcel = nil
         }
     }
+    private func _beResizeBarButtonItemImage(
+        image: UIImage, width: CGFloat, _ complete: @escaping (UIImage) -> Void) {
+        ToolMan().beResizeImage(
+            sender: self, image: image, width: width) { (newImage) in
+            DispatchQueue.main.async {
+                complete(newImage)
+            }
+        }
+    }
     
     // MARK: - Pilot protocols
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
@@ -215,6 +224,11 @@ extension SearchLocScenario {
     @discardableResult
     public func beCancelFoundLocParcel() -> Self {
         unsafeSend(_beCancelFoundLocParcel)
+        return self
+    }
+    @discardableResult
+    public func beResizeBarButtonItemImage(image: UIImage, width: CGFloat, _ complete: @escaping (UIImage) -> Void) -> Self {
+        unsafeSend { self._beResizeBarButtonItemImage(image: image, width: width, complete) }
         return self
     }
     @discardableResult

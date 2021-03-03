@@ -48,12 +48,14 @@ class SearchLocViewController: UIViewController {
         super.viewDidAppear(animated)
         scenario.beSetScenarioMap(map: mapView)
         if let image = UIImage(named: "icon_gps") {
-            let smallImage = resizeImage(image: image, width: 44)
-            let rightBarButtonItem = UIBarButtonItem(
-                image: smallImage.withRenderingMode(.alwaysOriginal),
-                style: .plain, target: self,
-                action: #selector(rigtBarButtonClickAction(sender:)))
-            sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
+            scenario.beResizeBarButtonItemImage(
+                image: image, width: 44.0) { [self] (newImage) in
+                let rightBarButtonItem = UIBarButtonItem(
+                    image: newImage.withRenderingMode(.alwaysOriginal),
+                    style: .plain, target: self,
+                    action: #selector(rigtBarButtonClickAction(sender:)))
+                sceneVC?.navigationItem.rightBarButtonItem = rightBarButtonItem
+            }
         }
         searchTextField.inputAccessoryView = createInputAccessoryView()
         coverView = createCoverView(coverSuperView: bottomSelectedView)
