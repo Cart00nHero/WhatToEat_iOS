@@ -205,15 +205,16 @@ extension SearchLocViewController: SceneStateDelegate {
             switch action.status {
             case .Success:
                 if action.responseData?.count ?? 0 > 0 {
-                    scenario.beGetMarkQueryData(queryData: action.responseData!) {
-                        (annotations) in
+                    scenario.beGetMarkQueryData(queryData: action.responseData!) { (annotations) in
                         appStore.dispatch(
-                            MapClearAndShowAnnotationsAction(annotions: annotations))
+                            MapClearAndShowAnnotationsAction(
+                                annotions: annotations))
                     }
                 } else {
                     scenario.beGetMarkFoundPlaces { (annotations) in
                         appStore.dispatch(
-                            MapClearAndShowAnnotationsAction(annotions: annotations))
+                            MapClearAndShowAnnotationsAction(
+                                annotions: annotations))
                     }
                 }
             default: break
@@ -227,20 +228,6 @@ extension SearchLocViewController: SceneStateDelegate {
                     withIdentifier: "AddGourmetViewController")
                 as! AddGourmetViewController
             sceneVC?.basePushToViewController(toVC, Animated: true)
-        case is MapRemoveAllAnnotationsAction:
-            mapView.removeAnnotations(mapView.annotations)
-        case let action as MapClearAndShowAnnotationsAction:
-            if action.annotions.count > 0 {
-                mapView.removeAnnotations(mapView.annotations)
-                let center = action.annotions.first
-                mapView.addAnnotations(action.annotions)
-                let region = MKCoordinateRegion(
-                    center: center!.coordinate,
-                    latitudinalMeters: CLLocationDistance(200.0),
-                    longitudinalMeters: CLLocationDistance(200.0)
-                )
-                mapView.setRegion(region, animated: true)
-            }
         default: break
         }
     }
