@@ -123,7 +123,7 @@ extension FindFoodViewController: SceneStateDelegate {
                 }
             }
             
-        case let action as MarkFoundPlacesOnMapAction:
+        case let action as MapClearAndShowAnnotationsAction:
             mkMapView.removeAnnotations(mkMapView.annotations)
             mkMapView.addAnnotations(action.annotions)
             scenario.beGetNewRegion { [self] (region) in
@@ -201,7 +201,9 @@ extension FindFoodViewController: MKMapViewDelegate, UIGestureRecognizerDelegate
     func mapView(_ mapView: MKMapView, didAdd views: [MKAnnotationView]) {
         annotationViewTag = -1
         if willMarkAnnotations {
-            scenario.beMoveMapCenterToCenterPoint(mapView: mapView)
+            scenario.beGetCenterPoint { (centerPT) in
+                mapView.centerCoordinate = centerPT.coordinate!
+            }
             willMarkAnnotations = false
         }
     }

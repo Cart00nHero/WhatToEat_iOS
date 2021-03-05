@@ -80,10 +80,6 @@ class FindFoodScenario: Actor,PilotProtocol {
         }
     }
 
-    private func _beMoveMapCenterToCenterPoint(mapView: MKMapView) {
-        MapNavigator(mapView: mapView)
-            .beSetCenterCoordinate(coordinate: centerPt.coordinate!)
-    }
     private func _beSearchInNewRange(mapCenter: CenterPoint) {
         var isNotified = false
         if !isNotified && centerPt.zoomLevel != mapCenter.zoomLevel {
@@ -133,7 +129,7 @@ class FindFoodScenario: Actor,PilotProtocol {
         let markAnnotations = annotations as? [MKPointAnnotation] ?? []
         DispatchQueue.main.async {
             appStore.dispatch(
-                MarkFoundPlacesOnMapAction(annotions: markAnnotations))
+                MapClearAndShowAnnotationsAction(annotions: markAnnotations))
         }
     }
     private func _beDynamicQuerySelectedData(index: Int) {
@@ -259,11 +255,6 @@ extension FindFoodScenario {
     @discardableResult
     public func beGetNewRegion(_ complete: @escaping (MKCoordinateRegion) -> Void) -> Self {
         unsafeSend { self._beGetNewRegion(complete) }
-        return self
-    }
-    @discardableResult
-    public func beMoveMapCenterToCenterPoint(mapView: MKMapView) -> Self {
-        unsafeSend { self._beMoveMapCenterToCenterPoint(mapView: mapView) }
         return self
     }
     @discardableResult

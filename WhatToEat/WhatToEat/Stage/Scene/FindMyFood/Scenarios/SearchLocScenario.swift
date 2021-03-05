@@ -19,7 +19,6 @@ class SearchLocScenario: Actor,PilotProtocol {
     }
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
-    private var mapView: MKMapView? = nil
     private var queryDataParcel: Parcel?
     private var markedGQinput = initGQInputObject()
     
@@ -36,9 +35,7 @@ class SearchLocScenario: Actor,PilotProtocol {
         let url = "https://www.google.co.in/search?q=" + query
         complete(url)
     }
-    private func _beSetScenarioMap(map: MKMapView) {
-        mapView = map
-    }
+    
     private func _beRequestCurrentLocation() {
         pilot.beRequestCurrentLocation()
     }
@@ -46,8 +43,9 @@ class SearchLocScenario: Actor,PilotProtocol {
         GeoCoder().beCodeAddress(sender: self, address: address) { [self]
             (placemarks, error) in
             if placemarks?.count ?? 0 > 0 {
-                if mapView != nil {
-                    MapNavigator(mapView: mapView!).beRemoveAnnotations(sender: self, mapView!.annotations) {
+                DispatchQueue.main.async {
+                    appStore.dispatch(MapRemoveAllAnnotationsAction())
+                    unsafeSend {
                         let location = placemarks?.first?.location
                         let isoCode = placemarks?.first?.isoCountryCode ?? ""
                         _beInquireIntoLocationsAddress(
@@ -87,12 +85,13 @@ class SearchLocScenario: Actor,PilotProtocol {
             }
         }
     }
-    private func _beMarkQueryDataOnMap(
-        queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]) {
+    private func _beGetMarkQueryData(
+        queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
+        _ complete: @escaping ([MKPointAnnotation]) -> Void) {
         DataManager().beParseLocDynamicQueryDataToGQInput(self, queryData) { [self]
             (inputObjs) in
             queryDataParcel = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
-            if mapView != nil && inputObjs.count > 0 {
+            if inputObjs.count > 0 {
                 let data = inputObjs.first!
                 var annotations = [MKPointAnnotation]()
                 let latitude = Double(data.address.latitude) ?? 0.0
@@ -101,26 +100,23 @@ class SearchLocScenario: Actor,PilotProtocol {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = location.coordinate
                 annotations.append(annotation)
-                let mapNab = MapNavigator(mapView: mapView!)
-                mapNab.beRemoveAnnotations(sender: self, mapView!.annotations) {
-                    mapNab.beShowAnnotations(annotations: annotations, animated: true)
+                DispatchQueue.main.async {
+                    complete(annotations)
                 }
             }
         }
     }
-    private func _beMarkFoundPlacesOnMap() {
-        if mapView != nil {
-            var annotations = [MKPointAnnotation]()
-            let latitude = Double(markedGQinput.address.latitude) ?? 0.0
-            let longitude = Double(markedGQinput.address.longitude) ?? 0.0
-            let location = CLLocation(latitude: latitude, longitude: longitude)
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = location.coordinate
-            annotations.append(annotation)
-            let mapNab = MapNavigator(mapView: mapView!)
-            mapNab.beRemoveAnnotations(sender: self, mapView!.annotations) {
-                mapNab.beShowAnnotations(annotations: annotations, animated: true)
-            }
+    private func _beGetMarkFoundPlaces(
+        _ complete: @escaping ([MKPointAnnotation]) -> Void) {
+        var annotations = [MKPointAnnotation]()
+        let latitude = Double(markedGQinput.address.latitude) ?? 0.0
+        let longitude = Double(markedGQinput.address.longitude) ?? 0.0
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        annotations.append(annotation)
+        DispatchQueue.main.async {
+            complete(annotations)
         }
     }
     
@@ -158,13 +154,8 @@ class SearchLocScenario: Actor,PilotProtocol {
     // MARK: - Pilot protocols
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
-            _beInquireIntoLocationsAddress(location: locations[0], localeId: "")
-            if mapView != nil {
-                let markLoc = locations[0]
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = markLoc.coordinate
-                MapNavigator(mapView: mapView!).beShowAnnotations(annotations: [annotation], animated: true)
-            }
+            _beInquireIntoLocationsAddress(
+                location: locations[0], localeId: "")
         }
     }
     
@@ -187,11 +178,6 @@ extension SearchLocScenario {
         return self
     }
     @discardableResult
-    public func beSetScenarioMap(map: MKMapView) -> Self {
-        unsafeSend { self._beSetScenarioMap(map: map) }
-        return self
-    }
-    @discardableResult
     public func beRequestCurrentLocation() -> Self {
         unsafeSend(_beRequestCurrentLocation)
         return self
@@ -207,13 +193,13 @@ extension SearchLocScenario {
         return self
     }
     @discardableResult
-    public func beMarkQueryDataOnMap(queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?]) -> Self {
-        unsafeSend { self._beMarkQueryDataOnMap(queryData: queryData) }
+    public func beGetMarkQueryData(queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([MKPointAnnotation]) -> Void) -> Self {
+        unsafeSend { self._beGetMarkQueryData(queryData: queryData, complete) }
         return self
     }
     @discardableResult
-    public func beMarkFoundPlacesOnMap() -> Self {
-        unsafeSend(_beMarkFoundPlacesOnMap)
+    public func beGetMarkFoundPlaces(_ complete: @escaping ([MKPointAnnotation]) -> Void) -> Self {
+        unsafeSend { self._beGetMarkFoundPlaces(complete) }
         return self
     }
     @discardableResult
