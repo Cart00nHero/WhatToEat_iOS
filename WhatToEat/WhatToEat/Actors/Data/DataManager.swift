@@ -12,7 +12,7 @@ import CoreLocation
 import MapKit
 
 class DataManager: Actor {
-    private func _beConvertPlaceMarktoGQInput(
+    private func _beConvertPlaceMarkToGQInput(
         _ sender: Actor,_ placeMarks:[CLPlacemark],
         _ complete: @escaping ([GQInputObject]) -> Void) {
         var result: [GQInputObject] = []
@@ -141,8 +141,8 @@ class DataManager: Actor {
 extension DataManager {
 
     @discardableResult
-    public func beConvertPlaceMarktoGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beConvertPlaceMarktoGQInput(sender, placeMarks, complete) }
+    public func beConvertPlaceMarkToGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
+        unsafeSend { self._beConvertPlaceMarkToGQInput(sender, placeMarks, complete) }
         return self
     }
     @discardableResult

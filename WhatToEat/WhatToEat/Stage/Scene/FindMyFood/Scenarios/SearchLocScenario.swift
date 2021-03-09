@@ -66,7 +66,7 @@ class SearchLocScenario: Actor,PilotProtocol {
             localeId: localeId) { (placemarks, error) in
             if error == nil {
                 if placemarks?.count ?? 0 > 0 {
-                    DataManager().beConvertPlaceMarktoGQInput(self, placemarks!) {
+                    DataManager().beConvertPlaceMarkToGQInput(self, placemarks!) {
                         [self] (inputObjs) in
                         if inputObjs.count > 0 {
                             markedGQinput = inputObjs.first!
