@@ -17,7 +17,16 @@ struct MKAnnotationDidSelectAction: Action {
 struct LocatePositionAction: Action {
     var status: LocatePositionStatus
 }
-struct MarkFoundPlacesOnMapAction: Action {
+//struct MarkFoundPlacesOnMapAction: Action {
+//    let annotions:[MKPointAnnotation]
+//
+//}
+
+struct MapShowAnnotationsAction: Action {
     let annotions:[MKPointAnnotation]
-    
+}
+struct MapRemoveAllAnnotationsAction: Action {
+}
+struct MapClearAndShowAnnotationsAction: Action {
+    let annotions:[MKPointAnnotation]
 }

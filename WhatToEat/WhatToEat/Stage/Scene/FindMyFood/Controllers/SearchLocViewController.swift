@@ -46,7 +46,6 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        scenario.beSetScenarioMap(map: mapView)
         if let image = UIImage(named: "icon_gps") {
             scenario.beResizeBarButtonItemImage(
                 image: image, width: 44.0) { [self] (newImage) in
@@ -206,9 +205,17 @@ extension SearchLocViewController: SceneStateDelegate {
             switch action.status {
             case .Success:
                 if action.responseData?.count ?? 0 > 0 {
-                    scenario.beMarkQueryDataOnMap(queryData: action.responseData!)
+                    scenario.beGetMarkQueryData(queryData: action.responseData!) { (annotations) in
+                        appStore.dispatch(
+                            MapClearAndShowAnnotationsAction(
+                                annotions: annotations))
+                    }
                 } else {
-                    scenario.beMarkFoundPlacesOnMap()
+                    scenario.beGetMarkFoundPlaces { (annotations) in
+                        appStore.dispatch(
+                            MapClearAndShowAnnotationsAction(
+                                annotions: annotations))
+                    }
                 }
             default: break
             }
