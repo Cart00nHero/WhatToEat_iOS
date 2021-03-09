@@ -12,7 +12,7 @@ import CoreLocation
 import MapKit
 
 class DataManager: Actor {
-    private func _beParsePlaceMarktoGQInput(
+    private func _beConvertPlaceMarktoGQInput(
         _ sender: Actor,_ placeMarks:[CLPlacemark],
         _ complete: @escaping ([GQInputObject]) -> Void) {
         var result: [GQInputObject] = []
@@ -36,7 +36,7 @@ class DataManager: Actor {
             complete(result)
         }
     }
-    private func _beParsePlaceMarkToAddressDqCmd(
+    private func _beConvertPlaceMarkToAddressDqCmd(
         _ sender: Actor,_ placeMark: CLPlacemark,
         _ complete: @escaping (AddressDqCmd) -> Void) {
         var addressDqCmd = AddressDqCmd()
@@ -71,7 +71,7 @@ class DataManager: Actor {
             complete(addressDqCmd)
         }
     }
-    private func _beParseLocDynamicQueryDataToGQInput(
+    private func _beConvertLocDynamicQueryDataToGQInput(
         _ sender: Actor,
         _ queryData:[LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
         _ complete:@escaping ([GQInputObject]) -> Void) {
@@ -141,18 +141,18 @@ class DataManager: Actor {
 extension DataManager {
 
     @discardableResult
-    public func beParsePlaceMarktoGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beParsePlaceMarktoGQInput(sender, placeMarks, complete) }
+    public func beConvertPlaceMarktoGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
+        unsafeSend { self._beConvertPlaceMarktoGQInput(sender, placeMarks, complete) }
         return self
     }
     @discardableResult
-    public func beParsePlaceMarkToAddressDqCmd(_ sender: Actor, _ placeMark: CLPlacemark, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
-        unsafeSend { self._beParsePlaceMarkToAddressDqCmd(sender, placeMark, complete) }
+    public func beConvertPlaceMarkToAddressDqCmd(_ sender: Actor, _ placeMark: CLPlacemark, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
+        unsafeSend { self._beConvertPlaceMarkToAddressDqCmd(sender, placeMark, complete) }
         return self
     }
     @discardableResult
-    public func beParseLocDynamicQueryDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beParseLocDynamicQueryDataToGQInput(sender, queryData, complete) }
+    public func beConvertLocDynamicQueryDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
+        unsafeSend { self._beConvertLocDynamicQueryDataToGQInput(sender, queryData, complete) }
         return self
     }
     @discardableResult

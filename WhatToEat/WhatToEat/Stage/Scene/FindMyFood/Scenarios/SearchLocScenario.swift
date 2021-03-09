@@ -33,7 +33,9 @@ class SearchLocScenario: Actor,PilotProtocol {
         _ queryText: String, _ complete: @escaping (String) -> Void) {
         let query = queryText.replacingOccurrences(of: " ", with: "+")
         let url = "https://www.google.co.in/search?q=" + query
-        complete(url)
+        DispatchQueue.main.async {
+            complete(url)
+        }
     }
     
     private func _beRequestCurrentLocation() {
@@ -64,7 +66,7 @@ class SearchLocScenario: Actor,PilotProtocol {
             localeId: localeId) { (placemarks, error) in
             if error == nil {
                 if placemarks?.count ?? 0 > 0 {
-                    DataManager().beParsePlaceMarktoGQInput(self, placemarks!) {
+                    DataManager().beConvertPlaceMarktoGQInput(self, placemarks!) {
                         [self] (inputObjs) in
                         if inputObjs.count > 0 {
                             markedGQinput = inputObjs.first!
@@ -74,7 +76,8 @@ class SearchLocScenario: Actor,PilotProtocol {
                             }
                         }
                     }
-                    DataManager().beParsePlaceMarkToAddressDqCmd(self, placemarks![0]) { (addressDqCmd) in
+                    DataManager().beConvertPlaceMarkToAddressDqCmd(
+                        self, placemarks![0]) { (addressDqCmd) in
                         DispatchQueue.main.async {
                             appStore.dispatch(
                                 locationsDynamicQueryAction(
@@ -88,7 +91,7 @@ class SearchLocScenario: Actor,PilotProtocol {
     private func _beGetMarkQueryData(
         queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
         _ complete: @escaping ([MKPointAnnotation]) -> Void) {
-        DataManager().beParseLocDynamicQueryDataToGQInput(self, queryData) { [self]
+        DataManager().beConvertLocDynamicQueryDataToGQInput(self, queryData) { [self]
             (inputObjs) in
             queryDataParcel = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
             if inputObjs.count > 0 {

@@ -128,13 +128,12 @@ class SearchLocViewController: UIViewController {
             if isWebViewCreated == false {
                 createWebViewOnBottom()
             }
-            scenario.beGoogleSearchUrl(searchTextField.text ?? "") { (urlString) in
-                DispatchQueue.main.async { [self] in
-                    let ecodeUrl =
-                        urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                    let request = NSURLRequest(url: URL(string: ecodeUrl)!)
-                    webView.load(request as URLRequest)
-                }
+            scenario.beGoogleSearchUrl(searchTextField.text ?? "") {
+                [self] (urlString) in
+                let ecodeUrl =
+                    urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                let request = NSURLRequest(url: URL(string: ecodeUrl)!)
+                webView.load(request as URLRequest)
             }
         }
     }

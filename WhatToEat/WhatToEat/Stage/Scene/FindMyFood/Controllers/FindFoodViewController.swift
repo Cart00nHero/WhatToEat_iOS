@@ -46,16 +46,12 @@ class FindFoodViewController: UIViewController {
         scenario.beRequestCurrentLocation()
     }
     private func startRadarAnimating() {
-        DispatchQueue.main.async { [self] in
-            mkMapView.isUserInteractionEnabled = false
-            radarView.startRadarAnimation()
-        }
+        mkMapView.isUserInteractionEnabled = false
+        radarView.startRadarAnimation()
     }
     private func stopRadarAnimating() {
-        DispatchQueue.main.async { [self] in
-            mkMapView.isUserInteractionEnabled = true
-            radarView.stopRadarAnimation()
-        }
+        mkMapView.isUserInteractionEnabled = true
+        radarView.stopRadarAnimation()
     }
     
     private func updateRangeValue() {
