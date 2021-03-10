@@ -12,7 +12,7 @@ import CoreLocation
 import MapKit
 
 class DataManager: Actor {
-    private func _beParsePlaceMarktoGQInput(
+    private func _beConvertPlaceMarkToGQInput(
         _ sender: Actor,_ placeMarks:[CLPlacemark],
         _ complete: @escaping ([GQInputObject]) -> Void) {
         var result: [GQInputObject] = []
@@ -29,14 +29,14 @@ class DataManager: Actor {
             inputObj.address.postalCode = placeMark.postalCode
             inputObj.address.thoroughfare = placeMark.thoroughfare
             inputObj.address.subThoroughfare = placeMark.subThoroughfare
-            inputObj.address.completeInfo = combineAddressCompleteInfo(input: inputObj)
+            inputObj.address.completeInfo = combineAddressCompleteInfo(input: inputObj.address)
             result.append(inputObj)
         }
         sender.unsafeSend {
             complete(result)
         }
     }
-    private func _beParsePlaceMarkToAddressDqCmd(
+    private func _beConvertPlaceMarkToAddressDqCmd(
         _ sender: Actor,_ placeMark: CLPlacemark,
         _ complete: @escaping (AddressDqCmd) -> Void) {
         var addressDqCmd = AddressDqCmd()
@@ -71,14 +71,14 @@ class DataManager: Actor {
             complete(addressDqCmd)
         }
     }
-    private func _beParseLocDynamicQueryDataToGQInput(
+    private func _beConvertLocDQDataToGQInput(
         _ sender: Actor,
         _ queryData:[LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
         _ complete:@escaping ([GQInputObject]) -> Void) {
         if queryData.count > 0 {
             var results = [GQInputObject]()
             for data in queryData {
-                let inputObj = locationsDynamicQueryToGQInputObj(result: data!)
+                let inputObj = locDQToGQInputObj(result: data!)
                 results.append(inputObj)
             }
             sender.unsafeSend {
@@ -124,13 +124,13 @@ class DataManager: Actor {
     }
     
     // MARK: - Private
-    private func combineAddressCompleteInfo(input: GQInputObject) -> String {
-        let mutabletext = NSMutableString(string: (input.address.administrativeArea ?? "") ?? "")
-        mutabletext.append((input.address.subAdministrativeArea ?? "") ?? "")
-        mutabletext.append((input.address.locality ?? "") ?? "")
-        mutabletext.append((input.address.thoroughfare ?? "") ?? "")
+    private func combineAddressCompleteInfo(input: InputAddress) -> String {
+        let mutabletext = NSMutableString(string: (input.administrativeArea ?? "") ?? "")
+        mutabletext.append((input.subAdministrativeArea ?? "") ?? "")
+        mutabletext.append((input.locality ?? "") ?? "")
+        mutabletext.append((input.thoroughfare ?? "") ?? "")
         mutabletext.append(" ")
-        mutabletext.append((input.address.subThoroughfare ?? "") ?? "")
+        mutabletext.append((input.subThoroughfare ?? "") ?? "")
         return mutabletext as String
     }
 }
@@ -141,18 +141,18 @@ class DataManager: Actor {
 extension DataManager {
 
     @discardableResult
-    public func beParsePlaceMarktoGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beParsePlaceMarktoGQInput(sender, placeMarks, complete) }
+    public func beConvertPlaceMarkToGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
+        unsafeSend { self._beConvertPlaceMarkToGQInput(sender, placeMarks, complete) }
         return self
     }
     @discardableResult
-    public func beParsePlaceMarkToAddressDqCmd(_ sender: Actor, _ placeMark: CLPlacemark, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
-        unsafeSend { self._beParsePlaceMarkToAddressDqCmd(sender, placeMark, complete) }
+    public func beConvertPlaceMarkToAddressDqCmd(_ sender: Actor, _ placeMark: CLPlacemark, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
+        unsafeSend { self._beConvertPlaceMarkToAddressDqCmd(sender, placeMark, complete) }
         return self
     }
     @discardableResult
-    public func beParseLocDynamicQueryDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beParseLocDynamicQueryDataToGQInput(sender, queryData, complete) }
+    public func beConvertLocDQDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
+        unsafeSend { self._beConvertLocDQDataToGQInput(sender, queryData, complete) }
         return self
     }
     @discardableResult
