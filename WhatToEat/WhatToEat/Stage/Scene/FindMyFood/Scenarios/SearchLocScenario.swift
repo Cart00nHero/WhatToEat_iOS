@@ -66,16 +66,19 @@ class SearchLocScenario: Actor,PilotProtocol {
             localeId: localeId) { (placemarks, error) in
             if error == nil {
                 if placemarks?.count ?? 0 > 0 {
-                    DataManager().beConvertPlaceMarkToGQInput(self, placemarks!) {
-                        [self] (inputObjs) in
-                        if inputObjs.count > 0 {
-                            markedGQinput = inputObjs.first!
+                    DataManager().beConvertPlaceMarksToInputAddresses(
+                        self, placemarks!) { [self] (addresses) in
+                        if addresses.count > 0 {
+                            var inputObj = initGQInputObject()
+                            inputObj.address = addresses.first!
+                            markedGQinput = inputObj
                             action.inputObj = markedGQinput
                             DispatchQueue.main.async {
                                 appStore.dispatch(action)
                             }
                         }
                     }
+                    
                     DataManager().beConvertPlaceMarkToAddressDqCmd(
                         self, placemarks![0]) { (addressDqCmd) in
                         DispatchQueue.main.async {

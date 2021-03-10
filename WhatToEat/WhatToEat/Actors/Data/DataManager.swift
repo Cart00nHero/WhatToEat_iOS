@@ -12,25 +12,26 @@ import CoreLocation
 import MapKit
 
 class DataManager: Actor {
-    private func _beConvertPlaceMarkToGQInput(
+    private func _beConvertPlaceMarksToInputAddresses(
         _ sender: Actor,_ placeMarks:[CLPlacemark],
-        _ complete: @escaping ([GQInputObject]) -> Void) {
-        var result: [GQInputObject] = []
+        _ complete: @escaping ([InputAddress]) -> Void) {
+        var result: [InputAddress] = []
         for placeMark in placeMarks {
-            var inputObj: GQInputObject = initGQInputObject()
-            inputObj.address.latitude = String(format: "%f", placeMark.location?.coordinate.latitude ?? 0.0)
-            inputObj.address.longitude = String(format: "%f", placeMark.location?.coordinate.longitude ?? 0.0)
-            inputObj.address.nation = placeMark.country
-            inputObj.address.isoNationCode = placeMark.isoCountryCode
-            inputObj.address.locality = placeMark.locality
-            inputObj.address.subLocality = placeMark.subLocality
-            inputObj.address.administrativeArea = placeMark.administrativeArea
-            inputObj.address.subAdministrativeArea = placeMark.subAdministrativeArea
-            inputObj.address.postalCode = placeMark.postalCode
-            inputObj.address.thoroughfare = placeMark.thoroughfare
-            inputObj.address.subThoroughfare = placeMark.subThoroughfare
-            inputObj.address.completeInfo = combineAddressCompleteInfo(input: inputObj.address)
-            result.append(inputObj)
+            var newAddress = InputAddress(
+                completeInfo: "", latitude: "", longitude: "")
+            newAddress.latitude = String(format: "%f", placeMark.location?.coordinate.latitude ?? 0.0)
+            newAddress.longitude = String(format: "%f", placeMark.location?.coordinate.longitude ?? 0.0)
+            newAddress.nation = placeMark.country
+            newAddress.isoNationCode = placeMark.isoCountryCode
+            newAddress.locality = placeMark.locality
+            newAddress.subLocality = placeMark.subLocality
+            newAddress.administrativeArea = placeMark.administrativeArea
+            newAddress.subAdministrativeArea = placeMark.subAdministrativeArea
+            newAddress.postalCode = placeMark.postalCode
+            newAddress.thoroughfare = placeMark.thoroughfare
+            newAddress.subThoroughfare = placeMark.subThoroughfare
+            newAddress.completeInfo = combineAddressCompleteInfo(input: newAddress)
+            result.append(newAddress)
         }
         sender.unsafeSend {
             complete(result)
@@ -141,8 +142,8 @@ class DataManager: Actor {
 extension DataManager {
 
     @discardableResult
-    public func beConvertPlaceMarkToGQInput(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beConvertPlaceMarkToGQInput(sender, placeMarks, complete) }
+    public func beConvertPlaceMarksToInputAddresses(_ sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([InputAddress]) -> Void) -> Self {
+        unsafeSend { self._beConvertPlaceMarksToInputAddresses(sender, placeMarks, complete) }
         return self
     }
     @discardableResult
