@@ -227,6 +227,15 @@ extension SearchLocViewController: SceneStateDelegate {
                     withIdentifier: "AddGourmetViewController")
                 as! AddGourmetViewController
             sceneVC?.basePushToViewController(toVC, Animated: true)
+        case let action as MapClearAndShowAnnotationsAction:
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.addAnnotations(action.annotions)
+            let region = MKCoordinateRegion(
+                center: action.annotions[0].coordinate,
+                latitudinalMeters: CLLocationDistance(200.0),
+                longitudinalMeters: CLLocationDistance(200.0)
+            )
+            mapView.setRegion(region, animated: true)
         default: break
         }
     }

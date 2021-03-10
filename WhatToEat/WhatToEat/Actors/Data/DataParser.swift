@@ -10,7 +10,8 @@ import UIKit
 
 var globalFoodieId: String = ""
 
-func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> GQInputObject {
+func locDQToGQInputObj(
+    result: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> GQInputObject {
     var inputObj = initGQInputObject()
     inputObj.shopId = result.shopBranch?.shop?.uniqueId ?? ""
     inputObj.branchId = result.shopBranch?.uniqueId ?? ""
@@ -44,7 +45,7 @@ func locationsDynamicQueryToGQInputObj(result: LocationsDynamicQueryQuery.Data.L
     
     return inputObj
 }
-func parseSearchForRangeGQInputObj(result: SearchForRangeQuery.Data.SearchForRange) -> GQInputObject {
+func convertSearchForRangeGQInputObj(result: SearchForRangeQuery.Data.SearchForRange) -> GQInputObject {
     var inputObj = initGQInputObject()
     var address = inputObj.address
     for key in address.graphQLMap.keys {

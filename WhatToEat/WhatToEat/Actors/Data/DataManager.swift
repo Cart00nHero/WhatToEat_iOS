@@ -29,7 +29,7 @@ class DataManager: Actor {
             inputObj.address.postalCode = placeMark.postalCode
             inputObj.address.thoroughfare = placeMark.thoroughfare
             inputObj.address.subThoroughfare = placeMark.subThoroughfare
-            inputObj.address.completeInfo = combineAddressCompleteInfo(input: inputObj)
+            inputObj.address.completeInfo = combineAddressCompleteInfo(input: inputObj.address)
             result.append(inputObj)
         }
         sender.unsafeSend {
@@ -71,14 +71,14 @@ class DataManager: Actor {
             complete(addressDqCmd)
         }
     }
-    private func _beConvertLocDynamicQueryDataToGQInput(
+    private func _beConvertLocDQDataToGQInput(
         _ sender: Actor,
         _ queryData:[LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
         _ complete:@escaping ([GQInputObject]) -> Void) {
         if queryData.count > 0 {
             var results = [GQInputObject]()
             for data in queryData {
-                let inputObj = locationsDynamicQueryToGQInputObj(result: data!)
+                let inputObj = locDQToGQInputObj(result: data!)
                 results.append(inputObj)
             }
             sender.unsafeSend {
@@ -124,13 +124,13 @@ class DataManager: Actor {
     }
     
     // MARK: - Private
-    private func combineAddressCompleteInfo(input: GQInputObject) -> String {
-        let mutabletext = NSMutableString(string: (input.address.administrativeArea ?? "") ?? "")
-        mutabletext.append((input.address.subAdministrativeArea ?? "") ?? "")
-        mutabletext.append((input.address.locality ?? "") ?? "")
-        mutabletext.append((input.address.thoroughfare ?? "") ?? "")
+    private func combineAddressCompleteInfo(input: InputAddress) -> String {
+        let mutabletext = NSMutableString(string: (input.administrativeArea ?? "") ?? "")
+        mutabletext.append((input.subAdministrativeArea ?? "") ?? "")
+        mutabletext.append((input.locality ?? "") ?? "")
+        mutabletext.append((input.thoroughfare ?? "") ?? "")
         mutabletext.append(" ")
-        mutabletext.append((input.address.subThoroughfare ?? "") ?? "")
+        mutabletext.append((input.subThoroughfare ?? "") ?? "")
         return mutabletext as String
     }
 }
@@ -151,8 +151,8 @@ extension DataManager {
         return self
     }
     @discardableResult
-    public func beConvertLocDynamicQueryDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
-        unsafeSend { self._beConvertLocDynamicQueryDataToGQInput(sender, queryData, complete) }
+    public func beConvertLocDQDataToGQInput(_ sender: Actor, _ queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([GQInputObject]) -> Void) -> Self {
+        unsafeSend { self._beConvertLocDQDataToGQInput(sender, queryData, complete) }
         return self
     }
     @discardableResult

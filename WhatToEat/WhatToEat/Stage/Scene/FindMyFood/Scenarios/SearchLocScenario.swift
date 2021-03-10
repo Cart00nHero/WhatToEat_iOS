@@ -91,7 +91,7 @@ class SearchLocScenario: Actor,PilotProtocol {
     private func _beGetMarkQueryData(
         queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
         _ complete: @escaping ([MKPointAnnotation]) -> Void) {
-        DataManager().beConvertLocDynamicQueryDataToGQInput(self, queryData) { [self]
+        DataManager().beConvertLocDQDataToGQInput(self, queryData) { [self]
             (inputObjs) in
             queryDataParcel = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
             if inputObjs.count > 0 {
