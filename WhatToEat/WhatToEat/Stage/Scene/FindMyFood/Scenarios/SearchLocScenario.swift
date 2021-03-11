@@ -67,10 +67,10 @@ class SearchLocScenario: Actor,PilotProtocol {
             if error == nil {
                 if placemarks?.count ?? 0 > 0 {
                     DataManager().beConvertPlaceMarksToInputAddresses(
-                        self, placemarks!) { [self] (addresses) in
-                        if addresses.count > 0 {
+                        self, placemarks!) { [self] (result) in
+                        if result.count > 0 {
                             var inputObj = initGQInputObject()
-                            inputObj.address = addresses.first!
+                            inputObj.address = result.first!
                             markedGQInput = inputObj
                             action.inputObj = markedGQInput
                             DispatchQueue.main.async {
@@ -91,53 +91,50 @@ class SearchLocScenario: Actor,PilotProtocol {
             }
         }
     }
-    private func _beGetMarkQueryData(
+    private func _beGetQueryDataMarkers(
         queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?],
         _ complete: @escaping ([MKPointAnnotation]) -> Void) {
         DataManager().beConvertLocDQDataToGQInput(self, queryData) { [self]
             (inputObjs) in
-            queryDataParcel = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
             if inputObjs.count > 0 {
+                queryDataParcel =
+                    LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
                 let data = inputObjs.first!
-                var annotations = [MKPointAnnotation]()
                 let latitude = Double(data.address.latitude) ?? 0.0
                 let longitude = Double(data.address.longitude) ?? 0.0
                 let location = CLLocation(latitude: latitude, longitude: longitude)
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = location.coordinate
-                annotations.append(annotation)
                 DispatchQueue.main.async {
-                    complete(annotations)
+                    complete([annotation])
                 }
             }
         }
     }
-    private func _beGetMarkFoundPlaces(
+    private func _beGetFoundPlacesMarkers(
         _ complete: @escaping ([MKPointAnnotation]) -> Void) {
-        var annotations = [MKPointAnnotation]()
         let latitude = Double(markedGQInput.address.latitude) ?? 0.0
         let longitude = Double(markedGQInput.address.longitude) ?? 0.0
         let location = CLLocation(latitude: latitude, longitude: longitude)
         let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
-        annotations.append(annotation)
         DispatchQueue.main.async {
-            complete(annotations)
+            complete([annotation])
         }
     }
     
     private func _bePrepareGoFoundLocScenario(_ complete: @escaping (Bool) -> Void) {
-        var isPreapared = false
+        var isPrepared = false
         if queryDataParcel != nil {
             queryDataParcel = nil
-            isPreapared = true
+            isPrepared = true
         } else {
             _ = LogisticsCenter.shared.applyExpressService(
                 sender: self, recipient: "AddGourmetScenario",
                 content: markedGQInput)
         }
         DispatchQueue.main.async {
-            complete(isPreapared)
+            complete(isPrepared)
         }
     }
     private func _beCancelFoundLocParcel() {
@@ -199,13 +196,13 @@ extension SearchLocScenario {
         return self
     }
     @discardableResult
-    public func beGetMarkQueryData(queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([MKPointAnnotation]) -> Void) -> Self {
-        unsafeSend { self._beGetMarkQueryData(queryData: queryData, complete) }
+    public func beGetQueryDataMarkers(queryData: [LocationsDynamicQueryQuery.Data.LocationsDynamicQuery?], _ complete: @escaping ([MKPointAnnotation]) -> Void) -> Self {
+        unsafeSend { self._beGetQueryDataMarkers(queryData: queryData, complete) }
         return self
     }
     @discardableResult
-    public func beGetMarkFoundPlaces(_ complete: @escaping ([MKPointAnnotation]) -> Void) -> Self {
-        unsafeSend { self._beGetMarkFoundPlaces(complete) }
+    public func beGetFoundPlacesMarkers(_ complete: @escaping ([MKPointAnnotation]) -> Void) -> Self {
+        unsafeSend { self._beGetFoundPlacesMarkers(complete) }
         return self
     }
     @discardableResult

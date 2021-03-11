@@ -152,7 +152,7 @@ class FindFoodScenario: Actor,PilotProtocol {
     }
     private func _beCollectGoogleNavParcel(
         _ complete: @escaping (CLLocation) -> Void) {
-        LogisticsCenter.shared.collectPacels(recipient: self) { (parcelSet) in
+        LogisticsCenter.shared.collectParcels(recipient: self) { (parcelSet) in
             guard parcelSet?.count ?? 0 > 0 else {
                 return}
             for parcel in parcelSet! {

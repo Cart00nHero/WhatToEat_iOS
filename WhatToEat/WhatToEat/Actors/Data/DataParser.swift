@@ -82,8 +82,9 @@ func convertSearchForRangeGQInputObj(result: SearchForRangeQuery.Data.SearchForR
 func isoNationCodeToLocaleId(isoCode: String) -> String {
     switch isoCode {
     case "CN": return "zh_Hans"
-    case "HK": return "zh_Hant_HK"
+    case "HK": return "zh_Hant"
     case "JP": return "ja_JP"
+    case "KR": return "ko"
     case "TW": return "zh_Hant_TW"
     default: return "en_US"
     }

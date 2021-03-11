@@ -30,7 +30,7 @@ class LogisticsCenter: NSObject {
     func cancelService(recipient:String, parcel: Parcel) {
         courier.beCancel(recipient, parcel)
     }
-    func collectPacels(recipient: Actor,complete: @escaping (NSSet?) -> Void) {
+    func collectParcels(recipient: Actor,complete: @escaping (NSSet?) -> Void) {
         courier.beCollect(recipient, complete)
     }
 }

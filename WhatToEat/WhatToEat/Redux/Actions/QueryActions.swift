@@ -20,10 +20,10 @@ func locationsDynamicQueryAction(foodieId: String?,whereCMD: AddressDqCmd) -> Lo
     var action = LocationsDynamicQueryAction()
     let service = ApolloService.shared.apollo
     var query: LocationsDynamicQueryQuery
-    if foodieId == nil {
-        query = LocationsDynamicQueryQuery(whereAnd: whereCMD)
-    } else {
+    if foodieId != nil {
         query = LocationsDynamicQueryQuery(foodieId: foodieId, whereAnd: whereCMD)
+    } else {
+        query = LocationsDynamicQueryQuery(whereAnd: whereCMD)
     }
     service.fetch(query: query) { result in
         switch result {

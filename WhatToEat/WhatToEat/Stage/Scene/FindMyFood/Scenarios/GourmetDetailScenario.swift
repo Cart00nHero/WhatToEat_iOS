@@ -47,7 +47,7 @@ class GourmetDetailScenario: Actor {
     private func _beCollectParcel(
         _ complete: @escaping (
             LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> Void) {
-        LogisticsCenter.shared.collectPacels(recipient: self) { (parcelSet) in
+        LogisticsCenter.shared.collectParcels(recipient: self) { (parcelSet) in
             guard parcelSet?.count ?? 0 > 0 else {
                 return}
             for parcel in parcelSet! {
