@@ -24,12 +24,25 @@ struct GQInputObject {
 }
 
 func initGQInputObject() -> GQInputObject {
-//    shop: InputShop(title: "", underPrice: 0.00)
-    return GQInputObject(address: InputAddress(completeInfo: "", latitude: "0.0", longitude: "0.0"),
-                     shopBranch: InputBranch(name: ""), shop: InputShop(title: "", underPrice: 0.00))
+    return GQInputObject(
+        address: initInputAddress(),
+        shopBranch: initInputBranch(),
+        shop: initInputShop()
+    )
 }
-func newInputAddress() -> InputAddress {
-    return InputAddress(administrativeArea: "", annotation: "", completeInfo: "", floor: "", isoNationCode: "", latitude: "", locality: "", longitude: "", name: "", nation: "", place: "", postalCode: "", premise: "", room: "", subAdministrativeArea: "", subLocality: "", subThoroughfare: "", subpremise: "", thoroughfare: "", ward: "", zone: "")
+func initInputShop() -> InputShop {
+    return InputShop(title: "", underPrice: 0.0)
+}
+func initInputBranch() -> InputBranch {
+    return InputBranch(name: "")
+}
+func initInputAddress() -> InputAddress {
+    return InputAddress(
+        administrativeArea: "", completeInfo: "",
+        isoNationCode: "", latitude: "0.0",
+        locality: "", longitude: "0.0", nation: "",
+        subAdministrativeArea: "", subLocality: "",
+        subThoroughfare: "", thoroughfare: "")
 }
 
 struct GQSearchRange {
