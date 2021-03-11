@@ -69,7 +69,7 @@ class AddGourmetScenario: Actor {
     private var queryData = initGQInputObject()
     
     private func _beCollectGQInputPacel() {
-        LogisticsCenter.shared.collectPacels(recipient: self) { [self] (parcelSet) in
+        LogisticsCenter.shared.collectParcels(recipient: self) { [self] (parcelSet) in
             guard parcelSet?.count ?? 0 > 0 else {return}
             for parcel in parcelSet! {
                 let parcelItem = parcel as! Parcel

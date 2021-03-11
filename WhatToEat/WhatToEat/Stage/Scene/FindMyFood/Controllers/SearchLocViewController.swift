@@ -204,13 +204,14 @@ extension SearchLocViewController: SceneStateDelegate {
             switch action.status {
             case .Success:
                 if action.responseData?.count ?? 0 > 0 {
-                    scenario.beGetMarkQueryData(queryData: action.responseData!) { (annotations) in
+                    scenario.beGetQueryDataMarkers(
+                        queryData: action.responseData!) { (annotations) in
                         appStore.dispatch(
                             MapClearAndShowAnnotationsAction(
                                 annotions: annotations))
                     }
                 } else {
-                    scenario.beGetMarkFoundPlaces { (annotations) in
+                    scenario.beGetFoundPlacesMarkers { (annotations) in
                         appStore.dispatch(
                             MapClearAndShowAnnotationsAction(
                                 annotions: annotations))
@@ -220,13 +221,6 @@ extension SearchLocViewController: SceneStateDelegate {
             }
         case let action as FoundLocationsAddressAction:
             searchTextField.text = action.inputObj.address.completeInfo
-        case is GoAddGourmetScenarioAction:
-            let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
-            let toVC =
-                storyboard.instantiateViewController(
-                    withIdentifier: "AddGourmetViewController")
-                as! AddGourmetViewController
-            sceneVC?.basePushToViewController(toVC, Animated: true)
         case let action as MapClearAndShowAnnotationsAction:
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(action.annotions)
