@@ -20,7 +20,7 @@ class SearchLocScenario: Actor,PilotProtocol {
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
     private var queryDataParcel: Parcel?
-    private var markedGQinput = initGQInputObject()
+    private var markedGQInput = initGQInputObject()
     
     override init() {
         super.init()
@@ -71,8 +71,8 @@ class SearchLocScenario: Actor,PilotProtocol {
                         if addresses.count > 0 {
                             var inputObj = initGQInputObject()
                             inputObj.address = addresses.first!
-                            markedGQinput = inputObj
-                            action.inputObj = markedGQinput
+                            markedGQInput = inputObj
+                            action.inputObj = markedGQInput
                             DispatchQueue.main.async {
                                 appStore.dispatch(action)
                             }
@@ -115,8 +115,8 @@ class SearchLocScenario: Actor,PilotProtocol {
     private func _beGetMarkFoundPlaces(
         _ complete: @escaping ([MKPointAnnotation]) -> Void) {
         var annotations = [MKPointAnnotation]()
-        let latitude = Double(markedGQinput.address.latitude) ?? 0.0
-        let longitude = Double(markedGQinput.address.longitude) ?? 0.0
+        let latitude = Double(markedGQInput.address.latitude) ?? 0.0
+        let longitude = Double(markedGQInput.address.longitude) ?? 0.0
         let location = CLLocation(latitude: latitude, longitude: longitude)
         let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
@@ -134,7 +134,7 @@ class SearchLocScenario: Actor,PilotProtocol {
         } else {
             _ = LogisticsCenter.shared.applyExpressService(
                 sender: self, recipient: "AddGourmetScenario",
-                content: markedGQinput)
+                content: markedGQInput)
         }
         DispatchQueue.main.async {
             complete(isPreapared)

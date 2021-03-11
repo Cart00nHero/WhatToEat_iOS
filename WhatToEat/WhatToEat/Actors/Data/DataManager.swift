@@ -17,19 +17,18 @@ class DataManager: Actor {
         _ complete: @escaping ([InputAddress]) -> Void) {
         var result: [InputAddress] = []
         for placeMark in placeMarks {
-            var newAddress = InputAddress(
-                completeInfo: "", latitude: "", longitude: "")
+            var newAddress = initInputAddress()
             newAddress.latitude = String(format: "%f", placeMark.location?.coordinate.latitude ?? 0.0)
             newAddress.longitude = String(format: "%f", placeMark.location?.coordinate.longitude ?? 0.0)
-            newAddress.nation = placeMark.country
-            newAddress.isoNationCode = placeMark.isoCountryCode
-            newAddress.locality = placeMark.locality
-            newAddress.subLocality = placeMark.subLocality
-            newAddress.administrativeArea = placeMark.administrativeArea
-            newAddress.subAdministrativeArea = placeMark.subAdministrativeArea
+            newAddress.nation = placeMark.country ?? ""
+            newAddress.isoNationCode = placeMark.isoCountryCode ?? ""
+            newAddress.locality = placeMark.locality ?? ""
+            newAddress.subLocality = placeMark.subLocality ?? ""
+            newAddress.administrativeArea = placeMark.administrativeArea ?? ""
+            newAddress.subAdministrativeArea = placeMark.subAdministrativeArea ?? ""
             newAddress.postalCode = placeMark.postalCode
-            newAddress.thoroughfare = placeMark.thoroughfare
-            newAddress.subThoroughfare = placeMark.subThoroughfare
+            newAddress.thoroughfare = placeMark.thoroughfare ?? ""
+            newAddress.subThoroughfare = placeMark.subThoroughfare ?? ""
             newAddress.completeInfo = combineAddressCompleteInfo(input: newAddress)
             result.append(newAddress)
         }
@@ -105,10 +104,12 @@ class DataManager: Actor {
             addressCmd.subLocality = searchData.subLocality
         }
         if searchData.administrativeArea != nil {
-            addressCmd.administrativeArea = searchData.administrativeArea
+            addressCmd.administrativeArea =
+                searchData.administrativeArea
         }
         if searchData.subAdministrativeArea != nil {
-            addressCmd.subAdministrativeArea = searchData.subAdministrativeArea
+            addressCmd.subAdministrativeArea =
+                searchData.subAdministrativeArea
         }
         if searchData.postalCode != nil {
             addressCmd.postalCode = searchData.postalCode
@@ -126,12 +127,12 @@ class DataManager: Actor {
     
     // MARK: - Private
     private func combineAddressCompleteInfo(input: InputAddress) -> String {
-        let mutabletext = NSMutableString(string: (input.administrativeArea ?? "") ?? "")
-        mutabletext.append((input.subAdministrativeArea ?? "") ?? "")
-        mutabletext.append((input.locality ?? "") ?? "")
-        mutabletext.append((input.thoroughfare ?? "") ?? "")
+        let mutabletext = NSMutableString(string: input.administrativeArea)
+        mutabletext.append(input.subAdministrativeArea)
+        mutabletext.append(input.locality)
+        mutabletext.append(input.thoroughfare)
         mutabletext.append(" ")
-        mutabletext.append((input.subThoroughfare ?? "") ?? "")
+        mutabletext.append(input.subThoroughfare)
         return mutabletext as String
     }
 }
