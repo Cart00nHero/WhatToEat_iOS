@@ -8,7 +8,7 @@
 
 import UIKit
 import ReSwift
-import FacebookLogin
+//import FacebookLogin
 
 class SignViewController: UIViewController {
 

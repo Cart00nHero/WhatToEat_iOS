@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import iOSDropDown
 
 class DropDownCellView: XibView {
     @IBOutlet weak var dropDownField: DropDown!
