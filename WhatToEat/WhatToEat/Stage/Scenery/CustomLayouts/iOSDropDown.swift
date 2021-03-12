@@ -7,7 +7,7 @@
 //  Copyright © 2018 JRiOSdev. All rights reserved.
 //
 import UIKit
-@objc(JRDropDown)
+
 open class DropDown : UITextField{
 
     var arrow : Arrow!
@@ -60,6 +60,7 @@ open class DropDown : UITextField{
     fileprivate var backgroundView = UIView()
     fileprivate var keyboardHeight:CGFloat = 0
 
+    public var rowTextColor: UIColor = .black
     public var optionArray = [String]() {
         didSet{
             self.dataArray = self.optionArray
@@ -153,8 +154,8 @@ open class DropDown : UITextField{
                         self.showList()
                     }
                 }
-              
             }
+            
             NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (notification) in
                 if self.isFirstResponder{
                 self.keyboardHeight = 0
@@ -401,8 +402,7 @@ extension DropDown: UITableViewDataSource {
         cell!.selectionStyle = .none
         cell?.textLabel?.font = self.font
         cell?.textLabel?.textAlignment = self.textAlignment
-        cell?.textLabel?.numberOfLines = 0
-        cell?.textLabel?.lineBreakMode = .byWordWrapping
+        cell?.textLabel?.textColor = rowTextColor
         return cell!
     }
 }
@@ -530,16 +530,7 @@ extension UIView {
         layer.shouldRasterize = true
         layer.rasterizationScale = scale ? UIScreen.main.scale : 1
     }
-    
-    func viewBorder(borderColor : UIColor, borderWidth : CGFloat?) {
-        self.layer.borderColor = borderColor.cgColor
-        if let borderWidth_ = borderWidth {
-            self.layer.borderWidth = borderWidth_
-        } else {
-            self.layer.borderWidth = 1.0
-        }
-    }
-    
+
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {
@@ -551,5 +542,4 @@ extension UIView {
         return nil
     }
 }
-
 
