@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Facebook",
+        "repositoryURL": "https://github.com/facebook/facebook-ios-sdk",
+        "state": {
+          "branch": null,
+          "revision": "82dec0403c32d7b1d93529dcabb9fcb18f0825cc",
+          "version": "9.1.0"
+        }
+      },
+      {
+        "package": "Flynn",
+        "repositoryURL": "https://github.com/KittyMac/Flynn.git",
+        "state": {
+          "branch": null,
+          "revision": "b7b8a7d9137b28bba0ad6a7a9a1299547f310014",
+          "version": "0.1.4"
+        }
+      },
+      {
+        "package": "ReSwift",
+        "repositoryURL": "https://github.com/ReSwift/ReSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "26d3095bdf55f093501bf3a749bb2718bab671b3",
+          "version": "6.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="973-yh-Mes">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Scene View Controller-->
+        <scene sceneID="61l-vD-AdU">
+            <objects>
+                <viewController storyboardIdentifier="SceneViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RDl-9R-6hD" customClass="SceneViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kBX-0Q-zwy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bEg-rU-vr5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <connections>
+                                    <segue destination="Qel-oS-6gd" kind="embed" id="JhL-43-Uq8"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DJT-eW-kxw"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bEg-rU-vr5" firstAttribute="leading" secondItem="DJT-eW-kxw" secondAttribute="leading" id="FRa-yb-iNn"/>
+                            <constraint firstItem="bEg-rU-vr5" firstAttribute="top" secondItem="DJT-eW-kxw" secondAttribute="top" id="SUL-Bm-pVt"/>
+                            <constraint firstItem="bEg-rU-vr5" firstAttribute="bottom" secondItem="DJT-eW-kxw" secondAttribute="bottom" id="aet-Me-tiY"/>
+                            <constraint firstItem="bEg-rU-vr5" firstAttribute="trailing" secondItem="DJT-eW-kxw" secondAttribute="trailing" id="o7l-pA-c8H"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ln1-v4-gnb"/>
+                    <connections>
+                        <outlet property="containerView" destination="bEg-rU-vr5" id="BuX-II-Ofu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VdN-ab-8ao" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-158" y="81"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Uj4-ka-tuA">
+            <objects>
+                <navigationController storyboardIdentifier="EnteranceNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="973-yh-Mes" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LBB-t6-Vhf">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RDl-9R-6hD" kind="relationship" relationship="rootViewController" id="Lef-Wb-6M2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pV3-71-58O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-929" y="81"/>
+        </scene>
+        <!--Sign View Controller-->
+        <scene sceneID="Gik-Xn-krf">
+            <objects>
+                <viewController storyboardIdentifier="SignViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CJ6-fV-xMv" customClass="SignViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QCr-9N-KOu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_shop_door" translatesAutoresizingMaskIntoConstraints="NO" id="Ect-Od-AaA">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            </imageView>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPx-6h-yEn">
+                                <rect key="frame" x="15" y="471" width="384" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.30196078431372547" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Facebook 登入"/>
+                                <connections>
+                                    <action selector="loginButtonClickAction:" destination="CJ6-fV-xMv" eventType="touchUpInside" id="uME-KO-Uyz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6O9-Fm-cKk" customClass="UIAuthorizationAppleIDButton" customModule="WhatToEat" customModuleProvider="target">
+                                <rect key="frame" x="15" y="391" width="384" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Apple">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="authButtonType">
+                                        <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="authButtonStyle">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="loginButtonClickAction:" destination="CJ6-fV-xMv" eventType="touchUpInside" id="7d8-IY-VLs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UEo-oH-cfN"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="KPx-6h-yEn" firstAttribute="centerY" secondItem="QCr-9N-KOu" secondAttribute="centerY" constant="40" id="09B-5a-roP"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="top" secondItem="QCr-9N-KOu" secondAttribute="top" id="1ND-LQ-bu5"/>
+                            <constraint firstItem="KPx-6h-yEn" firstAttribute="centerX" secondItem="QCr-9N-KOu" secondAttribute="centerX" id="71d-hb-l7T"/>
+                            <constraint firstItem="6O9-Fm-cKk" firstAttribute="centerY" secondItem="QCr-9N-KOu" secondAttribute="centerY" constant="-40" id="GVZ-u6-ecb"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="bottom" secondItem="UEo-oH-cfN" secondAttribute="bottom" id="KPg-uh-DDd"/>
+                            <constraint firstItem="6O9-Fm-cKk" firstAttribute="leading" secondItem="UEo-oH-cfN" secondAttribute="leading" constant="15" id="Lpu-Rq-sG4"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="leading" secondItem="UEo-oH-cfN" secondAttribute="leading" id="RGq-jW-C77"/>
+                            <constraint firstItem="6O9-Fm-cKk" firstAttribute="centerX" secondItem="QCr-9N-KOu" secondAttribute="centerX" id="Xuq-9a-PfD"/>
+                            <constraint firstItem="Ect-Od-AaA" firstAttribute="trailing" secondItem="UEo-oH-cfN" secondAttribute="trailing" id="qeJ-zF-v4c"/>
+                            <constraint firstItem="KPx-6h-yEn" firstAttribute="leading" secondItem="QCr-9N-KOu" secondAttribute="leading" constant="15" id="qjK-oZ-wq0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="signWithAppleButton" destination="6O9-Fm-cKk" id="76e-NO-To3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zIO-WV-D3F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1216" y="80"/>
+        </scene>
+        <!--Main Menu View Controller-->
+        <scene sceneID="iTB-Rb-N5G">
+            <objects>
+                <viewController storyboardIdentifier="MainMenuViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qel-oS-6gd" customClass="MainMenuViewController" customModule="WhatToEat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g1g-59-mZd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image_shop_inner" translatesAutoresizingMaskIntoConstraints="NO" id="ENr-Zg-gUJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="774"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2m-IC-U1J">
+                                <rect key="frame" x="15" y="332" width="384" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.30196078431372547" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="尋找好料"/>
+                                <connections>
+                                    <action selector="toFindFoodButtonClickActionWithSender:" destination="Qel-oS-6gd" eventType="touchUpInside" id="paw-4V-5v4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oh9-A0-j7T">
+                                <rect key="frame" x="15" y="452" width="384" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.30196078431372547" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="分享好店"/>
+                                <connections>
+                                    <action selector="toAddGourmetsButtonClickActionWithSender:" destination="Qel-oS-6gd" eventType="touchUpInside" id="79s-nT-iHD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Sk0-i5-p1v"/>
+                        <color key="backgroundColor" red="1" green="0.97254901960784312" blue="0.86274509803921573" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="N2m-IC-U1J" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="1TB-6c-ih9"/>
+                            <constraint firstItem="Oh9-A0-j7T" firstAttribute="centerY" secondItem="g1g-59-mZd" secondAttribute="centerY" constant="60" id="3Rz-1F-yfu"/>
+                            <constraint firstItem="N2m-IC-U1J" firstAttribute="centerY" secondItem="g1g-59-mZd" secondAttribute="centerY" constant="-60" id="71O-Zj-WrD"/>
+                            <constraint firstItem="ENr-Zg-gUJ" firstAttribute="top" secondItem="Sk0-i5-p1v" secondAttribute="top" id="EOw-lH-A9s"/>
+                            <constraint firstItem="N2m-IC-U1J" firstAttribute="centerX" secondItem="g1g-59-mZd" secondAttribute="centerX" id="Nxo-h6-Swu"/>
+                            <constraint firstItem="Sk0-i5-p1v" firstAttribute="trailing" secondItem="ENr-Zg-gUJ" secondAttribute="trailing" id="W8U-yM-9j0"/>
+                            <constraint firstItem="Sk0-i5-p1v" firstAttribute="bottom" secondItem="ENr-Zg-gUJ" secondAttribute="bottom" id="c84-wM-J9z"/>
+                            <constraint firstItem="ENr-Zg-gUJ" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" id="l8v-Xq-2C3"/>
+                            <constraint firstItem="Oh9-A0-j7T" firstAttribute="centerX" secondItem="g1g-59-mZd" secondAttribute="centerX" id="mf6-pa-yRh"/>
+                            <constraint firstItem="Oh9-A0-j7T" firstAttribute="leading" secondItem="Sk0-i5-p1v" secondAttribute="leading" constant="15" id="pdX-eK-9PZ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="GHe-ag-CIx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fXg-7B-qLj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="539" y="80"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="6O9-Fm-cKk">
+            <size key="intrinsicContentSize" width="47" height="34"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="image_shop_door" width="870" height="870"/>
+        <image name="image_shop_inner" width="919" height="917"/>
+    </resources>
+</document>

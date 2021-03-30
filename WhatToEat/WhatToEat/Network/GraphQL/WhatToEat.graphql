@@ -1,0 +1,203 @@
+mutation SignFoodie($signData: SignData!) {
+  signFoodie(signData: $signData) {
+    uniqueId
+    email
+    name
+    gender
+    auth{
+      facebook{
+        email
+        token
+      }
+    }
+  }
+}
+mutation SignFoodieWithApple($signData: SignData!) {
+  signFoodieWithApple(signData: $signData) {
+    uniqueId
+    email
+    name
+    gender
+    auth{
+      apple{
+        uid
+        email
+      }
+    }
+  }
+}
+
+mutation CreateGourmet(
+  $foodieId: String,
+  $address: InputAddress!,
+  $shopBranch:InputBranch!
+) {
+  createGourmet(foodieId:$foodieId,address:$address,shopBranch: $shopBranch) {
+    uniqueId
+    orderId
+    title
+    subtitle
+    tel
+    style
+    type
+    underPrice
+    address{
+      ownerId
+      completeInfo
+      name
+      postalCode
+      nation
+      isoNationCode
+      locality
+      subLocality
+      ward
+      administrativeArea
+      subAdministrativeArea
+      thoroughfare
+      subThoroughfare
+      floor
+      room
+      latitude
+      longitude
+    }
+  }
+}
+mutation UpdateGourmet($foodieId: String,$branchId: String!,$branch: InputBranch!,$address: InputAddress){
+  updateGourmet(foodieId:$foodieId,branchId: $branchId,branch: $branch,address: $address){
+    uniqueId
+    orderId
+    title
+    subtitle
+    tel
+    style
+    type
+    underPrice
+    address{
+      ownerId
+      completeInfo
+      name
+      postalCode
+      nation
+      isoNationCode
+      locality
+      subLocality
+      ward
+      administrativeArea
+      subAdministrativeArea
+      thoroughfare
+      subThoroughfare
+      floor
+      room
+      latitude
+      longitude
+    }
+  }
+}
+mutation DislikeGourmet($foodieId: String!,$branchId: String!){
+  dislikeGourmet(foodieId:$foodieId,branchId:$branchId){
+    uniqueId
+    orderId
+    title
+    subtitle
+    tel
+    style
+    type
+    underPrice
+    shop{
+      uniqueId
+      name
+      status
+    }
+    address{
+      ownerId
+      completeInfo
+      name
+      postalCode
+      nation
+      isoNationCode
+      locality
+      subLocality
+      ward
+      administrativeArea
+      subAdministrativeArea
+      thoroughfare
+      subThoroughfare
+      floor
+      room
+      latitude
+      longitude
+    }
+  }
+}
+query LocationsDynamicQuery($foodieId: String,$whereAnd: AddressDqCmd!) {
+  locationsDynamicQuery(foodieId:$foodieId,whereAnd: $whereAnd) {
+    ownerId
+    completeInfo
+    name
+    postalCode
+    nation
+    isoNationCode
+    locality
+    subLocality
+    ward
+    administrativeArea
+    subAdministrativeArea
+    thoroughfare
+    subThoroughfare
+    floor
+    room
+    latitude
+    longitude
+    shopBranch{
+      uniqueId
+      orderId
+      title
+      subtitle
+      tel
+      style
+      type
+      underPrice
+      shop{
+        uniqueId
+        name
+        status
+      }
+    }
+  }
+}
+query SearchForRange($foodieId: String,$minCoordinate: InputCoordinate!,$maxCoordinate: InputCoordinate!) {
+  searchForRange(foodieId:$foodieId,minCoordinate: $minCoordinate, maxCoordinate: $maxCoordinate){
+    ownerId
+    completeInfo
+    name
+    postalCode
+    nation
+    isoNationCode
+    locality
+    subLocality
+    ward
+    administrativeArea
+    subAdministrativeArea
+    thoroughfare
+    subThoroughfare
+    floor
+    room
+    latitude
+    longitude
+    shopBranch{
+      uniqueId
+      orderId
+      title
+      subtitle
+      tel
+      style
+      type
+      underPrice
+      shop{
+        uniqueId
+        name
+        status
+      }
+    }
+  }
+}
