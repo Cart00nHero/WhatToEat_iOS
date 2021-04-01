@@ -260,12 +260,14 @@ extension FindFoodViewController: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         switch cell {
-        case is ShopCollectCell :
-            let data = dataSource[indexPath.row]
-            scenario.beSendGourmetDetailParcel(content: data!)
-            let presentVC =
-                self.storyboard?.instantiateViewController(identifier: "GourmetDetailViewController")
-            sceneVC?.basePresentViewController(presentVC!, Animated: true)
+        case is ShopCollectCell:
+            if indexPath.row < dataSource.count {
+                let data = dataSource[indexPath.row]
+                scenario.beSendGourmetDetailParcel(content: data!)
+                let presentVC =
+                    self.storyboard?.instantiateViewController(identifier: "GourmetDetailViewController")
+                sceneVC?.basePresentViewController(presentVC!, Animated: true)
+            }
             
         default: break
         }
