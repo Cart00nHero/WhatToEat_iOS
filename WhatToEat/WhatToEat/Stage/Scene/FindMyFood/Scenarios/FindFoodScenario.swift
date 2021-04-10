@@ -37,19 +37,7 @@ class FindFoodScenario: Actor {
         queryData: [SearchForRangeQuery.Data.SearchForRange?]) {
         lastQueryData = queryData
     }
-    private func _beGetQueryData(_ complete: @escaping ([SearchForRangeQuery.Data.SearchForRange?]) -> Void) {
-        complete(lastQueryData)
-    }
-    private func _beGetQueryCount(_ complete: @escaping (Int) -> Void) {
-        DispatchQueue.main.async { [self] in
-            complete(lastQueryData.count)
-        }
-    }
-    private func _beGetCenterPoint(_ complete: @escaping (CenterPoint) -> Void) {
-        DispatchQueue.main.async { [self] in
-            complete(centerPt)
-        }
-    }
+    
     private func _beUpdateCenterPoint(
         zoomLevel: Int,
         coordinate: CLLocationCoordinate2D?,
@@ -248,21 +236,6 @@ extension FindFoodScenario {
     @discardableResult
     public func beStoreQueryData(queryData: [SearchForRangeQuery.Data.SearchForRange?]) -> Self {
         unsafeSend { self._beStoreQueryData(queryData: queryData) }
-        return self
-    }
-    @discardableResult
-    public func beGetQueryData(_ complete: @escaping ([SearchForRangeQuery.Data.SearchForRange?]) -> Void) -> Self {
-        unsafeSend { self._beGetQueryData(complete) }
-        return self
-    }
-    @discardableResult
-    public func beGetQueryCount(_ complete: @escaping (Int) -> Void) -> Self {
-        unsafeSend { self._beGetQueryCount(complete) }
-        return self
-    }
-    @discardableResult
-    public func beGetCenterPoint(_ complete: @escaping (CenterPoint) -> Void) -> Self {
-        unsafeSend { self._beGetCenterPoint(complete) }
         return self
     }
     @discardableResult

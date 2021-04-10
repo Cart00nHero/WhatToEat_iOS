@@ -417,7 +417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gmv-Gn-Ic7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2262" y="188"/>
+            <point key="canvasLocation" x="2260.8695652173915" y="187.5"/>
         </scene>
     </scenes>
     <resources>

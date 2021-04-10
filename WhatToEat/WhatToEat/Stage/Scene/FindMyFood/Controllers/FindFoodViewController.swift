@@ -21,6 +21,7 @@ class FindFoodViewController: UIViewController {
     private var sceneVC: SceneViewController? = nil
     private var willMarkAnnotations = false
     private var mapGestureState: UIGestureRecognizer.State = .possible
+    private var willGoNextVC = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class FindFoodViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        willGoNextVC = false
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
         sceneVC?.title = "Find My Food"
@@ -40,7 +42,9 @@ class FindFoodViewController: UIViewController {
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.mkMapView.removeFromSuperview()
+        if !willGoNextVC {
+            self.mkMapView.removeFromSuperview()
+        }
     }
     
     private func initialViewContorller() {
@@ -120,6 +124,7 @@ extension FindFoodViewController: SceneStateDelegate {
                 }
             }
         case is GoAddGourmetScenarioAction:
+            willGoNextVC = true
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC = storyboard.instantiateViewController(identifier: "AddGourmetViewController")
             sceneVC?.basePushToViewController(toVC, Animated: true)
