@@ -21,6 +21,7 @@ class FindFoodViewController: UIViewController {
     private var sceneVC: SceneViewController? = nil
     private var willMarkAnnotations = false
     private var mapGestureState: UIGestureRecognizer.State = .possible
+    private var willGoNextVC = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class FindFoodViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        willGoNextVC = false
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
         sceneVC?.title = "Find My Food"
@@ -37,6 +39,12 @@ class FindFoodViewController: UIViewController {
         collectionView.layer.borderWidth = 2.0
         collectionView.layer.borderColor =
             UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 240.0/255.0, alpha: 1.0).cgColor
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if !willGoNextVC {
+            self.mkMapView.removeFromSuperview()
+        }
     }
     
     private func initialViewContorller() {
@@ -116,6 +124,7 @@ extension FindFoodViewController: SceneStateDelegate {
                 }
             }
         case is GoAddGourmetScenarioAction:
+            willGoNextVC = true
             let storyboard = UIStoryboard.init(name: "AddGourmets", bundle: nil)
             let toVC = storyboard.instantiateViewController(identifier: "AddGourmetViewController")
             sceneVC?.basePushToViewController(toVC, Animated: true)
@@ -256,12 +265,14 @@ extension FindFoodViewController: UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         switch cell {
-        case is ShopCollectCell :
-            let data = dataSource[indexPath.row]
-            scenario.beSendGourmetDetailParcel(content: data!)
-            let presentVC =
-                self.storyboard?.instantiateViewController(identifier: "GourmetDetailViewController")
-            sceneVC?.basePresentViewController(presentVC!, Animated: true)
+        case is ShopCollectCell:
+            if indexPath.row < dataSource.count {
+                let data = dataSource[indexPath.row]
+                scenario.beSendGourmetDetailParcel(content: data!)
+                let presentVC =
+                    self.storyboard?.instantiateViewController(identifier: "GourmetDetailViewController")
+                sceneVC?.basePresentViewController(presentVC!, Animated: true)
+            }
             
         default: break
         }

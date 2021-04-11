@@ -14,7 +14,10 @@ class AddGourmetViewController: UIViewController {
     private var tableData = GourmetsTableData(address: initGQInputObject())
     private var originTableFooter = UIView()
     private let scenario = AddGourmetScenario()
-    var saveToCreate = false
+    private var saveToCreate = false
+    private var clickedButton: UIButton?
+    
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -133,7 +136,9 @@ extension AddGourmetViewController: SceneStateDelegate {
             let data = cell?.cellTemplate?.rightViewItem as? TextFieldItem
             updateTextFieldInputData(
                 newText: data?.text ?? "", indexPath: indexPath!)
-        case is TableCellButtonClickAction:
+        case let action as TableCellButtonClickAction:
+            action.button.isEnabled = false
+            clickedButton = action.button
             scenario.beGetInputData { [self] (inputObj) in
                 DispatchQueue.main.async {
                     if saveToCreate {
@@ -144,6 +149,10 @@ extension AddGourmetViewController: SceneStateDelegate {
                 }
             }
         case let action as CreateGourmetAction:
+            if clickedButton != nil && action.status != .Started {
+                clickedButton?.isEnabled = true
+                clickedButton = nil
+            }
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers
@@ -151,6 +160,10 @@ extension AddGourmetViewController: SceneStateDelegate {
             default: break
             }
         case let action as UpdateGourmetAction:
+            if clickedButton != nil && action.status != .Started {
+                clickedButton?.isEnabled = true
+                clickedButton = nil
+            }
             switch action.status {
             case .Success:
                 let stackVCs = self.navigationController?.viewControllers

@@ -29,11 +29,12 @@ class FoundLocScenario: Actor {
     private func _bePrepareNewParcel(inputObj: GQInputObject) {
         var newData = initGQInputObject()
         newData.address = inputObj.address
-        _bePackageParcel(inputObj: newData)
+        bePackageParcel(inputObj: newData)
     }
     private func _bePackageParcel(inputObj: GQInputObject) {
         _ = LogisticsCenter.shared.applyExpressService(
-            sender: self, recipient: "AddGourmetScenario",
+            sender: self,
+            recipient: String(describing: AddGourmetScenario.self),
             content: inputObj)
     }
 }
