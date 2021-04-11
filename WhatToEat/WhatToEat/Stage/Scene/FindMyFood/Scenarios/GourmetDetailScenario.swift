@@ -26,6 +26,22 @@ class GourmetDetailScenario: Actor {
             }
         }
     }
+    private func _beGoogleSearchTitle(
+        data: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery,
+        _ complete: @escaping (String) -> Void) {
+        let mutabeStr =
+            NSMutableString(
+                string: data.shopBranch?.title ?? "")
+        mutabeStr.append(" ")
+        mutabeStr.append(data.shopBranch?.subtitle ?? "")
+        let query = mutabeStr.replacingOccurrences(of: " ", with: "+")
+        let url = "https://www.google.co.in/search?q=" + query
+        let ecodeUrl =
+            url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        DispatchQueue.main.async {
+            complete(ecodeUrl)
+        }
+    }
     private func _beResizeUpdateButtonImage(
         origin:UIImage, _ complete: @escaping (UIImage) -> Void) {
         ToolMan().beResizeImage(
@@ -70,6 +86,11 @@ extension GourmetDetailScenario {
     public func beCollectParcel(_ complete: @escaping (
             LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> Void) -> Self {
         unsafeSend { self._beCollectParcel(complete) }
+        return self
+    }
+    @discardableResult
+    public func beGoogleSearchTitle(data: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery, _ complete: @escaping (String) -> Void) -> Self {
+        unsafeSend { self._beGoogleSearchTitle(data: data, complete) }
         return self
     }
     @discardableResult

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class GourmetDetailViewController: UIViewController {
     
@@ -96,7 +97,17 @@ extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate
         let data = tableData.dataSource[indexPath.row]
         if data.templateStyle == .LeftRight {
             let leftItem = (data as! LRTemplate).leftViewItem
-            if (leftItem as! LabelItem).text == "Tel" {
+            let titleText = (leftItem as! LabelItem).text
+            
+            if titleText == "Title" || titleText == "Subtitle" {
+                scenario.beGoogleSearchTitle(data: tableData.dataObj) { (encodeUrl) in
+                    let sfVC =
+                        SFSafariViewController(url: URL(string: encodeUrl)!)
+                    self.present(sfVC, animated: true, completion: nil)
+                }
+                return
+            }
+            if titleText == "Tel" {
                 let rightItem = (data as! LRTemplate).rightViewItem
                 callNumber(phoneNumber: (rightItem as! LabelItem).text)
             }
