@@ -230,9 +230,9 @@
                                             <constraint firstAttribute="width" secondItem="9Q8-Z9-JvZ" secondAttribute="height" multiplier="1:2" id="3ib-Ea-w7c"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊上下區域可選擇地圖或網頁模式在地圖上找到要新增的地點" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK4-70-MS2">
-                                        <rect key="frame" x="10" y="177" width="299" height="43"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點擊上下區域可以切換搜尋模式喔！您可以輸入關鍵字開啟下方網頁複製地址資訊或直接在輸入框輸入地址並在上方地圖找到地點，就可以分享店家囉!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK4-70-MS2">
+                                        <rect key="frame" x="10" y="160.5" width="299" height="76.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
