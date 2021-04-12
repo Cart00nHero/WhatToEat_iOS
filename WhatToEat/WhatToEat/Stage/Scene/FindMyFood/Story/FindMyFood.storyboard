@@ -191,7 +191,7 @@
                                                                         <constraint firstAttribute="width" secondItem="jxP-sO-zTO" secondAttribute="height" multiplier="1:2" id="syu-JW-gJn"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利用地圖放大縮小、移動，來搜尋各位美食家分享的店家" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofv-Ix-k06">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利用地圖放大縮小、移動，來搜尋好料" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofv-Ix-k06">
                                                                     <rect key="frame" x="8" y="26.666666666666671" width="248" height="43"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <color key="textColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -283,7 +283,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Detail" id="Nf2-Xd-1Jp">
+                                    <navigationItem title="詳細資訊" id="Nf2-Xd-1Jp">
                                         <barButtonItem key="rightBarButtonItem" id="VZ6-hB-cOH">
                                             <connections>
                                                 <action selector="updateButtonClickActionWithSender:" destination="8DO-JK-pj0" id="Ue6-cs-wua"/>
