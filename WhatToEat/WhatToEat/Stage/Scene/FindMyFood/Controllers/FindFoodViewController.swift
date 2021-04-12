@@ -32,7 +32,7 @@ class FindFoodViewController: UIViewController {
         willGoNextVC = false
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
-        sceneVC?.title = "Find My Food"
+        sceneVC?.title = "尋找附近美食"
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
