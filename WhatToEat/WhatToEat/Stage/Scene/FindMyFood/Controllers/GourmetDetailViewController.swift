@@ -99,7 +99,7 @@ extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate
             let leftItem = (data as! LRTemplate).leftViewItem
             let titleText = (leftItem as! LabelItem).text
             
-            if titleText == "Title" || titleText == "Subtitle" {
+            if titleText == "名稱" || titleText == "副標題" {
                 scenario.beGoogleSearchTitle(data: tableData.dataObj) { (encodeUrl) in
                     let sfVC =
                         SFSafariViewController(url: URL(string: encodeUrl)!)
@@ -107,9 +107,12 @@ extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate
                 }
                 return
             }
-            if titleText == "Tel" {
+            if titleText == "電話" {
                 let rightItem = (data as! LRTemplate).rightViewItem
-                callNumber(phoneNumber: (rightItem as! LabelItem).text)
+                let telNo = (rightItem as! LabelItem).text
+                if !telNo.isEmpty {
+                    callNumber(phoneNumber: telNo)
+                }
             }
         }
     }
