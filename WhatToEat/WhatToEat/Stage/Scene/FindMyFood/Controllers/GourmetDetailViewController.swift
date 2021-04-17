@@ -91,6 +91,9 @@ extension GourmetDetailViewController: UITableViewDataSource,UITableViewDelegate
             let contentCell = cell as? ButtonTableViewCell
             contentCell?.cellData = data as? ButtonTemplate
         }
+        if indexPath.row == 0 || indexPath.row == 1 {
+            cell.accessoryType = .disclosureIndicator
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
