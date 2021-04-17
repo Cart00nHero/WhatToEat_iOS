@@ -22,6 +22,7 @@
 		AFAC4B19260C3ADC0006506F /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAC4B18260C3ADC0006506F /* ResponseData.swift */; };
 		AFAC4B32260C63AD0006506F /* SingletonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAC4B31260C63AD0006506F /* SingletonStorage.swift */; };
 		AFAF26502625CF7700A43464 /* SceneDelegateActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAF264F2625CF7700A43464 /* SceneDelegateActions.swift */; };
+		AFC0A74C262B60FE00342476 /* InputBarAccessoryView in Frameworks */ = {isa = PBXBuildFile; productRef = AFC0A74B262B60FE00342476 /* InputBarAccessoryView */; };
 		AFC449E92609DC2200A5336C /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AFC449E82609DC2200A5336C /* schema.json */; };
 		AFE5B11E25FEFF3300DE2CAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE5B11D25FEFF3300DE2CAA /* AppDelegate.swift */; };
 		AFE5B12025FEFF3300DE2CAA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE5B11F25FEFF3300DE2CAA /* SceneDelegate.swift */; };
@@ -219,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF7E3B1F26034ECD00E192B0 /* ReSwift in Frameworks */,
+				AFC0A74C262B60FE00342476 /* InputBarAccessoryView in Frameworks */,
 				AF7E3B1926034EBA00E192B0 /* Flynn in Frameworks */,
 				CC4429F100A17879224C4FE4 /* Pods_WhatToEat.framework in Frameworks */,
 			);
@@ -713,6 +715,7 @@
 			packageProductDependencies = (
 				AF7E3B1826034EBA00E192B0 /* Flynn */,
 				AF7E3B1E26034ECD00E192B0 /* ReSwift */,
+				AFC0A74B262B60FE00342476 /* InputBarAccessoryView */,
 			);
 			productName = WhatToEat;
 			productReference = AFE5B11A25FEFF3300DE2CAA /* WhatToEat.app */;
@@ -791,6 +794,7 @@
 			packageReferences = (
 				AF7E3B1726034EBA00E192B0 /* XCRemoteSwiftPackageReference "Flynn" */,
 				AF7E3B1D26034ECD00E192B0 /* XCRemoteSwiftPackageReference "ReSwift" */,
+				AFC0A74A262B60FE00342476 /* XCRemoteSwiftPackageReference "InputBarAccessoryView" */,
 			);
 			productRefGroup = AFE5B11B25FEFF3300DE2CAA /* Products */;
 			projectDirPath = "";
@@ -1228,8 +1232,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WhatToEat/WhatToEat.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M34XUV83ZD;
 				INFOPLIST_FILE = WhatToEat/Info.plist;
@@ -1241,7 +1245,7 @@
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = toon.town.party.WhatToEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "WhatToEat App";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1254,8 +1258,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WhatToEat/WhatToEatRelease.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M34XUV83ZD;
 				INFOPLIST_FILE = WhatToEat/Info.plist;
@@ -1267,7 +1271,7 @@
 				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = toon.town.party.WhatToEat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "WhatToEat App";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1419,6 +1423,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		AFC0A74A262B60FE00342476 /* XCRemoteSwiftPackageReference "InputBarAccessoryView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nathantannar4/InputBarAccessoryView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1431,6 +1443,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF7E3B1D26034ECD00E192B0 /* XCRemoteSwiftPackageReference "ReSwift" */;
 			productName = ReSwift;
+		};
+		AFC0A74B262B60FE00342476 /* InputBarAccessoryView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFC0A74A262B60FE00342476 /* XCRemoteSwiftPackageReference "InputBarAccessoryView" */;
+			productName = InputBarAccessoryView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

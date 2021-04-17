@@ -20,6 +20,7 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
     var action = LocationsDynamicQueryAction()
     let service = ApolloService.shared.apollo
     let query = LocationsDynamicQueryQuery(foodieId: nil, whereAnd: whereCMD)
+    service.clearCache()
     service.fetch(query: query) { result in
         switch result {
         case .success(let gqlResult):
@@ -45,14 +46,15 @@ func locationsDynamicQueryAction(whereCMD: AddressDqCmd) -> LocationsDynamicQuer
             appStore.dispatch(action)
         }
     }
-    service.clearCache()
     return action
 }
 struct SearchForRangeAction: Action, ApiActionProtocol {
     var status: ApiActionStatus = .Started
     var responseData: [SearchForRangeQuery.Data.SearchForRange?]?
 }
-func searchForRangeAction(foodieId: String?,min: InputCoordinate, max: InputCoordinate) -> SearchForRangeAction {
+func searchForRangeAction(
+    foodieId: String?,
+    min: InputCoordinate, max: InputCoordinate) -> SearchForRangeAction {
     var action = SearchForRangeAction()
     let service = ApolloService.shared.apollo
     var query:SearchForRangeQuery
@@ -63,6 +65,7 @@ func searchForRangeAction(foodieId: String?,min: InputCoordinate, max: InputCoor
         query = SearchForRangeQuery(
             foodieId: foodieId, minCoordinate: min, maxCoordinate: max)
     }
+    service.clearCache()
     service.fetch(query: query) { result in
         switch result {
         case .success(let graphQLResult):
@@ -86,7 +89,6 @@ func searchForRangeAction(foodieId: String?,min: InputCoordinate, max: InputCoor
             appStore.dispatch(action)
         }
     }
-    service.clearCache()
     return action
 }
 struct ApolloClearCacheAction: Action {
