@@ -27,8 +27,10 @@ class GourmetDetailViewController: UIViewController {
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
         if let image = UIImage(named: "icon_edit") {
-            GourmetDetailScenario().beResizeUpdateButtonImage(origin: image) { [self] (smallImage) in
-                self.updateButton.image = smallImage.withRenderingMode(.alwaysOriginal)
+            GourmetDetailScenario().beResizeUpdateButtonImage(
+                origin: image) { [self] (smallImage) in
+                self.updateButton.image =
+                    smallImage.withRenderingMode(.alwaysOriginal)
             }
         }
         /* 暫時沒有要用

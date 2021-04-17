@@ -69,7 +69,7 @@ class FindFoodScenario: Actor {
             }
         }
     }
-
+    
     private func _beSearchInNewRange(mapCenter: CenterPoint) {
         centerPt = mapCenter
         if lastSearchPt.coordinate == nil {
@@ -88,6 +88,10 @@ class FindFoodScenario: Actor {
         }
         var isNotified = false
         if !isNotified && centerPt.zoomLevel != lastSearchPt.zoomLevel {
+            if lastSearchPt.zoomLevel <= 15 &&
+                centerPt.zoomLevel < lastSearchPt.zoomLevel {
+                return
+            }
             if lastSearchPt.zoomLevel >= 17 &&
                 centerPt.zoomLevel > lastSearchPt.zoomLevel {
                 return
@@ -157,7 +161,7 @@ class FindFoodScenario: Actor {
     private func _beSendGourmetDetailParcel(
         content: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery){
         let recipientName = "GourmetDetailScenario"
-//            String(describing: type(of: GourmetDetailScenario.self))
+        //            String(describing: type(of: GourmetDetailScenario.self))
         _ = LogisticsCenter.shared.applyExpressService(sender: self, recipient: recipientName, content: content)
     }
     private func _beCollectGoogleNavParcel(
@@ -178,7 +182,7 @@ class FindFoodScenario: Actor {
     private func _beStopPilot() {
         pilot.beStop()
     }
-
+    
     // MARK: - private
     private func searchRange(zoomLevel: Int) -> Float64 {
         // KM
