@@ -160,6 +160,9 @@ class SearchLocScenario: Actor {
             }
         }
     }
+    private func _beStopPilot() {
+        pilot.beStop()
+    }
 }
 // MARK: - Pilot protocols
 extension SearchLocScenario: PilotProtocol {
@@ -224,6 +227,11 @@ extension SearchLocScenario {
     @discardableResult
     public func beResizeBarButtonItemImage(image: UIImage, _ complete: @escaping (UIImage) -> Void) -> Self {
         unsafeSend { self._beResizeBarButtonItemImage(image: image, complete) }
+        return self
+    }
+    @discardableResult
+    public func beStopPilot() -> Self {
+        unsafeSend(_beStopPilot)
         return self
     }
     @discardableResult

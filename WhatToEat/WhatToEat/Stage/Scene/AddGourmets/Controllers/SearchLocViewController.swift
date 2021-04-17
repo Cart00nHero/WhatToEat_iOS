@@ -36,7 +36,7 @@ class SearchLocViewController: UIViewController {
         super.viewWillAppear(animated)
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
-        sceneVC?.title = "Search"
+        sceneVC?.title = "地址輸入"
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -66,6 +66,7 @@ class SearchLocViewController: UIViewController {
         super.viewDidDisappear(animated)
         scenario.beCancelFoundLocParcel()
         mapView.removeAnnotations(mapView.annotations)
+        scenario.beStopPilot()
     }
     
     // MARK: - Private methods
