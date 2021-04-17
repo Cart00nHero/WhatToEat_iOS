@@ -88,6 +88,10 @@ class FindFoodScenario: Actor {
         }
         var isNotified = false
         if !isNotified && centerPt.zoomLevel != lastSearchPt.zoomLevel {
+            if lastSearchPt.zoomLevel >= 17 &&
+                centerPt.zoomLevel > lastSearchPt.zoomLevel {
+                return
+            }
             isNotified = true
             DispatchQueue.main.async {
                 appStore.dispatch(SearchInNewRangeAction())
