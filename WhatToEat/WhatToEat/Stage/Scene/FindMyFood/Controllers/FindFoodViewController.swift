@@ -46,6 +46,10 @@ class FindFoodViewController: UIViewController {
             self.mkMapView.removeFromSuperview()
         }
     }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        scenario.beStopPilot()
+    }
     
     private func initialViewContorller() {
         mkMapView.delegate = self

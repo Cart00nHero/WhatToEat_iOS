@@ -66,6 +66,7 @@ class SearchLocViewController: UIViewController {
         super.viewDidDisappear(animated)
         scenario.beCancelFoundLocParcel()
         mapView.removeAnnotations(mapView.annotations)
+        scenario.beStopPilot()
     }
     
     // MARK: - Private methods

@@ -17,8 +17,6 @@ class AddGourmetViewController: UIViewController {
     private var saveToCreate = false
     private var clickedButton: UIButton?
     
-    
-    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -80,12 +78,12 @@ extension AddGourmetViewController: UITableViewDataSource,UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableData.dataSource[indexPath.section][indexPath.row]
-        var cellIdentifier = "AddGTableViewCell"
+        var cellIdentifier = "AddGmtTableViewCell"
         if data.templateStyle == .Button {
             cellIdentifier = "AddBtnTableViewCell"
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        if cellIdentifier == "AddGTableViewCell" {
+        if cellIdentifier == "AddGmtTableViewCell" {
             let contentCell = cell as? AddGmtTableViewCell
             contentCell?.cellTemplate = data as? LRTemplate
         }
@@ -141,6 +139,19 @@ extension AddGourmetViewController: SceneStateDelegate {
             clickedButton = action.button
             scenario.beGetInputData { [self] (inputObj) in
                 DispatchQueue.main.async {
+                    if inputObj.shopBranch.title.isEmpty {
+                        let cell =
+                            tableView.cellForRow(at: IndexPath(row: 0, section: 0))
+                        for subView in (cell as! AddGmtTableViewCell).cellRightView.subviews {
+                            if subView is UITextField {
+                                (subView as! UITextField).attributedPlaceholder =
+                                    NSAttributedString(string:
+                                        "需要請您輸入店家名稱喔", attributes:
+                                            [NSAttributedString.Key.foregroundColor:UIColor.red])
+                            }
+                        }
+                        return
+                    }
                     if saveToCreate {
                         appStore.dispatch(createGourmetAction(inputObj: inputObj))
                     } else {
@@ -155,8 +166,9 @@ extension AddGourmetViewController: SceneStateDelegate {
             }
             switch action.status {
             case .Success:
-                let stackVCs = self.navigationController?.viewControllers
-                self.navigationController?.popToViewController((stackVCs?[1])!, animated: true)
+                self.navigationController?.popViewController(animated: true)
+//                let stackVCs = self.navigationController?.viewControllers
+//                self.navigationController?.popToViewController((stackVCs?[1])!, animated: true)
             default: break
             }
         case let action as UpdateGourmetAction:
@@ -166,8 +178,9 @@ extension AddGourmetViewController: SceneStateDelegate {
             }
             switch action.status {
             case .Success:
-                let stackVCs = self.navigationController?.viewControllers
-                self.navigationController?.popToViewController((stackVCs?[1])!, animated: true)
+                self.navigationController?.popViewController(animated: true)
+//                let stackVCs = self.navigationController?.viewControllers
+//                self.navigationController?.popToViewController((stackVCs?[1])!, animated: true)
             default: break
             }
         default: break

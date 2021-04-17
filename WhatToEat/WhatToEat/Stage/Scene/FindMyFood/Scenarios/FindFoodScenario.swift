@@ -171,6 +171,9 @@ class FindFoodScenario: Actor {
             }
         }
     }
+    private func _beStopPilot() {
+        pilot.beStop()
+    }
 
     // MARK: - private
     private func searchRange(zoomLevel: Int) -> Float64 {
@@ -276,6 +279,11 @@ extension FindFoodScenario {
     @discardableResult
     public func beCollectGoogleNavParcel(_ complete: @escaping (CLLocation) -> Void) -> Self {
         unsafeSend { self._beCollectGoogleNavParcel(complete) }
+        return self
+    }
+    @discardableResult
+    public func beStopPilot() -> Self {
+        unsafeSend(_beStopPilot)
         return self
     }
     @discardableResult
