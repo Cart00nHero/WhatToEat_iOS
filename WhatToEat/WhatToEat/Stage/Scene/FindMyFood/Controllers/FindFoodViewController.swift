@@ -40,15 +40,13 @@ class FindFoodViewController: UIViewController {
         collectionView.layer.borderColor =
             UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 240.0/255.0, alpha: 1.0).cgColor
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if !willGoNextVC {
-            self.mkMapView.removeFromSuperview()
-        }
-    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         scenario.beStopPilot()
+        if !willGoNextVC {
+            self.mkMapView.removeFromSuperview()
+        }
     }
     
     private func initialViewContorller() {
