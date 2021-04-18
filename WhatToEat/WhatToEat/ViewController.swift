@@ -13,18 +13,22 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let toStoryBoard = UIStoryboard(name: "Entrance", bundle: nil)
+        let toVC = toStoryBoard.instantiateViewController(withIdentifier: "SceneViewController") as? SceneViewController
+        toVC?.childVC = toStoryBoard.instantiateViewController(withIdentifier: "MainMenuViewController")
+        self.navigationController?.show(toVC!, sender: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        appStore.subscribe(self) {
-            $0.select {
-                $0.sceneState
-            }
-        }
+//        appStore.subscribe(self) {
+//            $0.select {
+//                $0.sceneState
+//            }
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        appStore.unsubscribe(self)
+//        appStore.unsubscribe(self)
     }
 
 }
