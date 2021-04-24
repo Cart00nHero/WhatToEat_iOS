@@ -16,7 +16,7 @@ class SearchLocViewController: UIViewController {
     enum SearchMode {
         case Map, Google
     }
-    private var scenario: SearchLocScenario? = nil
+    private var scenario: SearchLocScenario = SearchLocScenario()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var topSelectedView: UIView!
     @IBOutlet weak var bottomSelectedView: UIView!
@@ -30,7 +30,6 @@ class SearchLocViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        scenario = SearchLocScenario()
         self.sceneVC = self.parent as? SceneViewController
         self.sceneVC?.stateDelegate = self
         sceneVC?.title = "地址輸入"
@@ -43,7 +42,7 @@ class SearchLocViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let image = UIImage(named: "icon_gps") {
-            scenario?.beResizeBarButtonItemImage(image: image) { [self] (newImage) in
+            scenario.beResizeBarButtonItemImage(image: image) { [self] (newImage) in
                 let rightBarButtonItem = UIBarButtonItem(
                     image: newImage.withRenderingMode(.alwaysOriginal),
                     style: .plain, target: self,
@@ -62,7 +61,6 @@ class SearchLocViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         mapView.removeAnnotations(mapView.annotations)
-        scenario = nil
     }
     
     // MARK: - Private methods
@@ -140,14 +138,14 @@ class SearchLocViewController: UIViewController {
         switch searchMode {
         case .Map:
             print("Map")
-            scenario?.beInquireIntoAddressesLocation(
+            scenario.beInquireIntoAddressesLocation(
                 address: searchTextField.text ?? "")
         case .Google:
             print("Google")
             if isWebViewCreated == false {
                 createWebViewOnBottom()
             }
-            scenario?.beGoogleSearchUrl(searchTextField.text ?? "") {
+            scenario.beGoogleSearchUrl(searchTextField.text ?? "") {
                 [self] (urlString) in
                 let ecodeUrl =
                     urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -160,7 +158,7 @@ class SearchLocViewController: UIViewController {
         searchTextField.resignFirstResponder()
     }
     @objc private func rigtBarButtonClickAction(sender: UIBarButtonItem) {
-        scenario?.beRequestCurrentLocation()
+        scenario.beRequestCurrentLocation()
     }
     @objc private func coverViewTapGesture(sender: UITapGestureRecognizer) {
         appStore.dispatch(ReceivedTapAction(tapGesture: sender))
@@ -173,7 +171,7 @@ class SearchLocViewController: UIViewController {
 // MARK: - MKMapViewDelegate
 extension SearchLocViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        scenario?.bePrepareGoFoundLocScenario { [self] (isPrepared) in
+        scenario.bePrepareGoFoundLocScenario { [self] (isPrepared) in
             if isPrepared {
                 let presentVC =
                     self.storyboard?.instantiateViewController(identifier: "FoundLocViewController")
@@ -219,14 +217,14 @@ extension SearchLocViewController: SceneStateDelegate {
             switch action.status {
             case .Success:
                 if action.responseData?.count ?? 0 > 0 {
-                    scenario?.beGetQueryDataMarkers(
+                    scenario.beGetQueryDataMarkers(
                         queryData: action.responseData!) { (annotations) in
                         appStore.dispatch(
                             MapClearAndShowAnnotationsAction(
                                 annotions: annotations))
                     }
                 } else {
-                    scenario?.beGetFoundPlacesMarkers { (annotations) in
+                    scenario.beGetFoundPlacesMarkers { (annotations) in
                         appStore.dispatch(
                             MapClearAndShowAnnotationsAction(
                                 annotions: annotations))
