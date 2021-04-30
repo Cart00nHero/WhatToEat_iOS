@@ -14,13 +14,13 @@ import Foundation
      field :name, :string
      field :gender, :integer
  */
-struct Foodie: MapConvertable {
+struct Foodie: Convertable {
     let uniqueId: String
     let email: String
     let name: String
 }
 
-struct Address: MapConvertable {
+struct Address: Convertable {
     var ownerType: String?
     var latitude: Double = 0.0
     var longitude: Double = 0.0
@@ -48,7 +48,7 @@ struct Address: MapConvertable {
     init() {
     }
 }
-struct ShopBranch: MapConvertable {
+struct ShopBranch: Convertable {
     let uniqueId: String?
     let name: String?
     let openTime: Date?
@@ -58,7 +58,7 @@ struct ShopBranch: MapConvertable {
     let foodies: [Foodie]?
 }
 
-struct Branch: MapConvertable {
+struct Branch: Convertable {
     let uniqueId: String?
     let name: String?
     let openTime: Date?
@@ -68,7 +68,7 @@ struct Branch: MapConvertable {
     let foodies: [Foodie]?
 }
 
-struct Shop: MapConvertable {
+struct Shop: Convertable {
     let uniqueId: String?
     let title: String?
     let style: String?

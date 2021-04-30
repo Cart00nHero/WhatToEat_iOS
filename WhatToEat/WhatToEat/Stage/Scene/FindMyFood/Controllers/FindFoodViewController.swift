@@ -48,6 +48,15 @@ class FindFoodViewController: UIViewController {
             self.mkMapView.removeFromSuperview()
         }
     }
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        switch motion {
+        case .motionShake:
+            scenario.beRandomSelect { result in
+                
+            }
+        default: break
+        }
+    }
     
     private func initialViewContorller() {
         mkMapView.delegate = self
