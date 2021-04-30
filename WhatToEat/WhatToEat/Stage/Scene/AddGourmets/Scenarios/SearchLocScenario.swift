@@ -130,7 +130,8 @@ class SearchLocScenario: Actor {
         }
     }
     
-    private func _bePrepareGoFoundLocScenario(_ complete: @escaping (Bool) -> Void) {
+    private func _bePrepareGoFoundLocScenario(
+        _ complete: @escaping (Bool) -> Void) {
         var isPrepared = false
         if queryDataParcel != nil {
             queryDataParcel = nil

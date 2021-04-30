@@ -9,7 +9,7 @@ import Foundation
 
 class SingletonStorage: NSObject {
     static let shared = SingletonStorage()
-    var apolloURL = "https://what2eat-dev.herokuapp.com/graphql/api"
+    var apolloURL = "https://what2eat00no8.herokuapp.com/graphql/api"
     var foodieId = ""
     
 }

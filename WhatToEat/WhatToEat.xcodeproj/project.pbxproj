@@ -22,6 +22,7 @@
 		AFAC4B19260C3ADC0006506F /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAC4B18260C3ADC0006506F /* ResponseData.swift */; };
 		AFAC4B32260C63AD0006506F /* SingletonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAC4B31260C63AD0006506F /* SingletonStorage.swift */; };
 		AFAF26502625CF7700A43464 /* SceneDelegateActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAF264F2625CF7700A43464 /* SceneDelegateActions.swift */; };
+		AFBCC83C263BF1000064236A /* RandomNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFBCC83B263BF1000064236A /* RandomNumber.swift */; };
 		AFC0A74C262B60FE00342476 /* InputBarAccessoryView in Frameworks */ = {isa = PBXBuildFile; productRef = AFC0A74B262B60FE00342476 /* InputBarAccessoryView */; };
 		AFC449E92609DC2200A5336C /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = AFC449E82609DC2200A5336C /* schema.json */; };
 		AFE5B11E25FEFF3300DE2CAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE5B11D25FEFF3300DE2CAA /* AppDelegate.swift */; };
@@ -133,6 +134,7 @@
 		AFAC4B18260C3ADC0006506F /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		AFAC4B31260C63AD0006506F /* SingletonStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingletonStorage.swift; sourceTree = "<group>"; };
 		AFAF264F2625CF7700A43464 /* SceneDelegateActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateActions.swift; sourceTree = "<group>"; };
+		AFBCC83B263BF1000064236A /* RandomNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomNumber.swift; sourceTree = "<group>"; };
 		AFC449E82609DC2200A5336C /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		AFE5B11A25FEFF3300DE2CAA /* WhatToEat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhatToEat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE5B11D25FEFF3300DE2CAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			children = (
 				AFE5B2E225FF12B000DE2CAA /* Mathematician.swift */,
 				AFE5B2E325FF12B000DE2CAA /* Haversine.swift */,
+				AFBCC83B263BF1000064236A /* RandomNumber.swift */,
 			);
 			path = Mathematician;
 			sourceTree = "<group>";
@@ -1049,6 +1052,7 @@
 				AFAF26502625CF7700A43464 /* SceneDelegateActions.swift in Sources */,
 				AFE5B2E725FF12B000DE2CAA /* Courier.swift in Sources */,
 				AF67FC7025FF3A2C005647F9 /* DataManager.swift in Sources */,
+				AFBCC83C263BF1000064236A /* RandomNumber.swift in Sources */,
 				AF183EB7261254120064F87D /* ApolloExtension.swift in Sources */,
 				AFE5B12025FEFF3300DE2CAA /* SceneDelegate.swift in Sources */,
 				AFE5B30325FF20EB00DE2CAA /* GQResponseData.swift in Sources */,
@@ -1234,7 +1238,7 @@
 				CODE_SIGN_ENTITLEMENTS = WhatToEat/WhatToEat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = M34XUV83ZD;
 				INFOPLIST_FILE = WhatToEat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -1260,7 +1264,7 @@
 				CODE_SIGN_ENTITLEMENTS = WhatToEat/WhatToEatRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = M34XUV83ZD;
 				INFOPLIST_FILE = WhatToEat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;

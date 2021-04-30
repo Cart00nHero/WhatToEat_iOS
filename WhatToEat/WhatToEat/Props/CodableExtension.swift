@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol MapConvertable: Codable {
+protocol Convertable: Codable {
 
 }
 
 // Convert struct to dictionary
-extension MapConvertable {
+extension Convertable {
     func convertToDict() -> Dictionary<String, Any>? {
         var dict: Dictionary<String, Any>? = nil
 

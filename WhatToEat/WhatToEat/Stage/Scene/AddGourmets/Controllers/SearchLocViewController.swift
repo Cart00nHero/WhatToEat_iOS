@@ -16,8 +16,7 @@ class SearchLocViewController: UIViewController {
     enum SearchMode {
         case Map, Google
     }
-    
-    private let scenario: SearchLocScenario = SearchLocScenario()
+    private var scenario: SearchLocScenario = SearchLocScenario()
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var topSelectedView: UIView!
     @IBOutlet weak var bottomSelectedView: UIView!
@@ -29,9 +28,6 @@ class SearchLocViewController: UIViewController {
     private let webView = WKWebView()
     private var sfSafariVC: SFSafariViewController? = nil
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.sceneVC = self.parent as? SceneViewController
@@ -64,9 +60,7 @@ class SearchLocViewController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        scenario.beCancelFoundLocParcel()
         mapView.removeAnnotations(mapView.annotations)
-        scenario.beStopPilot()
     }
     
     // MARK: - Private methods
