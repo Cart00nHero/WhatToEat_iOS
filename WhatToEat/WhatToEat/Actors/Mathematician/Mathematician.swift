@@ -30,7 +30,7 @@ class Mathematician: Actor {
             complete(toLoc.distance(from: fromLoc))
         }
     }
-    private func _beRandomNumber(
+    private func _beRandomInteger(
         sender: Actor,min: Int,max: Int,
         _ complete: @escaping (Int) -> Void) {
         let result = randomInt(min: min, max: max)
@@ -56,8 +56,8 @@ extension Mathematician {
         return self
     }
     @discardableResult
-    public func beRandomNumber(sender: Actor, min: Int, max: Int, _ complete: @escaping (Int) -> Void) -> Self {
-        unsafeSend { self._beRandomNumber(sender: sender, min: min, max: max, complete) }
+    public func beRandomInteger(sender: Actor, min: Int, max: Int, _ complete: @escaping (Int) -> Void) -> Self {
+        unsafeSend { self._beRandomInteger(sender: sender, min: min, max: max, complete) }
         return self
     }
 

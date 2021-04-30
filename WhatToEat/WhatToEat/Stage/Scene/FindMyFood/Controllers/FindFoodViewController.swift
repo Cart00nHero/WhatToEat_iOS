@@ -49,12 +49,8 @@ class FindFoodViewController: UIViewController {
         }
     }
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        switch motion {
-        case .motionShake:
-            scenario.beRandomSelect { result in
-                
-            }
-        default: break
+        if motion == .motionShake {
+            scenario.beRandomSelect()
         }
     }
     

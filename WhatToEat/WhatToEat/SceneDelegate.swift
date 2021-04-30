@@ -43,8 +43,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to undo the changes made on entering the background.
         Flynn.startup()
         appStore.dispatch(SceneWillEnterForegroundAction())
-//        SingletonStorage.shared.foodieId =
-//            UserDefaults.standard.object(forKey: "Signed_Foodie_Id") as? String ?? ""
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {

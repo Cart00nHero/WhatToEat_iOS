@@ -182,13 +182,11 @@ class FindFoodScenario: Actor {
     private func _beStopPilot() {
         pilot.beStop()
     }
-    private func _beRandomSelect(_ complete:@escaping (Int) -> Void) {
+    private func _beRandomSelect() {
         if lastQueryData.count > 0 {
-            Mathematician().beRandomNumber(
-                sender: self, min: 0, max: lastQueryData.count) { result in
-                DispatchQueue.main.async {
-                    complete(result)
-                }
+            Mathematician().beRandomInteger(
+                sender: self, min: 0, max: lastQueryData.count) { [self] number in
+                beDynamicQuerySelectedData(index: number)
             }
         }
     }
@@ -305,8 +303,8 @@ extension FindFoodScenario {
         return self
     }
     @discardableResult
-    public func beRandomSelect(_ complete: @escaping (Int) -> Void) -> Self {
-        unsafeSend { self._beRandomSelect(complete) }
+    public func beRandomSelect() -> Self {
+        unsafeSend(_beRandomSelect)
         return self
     }
     @discardableResult
