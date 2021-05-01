@@ -233,7 +233,7 @@ extension SearchLocViewController: SceneStateDelegate {
             default: break
             }
         case let action as FoundLocationsAddressAction:
-            searchTextField.text = action.inputObj.address.completeInfo
+            searchTextField.text = action.localizedAddress
         case let action as MapClearAndShowAnnotationsAction:
             mapView.removeAnnotations(mapView.annotations)
             mapView.addAnnotations(action.annotions)
