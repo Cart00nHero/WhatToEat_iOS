@@ -20,6 +20,7 @@ class SearchLocScenario: Actor {
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
     private var queryDataParcel: Parcel?
+    private var locFromGPS = false
     private var markedGQInput = initGQInputObject()
     
     override init() {
@@ -63,35 +64,54 @@ class SearchLocScenario: Actor {
         var action = FoundLocationsAddressAction()
         GeoCoder().beLocalizedReverseLocation(
             sender: self, location: location,
-            localeId: localeId) { (placemarks, error) in
-            if error == nil {
-                if placemarks?.count ?? 0 > 0 {
-                    DataManager().beConvertPlaceMarksToInputAddresses(
-                        self, placemarks!) { [self] (result) in
-                        if result.count > 0 {
-                            var inputObj = initGQInputObject()
-                            inputObj.address = result.first!
-                            if localeId.isEmpty {
-                                // get localized address
-                                beInquireIntoAddressesLocation(address: inputObj.address.completeInfo)
-                            } else {
-                                markedGQInput = inputObj
-                                action.inputObj = inputObj
+            localeId: localeId) { [self] (placemarks, error) in
+            if error == nil && placemarks?.count ?? 0 > 0 {
+                if localeId.isEmpty && locFromGPS {
+                    DataManager().beCombinePlaceMarks(
+                        sender: self, placemarks!) { results in
+                        action.localizedAddress = results.first!
+                        // get localized address
+                        beInquireIntoAddressesLocation(address: results.first!)
+                        // display on textfield
+                        DispatchQueue.main.async {
+                            appStore.dispatch(action)
+                        }
+                    }
+                    return
+                }
+                DataManager().beConvertPlaceMarksToInputAddresses(
+                    self, placemarks!) { [self] (result) in
+                    if result.count > 0 {
+                        var inputObj = initGQInputObject()
+                        inputObj.address = result.first!
+                        markedGQInput = inputObj
+                        action.inputObj = inputObj
+                    }
+                }
+                DataManager().beConvertPlaceMarkToAddressDqCmd(
+                    self, placemarks![0]) { (addressDqCmd) in
+                    DispatchQueue.main.async {
+                        appStore.dispatch(
+                            locationsDynamicQueryAction(whereCMD: addressDqCmd))
+                    }
+                }
+                if !locFromGPS {
+                    // Get device localized text
+                    GeoCoder().beReverseLocation(
+                        sender: self, location: location) { places, error in
+                        if error == nil && places?.count ?? 0 > 0 {
+                            DataManager().beCombinePlaceMarks(
+                                sender: self, placemarks!) { results in
+                                action.localizedAddress = results.first!
+                                // display on textfield
                                 DispatchQueue.main.async {
                                     appStore.dispatch(action)
                                 }
                             }
                         }
                     }
-                    if !localeId.isEmpty {
-                        DataManager().beConvertPlaceMarkToAddressDqCmd(
-                            self, placemarks![0]) { (addressDqCmd) in
-                            DispatchQueue.main.async {
-                                appStore.dispatch(
-                                    locationsDynamicQueryAction(whereCMD: addressDqCmd))
-                            }
-                        }
-                    }
+                } else {
+                    locFromGPS = false
                 }
             }
         }
@@ -169,6 +189,7 @@ class SearchLocScenario: Actor {
 extension SearchLocScenario: PilotProtocol {
     private func _beLocationManager(didUpdateLocations locations: [CLLocation]) {
         if locations.count > 0 {
+            locFromGPS = true
             beInquireIntoLocationsAddress(
                 location: locations[0], localeId: "")
         }

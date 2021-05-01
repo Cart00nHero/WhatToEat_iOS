@@ -130,7 +130,8 @@ class DataManager: Actor {
         _ complete: @escaping ([String]) -> Void) {
         var result: [String] = []
         for placeMark in placeMarks {
-            result.append(combinePlaceMarkInfo(placeMark))
+            result.append(
+                combinePlaceMarkInfo(placeMark))
         }
         sender.unsafeSend {
             complete(result)
