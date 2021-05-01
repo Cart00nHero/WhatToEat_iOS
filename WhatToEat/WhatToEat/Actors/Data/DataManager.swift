@@ -29,7 +29,8 @@ class DataManager: Actor {
             newAddress.postalCode = placeMark.postalCode
             newAddress.thoroughfare = placeMark.thoroughfare ?? ""
             newAddress.subThoroughfare = placeMark.subThoroughfare ?? ""
-            newAddress.completeInfo = combineAddressCompleteInfo(input: newAddress)
+            newAddress.completeInfo =
+                combinePlaceMarkInfo(placeMark)
             result.append(newAddress)
         }
         sender.unsafeSend {
@@ -124,10 +125,35 @@ class DataManager: Actor {
             complete(addressCmd)
         }
     }
+    private func _beCombinePlaceMarks(
+        sender: Actor,_ placeMarks:[CLPlacemark],
+        _ complete: @escaping ([String]) -> Void) {
+        var result: [String] = []
+        for placeMark in placeMarks {
+            result.append(combinePlaceMarkInfo(placeMark))
+        }
+        sender.unsafeSend {
+            complete(result)
+        }
+    }
     
     // MARK: - Private
+    private func combinePlaceMarkInfo(_ place:CLPlacemark) -> String {
+        let mutabletext =
+            NSMutableString(string: place.administrativeArea ?? "")
+        mutabletext.append(" ")
+        mutabletext.append(place.subAdministrativeArea ?? "")
+        mutabletext.append(" ")
+        mutabletext.append(place.locality ?? "")
+        mutabletext.append(" ")
+        mutabletext.append(place.thoroughfare ?? "")
+        mutabletext.append(" ")
+        mutabletext.append(place.subThoroughfare ?? "")
+        return mutabletext as String
+    }
     private func combineAddressCompleteInfo(input: InputAddress) -> String {
-        let mutabletext = NSMutableString(string: input.administrativeArea)
+        let mutabletext =
+            NSMutableString(string: input.administrativeArea)
         mutabletext.append(" ")
         mutabletext.append(input.subAdministrativeArea)
         mutabletext.append(" ")
@@ -163,6 +189,11 @@ extension DataManager {
     @discardableResult
     public func beSearchRangeDataToLocDqCmd(sender: Actor, searchData: SearchForRangeQuery.Data.SearchForRange, _ complete: @escaping (AddressDqCmd) -> Void) -> Self {
         unsafeSend { self._beSearchRangeDataToLocDqCmd(sender: sender, searchData: searchData, complete) }
+        return self
+    }
+    @discardableResult
+    public func beCombinePlaceMarks(sender: Actor, _ placeMarks: [CLPlacemark], _ complete: @escaping ([String]) -> Void) -> Self {
+        unsafeSend { self._beCombinePlaceMarks(sender: sender, placeMarks, complete) }
         return self
     }
 
