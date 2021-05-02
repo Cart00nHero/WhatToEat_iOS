@@ -405,9 +405,6 @@
             <point key="canvasLocation" x="1642" y="-42"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="RSL-nL-1VG"/>
-    </designables>
     <resources>
         <image name="icon_favorite_food" width="512" height="512"/>
         <image name="icon_locate_off" width="41" height="41"/>
