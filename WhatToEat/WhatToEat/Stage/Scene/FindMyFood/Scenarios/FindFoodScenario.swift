@@ -162,19 +162,18 @@ class FindFoodScenario: Actor {
         content: LocationsDynamicQueryQuery.Data.LocationsDynamicQuery){
         let recipientName = "GourmetDetailScenario"
         //            String(describing: type(of: GourmetDetailScenario.self))
-        _ = LogisticsCenter.shared.applyExpressService(sender: self, recipient: recipientName, content: content)
+        Courier().beApplyExpress(
+            sender: self, recipient: recipientName, content: content, nil)
     }
     private func _beCollectGoogleNavParcel(
         _ complete: @escaping (CLLocation) -> Void) {
-        LogisticsCenter.shared.collectParcels(recipient: self) { (parcelSet) in
-            guard parcelSet?.count ?? 0 > 0 else {
-                return}
-            for parcel in parcelSet! {
-                let parcelItem = parcel as! Parcel
-                guard let content =
-                        parcelItem.content as? CLLocation else { return }
-                DispatchQueue.main.async {
-                    complete(content)
+        Courier().beClaim(recipient: self) { parcelSet in
+            guard parcelSet.count > 0 else {return}
+            for parcel in parcelSet {
+                if let parcelItem = parcel as? Parcel<CLLocation> {
+                    DispatchQueue.main.async {
+                        complete(parcelItem.content)
+                    }
                 }
             }
         }

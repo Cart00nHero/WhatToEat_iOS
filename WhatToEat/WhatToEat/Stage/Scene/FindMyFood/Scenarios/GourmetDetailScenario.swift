@@ -15,13 +15,12 @@ class GourmetDetailScenario: Actor {
     private func _beCollectParcel(
         _ complete: @escaping (
             LocationsDynamicQueryQuery.Data.LocationsDynamicQuery) -> Void) {
-        LogisticsCenter.shared.collectParcels(recipient: self) { (parcelSet) in
-            guard parcelSet?.count ?? 0 > 0 else {
-                return}
-            for parcel in parcelSet! {
-                let parcelItem = parcel as! Parcel
-                if let content = parcelItem.content as? LocationsDynamicQueryQuery.Data.LocationsDynamicQuery {
-                    complete(content)
+        Courier().beClaim(recipient: self) { parcelSet in
+            guard parcelSet.count > 0 else {return}
+            for parcel in parcelSet {
+                if let parcelItem =
+                    parcel as? Parcel<LocationsDynamicQueryQuery.Data.LocationsDynamicQuery> {
+                    complete(parcelItem.content)
                 }
             }
         }
@@ -56,7 +55,8 @@ class GourmetDetailScenario: Actor {
         _ complete: @escaping () -> Void) {
         let parcelLoc =
             CLLocation(latitude: latitude, longitude: longitude)
-        _ = LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FindFoodScenario", content: parcelLoc)
+        Courier().beApplyExpress(
+            sender: self, recipient: "FindFoodScenario", content: parcelLoc, nil)
         DispatchQueue.main.async {
             complete()
         }
@@ -67,8 +67,8 @@ class GourmetDetailScenario: Actor {
         DataManager().beConvertLocDQDataToGQInput(self, [data]) { (inputObjs) in
             if inputObjs.count > 0 {
                 let updateObj = inputObjs.first
-                _ = LogisticsCenter.shared.applyExpressService(
-                    sender: self, recipient: "AddGourmetScenario", content: updateObj)
+                Courier().beApplyExpress(
+                    sender: self, recipient: "AddGourmetScenario", content: updateObj, nil)
                 DispatchQueue.main.async {
                     complete()
                 }

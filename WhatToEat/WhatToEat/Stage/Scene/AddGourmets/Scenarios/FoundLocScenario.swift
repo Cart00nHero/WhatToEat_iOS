@@ -15,13 +15,11 @@ class FoundLocScenario: Actor {
     private func _beCollectParcel(
         _ complete: @escaping (
             [GQInputObject]) -> Void) {
-        LogisticsCenter.shared.collectParcels(recipient: self) { (parcelSet) in
-            guard parcelSet?.count ?? 0 > 0 else {
-                return}
-            for parcel in parcelSet! {
-                let parcelItem = parcel as! Parcel
-                if let content = parcelItem.content as? [GQInputObject] {
-                    complete(content)
+        Courier().beClaim(recipient: self) { parcelSet in
+            guard parcelSet.count > 0 else {return}
+            for parcel in parcelSet {
+                if let parcelItem = parcel as? Parcel<[GQInputObject]> {
+                    complete(parcelItem.content)
                 }
             }
         }
@@ -32,10 +30,9 @@ class FoundLocScenario: Actor {
         bePackageParcel(inputObj: newData)
     }
     private func _bePackageParcel(inputObj: GQInputObject) {
-        _ = LogisticsCenter.shared.applyExpressService(
-            sender: self,
-            recipient: String(describing: AddGourmetScenario.self),
-            content: inputObj)
+        Courier().beApplyExpress(
+            sender: self, recipient: String(describing: AddGourmetScenario.self),
+            content: inputObj, nil)
     }
 }
 
