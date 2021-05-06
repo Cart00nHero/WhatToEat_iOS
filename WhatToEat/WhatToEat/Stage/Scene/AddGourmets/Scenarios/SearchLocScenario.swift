@@ -19,7 +19,7 @@ class SearchLocScenario: Actor {
     }
     
     private let pilot = Pilot(100.0, accuracy: .ACCURACY_BEST_FOR_NAVIGATION)
-    private var queryDataParcel: Parcel?
+    private var queryDataParcel: Parcel<[GQInputObject]>?
     private var locFromGPS = false
     private var markedGQInput = initGQInputObject()
     
@@ -122,8 +122,10 @@ class SearchLocScenario: Actor {
         DataManager().beConvertLocDQDataToGQInput(self, queryData) { [self]
             (inputObjs) in
             if inputObjs.count > 0 {
-                queryDataParcel =
-                    LogisticsCenter.shared.applyExpressService(sender: self, recipient: "FoundLocScenario", content: inputObjs)
+                Courier().beApplyExpress(
+                    sender: self, recipient: "FoundLocScenario", content: inputObjs) { parcel in
+                    queryDataParcel = parcel
+                }
                 let data = inputObjs.first!
                 let latitude = Double(data.address.latitude) ?? 0.0
                 let longitude = Double(data.address.longitude) ?? 0.0
@@ -157,9 +159,8 @@ class SearchLocScenario: Actor {
             queryDataParcel = nil
             isPrepared = true
         } else {
-            _ = LogisticsCenter.shared.applyExpressService(
-                sender: self, recipient: "AddGourmetScenario",
-                content: markedGQInput)
+            Courier().beApplyExpress(
+                sender: self, recipient: "AddGourmetScenario", content: markedGQInput, nil)
         }
         DispatchQueue.main.async {
             complete(isPrepared)
@@ -167,8 +168,7 @@ class SearchLocScenario: Actor {
     }
     private func _beCancelFoundLocParcel() {
         if queryDataParcel != nil {
-            LogisticsCenter.shared.cancelService(
-                recipient: "FoundLocScenario", parcel: queryDataParcel!)
+            Courier().beCancel(recipient: "FoundLocScenario", parcel: queryDataParcel!)
             queryDataParcel = nil
         }
     }

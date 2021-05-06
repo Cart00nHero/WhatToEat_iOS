@@ -27,12 +27,11 @@ struct DropDownMenuData
 class AddGourmetScenario: Actor {
     private var queryData = initGQInputObject()
     private func _beCollectGQInputParcel() {
-        LogisticsCenter.shared.collectParcels(recipient: self) { [self] (parcelSet) in
-            guard parcelSet?.count ?? 0 > 0 else {return}
-            for parcel in parcelSet! {
-                let parcelItem = parcel as! Parcel
-                if let content = parcelItem.content as? GQInputObject {
-                    queryData = content
+        Courier().beClaim(recipient: self) { [self] parcelSet in
+            guard parcelSet.count > 0 else {return}
+            for parcel in parcelSet {
+                if let parcelItem = parcel as? Parcel<GQInputObject> {
+                    queryData = parcelItem.content
                 }
             }
         }
